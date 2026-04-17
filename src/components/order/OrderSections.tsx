@@ -37,16 +37,10 @@ const buildConfirmations = (stage: OrderStage): Confirmation[] => {
   ];
 };
 
-export const OrderSections = ({
-  stage = "delivery",
-  detailsFirst = false,
-}: {
-  stage?: OrderStage;
-  detailsFirst?: boolean;
-}) => {
+export const OrderConfirmations = ({ stage = "delivery" }: { stage?: OrderStage }) => {
   const confirmations = buildConfirmations(stage);
   const doneCount = confirmations.filter((c) => c.status === "done").length;
-  const confirmationsCard = (
+  return (
     <section
       key="confirmations"
       className="mx-5 mt-4 rounded-3xl border border-border bg-card shadow-card animate-fade-in p-5"
