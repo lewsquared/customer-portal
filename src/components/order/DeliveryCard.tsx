@@ -4,9 +4,10 @@ interface Props {
   address: string;
   when: string;
   dropoffNote: string;
+  secondaryNote?: string;
 }
 
-export const DeliveryCard = ({ address, when, dropoffNote }: Props) => {
+export const DeliveryCard = ({ address, when, dropoffNote, secondaryNote }: Props) => {
   return (
     <section
       className="mx-5 mt-5 overflow-hidden rounded-2xl border border-border bg-card shadow-card animate-fade-in"
@@ -16,6 +17,9 @@ export const DeliveryCard = ({ address, when, dropoffNote }: Props) => {
       {/* Header */}
       <div className="border-b border-border/60 px-4 py-2.5">
         <h3 className="font-display text-sm font-bold text-primary">{dropoffNote}</h3>
+        {secondaryNote && (
+          <p className="mt-0.5 text-xs font-medium text-muted-foreground">{secondaryNote}</p>
+        )}
       </div>
 
       {/* Body */}
