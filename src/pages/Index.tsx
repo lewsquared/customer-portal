@@ -4,7 +4,7 @@ import { QuickActions } from "@/components/order/QuickActions";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
 
 import { OrderSections } from "@/components/order/OrderSections";
-import { BottomBar } from "@/components/order/BottomBar";
+
 import type { Stage } from "@/components/order/StatusTimeline";
 
 const stages: Stage[] = [
