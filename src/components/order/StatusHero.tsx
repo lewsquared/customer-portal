@@ -21,6 +21,14 @@ const wrapperAnim: Record<HeroVariant, string> = {
   hold: "animate-shake",
 };
 
+const wrapperOffset: Record<HeroVariant, string> = {
+  received: "-translate-y-1",
+  processing: "-translate-y-2",
+  delivery: "-translate-y-2",
+  complete: "-translate-y-1.5",
+  hold: "-translate-y-1",
+};
+
 export const StatusHero = ({
   status,
   subtitle,
