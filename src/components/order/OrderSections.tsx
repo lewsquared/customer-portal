@@ -50,7 +50,7 @@ export const OrderSections = () => {
                     className={cn(
                       "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg",
                       done
-                        ? "bg-success/15 text-success"
+                        ? "bg-secondary text-primary"
                         : "border border-dashed border-muted-foreground/40 text-muted-foreground",
                     )}
                   >
