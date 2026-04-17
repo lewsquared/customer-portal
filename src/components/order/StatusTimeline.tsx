@@ -26,47 +26,69 @@ export const StatusTimeline = ({ stages, currentIndex }: Props) => {
   const [open, setOpen] = useState(false);
   const segments = stages.length - 1;
   const progressPct = segments === 0 ? 0 : (currentIndex / segments) * 100;
-  const current = stages[currentIndex];
-  const CurrentIcon = iconForKey[current.key] ?? Truck;
+  const next = stages[currentIndex + 1];
+  const prev = stages[currentIndex - 1];
 
   return (
     <div className="w-full">
-      {/* Slim progress bar */}
-      <div className="relative h-1.5 w-full overflow-hidden rounded-full bg-foreground/10">
-        <div
-          className="h-full rounded-full bg-gradient-progress animate-progress-fill"
-          style={{ ["--progress-target" as string]: `${progressPct}%`, width: `${progressPct}%` }}
-        />
+      {/* Slim progress bar with step markers */}
+      <div className="relative">
+        <div className="relative h-1.5 w-full overflow-hidden rounded-full bg-foreground/10">
+          <div
+            className="h-full rounded-full bg-gradient-progress animate-progress-fill"
+            style={{ ["--progress-target" as string]: `${progressPct}%`, width: `${progressPct}%` }}
+          />
+        </div>
+        <div className="pointer-events-none absolute inset-x-0 -top-0.5 flex justify-between px-0">
+          {stages.map((s, i) => {
+            const done = i <= currentIndex;
+            return (
+              <span
+                key={s.key}
+                className={cn(
+                  "h-2.5 w-2.5 rounded-full border-2 transition-colors",
+                  done ? "border-primary bg-primary" : "border-foreground/20 bg-card",
+                  i === currentIndex && "ring-2 ring-accent/50",
+                )}
+              />
+            );
+          })}
+        </div>
       </div>
-      <div className="mt-2 flex items-center justify-between text-[10px] font-semibold uppercase tracking-widest text-muted-foreground tabular">
+
+      <div className="mt-3 flex items-center justify-between text-[10px] font-semibold uppercase tracking-widest text-muted-foreground tabular">
         <span>
           Step {currentIndex + 1} of {stages.length}
         </span>
         <span>{Math.round(progressPct)}%</span>
       </div>
 
-      {/* Current status row + expand */}
+      {/* Smart hint row + toggle */}
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="group mt-4 flex w-full items-center gap-3 rounded-2xl bg-card/70 p-3 text-left shadow-press backdrop-blur transition-all active:scale-[0.99]"
+        className="group mt-3 flex w-full items-center justify-between gap-3 rounded-full bg-card/70 px-4 py-2.5 text-left shadow-press backdrop-blur transition-all active:scale-[0.99]"
       >
-        <span className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground animate-pulse-ring">
-          <CurrentIcon className="h-5 w-5" strokeWidth={2.2} />
-        </span>
-        <div className="min-w-0 flex-1">
-          <div className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-            Current
-          </div>
-          <div className="truncate font-display text-base font-bold text-primary">{current.label}</div>
-          {current.timestamp && (
-            <div className="truncate text-xs text-muted-foreground tabular">{current.timestamp}</div>
+        <span className="flex min-w-0 items-center gap-2 text-xs">
+          {next ? (
+            <>
+              <Clock className="h-3.5 w-3.5 shrink-0 text-primary" />
+              <span className="truncate text-muted-foreground">
+                Next: <span className="font-semibold text-primary">{next.label}</span>
+              </span>
+            </>
+          ) : (
+            <>
+              <PackageCheck className="h-3.5 w-3.5 shrink-0 text-success" />
+              <span className="truncate font-semibold text-primary">All steps complete</span>
+            </>
           )}
-        </div>
-        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-primary">
+        </span>
+        <span className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-primary">
+          {open ? "Hide" : "Timeline"}
           <ChevronDown
-            className={cn("h-4 w-4 transition-transform duration-300", open && "rotate-180")}
+            className={cn("h-3.5 w-3.5 transition-transform duration-300", open && "rotate-180")}
           />
         </span>
       </button>
