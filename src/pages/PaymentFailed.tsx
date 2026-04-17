@@ -26,6 +26,7 @@ const PaymentFailed = () => {
             subtitle="Delivery on hold · capture payment to release"
             stages={stages}
             currentIndex={3}
+            onHold
           />
 
           <PaymentFailedBanner amount="AED 142.00" reason="Your card was declined" />
