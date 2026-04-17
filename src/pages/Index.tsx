@@ -2,6 +2,7 @@ import { OrderHeader } from "@/components/order/OrderHeader";
 import { StatusHero } from "@/components/order/StatusHero";
 import { QuickActions } from "@/components/order/QuickActions";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
+import { DelayBanner } from "@/components/order/DelayBanner";
 
 import { OrderSections } from "@/components/order/OrderSections";
 
@@ -29,6 +30,8 @@ const Index = () => {
             currentIndex={3}
             variant="delivery"
           />
+
+          <DelayBanner count={2} />
 
           <QuickActions />
 
