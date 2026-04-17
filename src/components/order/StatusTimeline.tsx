@@ -125,7 +125,7 @@ export const StatusTimeline = ({ stages, currentIndex, rightSlot }: Props) => {
                           </span>
                         )}
                       </span>
-                      {s.timestamp && (
+                      {s.timestamp && !active && (
                         <span className="shrink-0 text-[11px] font-medium text-muted-foreground tabular">
                           {s.timestamp}
                         </span>
