@@ -23,7 +23,7 @@ const iconForKey: Record<string, LucideIcon> = {
   complete: PackageCheck,
 };
 
-export const StatusTimeline = ({ stages, currentIndex }: Props) => {
+export const StatusTimeline = ({ stages, currentIndex, rightSlot }: Props) => {
   const [open, setOpen] = useState(false);
   const segments = stages.length - 1;
   const progressPct = segments === 0 ? 0 : (currentIndex / segments) * 100;
