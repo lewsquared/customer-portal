@@ -111,6 +111,31 @@ export default {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-6px)" },
         },
+        sway: {
+          "0%, 100%": { transform: "rotate(-4deg)" },
+          "50%": { transform: "rotate(4deg)" },
+        },
+        "spin-slow": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        "truck-roll": {
+          "0%, 100%": { transform: "translateX(0)" },
+          "50%": { transform: "translateX(6px)" },
+        },
+        shake: {
+          "0%, 100%": { transform: "translateX(0)" },
+          "20%, 60%": { transform: "translateX(-4px)" },
+          "40%, 80%": { transform: "translateX(4px)" },
+        },
+        "bounce-soft": {
+          "0%, 100%": { transform: "translateY(0) scale(1)" },
+          "50%": { transform: "translateY(-4px) scale(1.04)" },
+        },
+        sparkle: {
+          "0%, 100%": { opacity: "0.4", transform: "scale(0.9)" },
+          "50%": { opacity: "1", transform: "scale(1.15)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.25s ease-out",
@@ -120,6 +145,12 @@ export default {
         "progress-fill": "progress-fill 1.2s cubic-bezier(0.65, 0, 0.35, 1) 0.2s both",
         "pulse-ring": "pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         float: "float 4s ease-in-out infinite",
+        sway: "sway 3s ease-in-out infinite",
+        "spin-slow": "spin-slow 6s linear infinite",
+        "truck-roll": "truck-roll 1.6s ease-in-out infinite",
+        shake: "shake 0.6s ease-in-out",
+        "bounce-soft": "bounce-soft 2s ease-in-out infinite",
+        sparkle: "sparkle 1.8s ease-in-out infinite",
       },
     },
   },

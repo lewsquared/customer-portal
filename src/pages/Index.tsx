@@ -27,6 +27,7 @@ const Index = () => {
             subtitle="Today, Sat · Anytime during the day"
             stages={stages}
             currentIndex={3}
+            variant="delivery"
           />
 
           <QuickActions />
