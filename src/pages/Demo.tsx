@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Package, Truck, PackageCheck, ArrowRight, Sparkles } from "lucide-react";
+import { Package, Truck, PackageCheck, ArrowRight, Sparkles, AlertTriangle } from "lucide-react";
 
 const Demo = () => {
   return (
@@ -40,11 +40,18 @@ const Demo = () => {
             delay="200ms"
           />
           <DemoCard
+            to="/payment-failed"
+            icon={<AlertTriangle className="h-6 w-6" />}
+            title="Payment failed"
+            description="Delivery on hold · payment required"
+            delay="240ms"
+          />
+          <DemoCard
             to="/order-complete"
             icon={<PackageCheck className="h-6 w-6" />}
             title="Order complete"
             description="Delivered · all photos available"
-            delay="240ms"
+            delay="280ms"
           />
         </div>
       </div>
