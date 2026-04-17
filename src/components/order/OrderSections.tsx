@@ -104,7 +104,7 @@ export const OrderDetails = ({ defaultOpen }: { defaultOpen?: "services" | "inst
       className="mx-5 mt-4 rounded-3xl border border-border bg-card shadow-card animate-fade-in"
       style={{ animationDelay: "300ms" }}
     >
-      <Accordion type="single" collapsible className="w-full">
+      <Accordion type="single" collapsible defaultValue={defaultOpen} className="w-full">
         <AccordionItem value="services" className="border-b last:border-b-0 px-5">
           <AccordionTrigger className="py-4 hover:no-underline">
             <div className="flex items-center gap-3">
@@ -154,6 +154,27 @@ export const OrderDetails = ({ defaultOpen }: { defaultOpen?: "services" | "inst
       </Accordion>
     </section>
   );
-
-  return <>{detailsFirst ? [detailsCard, confirmationsCard] : [confirmationsCard, detailsCard]}</>;
 };
+
+/** Backward-compatible combined view (used by the live order page). */
+export const OrderSections = ({
+  stage = "delivery",
+  detailsFirst = false,
+}: {
+  stage?: OrderStage;
+  detailsFirst?: boolean;
+}) => (
+  <>
+    {detailsFirst ? (
+      <>
+        <OrderDetails />
+        <OrderConfirmations stage={stage} />
+      </>
+    ) : (
+      <>
+        <OrderConfirmations stage={stage} />
+        <OrderDetails />
+      </>
+    )}
+  </>
+);
