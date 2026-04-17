@@ -13,6 +13,7 @@ interface Props {
   stages: Stage[];
   currentIndex: number;
   rightSlot?: React.ReactNode;
+  onHold?: boolean;
 }
 
 const iconForKey: Record<string, LucideIcon> = {
@@ -23,7 +24,7 @@ const iconForKey: Record<string, LucideIcon> = {
   complete: PackageCheck,
 };
 
-export const StatusTimeline = ({ stages, currentIndex, rightSlot }: Props) => {
+export const StatusTimeline = ({ stages, currentIndex, rightSlot, onHold = false }: Props) => {
   const [open, setOpen] = useState(false);
   const segments = stages.length - 1;
   const progressPct = segments === 0 ? 0 : (currentIndex / segments) * 100;
@@ -120,10 +121,17 @@ export const StatusTimeline = ({ stages, currentIndex, rightSlot }: Props) => {
                         {s.label}
                       </span>
                       {active ? (
-                        <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-success/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-success">
-                          <span className="h-1 w-1 rounded-full bg-success animate-pulse" />
-                          Now
-                        </span>
+                        onHold ? (
+                          <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-destructive/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-destructive">
+                            <span className="h-1 w-1 rounded-full bg-destructive animate-pulse" />
+                            On hold
+                          </span>
+                        ) : (
+                          <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-success/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-success">
+                            <span className="h-1 w-1 rounded-full bg-success animate-pulse" />
+                            Now
+                          </span>
+                        )
                       ) : s.timestamp ? (
                         <span className="shrink-0 text-[11px] font-medium text-muted-foreground tabular">
                           {s.timestamp}
