@@ -1,5 +1,5 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Check, ChevronRight, ListChecks, Sparkles, MessageSquare } from "lucide-react";
+import { Check, ChevronRight, ListChecks, Sparkles, MessageSquare, Camera } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Confirmation = {
@@ -48,8 +48,13 @@ export const OrderConfirmations = ({ stage = "delivery" }: { stage?: OrderStage 
     >
       <div className="flex items-start justify-between">
         <div>
-          <h3 className="font-display text-base font-bold text-primary">Order Confirmations</h3>
-          <p className="mt-0.5 text-xs font-medium text-muted-foreground">
+          <div className="flex items-center gap-2">
+            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-secondary text-primary">
+              <Camera className="h-3.5 w-3.5" />
+            </span>
+            <h3 className="font-display text-base font-bold text-primary">Order Confirmations</h3>
+          </div>
+          <p className="mt-1 text-xs font-medium text-muted-foreground">
             We capture photos at every step — from your doorstep to our facility and back.
           </p>
         </div>
