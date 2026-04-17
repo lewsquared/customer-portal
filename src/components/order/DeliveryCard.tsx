@@ -1,15 +1,19 @@
-import { Pencil, MapPin, ArrowDownToLine, ArrowUpFromLine, Truck } from "lucide-react";
+import { Pencil, MapPin, ArrowDownToLine, ArrowUpFromLine, Truck, Check } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { cn } from "@/lib/utils";
 
 interface DropoffSection {
   label: string;
   when: string;
+  done?: boolean;
 }
 
 interface Props {
   address: string;
   when: string;
   dropoffNote: string;
+  /** Whether pickup is already completed. */
+  pickupDone?: boolean;
   /** Optional second editable row (e.g. Drop off at door). */
   dropoff?: DropoffSection;
   /** Whether the section is open by default. */
@@ -22,22 +26,29 @@ const Row = ({
   value,
   ariaLabel,
   editable = true,
+  done = false,
 }: {
   icon: React.ReactNode;
   label: string;
   value: string;
   ariaLabel?: string;
   editable?: boolean;
+  done?: boolean;
 }) => (
   <div className="flex items-center gap-3 py-2.5">
-    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
-      {icon}
+    <span
+      className={cn(
+        "flex h-8 w-8 shrink-0 items-center justify-center rounded-lg",
+        done ? "bg-success/15 text-success" : "bg-secondary text-primary",
+      )}
+    >
+      {done ? <Check className="h-4 w-4" strokeWidth={3} /> : icon}
     </span>
     <div className="min-w-0 flex-1">
       <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">{label}</p>
       <p className="truncate text-sm font-semibold text-primary tabular">{value}</p>
     </div>
-    {editable && (
+    {editable && !done && (
       <button
         aria-label={ariaLabel}
         className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-secondary text-primary transition-transform active:scale-95"
@@ -48,7 +59,14 @@ const Row = ({
   </div>
 );
 
-export const DeliveryCard = ({ address, when, dropoffNote, dropoff, defaultOpen = true }: Props) => {
+export const DeliveryCard = ({
+  address,
+  when,
+  dropoffNote,
+  dropoff,
+  pickupDone = false,
+  defaultOpen = true,
+}: Props) => {
   return (
     <section
       className="mx-5 mt-4 rounded-3xl border border-border bg-card shadow-card animate-fade-in"
@@ -72,6 +90,7 @@ export const DeliveryCard = ({ address, when, dropoffNote, dropoff, defaultOpen 
                 label={dropoffNote}
                 value={when}
                 ariaLabel="Edit pickup time"
+                done={pickupDone}
               />
               {dropoff && (
                 <Row
@@ -79,6 +98,7 @@ export const DeliveryCard = ({ address, when, dropoffNote, dropoff, defaultOpen 
                   label={dropoff.label}
                   value={dropoff.when}
                   ariaLabel="Edit drop off time"
+                  done={dropoff.done}
                 />
               )}
               <Row
