@@ -205,16 +205,16 @@ const ShirtHanger = () => (
 const PhoneConfirm = () => (
   <svg viewBox="0 0 128 128" fill="none" className="h-full w-full">
     {bagDefs}
-    {/* phone body */}
-    <rect x="32" y="14" width="56" height="92" rx="10" fill="hsl(var(--primary))" />
+    {/* phone body — centered */}
+    <rect x="40" y="12" width="48" height="104" rx="10" fill="hsl(var(--primary))" />
     {/* screen */}
-    <rect x="37" y="22" width="46" height="76" rx="5" fill="hsl(var(--card))" />
+    <rect x="45" y="20" width="38" height="88" rx="5" fill="hsl(var(--card))" />
     {/* speaker */}
-    <rect x="54" y="18" width="12" height="2" rx="1" fill="hsl(var(--card))" opacity="0.5" />
-    {/* check badge inside screen */}
-    <circle cx="60" cy="56" r="16" fill="url(#bagSuccess)" />
+    <rect x="58" y="16" width="12" height="2" rx="1" fill="hsl(var(--card))" opacity="0.5" />
+    {/* check badge */}
+    <circle cx="64" cy="58" r="16" fill="url(#bagSuccess)" />
     <path
-      d="M52 56 L58 62 L70 50"
+      d="M56 58 L62 64 L74 52"
       stroke="hsl(var(--card))"
       strokeWidth="3.5"
       strokeLinecap="round"
@@ -222,21 +222,12 @@ const PhoneConfirm = () => (
       fill="none"
     />
     {/* status lines */}
-    <rect x="44" y="80" width="32" height="3" rx="1.5" fill="hsl(var(--secondary))" />
-    <rect x="48" y="88" width="24" height="3" rx="1.5" fill="hsl(var(--secondary))" opacity="0.7" />
-    {/* hand / thumb holding phone */}
-    <path
-      d="M82 70 C92 70 100 76 100 86 L100 116 L70 116 L70 100 C70 92 74 86 82 84 Z"
-      fill="hsl(35 50% 78%)"
-    />
-    <path
-      d="M86 72 C92 72 96 76 96 82 L96 88 L82 88 L82 80 C82 76 84 72 86 72 Z"
-      fill="hsl(35 55% 84%)"
-    />
+    <rect x="50" y="84" width="28" height="3" rx="1.5" fill="hsl(var(--secondary))" />
+    <rect x="54" y="92" width="20" height="3" rx="1.5" fill="hsl(var(--secondary))" opacity="0.7" />
     {/* sparkles */}
-    <circle cx="22" cy="30" r="2.2" fill="hsl(var(--accent))" className="animate-sparkle" />
-    <circle cx="106" cy="34" r="2" fill="hsl(var(--accent))" className="animate-sparkle" style={{ animationDelay: "350ms" }} />
-    <circle cx="18" cy="62" r="1.8" fill="hsl(var(--accent))" className="animate-sparkle" style={{ animationDelay: "700ms" }} />
+    <circle cx="22" cy="32" r="2.2" fill="hsl(var(--accent))" className="animate-sparkle" />
+    <circle cx="106" cy="36" r="2" fill="hsl(var(--accent))" className="animate-sparkle" style={{ animationDelay: "350ms" }} />
+    <circle cx="20" cy="96" r="1.8" fill="hsl(var(--accent))" className="animate-sparkle" style={{ animationDelay: "700ms" }} />
   </svg>
 );
 
