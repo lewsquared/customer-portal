@@ -55,7 +55,7 @@ export const StatusTimeline = ({ stages, currentIndex, rightSlot }: Props) => {
         </div>
       </div>
 
-      <div className="relative mt-4 flex items-center justify-center">
+      <div className="mt-4 flex items-center justify-between gap-3">
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
@@ -68,7 +68,7 @@ export const StatusTimeline = ({ stages, currentIndex, rightSlot }: Props) => {
             className={cn("h-3.5 w-3.5 transition-transform duration-300", open && "rotate-180")}
           />
         </button>
-        {rightSlot && <div className="absolute right-0">{rightSlot}</div>}
+        {rightSlot}
       </div>
 
       {/* Expandable timeline */}
