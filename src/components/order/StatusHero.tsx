@@ -1,3 +1,4 @@
+import { X } from "lucide-react";
 import { StatusTimeline, type Stage } from "./StatusTimeline";
 
 interface Props {
@@ -5,9 +6,10 @@ interface Props {
   subtitle: string;
   stages: Stage[];
   currentIndex: number;
+  cancellable?: boolean;
 }
 
-export const StatusHero = ({ status, subtitle, stages, currentIndex }: Props) => {
+export const StatusHero = ({ status, subtitle, stages, currentIndex, cancellable = false }: Props) => {
   return (
     <section
       className="relative mx-5 mt-2 overflow-hidden rounded-3xl bg-gradient-hero p-6 shadow-hero animate-fade-in"
@@ -31,6 +33,18 @@ export const StatusHero = ({ status, subtitle, stages, currentIndex }: Props) =>
       <div className="relative mt-6">
         <StatusTimeline stages={stages} currentIndex={currentIndex} />
       </div>
+
+      {cancellable && (
+        <div className="relative mt-5 flex justify-end">
+          <button
+            type="button"
+            className="inline-flex items-center gap-1.5 rounded-full border border-destructive/30 bg-card/70 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-destructive backdrop-blur transition-all hover:bg-destructive hover:text-destructive-foreground active:scale-95"
+          >
+            <X className="h-3.5 w-3.5" strokeWidth={2.6} />
+            Cancel order
+          </button>
+        </div>
+      )}
     </section>
   );
 };
