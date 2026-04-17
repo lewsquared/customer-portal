@@ -46,15 +46,13 @@ export const OrderConfirmations = ({ stage = "delivery" }: { stage?: OrderStage 
       className="mx-5 mt-4 rounded-3xl border border-border bg-card shadow-card animate-fade-in p-5"
       style={{ animationDelay: "260ms" }}
     >
-      <div className="flex items-start justify-between">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-secondary text-primary">
-              <Camera className="h-3.5 w-3.5" />
-            </span>
-            <h3 className="font-display text-base font-bold text-primary">Order Confirmations</h3>
-          </div>
-          <p className="mt-1 text-xs font-medium text-muted-foreground">
+      <div className="flex items-start gap-3">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
+          <Camera className="h-4 w-4" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <h3 className="font-display text-base font-bold text-primary leading-tight">Order Confirmations</h3>
+          <p className="mt-1 text-xs font-medium text-muted-foreground leading-relaxed">
             We capture photos at every step — from your doorstep to our facility and back.
           </p>
         </div>
