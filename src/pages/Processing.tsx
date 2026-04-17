@@ -26,6 +26,7 @@ const Processing = () => {
             subtitle="Your laundry is being cared for"
             stages={stages}
             currentIndex={2}
+            variant="processing"
           />
 
           <ReviewBanner count={3} />
