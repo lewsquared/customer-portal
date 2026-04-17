@@ -5,20 +5,19 @@ import { DeliveryCard } from "@/components/order/DeliveryCard";
 import { ReceiptCard } from "@/components/order/ReceiptCard";
 import { OrderSections } from "@/components/order/OrderSections";
 import { BottomBar } from "@/components/order/BottomBar";
-import type { Stage } from "@/components/order/HorizontalStepper";
+import type { Stage } from "@/components/order/StatusTimeline";
 
 const stages: Stage[] = [
-  { key: "received", label: "Received", timestamp: "Wed 9:12 PM" },
-  { key: "collected", label: "Collected", timestamp: "Thu 8:42 AM" },
-  { key: "processing", label: "Processing", timestamp: "Thu 1:05 PM" },
-  { key: "delivery", label: "Delivery", timestamp: "Sat — today" },
-  { key: "complete", label: "Complete" },
+  { key: "received", label: "Order received", timestamp: "Wed 9:12 PM", description: "We got your request and scheduled pickup." },
+  { key: "collected", label: "Collected", timestamp: "Thu 8:42 AM", description: "Driver picked up 1 bag from your address." },
+  { key: "processing", label: "Processing", timestamp: "Thu 1:05 PM", description: "Wash, dry, and iron in progress at the facility." },
+  { key: "delivery", label: "Out for delivery", timestamp: "Today, anytime", description: "Driver is heading your way today." },
+  { key: "complete", label: "Delivered", description: "Your order will be marked complete on drop-off." },
 ];
 
 const Index = () => {
   return (
     <main className="min-h-screen bg-background font-sans antialiased">
-      {/* Phone-frame container on desktop */}
       <div className="mx-auto flex min-h-screen max-w-md flex-col bg-background shadow-hero md:my-6 md:min-h-[calc(100vh-3rem)] md:overflow-hidden md:rounded-[2.25rem] md:border md:border-border">
         <OrderHeader orderId="CUD137" />
 
