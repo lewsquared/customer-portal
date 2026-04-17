@@ -96,10 +96,11 @@ export const OrderConfirmations = ({ stage = "delivery" }: { stage?: OrderStage 
       </ul>
     </section>
   );
+};
 
-  const detailsCard = (
+export const OrderDetails = ({ defaultOpen }: { defaultOpen?: "services" | "instructions" }) => {
+  return (
     <section
-      key="details"
       className="mx-5 mt-4 rounded-3xl border border-border bg-card shadow-card animate-fade-in"
       style={{ animationDelay: "300ms" }}
     >
