@@ -87,7 +87,7 @@ const HeroArt = ({ variant }: { variant: HeroVariant }) => {
   if (variant === "processing") return <WashingMachine />;
   if (variant === "delivery") return <DeliveryTruck />;
   if (variant === "complete") return <ShirtHanger />;
-  if (variant === "hold") return <AlertBag />;
+  if (variant === "hold") return <CardAlert />;
   if (variant === "received") return <PhoneConfirm />;
   return <LaundryBag />;
 };
