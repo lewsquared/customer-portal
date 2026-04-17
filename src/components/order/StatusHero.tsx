@@ -64,7 +64,7 @@ export const StatusHero = ({
             </h1>
           </div>
 
-          <div className={`pointer-events-none shrink-0 h-24 w-24 opacity-95 ${wrapperAnim[v]}`}>
+          <div className={`pointer-events-none shrink-0 h-24 w-24 opacity-95 ${wrapperAnim[v]} ${wrapperOffset[v]}`}>
             <HeroArt variant={v} />
           </div>
         </div>
