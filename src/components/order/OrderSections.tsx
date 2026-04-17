@@ -46,23 +46,7 @@ export const OrderSections = () => {
           </AccordionContent>
         </AccordionItem>
 
-        <AccordionItem value="instructions" className="border-b last:border-b-0 px-5">
-          <AccordionTrigger className="py-4 hover:no-underline">
-            <div className="flex items-center gap-3">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-secondary text-primary">
-                <MessageSquare className="h-4 w-4" />
-              </span>
-              <span className="font-display text-base font-bold text-primary">Order instructions</span>
-            </div>
-          </AccordionTrigger>
-          <AccordionContent>
-            <p className="mb-4 rounded-2xl bg-secondary/60 p-3 text-sm text-muted-foreground">
-              Please ring the doorbell twice. Leave the bag at the door if no one answers.
-            </p>
-          </AccordionContent>
-        </AccordionItem>
-
-        <AccordionItem value="services" className="border-b-0 px-5">
+        <AccordionItem value="services" className="border-b last:border-b-0 px-5">
           <AccordionTrigger className="py-4 hover:no-underline">
             <div className="flex items-center gap-3">
               <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-secondary text-primary">
@@ -90,6 +74,22 @@ export const OrderSections = () => {
                 </li>
               ))}
             </ul>
+          </AccordionContent>
+        </AccordionItem>
+
+        <AccordionItem value="instructions" className="border-b-0 px-5">
+          <AccordionTrigger className="py-4 hover:no-underline">
+            <div className="flex items-center gap-3">
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-secondary text-primary">
+                <MessageSquare className="h-4 w-4" />
+              </span>
+              <span className="font-display text-base font-bold text-primary">Order instructions</span>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent>
+            <p className="mb-4 rounded-2xl bg-secondary/60 p-3 text-sm text-muted-foreground">
+              Please ring the doorbell twice. Leave the bag at the door if no one answers.
+            </p>
           </AccordionContent>
         </AccordionItem>
       </Accordion>
