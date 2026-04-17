@@ -1,16 +1,56 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { OrderHeader } from "@/components/order/OrderHeader";
+import { StatusHero } from "@/components/order/StatusHero";
+import { QuickActions } from "@/components/order/QuickActions";
+import { DeliveryCard } from "@/components/order/DeliveryCard";
+import { ReceiptCard } from "@/components/order/ReceiptCard";
+import { OrderSections } from "@/components/order/OrderSections";
+import { BottomBar } from "@/components/order/BottomBar";
+import type { Stage } from "@/components/order/HorizontalStepper";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const stages: Stage[] = [
+  { key: "received", label: "Received", timestamp: "Wed 9:12 PM" },
+  { key: "collected", label: "Collected", timestamp: "Thu 8:42 AM" },
+  { key: "processing", label: "Processing", timestamp: "Thu 1:05 PM" },
+  { key: "delivery", label: "Delivery", timestamp: "Sat — today" },
+  { key: "complete", label: "Complete" },
+];
+
+const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
-    </div>
+    <main className="min-h-screen bg-background font-sans antialiased">
+      {/* Phone-frame container on desktop */}
+      <div className="mx-auto flex min-h-screen max-w-md flex-col bg-background shadow-hero md:my-6 md:min-h-[calc(100vh-3rem)] md:overflow-hidden md:rounded-[2.25rem] md:border md:border-border">
+        <OrderHeader orderId="CUD137" />
+
+        <div className="flex-1 overflow-y-auto pb-4">
+          <StatusHero
+            status="Out for delivery"
+            subtitle="Today, Sat · Anytime during the day"
+            stages={stages}
+            currentIndex={3}
+          />
+
+          <QuickActions />
+
+          <DeliveryCard
+            dropoffNote="Delivery at door"
+            address="Apt 1402, Marina Heights, Dubai Marina"
+            when="Sat · Anytime today"
+          />
+
+          <ReceiptCard
+            itemCount={18}
+            services={["Wash & Fold", "Iron", "Eco rinse"]}
+            total="AED 142.00"
+          />
+
+          <OrderSections />
+        </div>
+
+        <BottomBar />
+      </div>
+    </main>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
