@@ -57,31 +57,18 @@ export const StatusTimeline = ({ stages, currentIndex, rightSlot, onHold = false
       </div>
 
       <div className="mt-4 flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          {onHold ? (
-            <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-destructive/15 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-destructive">
-              <span className="h-1 w-1 rounded-full bg-destructive animate-pulse" />
-              On hold
-            </span>
-          ) : (
-            <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-success/15 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-success">
-              <span className="h-1 w-1 rounded-full bg-success animate-pulse" />
-              Live
-            </span>
-          )}
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-expanded={open}
-            className="inline-flex items-center gap-1.5 rounded-full bg-card/70 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-primary shadow-press backdrop-blur transition-all active:scale-[0.97]"
-          >
-            <History className="h-3.5 w-3.5" />
-            {open ? "Hide timeline" : "View timeline"}
-            <ChevronDown
-              className={cn("h-3.5 w-3.5 transition-transform duration-300", open && "rotate-180")}
-            />
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          className="inline-flex items-center gap-1.5 rounded-full bg-card/70 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-primary shadow-press backdrop-blur transition-all active:scale-[0.97]"
+        >
+          <History className="h-3.5 w-3.5" />
+          {open ? "Hide timeline" : "View timeline"}
+          <ChevronDown
+            className={cn("h-3.5 w-3.5 transition-transform duration-300", open && "rotate-180")}
+          />
+        </button>
         {rightSlot}
       </div>
 
