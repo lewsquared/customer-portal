@@ -22,11 +22,11 @@ const wrapperAnim: Record<HeroVariant, string> = {
 };
 
 const wrapperOffset: Record<HeroVariant, string> = {
-  received: "-translate-y-1",
-  processing: "-translate-y-2",
-  delivery: "-translate-y-2",
-  complete: "-translate-y-1.5",
-  hold: "-translate-y-1",
+  received: "translate-y-2",
+  processing: "translate-y-2",
+  delivery: "translate-y-2",
+  complete: "translate-y-2",
+  hold: "translate-y-2",
 };
 
 export const StatusHero = ({
