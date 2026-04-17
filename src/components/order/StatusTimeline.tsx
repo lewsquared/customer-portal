@@ -118,18 +118,17 @@ export const StatusTimeline = ({ stages, currentIndex, rightSlot }: Props) => {
                         )}
                       >
                         {s.label}
-                        {active && (
-                          <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-success/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-success">
-                            <span className="h-1 w-1 rounded-full bg-success animate-pulse" />
-                            Now
-                          </span>
-                        )}
                       </span>
-                      {s.timestamp && !active && (
+                      {active ? (
+                        <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-success/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-success">
+                          <span className="h-1 w-1 rounded-full bg-success animate-pulse" />
+                          Now
+                        </span>
+                      ) : s.timestamp ? (
                         <span className="shrink-0 text-[11px] font-medium text-muted-foreground tabular">
                           {s.timestamp}
                         </span>
-                      )}
+                      ) : null}
                     </div>
                     {s.description && (
                       <p className="mt-0.5 text-xs text-muted-foreground leading-snug">{s.description}</p>
