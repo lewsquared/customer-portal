@@ -21,9 +21,15 @@ export const StatusHero = ({ status, subtitle, stages, currentIndex, cancellable
       </div>
 
       <div className="relative">
-        <div className="inline-flex max-w-[70%] items-center gap-1.5 rounded-full bg-card/70 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary backdrop-blur">
-          <span className={`h-1.5 w-1.5 rounded-full bg-success ${completed ? "" : "animate-pulse"}`} />
-          {completed ? "Completed" : "Live"}
+        <div
+          className={`inline-flex max-w-[70%] items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider backdrop-blur ${
+            onHold ? "bg-destructive/15 text-destructive" : "bg-card/70 text-primary"
+          }`}
+        >
+          <span
+            className={`h-1.5 w-1.5 rounded-full ${onHold ? "bg-destructive animate-pulse" : `bg-success ${completed ? "" : "animate-pulse"}`}`}
+          />
+          {onHold ? "On hold" : completed ? "Completed" : "Live"}
         </div>
         <h1 className="mt-3 max-w-[70%] font-display text-3xl font-extrabold leading-tight text-primary">
           {status}
