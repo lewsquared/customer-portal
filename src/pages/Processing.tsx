@@ -1,6 +1,6 @@
 import { OrderHeader } from "@/components/order/OrderHeader";
 import { StatusHero } from "@/components/order/StatusHero";
-import { QuickActions } from "@/components/order/QuickActions";
+
 import { DeliveryCard } from "@/components/order/DeliveryCard";
 import { ReviewBanner } from "@/components/order/ReviewBanner";
 import { OrderSections } from "@/components/order/OrderSections";
@@ -18,7 +18,7 @@ const Processing = () => {
   return (
     <main className="min-h-screen bg-background font-sans antialiased">
       <div className="mx-auto flex min-h-screen max-w-md flex-col bg-background shadow-hero md:my-6 md:min-h-[calc(100vh-3rem)] md:overflow-hidden md:rounded-[2.25rem] md:border md:border-border">
-        <OrderHeader orderId="CUD137" />
+        <OrderHeader orderId="CUD137" showSupport />
 
         <div className="flex-1 overflow-y-auto pb-4">
           <StatusHero
@@ -30,7 +30,7 @@ const Processing = () => {
 
           <ReviewBanner count={3} />
 
-          <QuickActions />
+          
 
           <DeliveryCard
             dropoffNote="Picked up at door"
