@@ -39,8 +39,6 @@ const Index = () => {
 
           <OrderSections />
         </div>
-
-        <BottomBar />
       </div>
     </main>
   );
