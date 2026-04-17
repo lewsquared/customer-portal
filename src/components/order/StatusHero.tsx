@@ -18,15 +18,15 @@ export const StatusHero = ({ status, subtitle, stages, currentIndex, cancellable
         <LaundryBag />
       </div>
 
-      <div className="relative max-w-[70%]">
-        <div className="inline-flex items-center gap-1.5 rounded-full bg-card/70 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary backdrop-blur">
+      <div className="relative">
+        <div className="inline-flex max-w-[70%] items-center gap-1.5 rounded-full bg-card/70 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary backdrop-blur">
           <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
           Live
         </div>
-        <h1 className="mt-3 font-display text-3xl font-extrabold leading-tight text-primary">
+        <h1 className="mt-3 max-w-[70%] font-display text-3xl font-extrabold leading-tight text-primary">
           {status}
         </h1>
-        <p className="mt-1.5 text-sm text-muted-foreground tabular">{subtitle}</p>
+        <p className="mt-1.5 whitespace-nowrap text-sm text-muted-foreground tabular">{subtitle}</p>
       </div>
 
       <div className="relative mt-6">
