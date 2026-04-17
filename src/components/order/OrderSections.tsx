@@ -9,17 +9,44 @@ type Confirmation = {
   status: "done" | "pending";
 };
 
-const confirmations: Confirmation[] = [
-  { key: "pickup", label: "Proof of pick up", subtitle: "Tap to view photos", status: "done" },
-  { key: "items", label: "Items received at Washmen", subtitle: "Tap to view photos", status: "done" },
-  { key: "drop", label: "Proof of drop off", subtitle: "Available after delivery", status: "pending" },
-];
+export type OrderStage = "received" | "collected" | "items-in" | "delivery" | "delivered";
 
-const doneCount = confirmations.filter((c) => c.status === "done").length;
+const buildConfirmations = (stage: OrderStage): Confirmation[] => {
+  const pickupDone = stage !== "received";
+  const itemsDone = stage === "items-in" || stage === "delivery" || stage === "delivered";
+  const dropDone = stage === "delivered";
+  return [
+    {
+      key: "pickup",
+      label: "Proof of pick up",
+      subtitle: pickupDone ? "Tap to view photos" : "Available after pickup",
+      status: pickupDone ? "done" : "pending",
+    },
+    {
+      key: "items",
+      label: "Items received at Washmen",
+      subtitle: itemsDone ? "Tap to view photos" : "Available after items received",
+      status: itemsDone ? "done" : "pending",
+    },
+    {
+      key: "drop",
+      label: "Proof of drop off",
+      subtitle: dropDone ? "Tap to view photos" : "Available after delivery",
+      status: dropDone ? "done" : "pending",
+    },
+  ];
+};
 
-export const OrderSections = () => {
-  return (
-    <>
+export const OrderSections = ({
+  stage = "delivery",
+  detailsFirst = false,
+}: {
+  stage?: OrderStage;
+  detailsFirst?: boolean;
+}) => {
+  const confirmations = buildConfirmations(stage);
+  const doneCount = confirmations.filter((c) => c.status === "done").length;
+  const confirmationsCard = (
       <section
         className="mx-5 mt-4 rounded-3xl border border-border bg-card shadow-card animate-fade-in p-5"
         style={{ animationDelay: "260ms" }}
