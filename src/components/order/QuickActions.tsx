@@ -1,10 +1,8 @@
-import { CalendarClock, MessageSquarePlus, MapPin, Headphones, type LucideIcon } from "lucide-react";
+import { CalendarClock, Headphones, type LucideIcon } from "lucide-react";
 
 const actions: { icon: LucideIcon; label: string }[] = [
-  { icon: CalendarClock, label: "Reschedule" },
-  { icon: MessageSquarePlus, label: "Instructions" },
-  { icon: MapPin, label: "Edit address" },
-  { icon: Headphones, label: "Support" },
+  { icon: CalendarClock, label: "Change delivery time" },
+  { icon: Headphones, label: "Contact support" },
 ];
 
 export const QuickActions = () => {
