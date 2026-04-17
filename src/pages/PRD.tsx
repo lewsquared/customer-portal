@@ -53,7 +53,7 @@ const PRD = () => {
           <div className="mt-6 grid gap-3 rounded-3xl border border-border bg-card p-5 shadow-card md:grid-cols-3">
             <Stat label="Order screens" value="6" />
             <Stat label="Pipeline statuses" value="5" />
-            <Stat label="Edge states" value="2" />
+            <Stat label="Edge states" value="3" />
           </div>
         </Section>
 
@@ -244,6 +244,7 @@ const PRD = () => {
               sections={[
                 "OrderHeader (no support icon)",
                 "StatusHero — truck",
+                "DelayBanner — '2 items may be delayed' (warning style, shown when facility flags risk of delay)",
                 "QuickActions — receipt + support buttons",
                 "DeliveryCard — pickup ✓, delivery scheduled",
                 "OrderSections (default stage='delivery')",
@@ -428,6 +429,17 @@ const PRD = () => {
           />
 
           <ComponentBlock
+            name="DelayBanner"
+            purpose="Soft warning that one or more items may push the drop-off window."
+            props={["count?: number — number of at-risk items (default 2)"]}
+            notes={[
+              "Uses warning color tokens (warning/10 surface, warning/30 border) — not destructive.",
+              "Shown on /out-for-delivery when the facility flags possible delay; copy: '{N} items may be delayed' + 'We'll confirm shortly if your drop-off time needs to shift.'",
+              "Singular/plural handled via the count prop. Non-actionable (informational only).",
+            ]}
+          />
+
+          <ComponentBlock
             name="QuickActions"
             purpose="2-button row: View receipt + Contact support."
             props={["showReceipt?: boolean (default true)"]}
@@ -455,6 +467,12 @@ const PRD = () => {
             title="Cancellation"
             trigger="Customer wants to cancel."
             behavior="Cancel chip is only present at stage 0 (received). Once the driver is dispatched (stage 1+), self-serve cancellation is removed and customer must contact support."
+          />
+
+          <EdgeCase
+            title="Possible delivery delay"
+            trigger="Facility flags items at risk of delaying the drop-off window during the 'Out for delivery' stage."
+            behavior="DelayBanner appears between StatusHero and QuickActions with the at-risk item count. Order stays at currentIndex=3 — the timeline does not regress and the drop-off label is unchanged until a confirmed reschedule. Banner is informational; no customer action required."
           />
 
           <EdgeCase
