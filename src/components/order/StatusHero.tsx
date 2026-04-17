@@ -39,9 +39,8 @@ export const StatusHero = ({ status, subtitle, stages, currentIndex, cancellable
               <button
                 type="button"
                 aria-label="Cancel order"
-                className="inline-flex items-center gap-1 rounded-full border border-destructive/30 bg-card/70 px-2.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-destructive shadow-press backdrop-blur transition-all hover:bg-destructive hover:text-destructive-foreground active:scale-95"
+                className="inline-flex items-center rounded-full border border-destructive/30 bg-card/70 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-destructive shadow-press backdrop-blur transition-all hover:bg-destructive hover:text-destructive-foreground active:scale-95"
               >
-                <X className="h-3 w-3" strokeWidth={2.8} />
                 Cancel
               </button>
             ) : undefined
