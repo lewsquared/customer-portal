@@ -162,43 +162,47 @@ const DeliveryTruck = () => (
 const ShirtHanger = () => (
   <svg viewBox="0 0 128 128" fill="none" className="h-full w-full">
     {bagDefs}
+    {/* door frame */}
+    <rect x="14" y="10" width="100" height="108" rx="6" fill="hsl(var(--secondary))" opacity="0.55" />
+    {/* door */}
+    <rect x="20" y="14" width="88" height="100" rx="4" fill="hsl(var(--card))" opacity="0.9" />
+    {/* door panels */}
+    <rect x="28" y="22" width="32" height="38" rx="3" stroke="hsl(var(--primary))" strokeWidth="1.2" opacity="0.35" fill="none" />
+    <rect x="68" y="22" width="32" height="38" rx="3" stroke="hsl(var(--primary))" strokeWidth="1.2" opacity="0.35" fill="none" />
+    {/* door knob */}
+    <circle cx="98" cy="68" r="2" fill="hsl(var(--primary))" opacity="0.6" />
+
+    {/* hanging clothes bag (garment bag) leaning on door */}
     {/* hanger hook */}
+    <path d="M50 70 C50 66 53 64 56 66" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round" fill="none" />
+    {/* garment bag */}
     <path
-      d="M64 18 C64 12 68 10 72 13 C76 16 74 22 68 24"
-      stroke="hsl(var(--primary))"
-      strokeWidth="3"
-      strokeLinecap="round"
-      fill="none"
-    />
-    {/* hanger bar */}
-    <path
-      d="M28 44 L64 26 L100 44"
-      stroke="hsl(var(--primary))"
-      strokeWidth="3"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      fill="none"
-    />
-    {/* shirt body */}
-    <path
-      d="M28 44 L44 36 L52 44 C52 50 60 52 64 52 C68 52 76 50 76 44 L84 36 L100 44 L94 60 L84 56 L84 108 C84 110 82 112 80 112 L48 112 C46 112 44 110 44 108 L44 56 L34 60 Z"
+      d="M38 76 L62 76 L66 114 L34 114 Z"
       fill="url(#bagSuccess)"
       opacity="0.95"
     />
-    {/* check badge */}
-    <circle cx="92" cy="92" r="14" fill="hsl(var(--card))" />
-    <circle cx="92" cy="92" r="14" stroke="hsl(var(--success))" strokeWidth="2" fill="none" />
+    <path d="M50 76 L50 114" stroke="hsl(var(--card))" strokeWidth="1" opacity="0.5" />
+
+    {/* package box in front */}
+    <rect x="62" y="86" width="42" height="30" rx="3" fill="url(#bag)" opacity="0.95" />
+    <path d="M62 96 L104 96" stroke="hsl(var(--card))" strokeWidth="1.5" opacity="0.7" />
+    <path d="M83 86 L83 116" stroke="hsl(var(--card))" strokeWidth="1.5" opacity="0.7" />
+
+    {/* check badge on package */}
+    <circle cx="98" cy="84" r="11" fill="hsl(var(--card))" />
+    <circle cx="98" cy="84" r="11" stroke="hsl(var(--success))" strokeWidth="1.8" fill="none" />
     <path
-      d="M85 92 L91 98 L100 86"
+      d="M93 84 L97 88 L104 80"
       stroke="hsl(var(--success))"
-      strokeWidth="3.5"
+      strokeWidth="2.6"
       strokeLinecap="round"
       strokeLinejoin="round"
       fill="none"
     />
+
     {/* sparkles */}
-    <circle cx="22" cy="30" r="2" fill="hsl(var(--accent))" className="animate-sparkle" />
-    <circle cx="106" cy="28" r="2.5" fill="hsl(var(--accent))" className="animate-sparkle" style={{ animationDelay: "400ms" }} />
+    <circle cx="22" cy="22" r="1.8" fill="hsl(var(--accent))" className="animate-sparkle" />
+    <circle cx="108" cy="20" r="2" fill="hsl(var(--accent))" className="animate-sparkle" style={{ animationDelay: "400ms" }} />
   </svg>
 );
 
