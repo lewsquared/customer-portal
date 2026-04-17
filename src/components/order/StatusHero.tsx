@@ -31,20 +31,23 @@ export const StatusHero = ({ status, subtitle, stages, currentIndex, cancellable
       </div>
 
       <div className="relative mt-6">
-        <StatusTimeline stages={stages} currentIndex={currentIndex} />
+        <StatusTimeline
+          stages={stages}
+          currentIndex={currentIndex}
+          rightSlot={
+            cancellable ? (
+              <button
+                type="button"
+                aria-label="Cancel order"
+                className="inline-flex items-center gap-1 rounded-full border border-destructive/30 bg-card/70 px-2.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-destructive shadow-press backdrop-blur transition-all hover:bg-destructive hover:text-destructive-foreground active:scale-95"
+              >
+                <X className="h-3 w-3" strokeWidth={2.8} />
+                Cancel
+              </button>
+            ) : undefined
+          }
+        />
       </div>
-
-      {cancellable && (
-        <div className="relative mt-5 flex justify-end">
-          <button
-            type="button"
-            className="inline-flex items-center gap-1.5 rounded-full border border-destructive/30 bg-card/70 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-destructive backdrop-blur transition-all hover:bg-destructive hover:text-destructive-foreground active:scale-95"
-          >
-            <X className="h-3.5 w-3.5" strokeWidth={2.6} />
-            Cancel order
-          </button>
-        </div>
-      )}
     </section>
   );
 };
