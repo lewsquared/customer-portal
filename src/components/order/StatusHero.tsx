@@ -6,9 +6,10 @@ interface Props {
   stages: Stage[];
   currentIndex: number;
   cancellable?: boolean;
+  completed?: boolean;
 }
 
-export const StatusHero = ({ status, subtitle, stages, currentIndex, cancellable = false }: Props) => {
+export const StatusHero = ({ status, subtitle, stages, currentIndex, cancellable = false, completed = false }: Props) => {
   return (
     <section
       className="relative mx-5 mt-2 overflow-hidden rounded-3xl bg-gradient-hero p-6 shadow-hero animate-fade-in"
@@ -20,8 +21,8 @@ export const StatusHero = ({ status, subtitle, stages, currentIndex, cancellable
 
       <div className="relative">
         <div className="inline-flex max-w-[70%] items-center gap-1.5 rounded-full bg-card/70 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary backdrop-blur">
-          <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
-          Live
+          <span className={`h-1.5 w-1.5 rounded-full bg-success ${completed ? "" : "animate-pulse"}`} />
+          {completed ? "Completed" : "Live"}
         </div>
         <h1 className="mt-3 max-w-[70%] font-display text-3xl font-extrabold leading-tight text-primary">
           {status}
