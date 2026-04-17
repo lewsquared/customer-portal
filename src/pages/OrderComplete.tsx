@@ -21,7 +21,7 @@ const OrderComplete = () => {
 
         <div className="flex-1 overflow-y-auto pb-4">
           <StatusHero
-            status="Delivered"
+            status="Completed Order"
             subtitle="Sat · 4:48 PM · Left at door"
             stages={stages}
             currentIndex={4}

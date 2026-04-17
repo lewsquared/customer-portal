@@ -11,7 +11,7 @@ const stages: Stage[] = [
   { key: "collected", label: "Collected", timestamp: "Thu 8:42 AM" },
   { key: "processing", label: "Processing", timestamp: "Thu 1:05 PM" },
   { key: "delivery", label: "Out for delivery" },
-  { key: "complete", label: "Delivered" },
+  { key: "complete", label: "Completed Order" },
 ];
 
 const Processing = () => {
