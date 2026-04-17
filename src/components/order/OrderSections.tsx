@@ -49,8 +49,8 @@ export const OrderConfirmations = ({ stage = "delivery" }: { stage?: OrderStage 
       <div className="flex items-start justify-between">
         <div>
           <h3 className="font-display text-base font-bold text-primary">Order Confirmations</h3>
-          <p className="mt-0.5 text-xs font-medium text-muted-foreground tabular">
-            {doneCount} photo{doneCount === 1 ? "" : "s"}
+          <p className="mt-0.5 text-xs font-medium text-muted-foreground">
+            We capture photos at every step — from your doorstep to our facility and back.
           </p>
         </div>
       </div>
