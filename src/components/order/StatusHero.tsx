@@ -1,4 +1,4 @@
-import { HorizontalStepper, type Stage } from "./HorizontalStepper";
+import { StatusTimeline, type Stage } from "./StatusTimeline";
 
 interface Props {
   status: string;
@@ -13,7 +13,6 @@ export const StatusHero = ({ status, subtitle, stages, currentIndex }: Props) =>
       className="relative mx-5 mt-2 overflow-hidden rounded-3xl bg-gradient-hero p-6 shadow-hero animate-fade-in"
       aria-label="Order status"
     >
-      {/* Floating laundry bag illustration */}
       <div className="pointer-events-none absolute -right-2 -top-2 h-32 w-32 opacity-90 animate-float">
         <LaundryBag />
       </div>
@@ -29,8 +28,8 @@ export const StatusHero = ({ status, subtitle, stages, currentIndex }: Props) =>
         <p className="mt-1.5 text-sm text-muted-foreground tabular">{subtitle}</p>
       </div>
 
-      <div className="relative mt-7">
-        <HorizontalStepper stages={stages} currentIndex={currentIndex} />
+      <div className="relative mt-6">
+        <StatusTimeline stages={stages} currentIndex={currentIndex} />
       </div>
     </section>
   );
