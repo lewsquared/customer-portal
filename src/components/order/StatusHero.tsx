@@ -21,14 +21,6 @@ const wrapperAnim: Record<HeroVariant, string> = {
   hold: "animate-shake",
 };
 
-const wrapperOffset: Record<HeroVariant, string> = {
-  received: "mt-5",
-  processing: "mt-5",
-  delivery: "mt-5",
-  complete: "mt-5",
-  hold: "mt-5",
-};
-
 export const StatusHero = ({
   status,
   subtitle,
@@ -47,24 +39,23 @@ export const StatusHero = ({
       aria-label="Order status"
     >
       <div className="relative">
-        <div className="flex items-center gap-4">
-          <div className="min-w-0 flex-1">
-            <div
-              className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider backdrop-blur ${
-                onHold ? "bg-destructive/15 text-destructive" : "bg-card/70 text-primary"
-              }`}
-            >
-              <span
-                className={`h-1.5 w-1.5 rounded-full ${onHold ? "bg-destructive animate-pulse" : `bg-success ${completed ? "" : "animate-pulse"}`}`}
-              />
-              {onHold ? "On hold" : completed ? "Completed" : "Live"}
-            </div>
-            <h1 className="mt-3 font-display text-3xl font-extrabold leading-tight text-primary animate-fade-in">
-              {status}
-            </h1>
-          </div>
+        <div
+          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider backdrop-blur ${
+            onHold ? "bg-destructive/15 text-destructive" : "bg-card/70 text-primary"
+          }`}
+        >
+          <span
+            className={`h-1.5 w-1.5 rounded-full ${onHold ? "bg-destructive animate-pulse" : `bg-success ${completed ? "" : "animate-pulse"}`}`}
+          />
+          {onHold ? "On hold" : completed ? "Completed" : "Live"}
+        </div>
 
-          <div className={`pointer-events-none shrink-0 h-24 w-24 opacity-95 ${wrapperAnim[v]} ${wrapperOffset[v]}`}>
+        <div className="mt-3 flex items-center gap-4">
+          <h1 className="min-w-0 flex-1 font-display text-3xl font-extrabold leading-tight text-primary animate-fade-in">
+            {status}
+          </h1>
+
+          <div className={`pointer-events-none shrink-0 h-24 w-24 opacity-95 ${wrapperAnim[v]}`}>
             <HeroArt variant={v} />
           </div>
         </div>
