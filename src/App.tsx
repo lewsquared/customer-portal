@@ -7,6 +7,7 @@ import Demo from "./pages/Demo.tsx";
 import Index from "./pages/Index.tsx";
 import OrderReceived from "./pages/OrderReceived.tsx";
 import Processing from "./pages/Processing.tsx";
+import PaymentFailed from "./pages/PaymentFailed.tsx";
 import OrderComplete from "./pages/OrderComplete.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/order-received" element={<OrderReceived />} />
           <Route path="/processing" element={<Processing />} />
           <Route path="/out-for-delivery" element={<Index />} />
+          <Route path="/payment-failed" element={<PaymentFailed />} />
           <Route path="/order-complete" element={<OrderComplete />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
