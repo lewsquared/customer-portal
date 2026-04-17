@@ -1,50 +1,89 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { CheckCircle2, Clock, Camera, ListChecks, Sparkles, MessageSquare } from "lucide-react";
+import { Check, ChevronRight, ListChecks, Sparkles, MessageSquare } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Confirmation = {
   key: string;
   label: string;
+  subtitle: string;
   status: "done" | "pending";
-  time?: string;
 };
 
 const confirmations: Confirmation[] = [
-  { key: "pickup", label: "Proof of pickup", status: "done", time: "Thu 8:42 AM" },
-  { key: "items", label: "Items received", status: "done", time: "Thu 11:10 AM" },
-  { key: "drop", label: "Proof of drop-off", status: "pending" },
+  { key: "pickup", label: "Proof of pick up", subtitle: "Tap to view photos", status: "done" },
+  { key: "items", label: "Items received at Washmen", subtitle: "Tap to view photos", status: "done" },
+  { key: "drop", label: "Proof of drop off", subtitle: "Available after delivery", status: "pending" },
 ];
+
+const doneCount = confirmations.filter((c) => c.status === "done").length;
 
 export const OrderSections = () => {
   return (
-    <section
-      className="mx-5 mt-4 rounded-3xl border border-border bg-card shadow-card animate-fade-in"
-      style={{ animationDelay: "280ms" }}
-    >
-      <Accordion type="single" collapsible defaultValue="confirmations" className="w-full">
-        <AccordionItem value="confirmations" className="border-b last:border-b-0 px-5">
-          <AccordionTrigger className="py-4 hover:no-underline">
-            <div className="flex items-center gap-3">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-secondary text-primary">
-                <Camera className="h-4 w-4" />
-              </span>
-              <span className="font-display text-base font-bold text-primary">Order confirmations</span>
-            </div>
-          </AccordionTrigger>
-          <AccordionContent>
-            <ul className="mb-3 space-y-2">
-              {confirmations.map((c) => (
-                <li
-                  key={c.key}
-                  className="flex items-center justify-between rounded-2xl bg-secondary/60 px-3 py-2.5"
+    <>
+      <section
+        className="mx-5 mt-4 rounded-3xl border border-border bg-card shadow-card animate-fade-in p-5"
+        style={{ animationDelay: "260ms" }}
+      >
+        <div className="flex items-start justify-between">
+          <div>
+            <h3 className="font-display text-base font-bold text-primary">Order Confirmations</h3>
+            <p className="mt-0.5 text-xs font-medium text-muted-foreground tabular">
+              {doneCount} photo{doneCount === 1 ? "" : "s"}
+            </p>
+          </div>
+        </div>
+
+        <ul className="mt-4 divide-y divide-border">
+          {confirmations.map((c) => {
+            const done = c.status === "done";
+            return (
+              <li key={c.key}>
+                <button
+                  type="button"
+                  disabled={!done}
+                  className={cn(
+                    "flex w-full items-center gap-3 py-3 text-left transition-colors",
+                    done ? "hover:bg-secondary/40 -mx-2 px-2 rounded-xl" : "opacity-50 cursor-not-allowed",
+                  )}
                 >
-                  <span className="text-sm font-semibold text-primary">{c.label}</span>
-                  <Badge status={c.status} time={c.time} />
-                </li>
-              ))}
-            </ul>
-          </AccordionContent>
-        </AccordionItem>
+                  <span
+                    className={cn(
+                      "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg",
+                      done
+                        ? "bg-success/15 text-success"
+                        : "border border-dashed border-muted-foreground/40 text-muted-foreground",
+                    )}
+                  >
+                    {done ? (
+                      <Check className="h-4 w-4" strokeWidth={3} />
+                    ) : (
+                      <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/60" />
+                    )}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p
+                      className={cn(
+                        "text-sm font-bold",
+                        done ? "text-primary" : "text-muted-foreground",
+                      )}
+                    >
+                      {c.label}
+                    </p>
+                    <p className="mt-0.5 text-xs font-medium text-muted-foreground">{c.subtitle}</p>
+                  </div>
+                  {done && <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+
+      <section
+        className="mx-5 mt-4 rounded-3xl border border-border bg-card shadow-card animate-fade-in"
+        style={{ animationDelay: "300ms" }}
+      >
+        <Accordion type="single" collapsible className="w-full">
 
         <AccordionItem value="services" className="border-b last:border-b-0 px-5">
           <AccordionTrigger className="py-4 hover:no-underline">
