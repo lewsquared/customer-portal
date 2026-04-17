@@ -205,18 +205,6 @@ const PhoneConfirm = () => (
     <rect x="43" y="56" width="36" height="1.6" rx="0.8" fill="hsl(var(--primary))" opacity="0.4" />
     <rect x="43" y="60" width="28" height="1.6" rx="0.8" fill="hsl(var(--primary))" opacity="0.4" />
 
-    {/* big check badge — overlapping */}
-    <circle cx="64" cy="84" r="14" fill="hsl(var(--card))" />
-    <circle cx="64" cy="84" r="12" fill="url(#bagSuccess)" />
-    <path
-      d="M57 84 L62 89 L72 78"
-      stroke="hsl(var(--card))"
-      strokeWidth="3"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      fill="none"
-    />
-
     {/* home indicator */}
     <rect x="54" y="103" width="20" height="2" rx="1" fill="hsl(var(--card))" opacity="0.6" />
 
