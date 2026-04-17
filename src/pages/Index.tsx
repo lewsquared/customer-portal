@@ -2,7 +2,7 @@ import { OrderHeader } from "@/components/order/OrderHeader";
 import { StatusHero } from "@/components/order/StatusHero";
 import { QuickActions } from "@/components/order/QuickActions";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
-import { ReceiptCard } from "@/components/order/ReceiptCard";
+
 import { OrderSections } from "@/components/order/OrderSections";
 import { BottomBar } from "@/components/order/BottomBar";
 import type { Stage } from "@/components/order/StatusTimeline";
@@ -35,12 +35,6 @@ const Index = () => {
             dropoffNote="Delivery at door"
             address="Apt 1402, Marina Heights, Dubai Marina"
             when="Sat · Anytime today"
-          />
-
-          <ReceiptCard
-            itemCount={18}
-            services={["Wash & Fold", "Iron", "Eco rinse"]}
-            total="AED 142.00"
           />
 
           <OrderSections />
