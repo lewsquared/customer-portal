@@ -162,47 +162,52 @@ const DeliveryTruck = () => (
 const ShirtHanger = () => (
   <svg viewBox="0 0 128 128" fill="none" className="h-full w-full">
     {bagDefs}
-    {/* door frame */}
-    <rect x="14" y="10" width="100" height="108" rx="6" fill="hsl(var(--secondary))" opacity="0.55" />
-    {/* door */}
-    <rect x="20" y="14" width="88" height="100" rx="4" fill="hsl(var(--card))" opacity="0.9" />
-    {/* door panels */}
-    <rect x="28" y="22" width="32" height="38" rx="3" stroke="hsl(var(--primary))" strokeWidth="1.2" opacity="0.35" fill="none" />
-    <rect x="68" y="22" width="32" height="38" rx="3" stroke="hsl(var(--primary))" strokeWidth="1.2" opacity="0.35" fill="none" />
-    {/* door knob */}
-    <circle cx="98" cy="68" r="2" fill="hsl(var(--primary))" opacity="0.6" />
 
-    {/* hanging clothes bag (garment bag) leaning on door */}
-    {/* hanger hook */}
-    <path d="M50 70 C50 66 53 64 56 66" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round" fill="none" />
-    {/* garment bag */}
+    {/* soft ground shadow */}
+    <ellipse cx="64" cy="116" rx="42" ry="4" fill="hsl(var(--indigo-deep))" opacity="0.12" />
+
+    {/* welcome mat */}
+    <rect x="22" y="108" width="84" height="8" rx="2" fill="hsl(var(--accent))" opacity="0.55" />
+    <rect x="26" y="110" width="76" height="4" rx="1.5" fill="hsl(var(--card))" opacity="0.5" />
+
+    {/* parcel box */}
+    <rect x="34" y="58" width="60" height="50" rx="4" fill="url(#bag)" />
+    {/* box top edge highlight */}
+    <rect x="34" y="58" width="60" height="6" rx="2" fill="hsl(var(--card))" opacity="0.18" />
+    {/* tape vertical */}
+    <rect x="61" y="58" width="6" height="50" fill="hsl(var(--card))" opacity="0.25" />
+    {/* tape horizontal */}
+    <rect x="34" y="78" width="60" height="6" fill="hsl(var(--card))" opacity="0.25" />
+
+    {/* garment bag draped on top of parcel */}
+    <path d="M58 44 C58 40 62 38 64 40" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round" fill="none" />
     <path
-      d="M38 76 L62 76 L66 114 L34 114 Z"
+      d="M50 50 L78 50 L82 60 L46 60 Z"
       fill="url(#bagSuccess)"
       opacity="0.95"
     />
-    <path d="M50 76 L50 114" stroke="hsl(var(--card))" strokeWidth="1" opacity="0.5" />
+    <path d="M64 50 L64 60" stroke="hsl(var(--card))" strokeWidth="1" opacity="0.5" />
 
-    {/* package box in front */}
-    <rect x="62" y="86" width="42" height="30" rx="3" fill="url(#bag)" opacity="0.95" />
-    <path d="M62 96 L104 96" stroke="hsl(var(--card))" strokeWidth="1.5" opacity="0.7" />
-    <path d="M83 86 L83 116" stroke="hsl(var(--card))" strokeWidth="1.5" opacity="0.7" />
+    {/* fragile / handle-with-care label */}
+    <rect x="42" y="92" width="20" height="8" rx="1.5" fill="hsl(var(--card))" opacity="0.85" />
+    <rect x="44" y="95" width="16" height="1.5" rx="0.75" fill="hsl(var(--primary))" opacity="0.5" />
 
-    {/* check badge on package */}
-    <circle cx="98" cy="84" r="11" fill="hsl(var(--card))" />
-    <circle cx="98" cy="84" r="11" stroke="hsl(var(--success))" strokeWidth="1.8" fill="none" />
+    {/* delivered seal — green check */}
+    <circle cx="92" cy="46" r="14" fill="hsl(var(--success))" />
+    <circle cx="92" cy="46" r="14" stroke="hsl(var(--card))" strokeWidth="2" fill="none" />
     <path
-      d="M93 84 L97 88 L104 80"
-      stroke="hsl(var(--success))"
-      strokeWidth="2.6"
+      d="M85 46 L91 52 L100 40"
+      stroke="hsl(var(--card))"
+      strokeWidth="3.2"
       strokeLinecap="round"
       strokeLinejoin="round"
       fill="none"
     />
 
     {/* sparkles */}
-    <circle cx="22" cy="22" r="1.8" fill="hsl(var(--accent))" className="animate-sparkle" />
-    <circle cx="108" cy="20" r="2" fill="hsl(var(--accent))" className="animate-sparkle" style={{ animationDelay: "400ms" }} />
+    <circle cx="22" cy="34" r="2" fill="hsl(var(--accent))" className="animate-sparkle" />
+    <circle cx="110" cy="74" r="1.8" fill="hsl(var(--accent))" className="animate-sparkle" style={{ animationDelay: "400ms" }} />
+    <circle cx="20" cy="86" r="1.6" fill="hsl(var(--accent))" className="animate-sparkle" style={{ animationDelay: "750ms" }} />
   </svg>
 );
 
