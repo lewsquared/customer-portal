@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Package, Truck, ArrowRight } from "lucide-react";
+import { Package, Truck, PackageCheck, ArrowRight } from "lucide-react";
 
 const Demo = () => {
   return (
@@ -31,6 +31,13 @@ const Demo = () => {
             title="Out for delivery"
             description="On its way back to you"
             delay="160ms"
+          />
+          <DemoCard
+            to="/order-complete"
+            icon={<PackageCheck className="h-6 w-6" />}
+            title="Order complete"
+            description="Delivered · all photos available"
+            delay="240ms"
           />
         </div>
       </div>
