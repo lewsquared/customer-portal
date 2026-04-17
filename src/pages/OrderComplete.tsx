@@ -2,7 +2,6 @@ import { OrderHeader } from "@/components/order/OrderHeader";
 import { StatusHero } from "@/components/order/StatusHero";
 import { QuickActions } from "@/components/order/QuickActions";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
-import { UpsellBanner } from "@/components/order/UpsellBanner";
 import { OrderConfirmations, OrderDetails } from "@/components/order/OrderSections";
 import type { Stage } from "@/components/order/StatusTimeline";
 
@@ -27,8 +26,6 @@ const OrderComplete = () => {
             stages={stages}
             currentIndex={4}
           />
-
-          <UpsellBanner />
 
           <QuickActions />
 

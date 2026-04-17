@@ -2,7 +2,6 @@ import { OrderHeader } from "@/components/order/OrderHeader";
 import { StatusHero } from "@/components/order/StatusHero";
 import { QuickActions } from "@/components/order/QuickActions";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
-import { UpsellBanner } from "@/components/order/UpsellBanner";
 
 import { OrderSections } from "@/components/order/OrderSections";
 
@@ -29,8 +28,6 @@ const Index = () => {
             stages={stages}
             currentIndex={3}
           />
-
-          <UpsellBanner />
 
           <QuickActions />
 
