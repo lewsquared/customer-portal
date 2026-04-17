@@ -40,7 +40,7 @@ export const StatusHero = ({
     >
       <div className="relative">
         <div className="flex items-center gap-4">
-          <h1 className="min-w-0 flex-1 font-display text-3xl font-extrabold leading-tight text-primary animate-fade-in">
+          <h1 className="min-w-0 flex-1 font-display text-3xl font-extrabold leading-tight text-primary animate-fade-in [text-wrap:balance] min-h-[2.4em] [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical] overflow-hidden">
             {status}
           </h1>
 
