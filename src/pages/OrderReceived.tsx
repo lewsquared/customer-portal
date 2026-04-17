@@ -34,6 +34,7 @@ const OrderReceived = () => {
 
           <DeliveryCard
             dropoffNote="Pickup at door"
+            secondaryNote="Drop off at door"
             address="Apt 1402, Marina Heights, Dubai Marina"
             when="Tomorrow · 8:00 – 10:00 AM"
           />
