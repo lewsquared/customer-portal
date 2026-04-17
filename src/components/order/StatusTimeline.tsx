@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, ChevronDown, Clock, Truck, Package, Sparkles, Home, PackageCheck, type LucideIcon } from "lucide-react";
+import { Check, ChevronDown, Clock, Truck, Package, Sparkles, Home, PackageCheck, History, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export type Stage = {
@@ -26,8 +26,6 @@ export const StatusTimeline = ({ stages, currentIndex }: Props) => {
   const [open, setOpen] = useState(false);
   const segments = stages.length - 1;
   const progressPct = segments === 0 ? 0 : (currentIndex / segments) * 100;
-  const next = stages[currentIndex + 1];
-  const prev = stages[currentIndex - 1];
 
   return (
     <div className="w-full">
@@ -56,42 +54,23 @@ export const StatusTimeline = ({ stages, currentIndex }: Props) => {
         </div>
       </div>
 
-      <div className="mt-3 flex items-center justify-between text-[10px] font-semibold uppercase tracking-widest text-muted-foreground tabular">
-        <span>
-          Step {currentIndex + 1} of {stages.length}
+      <div className="mt-3 flex items-center justify-between gap-3">
+        <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground tabular">
+          Step {currentIndex + 1} of {stages.length} · {Math.round(progressPct)}%
         </span>
-        <span>{Math.round(progressPct)}%</span>
-      </div>
-
-      {/* Smart hint row + toggle */}
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-        className="group mt-3 flex w-full items-center justify-between gap-3 rounded-full bg-card/70 px-4 py-2.5 text-left shadow-press backdrop-blur transition-all active:scale-[0.99]"
-      >
-        <span className="flex min-w-0 items-center gap-2 text-xs">
-          {next ? (
-            <>
-              <Clock className="h-3.5 w-3.5 shrink-0 text-primary" />
-              <span className="truncate text-muted-foreground">
-                Next: <span className="font-semibold text-primary">{next.label}</span>
-              </span>
-            </>
-          ) : (
-            <>
-              <PackageCheck className="h-3.5 w-3.5 shrink-0 text-success" />
-              <span className="truncate font-semibold text-primary">All steps complete</span>
-            </>
-          )}
-        </span>
-        <span className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-primary">
-          {open ? "Hide" : "Timeline"}
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          className="inline-flex items-center gap-1.5 rounded-full bg-card/70 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-primary shadow-press backdrop-blur transition-all active:scale-[0.97]"
+        >
+          <History className="h-3.5 w-3.5" />
+          {open ? "Hide timeline" : "View timeline"}
           <ChevronDown
             className={cn("h-3.5 w-3.5 transition-transform duration-300", open && "rotate-180")}
           />
-        </span>
-      </button>
+        </button>
+      </div>
 
       {/* Expandable timeline */}
       <div
