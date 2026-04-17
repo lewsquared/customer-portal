@@ -1,4 +1,3 @@
-import { X } from "lucide-react";
 import { StatusTimeline, type Stage } from "./StatusTimeline";
 
 interface Props {
