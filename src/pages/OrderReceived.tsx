@@ -2,7 +2,7 @@ import { OrderHeader } from "@/components/order/OrderHeader";
 import { StatusHero } from "@/components/order/StatusHero";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
 import { UpsellBanner } from "@/components/order/UpsellBanner";
-import { OrderSections } from "@/components/order/OrderSections";
+import { OrderDetails, OrderConfirmations } from "@/components/order/OrderSections";
 import type { Stage } from "@/components/order/StatusTimeline";
 
 const stages: Stage[] = [
@@ -30,6 +30,8 @@ const OrderReceived = () => {
 
           <UpsellBanner />
 
+          <OrderDetails defaultOpen="services" />
+
           <DeliveryCard
             dropoffNote="Pickup at door"
             address="Apt 1402, Marina Heights, Dubai Marina"
@@ -37,7 +39,7 @@ const OrderReceived = () => {
             dropoff={{ label: "Drop off at door", when: "Sun · 6:00 – 8:00 PM" }}
           />
 
-          <OrderSections stage="received" detailsFirst />
+          <OrderConfirmations stage="received" />
         </div>
       </div>
     </main>
