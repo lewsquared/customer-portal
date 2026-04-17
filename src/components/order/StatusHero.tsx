@@ -7,9 +7,10 @@ interface Props {
   currentIndex: number;
   cancellable?: boolean;
   completed?: boolean;
+  onHold?: boolean;
 }
 
-export const StatusHero = ({ status, subtitle, stages, currentIndex, cancellable = false, completed = false }: Props) => {
+export const StatusHero = ({ status, subtitle, stages, currentIndex, cancellable = false, completed = false, onHold = false }: Props) => {
   return (
     <section
       className="relative mx-5 mt-2 overflow-hidden rounded-3xl bg-gradient-hero p-6 shadow-hero animate-fade-in"
@@ -34,6 +35,7 @@ export const StatusHero = ({ status, subtitle, stages, currentIndex, cancellable
         <StatusTimeline
           stages={stages}
           currentIndex={currentIndex}
+          onHold={onHold}
           rightSlot={
             cancellable ? (
               <button
