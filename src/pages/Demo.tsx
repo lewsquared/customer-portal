@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Package, Truck, PackageCheck, ArrowRight, Sparkles, AlertTriangle } from "lucide-react";
+import { Package, PackageOpen, Truck, PackageCheck, ArrowRight, Sparkles, AlertTriangle } from "lucide-react";
 
 const Demo = () => {
   return (
@@ -24,6 +24,13 @@ const Demo = () => {
             title="Order received"
             description="Just placed · pickup tomorrow"
             delay="80ms"
+          />
+          <DemoCard
+            to="/order-collected"
+            icon={<PackageOpen className="h-6 w-6" />}
+            title="Order collected"
+            description="On its way to our facility"
+            delay="120ms"
           />
           <DemoCard
             to="/processing"
