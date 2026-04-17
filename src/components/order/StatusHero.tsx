@@ -87,7 +87,7 @@ const HeroArt = ({ variant }: { variant: HeroVariant }) => {
   if (variant === "processing") return <WashingMachine />;
   if (variant === "delivery") return <DeliveryTruck />;
   if (variant === "complete") return <ShirtHanger />;
-  if (variant === "hold") return <AlertBag />;
+  if (variant === "hold") return <CardAlert />;
   if (variant === "received") return <PhoneConfirm />;
   return <LaundryBag />;
 };
@@ -240,17 +240,31 @@ const PhoneConfirm = () => (
   </svg>
 );
 
-const AlertBag = () => (
+const CardAlert = () => (
   <svg viewBox="0 0 128 128" fill="none" className="h-full w-full">
     {bagDefs}
-    <path
-      d="M40 44 L88 44 C92 44 95 47 95 51 L100 102 C100 108 96 112 90 112 L38 112 C32 112 28 108 28 102 L33 51 C33 47 36 44 40 44 Z"
-      fill="url(#bagAlert)"
-      opacity="0.95"
-    />
-    <path d="M52 44 C52 30 56 24 64 24 C72 24 76 30 76 44" stroke="hsl(var(--primary))" strokeWidth="4" strokeLinecap="round" fill="none" />
-    <circle cx="64" cy="80" r="18" fill="hsl(var(--card))" opacity="0.95" />
-    <rect x="62" y="70" width="4" height="12" rx="2" fill="hsl(var(--destructive))" />
-    <circle cx="64" cy="88" r="2.4" fill="hsl(var(--destructive))" />
+    {/* card body */}
+    <rect x="14" y="38" width="92" height="60" rx="8" fill="url(#bagAlert)" opacity="0.95" />
+    {/* magnetic stripe */}
+    <rect x="14" y="50" width="92" height="10" fill="hsl(var(--indigo-deep))" opacity="0.55" />
+    {/* chip */}
+    <rect x="24" y="68" width="14" height="11" rx="2" fill="hsl(var(--card))" opacity="0.85" />
+    <path d="M24 73 L38 73 M31 68 L31 79" stroke="hsl(var(--primary))" strokeWidth="0.8" opacity="0.7" />
+    {/* number dots */}
+    <g fill="hsl(var(--card))" opacity="0.75">
+      <circle cx="48" cy="86" r="1.4" />
+      <circle cx="52" cy="86" r="1.4" />
+      <circle cx="56" cy="86" r="1.4" />
+      <circle cx="60" cy="86" r="1.4" />
+      <circle cx="68" cy="86" r="1.4" />
+      <circle cx="72" cy="86" r="1.4" />
+      <circle cx="76" cy="86" r="1.4" />
+      <circle cx="80" cy="86" r="1.4" />
+    </g>
+    {/* alert badge */}
+    <circle cx="98" cy="34" r="16" fill="hsl(var(--destructive))" />
+    <circle cx="98" cy="34" r="16" stroke="hsl(var(--card))" strokeWidth="2.5" fill="none" />
+    <rect x="96" y="24" width="4" height="12" rx="2" fill="hsl(var(--card))" />
+    <circle cx="98" cy="42" r="2.2" fill="hsl(var(--card))" />
   </svg>
 );
