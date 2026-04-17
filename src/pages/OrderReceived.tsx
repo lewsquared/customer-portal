@@ -1,6 +1,5 @@
 import { OrderHeader } from "@/components/order/OrderHeader";
 import { StatusHero } from "@/components/order/StatusHero";
-import { QuickActions } from "@/components/order/QuickActions";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
 import { UpsellBanner } from "@/components/order/UpsellBanner";
 import { OrderSections } from "@/components/order/OrderSections";
@@ -18,7 +17,7 @@ const OrderReceived = () => {
   return (
     <main className="min-h-screen bg-background font-sans antialiased">
       <div className="mx-auto flex min-h-screen max-w-md flex-col bg-background shadow-hero md:my-6 md:min-h-[calc(100vh-3rem)] md:overflow-hidden md:rounded-[2.25rem] md:border md:border-border">
-        <OrderHeader orderId="CUD138" />
+        <OrderHeader orderId="CUD138" showSupport />
 
         <div className="flex-1 overflow-y-auto pb-4">
           <StatusHero
@@ -26,11 +25,10 @@ const OrderReceived = () => {
             subtitle="We'll pick up your laundry soon"
             stages={stages}
             currentIndex={0}
+            cancellable
           />
 
           <UpsellBanner />
-
-          <QuickActions showReceipt={false} />
 
           <DeliveryCard
             dropoffNote="Pickup at door"
