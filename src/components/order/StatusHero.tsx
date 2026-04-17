@@ -147,15 +147,20 @@ const WashingMachine = () => (
 const DeliveryTruck = () => (
   <svg viewBox="0 0 128 128" fill="none" className="h-full w-full">
     {bagDefs}
-    <rect x="14" y="50" width="60" height="42" rx="8" fill="url(#bag)" opacity="0.95" />
-    <path d="M74 60 L96 60 L110 78 L110 92 L74 92 Z" fill="hsl(var(--primary))" opacity="0.85" />
-    <rect x="80" y="66" width="22" height="14" rx="3" fill="hsl(var(--card))" opacity="0.6" />
-    <circle cx="36" cy="98" r="9" fill="hsl(var(--indigo-deep))" />
-    <circle cx="36" cy="98" r="3.5" fill="hsl(var(--card))" />
-    <circle cx="92" cy="98" r="9" fill="hsl(var(--indigo-deep))" />
-    <circle cx="92" cy="98" r="3.5" fill="hsl(var(--card))" />
-    <path d="M6 84 L20 84" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round" opacity="0.5" />
-    <path d="M2 76 L16 76" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round" opacity="0.35" />
+    {/* truck body */}
+    <rect x="14" y="32" width="60" height="42" rx="8" fill="url(#bag)" opacity="0.95" />
+    {/* cab */}
+    <path d="M74 42 L96 42 L110 60 L110 74 L74 74 Z" fill="hsl(var(--primary))" opacity="0.9" />
+    {/* window */}
+    <rect x="80" y="48" width="22" height="14" rx="3" fill="hsl(var(--card))" opacity="0.7" />
+    {/* wheels */}
+    <circle cx="36" cy="82" r="9" fill="hsl(var(--indigo-deep))" />
+    <circle cx="36" cy="82" r="3.5" fill="hsl(var(--card))" />
+    <circle cx="92" cy="82" r="9" fill="hsl(var(--indigo-deep))" />
+    <circle cx="92" cy="82" r="3.5" fill="hsl(var(--card))" />
+    {/* speed lines */}
+    <path d="M2 60 L18 60" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round" opacity="0.45" />
+    <path d="M0 70 L14 70" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round" opacity="0.3" />
   </svg>
 );
 
