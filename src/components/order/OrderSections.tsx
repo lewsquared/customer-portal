@@ -105,12 +105,7 @@ export const OrderDetails = ({ defaultOpen }: { defaultOpen?: "services" | "inst
       <Accordion type="single" collapsible defaultValue={defaultOpen} className="w-full">
         <AccordionItem value="services" className="border-b last:border-b-0 px-5">
           <AccordionTrigger className="py-4 hover:no-underline">
-            <div className="flex items-center gap-3">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-secondary text-primary">
-                <ListChecks className="h-4 w-4" />
-              </span>
-              <span className="font-display text-base font-bold text-primary">Services selection</span>
-            </div>
+            <span className="font-display text-base font-bold text-primary">Services selection</span>
           </AccordionTrigger>
           <AccordionContent>
             <ul className="mb-3 space-y-2">
