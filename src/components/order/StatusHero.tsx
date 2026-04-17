@@ -39,18 +39,7 @@ export const StatusHero = ({
       aria-label="Order status"
     >
       <div className="relative">
-        <div
-          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider backdrop-blur ${
-            onHold ? "bg-destructive/15 text-destructive" : "bg-card/70 text-primary"
-          }`}
-        >
-          <span
-            className={`h-1.5 w-1.5 rounded-full ${onHold ? "bg-destructive animate-pulse" : `bg-success ${completed ? "" : "animate-pulse"}`}`}
-          />
-          {onHold ? "On hold" : completed ? "Completed" : "Live"}
-        </div>
-
-        <div className="mt-3 flex items-center gap-4">
+        <div className="flex items-center gap-4">
           <h1 className="min-w-0 flex-1 font-display text-3xl font-extrabold leading-tight text-primary animate-fade-in">
             {status}
           </h1>
