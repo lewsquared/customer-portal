@@ -1,4 +1,4 @@
-import { ChevronLeft, LifeBuoy } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 
 interface Props {
   orderId: string;
@@ -20,12 +20,7 @@ export const OrderHeader = ({ orderId }: Props) => {
           <span className="font-mono text-sm font-semibold text-primary tabular">{orderId}</span>
         </div>
 
-        <button
-          aria-label="Support"
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-card/80 text-primary shadow-press transition-transform active:scale-95"
-        >
-          <LifeBuoy className="h-5 w-5" strokeWidth={2.2} />
-        </button>
+        <span className="h-10 w-10" aria-hidden />
       </div>
     </header>
   );
