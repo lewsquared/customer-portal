@@ -12,6 +12,7 @@ export type Stage = {
 interface Props {
   stages: Stage[];
   currentIndex: number;
+  rightSlot?: React.ReactNode;
 }
 
 const iconForKey: Record<string, LucideIcon> = {
