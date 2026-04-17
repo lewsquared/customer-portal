@@ -127,19 +127,20 @@ const LaundryBag = () => (
 const WashingMachine = () => (
   <svg viewBox="0 0 128 128" fill="none" className="h-full w-full">
     {bagDefs}
-    <rect x="24" y="22" width="80" height="92" rx="14" fill="url(#bag)" opacity="0.95" />
-    <rect x="32" y="30" width="64" height="10" rx="5" fill="hsl(var(--card))" opacity="0.4" />
-    <circle cx="44" cy="35" r="2" fill="hsl(var(--card))" />
-    <circle cx="54" cy="35" r="2" fill="hsl(var(--card))" />
-    <circle cx="64" cy="76" r="26" fill="hsl(var(--card))" opacity="0.95" />
-    <g className="origin-center" style={{ transformOrigin: "64px 76px" }}>
-      <g className="animate-spin-slow" style={{ transformOrigin: "64px 76px" }}>
-        <circle cx="64" cy="76" r="20" fill="hsl(var(--secondary))" />
-        <circle cx="56" cy="68" r="3.5" fill="hsl(var(--accent))" opacity="0.85" />
-        <circle cx="72" cy="72" r="2.5" fill="hsl(var(--primary))" opacity="0.6" />
-        <circle cx="60" cy="84" r="3" fill="hsl(var(--accent))" opacity="0.7" />
-        <circle cx="74" cy="82" r="2" fill="hsl(var(--primary))" opacity="0.5" />
-      </g>
+    {/* body */}
+    <rect x="30" y="30" width="68" height="78" rx="12" fill="url(#bag)" opacity="0.95" />
+    {/* control panel */}
+    <rect x="36" y="36" width="56" height="9" rx="4" fill="hsl(var(--card))" opacity="0.4" />
+    <circle cx="46" cy="40" r="1.8" fill="hsl(var(--card))" />
+    <circle cx="54" cy="40" r="1.8" fill="hsl(var(--card))" />
+    {/* drum */}
+    <circle cx="64" cy="74" r="22" fill="hsl(var(--card))" opacity="0.95" />
+    <g className="animate-spin-slow" style={{ transformOrigin: "64px 74px" }}>
+      <circle cx="64" cy="74" r="17" fill="hsl(var(--secondary))" />
+      <circle cx="56" cy="66" r="3" fill="hsl(var(--accent))" opacity="0.85" />
+      <circle cx="72" cy="70" r="2.2" fill="hsl(var(--primary))" opacity="0.6" />
+      <circle cx="60" cy="82" r="2.6" fill="hsl(var(--accent))" opacity="0.7" />
+      <circle cx="73" cy="80" r="1.8" fill="hsl(var(--primary))" opacity="0.5" />
     </g>
   </svg>
 );
