@@ -75,7 +75,7 @@ export const OrderConfirmations = ({ stage = "delivery" }: { stage?: OrderStage 
                   )}
                 >
                   {done ? (
-                    <Check className="h-4 w-4" strokeWidth={3} />
+                    <Camera className="h-4 w-4" />
                   ) : (
                     <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/60" />
                   )}
