@@ -105,7 +105,7 @@ export const OrderDetails = ({ defaultOpen }: { defaultOpen?: "services" | "inst
       <Accordion type="single" collapsible defaultValue={defaultOpen} className="w-full">
         <AccordionItem value="services" className="border-b last:border-b-0 px-5">
           <AccordionTrigger className="py-4 hover:no-underline">
-            <span className="font-display text-base font-bold text-primary">Services selection</span>
+            <span className="font-display text-base font-bold text-primary">Services Selection</span>
           </AccordionTrigger>
           <AccordionContent>
             <ul className="mb-3 space-y-2">
@@ -131,7 +131,7 @@ export const OrderDetails = ({ defaultOpen }: { defaultOpen?: "services" | "inst
 
         <AccordionItem value="instructions" className="border-b-0 px-5">
           <AccordionTrigger className="py-4 hover:no-underline">
-            <span className="font-display text-base font-bold text-primary">Order instructions</span>
+            <span className="font-display text-base font-bold text-primary">Order Instructions</span>
           </AccordionTrigger>
           <AccordionContent>
             <p className="mb-4 rounded-2xl bg-secondary/60 p-3 text-sm text-muted-foreground">
