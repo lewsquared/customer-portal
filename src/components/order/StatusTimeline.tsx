@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, ChevronDown, Clock, Truck, Package, Sparkles, Home, PackageCheck, ListTimer, type LucideIcon } from "lucide-react";
+import { Check, ChevronDown, Clock, Truck, Package, Sparkles, Home, PackageCheck, History, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export type Stage = {
