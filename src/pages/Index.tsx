@@ -8,11 +8,11 @@ import { OrderSections } from "@/components/order/OrderSections";
 import type { Stage } from "@/components/order/StatusTimeline";
 
 const stages: Stage[] = [
-  { key: "received", label: "Order received", timestamp: "Wed 9:12 PM", description: "We got your request and scheduled pickup." },
-  { key: "collected", label: "Collected", timestamp: "Thu 8:42 AM", description: "Driver picked up 1 bag from your address." },
-  { key: "processing", label: "Processing", timestamp: "Thu 1:05 PM", description: "Wash, dry, and iron in progress at the facility." },
-  { key: "delivery", label: "Out for delivery", timestamp: "Today, anytime", description: "Driver is heading your way today." },
-  { key: "complete", label: "Delivered", description: "Your order will be marked complete on drop-off." },
+  { key: "received", label: "Order received", timestamp: "Wed 9:12 PM" },
+  { key: "collected", label: "Collected", timestamp: "Thu 8:42 AM" },
+  { key: "processing", label: "Processing", timestamp: "Thu 1:05 PM" },
+  { key: "delivery", label: "Out for delivery", timestamp: "Today, anytime" },
+  { key: "complete", label: "Delivered" },
 ];
 
 const Index = () => {
