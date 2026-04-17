@@ -10,7 +10,7 @@ const stages: Stage[] = [
   { key: "collected", label: "Collected", timestamp: "Thu 8:42 AM" },
   { key: "processing", label: "Processing", timestamp: "Thu 1:05 PM" },
   { key: "delivery", label: "Out for delivery", timestamp: "Sat 11:20 AM" },
-  { key: "complete", label: "Completed Order", timestamp: "Sat 4:48 PM" },
+  { key: "complete", label: "Completed order", timestamp: "Sat 4:48 PM" },
 ];
 
 const OrderComplete = () => {
@@ -21,7 +21,7 @@ const OrderComplete = () => {
 
         <div className="flex-1 overflow-y-auto pb-4">
           <StatusHero
-            status="Completed Order"
+            status="Completed order"
             subtitle="Sat · 4:48 PM · Left at door"
             stages={stages}
             currentIndex={4}
