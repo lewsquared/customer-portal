@@ -132,21 +132,7 @@ export const OrderSections = () => {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-    </section>
-  );
-};
-
-const Badge = ({ status, time }: { status: "done" | "pending"; time?: string }) => {
-  const done = status === "done";
-  return (
-    <span
-      className={cn(
-        "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold tabular",
-        done ? "bg-success/15 text-success" : "bg-warning/15 text-warning",
-      )}
-    >
-      {done ? <CheckCircle2 className="h-3.5 w-3.5" /> : <Clock className="h-3.5 w-3.5" />}
-      {done ? time ?? "Done" : "Pending"}
-    </span>
+      </section>
+    </>
   );
 };
