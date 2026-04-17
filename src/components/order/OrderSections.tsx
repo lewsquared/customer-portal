@@ -46,16 +46,11 @@ export const OrderConfirmations = ({ stage = "delivery" }: { stage?: OrderStage 
       className="mx-5 mt-4 rounded-3xl border border-border bg-card shadow-card animate-fade-in p-5"
       style={{ animationDelay: "260ms" }}
     >
-      <div className="flex items-start gap-3">
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
-          <Camera className="h-4 w-4" />
-        </span>
-        <div className="min-w-0 flex-1">
-          <h3 className="font-display text-base font-bold text-primary leading-tight">Order Confirmations</h3>
-          <p className="mt-1 text-xs font-medium text-muted-foreground leading-relaxed">
-            We capture photos at every step — from your doorstep to our facility and back.
-          </p>
-        </div>
+      <div>
+        <h3 className="font-display text-base font-bold text-primary leading-tight">Order Confirmations</h3>
+        <p className="mt-1 text-xs font-medium text-muted-foreground leading-relaxed">
+          We capture photos at every step — from your doorstep to our facility and back.
+        </p>
       </div>
 
       <ul className="mt-4 divide-y divide-border">
@@ -80,7 +75,7 @@ export const OrderConfirmations = ({ stage = "delivery" }: { stage?: OrderStage 
                   )}
                 >
                   {done ? (
-                    <Check className="h-4 w-4" strokeWidth={3} />
+                    <Camera className="h-4 w-4" />
                   ) : (
                     <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/60" />
                   )}
@@ -110,12 +105,7 @@ export const OrderDetails = ({ defaultOpen }: { defaultOpen?: "services" | "inst
       <Accordion type="single" collapsible defaultValue={defaultOpen} className="w-full">
         <AccordionItem value="services" className="border-b last:border-b-0 px-5">
           <AccordionTrigger className="py-4 hover:no-underline">
-            <div className="flex items-center gap-3">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-secondary text-primary">
-                <ListChecks className="h-4 w-4" />
-              </span>
-              <span className="font-display text-base font-bold text-primary">Services selection</span>
-            </div>
+            <span className="font-display text-base font-bold text-primary">Services selection</span>
           </AccordionTrigger>
           <AccordionContent>
             <ul className="mb-3 space-y-2">
@@ -141,12 +131,7 @@ export const OrderDetails = ({ defaultOpen }: { defaultOpen?: "services" | "inst
 
         <AccordionItem value="instructions" className="border-b-0 px-5">
           <AccordionTrigger className="py-4 hover:no-underline">
-            <div className="flex items-center gap-3">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-secondary text-primary">
-                <MessageSquare className="h-4 w-4" />
-              </span>
-              <span className="font-display text-base font-bold text-primary">Order instructions</span>
-            </div>
+            <span className="font-display text-base font-bold text-primary">Order instructions</span>
           </AccordionTrigger>
           <AccordionContent>
             <p className="mb-4 rounded-2xl bg-secondary/60 p-3 text-sm text-muted-foreground">
