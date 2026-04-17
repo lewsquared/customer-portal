@@ -1,11 +1,12 @@
 import { Receipt, Headphones, type LucideIcon } from "lucide-react";
 
-const actions: { icon: LucideIcon; label: string; flex: string }[] = [
-  { icon: Receipt, label: "View receipt", flex: "flex-[2]" },
-  { icon: Headphones, label: "Contact support", flex: "flex-[3]" },
+const allActions: { icon: LucideIcon; label: string; flex: string; key: string }[] = [
+  { key: "receipt", icon: Receipt, label: "View receipt", flex: "flex-[2]" },
+  { key: "support", icon: Headphones, label: "Contact support", flex: "flex-[3]" },
 ];
 
-export const QuickActions = () => {
+export const QuickActions = ({ showReceipt = true }: { showReceipt?: boolean }) => {
+  const actions = allActions.filter((a) => showReceipt || a.key !== "receipt");
   return (
     <section className="mt-5 animate-fade-in" style={{ animationDelay: "80ms" }}>
       <div className="flex gap-3 px-5">

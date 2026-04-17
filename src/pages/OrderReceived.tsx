@@ -30,7 +30,7 @@ const OrderReceived = () => {
 
           <UpsellBanner />
 
-          <QuickActions />
+          <QuickActions showReceipt={false} />
 
           <DeliveryCard
             dropoffNote="Pickup at door"
@@ -38,7 +38,7 @@ const OrderReceived = () => {
             when="Tomorrow · 8:00 – 10:00 AM"
           />
 
-          <OrderSections />
+          <OrderSections stage="received" detailsFirst />
         </div>
       </div>
     </main>
