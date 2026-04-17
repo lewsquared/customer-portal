@@ -16,13 +16,13 @@ export const DeliveryCard = ({ address, when, dropoffNote }: Props) => {
       <div className="flex items-center justify-between gap-3 px-4 py-3">
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-            <MapPin className="h-3 w-3" />
-            {dropoffNote}
-          </div>
-          <div className="mt-0.5 truncate text-sm font-semibold text-primary">{address}</div>
-          <div className="mt-0.5 flex items-center gap-1.5 text-xs text-muted-foreground tabular">
             <Clock className="h-3 w-3" />
-            {when}
+            Delivery
+          </div>
+          <div className="mt-0.5 text-sm font-bold text-primary tabular">{when}</div>
+          <div className="mt-0.5 flex items-center gap-1.5 truncate text-xs text-muted-foreground">
+            <MapPin className="h-3 w-3 shrink-0" />
+            <span className="truncate">{dropoffNote} · {address}</span>
           </div>
         </div>
         <button
