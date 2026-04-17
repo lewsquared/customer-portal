@@ -38,27 +38,29 @@ export const StatusHero = ({
       className="relative mx-5 mt-2 overflow-hidden rounded-3xl bg-gradient-hero p-6 shadow-hero animate-fade-in"
       aria-label="Order status"
     >
-      <div className={`pointer-events-none absolute right-4 top-14 h-24 w-24 opacity-95 ${wrapperAnim[v]}`}>
-        <HeroArt variant={v} />
-      </div>
-
-      <div className="relative">
-        <div
-          className={`inline-flex max-w-[70%] items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider backdrop-blur ${
-            onHold ? "bg-destructive/15 text-destructive" : "bg-card/70 text-primary"
-          }`}
-        >
-          <span
-            className={`h-1.5 w-1.5 rounded-full ${onHold ? "bg-destructive animate-pulse" : `bg-success ${completed ? "" : "animate-pulse"}`}`}
-          />
-          {onHold ? "On hold" : completed ? "Completed" : "Live"}
+      <div className="relative flex items-center gap-4">
+        <div className="min-w-0 flex-1">
+          <div
+            className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider backdrop-blur ${
+              onHold ? "bg-destructive/15 text-destructive" : "bg-card/70 text-primary"
+            }`}
+          >
+            <span
+              className={`h-1.5 w-1.5 rounded-full ${onHold ? "bg-destructive animate-pulse" : `bg-success ${completed ? "" : "animate-pulse"}`}`}
+            />
+            {onHold ? "On hold" : completed ? "Completed" : "Live"}
+          </div>
+          <h1 className="mt-3 font-display text-3xl font-extrabold leading-tight text-primary animate-fade-in">
+            {status}
+          </h1>
+          <p className="mt-1.5 text-sm text-muted-foreground tabular animate-fade-in" style={{ animationDelay: "80ms" }}>
+            {subtitle}
+          </p>
         </div>
-        <h1 className="mt-3 max-w-[70%] font-display text-3xl font-extrabold leading-tight text-primary animate-fade-in">
-          {status}
-        </h1>
-        <p className="mt-1.5 whitespace-nowrap text-sm text-muted-foreground tabular animate-fade-in" style={{ animationDelay: "80ms" }}>
-          {subtitle}
-        </p>
+
+        <div className={`pointer-events-none shrink-0 h-24 w-24 opacity-95 ${wrapperAnim[v]}`}>
+          <HeroArt variant={v} />
+        </div>
       </div>
 
       <div className="relative mt-6">
