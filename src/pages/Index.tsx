@@ -2,7 +2,7 @@ import { OrderHeader } from "@/components/order/OrderHeader";
 import { StatusHero } from "@/components/order/StatusHero";
 import { QuickActions } from "@/components/order/QuickActions";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
-import { ReceiptCard } from "@/components/order/ReceiptCard";
+
 import { OrderSections } from "@/components/order/OrderSections";
 import { BottomBar } from "@/components/order/BottomBar";
 import type { Stage } from "@/components/order/StatusTimeline";
