@@ -186,24 +186,40 @@ const PhoneConfirm = () => (
     {/* phone body — iPhone-like proportions */}
     <rect x="30" y="14" width="68" height="100" rx="14" fill="hsl(var(--primary))" />
     {/* inner bezel */}
-    <rect x="33" y="17" width="62" height="94" rx="12" fill="hsl(var(--indigo-deep))" opacity="0.6" />
-    {/* screen */}
-    <rect x="36" y="20" width="56" height="88" rx="9" fill="hsl(var(--card))" />
+    <rect x="33" y="17" width="62" height="94" rx="12" fill="hsl(var(--indigo-deep))" opacity="0.7" />
+    {/* screen background — tinted, not white */}
+    <rect x="36" y="20" width="56" height="88" rx="9" fill="hsl(var(--indigo-deep))" />
+    <rect x="36" y="20" width="56" height="88" rx="9" fill="url(#bag)" opacity="0.85" />
     {/* dynamic island / notch */}
     <rect x="55" y="24" width="18" height="5" rx="2.5" fill="hsl(var(--indigo-deep))" />
-    {/* check badge */}
-    <circle cx="64" cy="60" r="17" fill="url(#bagSuccess)" />
+
+    {/* notification card */}
+    <rect x="40" y="36" width="48" height="34" rx="5" fill="hsl(var(--card))" opacity="0.95" />
+    {/* app icon (tiny check tile) */}
+    <rect x="43" y="39" width="9" height="9" rx="2" fill="hsl(var(--success))" />
+    <path d="M45 43.5 L47 45.5 L50 42" stroke="hsl(var(--card))" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    {/* notification text lines */}
+    <rect x="55" y="40" width="22" height="2" rx="1" fill="hsl(var(--primary))" opacity="0.85" />
+    <rect x="55" y="44" width="14" height="1.6" rx="0.8" fill="hsl(var(--primary))" opacity="0.5" />
+    <rect x="43" y="52" width="42" height="1.6" rx="0.8" fill="hsl(var(--primary))" opacity="0.4" />
+    <rect x="43" y="56" width="36" height="1.6" rx="0.8" fill="hsl(var(--primary))" opacity="0.4" />
+    <rect x="43" y="60" width="28" height="1.6" rx="0.8" fill="hsl(var(--primary))" opacity="0.4" />
+
+    {/* big check badge — overlapping */}
+    <circle cx="64" cy="84" r="14" fill="hsl(var(--card))" />
+    <circle cx="64" cy="84" r="12" fill="url(#bagSuccess)" />
     <path
-      d="M55 60 L62 67 L74 53"
+      d="M57 84 L62 89 L72 78"
       stroke="hsl(var(--card))"
-      strokeWidth="3.8"
+      strokeWidth="3"
       strokeLinecap="round"
       strokeLinejoin="round"
       fill="none"
     />
-    {/* status lines */}
-    <rect x="46" y="86" width="36" height="3" rx="1.5" fill="hsl(var(--secondary))" />
-    <rect x="52" y="94" width="24" height="3" rx="1.5" fill="hsl(var(--secondary))" opacity="0.7" />
+
+    {/* home indicator */}
+    <rect x="54" y="103" width="20" height="2" rx="1" fill="hsl(var(--card))" opacity="0.6" />
+
     {/* side buttons */}
     <rect x="28" y="36" width="2" height="10" rx="1" fill="hsl(var(--indigo-deep))" opacity="0.7" />
     <rect x="28" y="52" width="2" height="14" rx="1" fill="hsl(var(--indigo-deep))" opacity="0.7" />
