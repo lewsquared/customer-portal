@@ -38,7 +38,7 @@ export const StatusHero = ({
       className="relative mx-5 mt-2 overflow-hidden rounded-3xl bg-gradient-hero p-6 shadow-hero animate-fade-in"
       aria-label="Order status"
     >
-      <div className={`pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 h-24 w-24 opacity-95 ${wrapperAnim[v]}`} style={{ top: "5.5rem" }}>
+      <div className={`pointer-events-none absolute right-4 top-14 h-24 w-24 opacity-95 ${wrapperAnim[v]}`}>
         <HeroArt variant={v} />
       </div>
 
