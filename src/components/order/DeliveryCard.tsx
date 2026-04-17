@@ -1,4 +1,5 @@
 import { Pencil, MapPin, ArrowDownToLine, ArrowUpFromLine, Truck } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 interface DropoffSection {
   label: string;
@@ -11,6 +12,8 @@ interface Props {
   dropoffNote: string;
   /** Optional second editable row (e.g. Drop off at door). */
   dropoff?: DropoffSection;
+  /** Whether the section is open by default. */
+  defaultOpen?: boolean;
 }
 
 const Row = ({
@@ -26,7 +29,7 @@ const Row = ({
   ariaLabel?: string;
   editable?: boolean;
 }) => (
-  <div className="flex items-center gap-3 px-5 py-3">
+  <div className="flex items-center gap-3 py-2.5">
     <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
       {icon}
     </span>
@@ -45,49 +48,49 @@ const Row = ({
   </div>
 );
 
-export const DeliveryCard = ({ address, when, dropoffNote, dropoff }: Props) => {
+export const DeliveryCard = ({ address, when, dropoffNote, dropoff, defaultOpen = true }: Props) => {
   return (
     <section
-      className="mx-5 mt-5 overflow-hidden rounded-3xl border border-border bg-card shadow-card animate-fade-in"
+      className="mx-5 mt-4 rounded-3xl border border-border bg-card shadow-card animate-fade-in"
       style={{ animationDelay: "160ms" }}
       aria-label="Pickup and drop off details"
     >
-      <div className="flex items-start gap-3 px-5 pt-5">
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
-          <Truck className="h-4 w-4" />
-        </span>
-        <div className="min-w-0 flex-1">
-          <h3 className="font-display text-base font-bold text-primary leading-tight">
-            Pickup & Drop Off
-          </h3>
-          <p className="mt-1 text-xs font-medium text-muted-foreground leading-relaxed">
-            When we'll collect and return your order.
-          </p>
-        </div>
-      </div>
-
-      <div className="mt-3 divide-y divide-border/60 border-t border-border/60">
-        <Row
-          icon={<ArrowUpFromLine className="h-4 w-4" />}
-          label={dropoffNote}
-          value={when}
-          ariaLabel="Edit pickup time"
-        />
-        {dropoff && (
-          <Row
-            icon={<ArrowDownToLine className="h-4 w-4" />}
-            label={dropoff.label}
-            value={dropoff.when}
-            ariaLabel="Edit drop off time"
-          />
-        )}
-        <Row
-          icon={<MapPin className="h-4 w-4" />}
-          label="Where"
-          value={address}
-          editable={false}
-        />
-      </div>
+      <Accordion type="single" collapsible defaultValue={defaultOpen ? "pickup-dropoff" : undefined} className="w-full">
+        <AccordionItem value="pickup-dropoff" className="border-b-0 px-5">
+          <AccordionTrigger className="py-4 hover:no-underline">
+            <div className="flex items-center gap-3">
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-secondary text-primary">
+                <Truck className="h-4 w-4" />
+              </span>
+              <span className="font-display text-base font-bold text-primary">Pickup & Drop Off</span>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent>
+            <div className="divide-y divide-border/60 pb-1">
+              <Row
+                icon={<ArrowUpFromLine className="h-4 w-4" />}
+                label={dropoffNote}
+                value={when}
+                ariaLabel="Edit pickup time"
+              />
+              {dropoff && (
+                <Row
+                  icon={<ArrowDownToLine className="h-4 w-4" />}
+                  label={dropoff.label}
+                  value={dropoff.when}
+                  ariaLabel="Edit drop off time"
+                />
+              )}
+              <Row
+                icon={<MapPin className="h-4 w-4" />}
+                label="Where"
+                value={address}
+                editable={false}
+              />
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </section>
   );
 };
