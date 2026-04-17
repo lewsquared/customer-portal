@@ -35,9 +35,11 @@ const Index = () => {
           <QuickActions />
 
           <DeliveryCard
-            dropoffNote="Delivery at door"
+            dropoffNote="Picked up at door"
             address="Apt 1402, Marina Heights, Dubai Marina"
-            when="Sat · Anytime today"
+            when="Thu · 8:42 AM"
+            pickupDone
+            dropoff={{ label: "Delivery at door", when: "Sat · Anytime today" }}
           />
 
           <OrderSections />
