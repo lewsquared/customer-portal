@@ -25,6 +25,7 @@ const OrderComplete = () => {
             subtitle="Sat · 4:48 PM · Left at door"
             stages={stages}
             currentIndex={4}
+            completed
           />
 
           <QuickActions />
