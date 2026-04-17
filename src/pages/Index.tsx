@@ -37,12 +37,6 @@ const Index = () => {
             when="Sat · Anytime today"
           />
 
-          <ReceiptCard
-            itemCount={18}
-            services={["Wash & Fold", "Iron", "Eco rinse"]}
-            total="AED 142.00"
-          />
-
           <OrderSections />
         </div>
 
