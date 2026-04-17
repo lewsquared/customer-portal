@@ -30,6 +30,8 @@ const Index = () => {
             currentIndex={3}
           />
 
+          <UpsellBanner />
+
           <QuickActions />
 
           <DeliveryCard
