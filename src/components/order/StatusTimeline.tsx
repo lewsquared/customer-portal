@@ -12,6 +12,7 @@ export type Stage = {
 interface Props {
   stages: Stage[];
   currentIndex: number;
+  rightSlot?: React.ReactNode;
 }
 
 const iconForKey: Record<string, LucideIcon> = {
@@ -22,7 +23,7 @@ const iconForKey: Record<string, LucideIcon> = {
   complete: PackageCheck,
 };
 
-export const StatusTimeline = ({ stages, currentIndex }: Props) => {
+export const StatusTimeline = ({ stages, currentIndex, rightSlot }: Props) => {
   const [open, setOpen] = useState(false);
   const segments = stages.length - 1;
   const progressPct = segments === 0 ? 0 : (currentIndex / segments) * 100;
@@ -54,7 +55,7 @@ export const StatusTimeline = ({ stages, currentIndex }: Props) => {
         </div>
       </div>
 
-      <div className="mt-4 flex justify-center">
+      <div className="relative mt-4 flex items-center justify-center">
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
@@ -67,6 +68,7 @@ export const StatusTimeline = ({ stages, currentIndex }: Props) => {
             className={cn("h-3.5 w-3.5 transition-transform duration-300", open && "rotate-180")}
           />
         </button>
+        {rightSlot && <div className="absolute right-0">{rightSlot}</div>}
       </div>
 
       {/* Expandable timeline */}
