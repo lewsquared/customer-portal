@@ -10,6 +10,7 @@ import OrderCollected from "./pages/OrderCollected.tsx";
 import Processing from "./pages/Processing.tsx";
 import PaymentFailed from "./pages/PaymentFailed.tsx";
 import OrderComplete from "./pages/OrderComplete.tsx";
+import PRD from "./pages/PRD.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/out-for-delivery" element={<Index />} />
           <Route path="/payment-failed" element={<PaymentFailed />} />
           <Route path="/order-complete" element={<OrderComplete />} />
+          <Route path="/prd" element={<PRD />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
