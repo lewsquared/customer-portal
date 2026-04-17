@@ -1,4 +1,4 @@
-import { Pencil, MapPin, Clock } from "lucide-react";
+import { Pencil, MapPin, Calendar } from "lucide-react";
 
 interface Props {
   address: string;
@@ -13,24 +13,35 @@ export const DeliveryCard = ({ address, when, dropoffNote }: Props) => {
       style={{ animationDelay: "160ms" }}
       aria-label="Delivery details"
     >
-      <div className="flex items-center justify-between gap-3 px-4 py-3">
-        <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-            <Clock className="h-3 w-3" />
-            {dropoffNote}
-          </div>
-          <div className="mt-0.5 text-sm font-bold text-primary tabular">{when}</div>
-          <div className="mt-0.5 flex items-center gap-1.5 truncate text-xs text-muted-foreground">
-            <MapPin className="h-3 w-3 shrink-0" />
-            <span className="truncate">{address}</span>
-          </div>
-        </div>
+      {/* Header */}
+      <div className="flex items-center justify-between gap-3 border-b border-border/60 px-4 py-2.5">
+        <h3 className="font-display text-sm font-bold text-primary">{dropoffNote}</h3>
         <button
           aria-label="Edit delivery"
-          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-secondary text-primary transition-transform active:scale-95"
+          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-secondary text-primary transition-transform active:scale-95"
         >
           <Pencil className="h-3.5 w-3.5" />
         </button>
+      </div>
+
+      {/* Body */}
+      <div className="divide-y divide-border/60">
+        <div className="flex items-center gap-3 px-4 py-2.5">
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
+            <Calendar className="h-3.5 w-3.5" />
+          </span>
+          <span className="min-w-0 flex-1 truncate text-sm font-semibold text-primary tabular">
+            {when}
+          </span>
+        </div>
+        <div className="flex items-center gap-3 px-4 py-2.5">
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
+            <MapPin className="h-3.5 w-3.5" />
+          </span>
+          <span className="min-w-0 flex-1 truncate text-sm text-muted-foreground">
+            {address}
+          </span>
+        </div>
       </div>
     </section>
   );
