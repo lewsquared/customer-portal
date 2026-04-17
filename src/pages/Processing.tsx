@@ -22,7 +22,7 @@ const Processing = () => {
 
         <div className="flex-1 overflow-y-auto pb-4">
           <StatusHero
-            status="Cleaning at Our Facility"
+            status="Cleaning at our facility"
             subtitle="Your laundry is being cared for"
             stages={stages}
             currentIndex={2}
