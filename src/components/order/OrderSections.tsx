@@ -1,5 +1,5 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Check, ChevronRight, ListChecks, Sparkles, MessageSquare, Camera } from "lucide-react";
+import { Check, ChevronRight, ListChecks, Sparkles, MessageSquare, Camera, Plus, Pencil, WashingMachine, Shirt, BedDouble, Footprints, Crown, Wind } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Confirmation = {
@@ -108,21 +108,80 @@ export const OrderDetails = ({ defaultOpen }: { defaultOpen?: "services" | "inst
             <span className="font-display text-base font-bold text-primary">Services Selection</span>
           </AccordionTrigger>
           <AccordionContent>
-            <ul className="mb-3 space-y-2">
-              {[
-                { label: "Wash & Fold", note: "Gentle cycle" },
-                { label: "Iron", note: "Crisp finish" },
-                { label: "Eco rinse", note: "Hypoallergenic" },
-              ].map((s) => (
-                <li
-                  key={s.label}
-                  className="flex items-center justify-between rounded-2xl bg-secondary/60 px-3 py-2.5"
-                >
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="h-4 w-4 text-accent" />
-                    <span className="text-sm font-semibold text-primary">{s.label}</span>
+            <ul className="mb-3 space-y-2.5">
+              {/* Wash & Fold with Press & Hang add-on */}
+              <li className="rounded-2xl border border-border bg-card overflow-hidden">
+                <div className="flex items-center gap-3 p-3">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[hsl(var(--accent)/0.18)] text-primary">
+                    <WashingMachine className="h-5 w-5" strokeWidth={2} />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-bold text-primary leading-tight">Wash & Fold</p>
+                    <button className="mt-0.5 text-[11px] font-semibold text-primary underline underline-offset-2">
+                      Learn More
+                    </button>
                   </div>
-                  <span className="text-xs text-muted-foreground">{s.note}</span>
+                  <button
+                    aria-label="Add Wash & Fold"
+                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-primary/30 text-primary transition-transform active:scale-95"
+                  >
+                    <Plus className="h-3.5 w-3.5" strokeWidth={2.5} />
+                  </button>
+                </div>
+
+                {/* nested add-on */}
+                <div className="flex items-start gap-3 px-3 pb-3 pt-1 border-t border-border/60">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-secondary/70 text-muted-foreground">
+                    <Shirt className="h-5 w-5" strokeWidth={1.75} />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-1.5">
+                      <p className="text-sm font-bold text-muted-foreground leading-tight">Press & Hang</p>
+                      <span className="rounded-md bg-warning px-1.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wide text-warning-foreground">
+                        New
+                      </span>
+                    </div>
+                    <p className="mt-0.5 text-xs text-muted-foreground">Press tops after washing</p>
+                    <div className="mt-2 flex items-center justify-between gap-2">
+                      <p className="text-xs text-muted-foreground">All T-Shirts / Polos</p>
+                      <span className="rounded-md bg-secondary px-2 py-0.5 text-[11px] font-semibold text-muted-foreground">
+                        + AED 9 /item
+                      </span>
+                    </div>
+                    <button className="mt-1.5 text-[11px] font-medium text-muted-foreground underline underline-offset-2">
+                      View Terms & Conditions
+                    </button>
+                  </div>
+                  <button
+                    aria-label="Edit Press & Hang"
+                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-transform active:scale-95"
+                  >
+                    <Pencil className="h-3.5 w-3.5" />
+                  </button>
+                </div>
+              </li>
+
+              {[
+                { label: "Clean & Press", Icon: Crown, tint: "bg-[hsl(140_70%_92%)] text-[hsl(140_60%_35%)]" },
+                { label: "Bed & Bath", Icon: BedDouble, tint: "bg-[hsl(330_80%_94%)] text-[hsl(330_60%_45%)]" },
+                { label: "Press Only", Icon: Wind, tint: "bg-secondary text-primary" },
+                { label: "Shoe & Bag Care", Icon: Footprints, tint: "bg-[hsl(28_90%_92%)] text-[hsl(28_70%_45%)]" },
+                { label: "The Finery", Icon: Crown, tint: "bg-primary text-primary-foreground" },
+              ].map(({ label, Icon, tint }) => (
+                <li
+                  key={label}
+                  className="flex items-center gap-3 rounded-2xl border border-border bg-card p-3"
+                >
+                  <span className={cn("flex h-11 w-11 shrink-0 items-center justify-center rounded-full", tint)}>
+                    <Icon className="h-5 w-5" strokeWidth={2} />
+                  </span>
+                  <p className="min-w-0 flex-1 text-sm font-bold text-primary">{label}</p>
+                  <button
+                    aria-label={`Add ${label}`}
+                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-primary/30 text-primary transition-transform active:scale-95"
+                  >
+                    <Plus className="h-3.5 w-3.5" strokeWidth={2.5} />
+                  </button>
                 </li>
               ))}
             </ul>
