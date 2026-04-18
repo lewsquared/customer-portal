@@ -238,18 +238,21 @@ export const OrderSections = ({
 }: {
   stage?: OrderStage;
   detailsFirst?: boolean;
-}) => (
-  <>
-    {detailsFirst ? (
-      <>
-        <OrderDetails />
-        <OrderConfirmations stage={stage} />
-      </>
-    ) : (
-      <>
-        <OrderConfirmations stage={stage} />
-        <OrderDetails />
-      </>
-    )}
-  </>
-);
+}) => {
+  const locked = stage !== "received";
+  return (
+    <>
+      {detailsFirst ? (
+        <>
+          <OrderDetails locked={locked} />
+          <OrderConfirmations stage={stage} />
+        </>
+      ) : (
+        <>
+          <OrderConfirmations stage={stage} />
+          <OrderDetails locked={locked} />
+        </>
+      )}
+    </>
+  );
+};
