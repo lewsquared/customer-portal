@@ -1,3 +1,4 @@
+import { DoorOpen } from "lucide-react";
 import { StatusTimeline, type Stage } from "./StatusTimeline";
 
 export type HeroVariant = "received" | "processing" | "delivery" | "complete" | "hold";
@@ -11,6 +12,7 @@ interface Props {
   completed?: boolean;
   onHold?: boolean;
   variant?: HeroVariant;
+  doorPickup?: boolean;
 }
 
 const wrapperAnim: Record<HeroVariant, string> = {
