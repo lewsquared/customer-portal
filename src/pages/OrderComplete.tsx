@@ -22,7 +22,7 @@ const OrderComplete = () => {
         <div className="flex-1 overflow-y-auto pb-4">
           <StatusHero
             status="Completed order"
-            subtitle="Delivered Sat · 26 Mar 2026 at 4:49 PM"
+            subtitle="Delivered Sat · 26-Mar-26 at 4:49 PM"
             stages={stages}
             currentIndex={4}
             completed
