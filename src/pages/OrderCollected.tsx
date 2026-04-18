@@ -33,6 +33,7 @@ const OrderCollected = () => {
             when="Today · 8:42 AM"
             pickupDone
             dropoff={{ label: "Drop off at door", when: "Sun · 6:00 – 8:00 PM" }}
+            defaultOpen={false}
           />
 
           <OrderConfirmations stage="collected" />
