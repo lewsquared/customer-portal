@@ -22,7 +22,7 @@ const OrderReceived = () => {
         <div className="flex-1 overflow-y-auto pb-4">
           <StatusHero
             status="Order received"
-            subtitle="We'll pick up your laundry soon"
+            subtitle="Pickup tomorrow · 8:00 – 10:00 AM"
             stages={stages}
             currentIndex={0}
             cancellable
