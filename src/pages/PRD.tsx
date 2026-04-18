@@ -559,9 +559,9 @@ const PRD = () => {
           <H2>7. Content & copy rules</H2>
           <Bullets
             items={[
-              "Stage labels are sentence case ('Order received', 'Completed order') — not title case.",
+              "Stage labels are sentence case ('Order received', 'Delivered') — not title case. Note: the Completed timeline label is the single word 'Delivered'.",
               "Subtitles never wrap — keep under ~36 chars or use abbreviations.",
-              "Timestamps are short, human ('Wed 9:12 PM', 'Just now', 'Today, anytime'). Never ISO.",
+              "Timeline timestamps follow 'Day DD/MM/YY' on line 1 + 'h:mm AM/PM' on line 2 (e.g. 'Wed 24/03/26' / '9:12 PM'). Hero subtitles can be long-form ('Delivered Sat 26/03/26 at 4:49 PM'). Never ISO.",
               "Action verbs are imperative ('Retry payment', 'View timeline', 'Contact support').",
               "Currency is prefix + space + amount with 2 decimals ('AED 142.00').",
               "Order IDs are uppercase alphanumeric, monospace, prefixed CUD (e.g. CUD138).",
