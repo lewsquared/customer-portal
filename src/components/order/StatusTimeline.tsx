@@ -113,7 +113,7 @@ export const StatusTimeline = ({ stages, currentIndex, rightSlot, onHold = false
                     )}
                   </span>
                   <div className="min-w-0 flex-1 pt-0.5">
-                    <div className="flex items-baseline justify-between gap-2">
+                    <div className="flex items-start justify-between gap-2">
                       <span
                         className={cn(
                           "text-sm font-semibold",
