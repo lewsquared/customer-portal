@@ -537,7 +537,7 @@ const PRD = () => {
               "Display font (font-display) for h1/h2/section titles — extra-bold, tight leading.",
               "Sans body for paragraphs and metadata.",
               "Tabular numerals (.tabular) for timestamps, IDs, currency.",
-              "Uppercase tracking-wide micro-labels (e.g. 'LIVE', 'NEW', section eyebrows).",
+              "Uppercase tracking-wide micro-labels (e.g. 'Live', 'NEW', 'Selected', 'Add-on', 'Available', section eyebrows).",
             ]}
           />
 
