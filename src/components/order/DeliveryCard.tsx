@@ -60,7 +60,7 @@ export const DeliveryCard = ({
   dropoffNote,
   dropoff,
   pickupDone = false,
-  defaultOpen = true,
+  defaultOpen = false,
 }: Props) => {
   return (
     <section
