@@ -377,7 +377,7 @@ const PRD = () => {
               "address, when, dropoffNote — pickup row content",
               "pickupDone?: boolean — replaces edit pencil with a green checkmark",
               "dropoff?: { label, when, done? } — second editable row",
-              "defaultOpen?: boolean — default true; set false on completed orders",
+              "defaultOpen?: boolean — default false; section is collapsed on every page (user opens to inspect).",
             ]}
             notes={[
               "Edit pencil only appears when row is editable AND not done. Address row is never editable.",
