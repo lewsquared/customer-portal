@@ -135,7 +135,7 @@ export const StatusTimeline = ({ stages, currentIndex, rightSlot, onHold = false
                           </span>
                         )
                       ) : s.timestamp ? (
-                        <span className="shrink-0 text-[11px] font-medium text-muted-foreground tabular">
+                        <span className="shrink-0 whitespace-pre-line text-right text-[11px] font-medium leading-tight text-muted-foreground tabular">
                           {s.timestamp}
                         </span>
                       ) : null}
