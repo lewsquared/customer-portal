@@ -128,7 +128,12 @@ export const StatusTimeline = ({ stages, currentIndex, rightSlot, onHold = false
                           On hold
                         </span>
                       ) : s.timestamp ? (
-                        <span className="shrink-0 whitespace-pre-line text-right text-[11px] font-medium leading-tight text-muted-foreground tabular">
+                        <span
+                          className={cn(
+                            "shrink-0 whitespace-pre-line text-right text-[11px] font-medium leading-tight tabular",
+                            active ? "font-bold text-success" : "text-muted-foreground",
+                          )}
+                        >
                           {s.timestamp}
                         </span>
                       ) : null}

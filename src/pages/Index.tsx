@@ -12,7 +12,7 @@ const stages: Stage[] = [
   { key: "received", label: "Order received", timestamp: "Wed 24/03/26\n9:12 PM" },
   { key: "collected", label: "Collected", timestamp: "Thu 25/03/26\n8:42 AM" },
   { key: "processing", label: "Processing", timestamp: "Thu 25/03/26\n1:05 PM" },
-  { key: "delivery", label: "Out for delivery" },
+  { key: "delivery", label: "Out for delivery", timestamp: "Sat 26/03/26\nAnytime" },
   { key: "complete", label: "Delivered" },
 ];
 
