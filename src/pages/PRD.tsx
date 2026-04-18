@@ -174,15 +174,20 @@ const PRD = () => {
               heroAnimation="Float (gentle vertical bob)"
               copy={{
                 status: "Order received",
-                subtitle: "We'll pick up your laundry soon",
+                subtitle: "Pickup tomorrow · 8:00 – 10:00 AM",
               }}
-              flags={["cancellable: true", "Pickup pending", "Drop-off scheduled"]}
+              flags={[
+                "cancellable: true",
+                "doorPickup: true → solid yellow pill 'Leave laundry bags at door' under the subtitle",
+                "Pickup pending, drop-off scheduled",
+                "Service selection fully editable",
+              ]}
               sections={[
                 "OrderHeader (with support button)",
-                "StatusHero — phone illustration, cancel chip",
+                "StatusHero — phone illustration, cancel chip, door-pickup pill",
                 "UpsellBanner — sneaker care (only on this stage)",
-                "OrderDetails (services accordion open by default)",
-                "DeliveryCard — pickup pending, dropoff scheduled",
+                "OrderDetails (services accordion open by default, all services visible)",
+                "DeliveryCard — pickup pending, dropoff scheduled (collapsed by default)",
                 "OrderConfirmations (stage='received' → all pending)",
               ]}
             />
@@ -197,15 +202,15 @@ const PRD = () => {
               heroAnimation="Truck-roll (horizontal sway w/ wheel rotation)"
               copy={{
                 status: "Order collected",
-                subtitle: "Your laundry is on its way to us",
+                subtitle: "Your laundry is on its way to our facility",
               }}
-              flags={["cancellable: false", "pickupDone: true"]}
+              flags={["cancellable: false", "pickupDone: true", "Active stage renders as completed (blue checkmark)"]}
               sections={[
                 "OrderHeader",
                 "StatusHero — truck illustration",
-                "OrderDetails (services accordion)",
-                "DeliveryCard — pickup ✓ done, dropoff scheduled",
+                "DeliveryCard — pickup ✓ done, dropoff scheduled (collapsed)",
                 "OrderConfirmations (stage='collected' → pickup ✓, items pending, drop pending)",
+                "OrderDetails (locked, collapsed) — only the selected Wash & Fold + Press & Hang add-on visible",
               ]}
             />
 
