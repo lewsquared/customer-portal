@@ -116,45 +116,47 @@ export const OrderDetails = ({
           </AccordionTrigger>
           <AccordionContent>
             <ul className="divide-y divide-border/60 pb-1">
-              {/* Selected: Wash & Fold */}
-              <li className="flex items-center gap-3 py-2.5">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
-                  <WashingMachine className="h-4 w-4" />
-                </span>
-                <div className="min-w-0 flex-1">
-                  <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Selected</p>
-                  <p className="truncate text-sm font-semibold text-primary tabular">Wash & Fold</p>
-                </div>
-                <span
-                  aria-label="Wash & Fold selected"
-                  className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground"
-                >
-                  <Check className="h-3.5 w-3.5" strokeWidth={3} />
-                </span>
-              </li>
-
-              {/* Add-on: Press & Hang */}
-              <li className="flex items-center gap-3 py-2.5">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
-                  <Shirt className="h-4 w-4" />
-                </span>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-1.5">
-                    <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Add-on</p>
-                    <span className="rounded-md bg-warning px-1.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wide text-warning-foreground">
-                      New
-                    </span>
+              {/* Selected: Wash & Fold (with nested Press & Hang add-on) */}
+              <li className="py-2.5">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
+                    <WashingMachine className="h-4 w-4" />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Selected</p>
+                    <p className="truncate text-sm font-semibold text-primary tabular">Wash & Fold</p>
                   </div>
-                  <p className="truncate text-sm font-semibold text-primary tabular">Press & Hang · +AED 9/item</p>
-                </div>
-                {!locked && (
-                  <button
-                    aria-label="Edit Press & Hang"
-                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-secondary text-primary transition-transform active:scale-95"
+                  <span
+                    aria-label="Wash & Fold selected"
+                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground"
                   >
-                    <Pencil className="h-3.5 w-3.5" />
-                  </button>
-                )}
+                    <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                  </span>
+                </div>
+
+                {/* nested add-on under Wash & Fold */}
+                <div className="mt-2 ml-[22px] flex items-center gap-3 border-l-2 border-border/70 pl-3 py-1.5">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-secondary/70 text-muted-foreground">
+                    <Shirt className="h-3.5 w-3.5" />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-1.5">
+                      <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Add-on</p>
+                      <span className="rounded-md bg-warning px-1.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wide text-warning-foreground">
+                        New
+                      </span>
+                    </div>
+                    <p className="truncate text-xs font-semibold text-primary tabular">Press & Hang · +AED 9/item</p>
+                  </div>
+                  {!locked && (
+                    <button
+                      aria-label="Add Press & Hang"
+                      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-secondary text-primary transition-transform active:scale-95"
+                    >
+                      <Plus className="h-3.5 w-3.5" strokeWidth={2.5} />
+                    </button>
+                  )}
+                </div>
               </li>
 
               {/* Other services — single trailing + per row */}
