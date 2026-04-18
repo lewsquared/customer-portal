@@ -495,9 +495,15 @@ const PRD = () => {
           />
 
           <EdgeCase
+            title="Door pickup"
+            trigger="Customer chose 'Pickup at door' as the pickup method."
+            behavior="A solid yellow pill 'Leave laundry bags at door' renders under the StatusHero subtitle on /order-received as a reminder. Pill disappears once the bag has been collected (stage 1+)."
+          />
+
+          <EdgeCase
             title="Completed-state rendering"
             trigger="currentIndex hits 4 OR completed=true."
-            behavior="Hero illustration shrinks (96 → 64px). 'LIVE' badge disappears. DeliveryCard collapses by default. All photo proofs unlock and become tappable."
+            behavior="Hero illustration shrinks (96 → 64px). Stage label is 'Delivered' and renders as a blue checkmark with its timestamp in muted grey (no Live badge). DeliveryCard stays collapsed. All photo proofs unlock and become tappable. Subtitle format: 'Delivered Sat 26/03/26 at 4:49 PM'."
           />
         </Section>
 
