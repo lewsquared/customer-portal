@@ -288,7 +288,7 @@ const PRD = () => {
 
             <ScreenCard
               icon={<PackageCheck className="h-5 w-5" />}
-              title="Order complete"
+              title="Delivered"
               route="/order-complete"
               orderId="CUD135"
               currentIndex={4}
@@ -296,16 +296,20 @@ const PRD = () => {
               heroAnimation="Float + sparkles"
               copy={{
                 status: "Completed order",
-                subtitle: "Sat · 4:48 PM · Left at door",
+                subtitle: "Delivered Sat 26/03/26 at 4:49 PM",
               }}
-              flags={["completed: true → forces 'complete' variant", "All 3 confirmations unlocked"]}
+              flags={[
+                "completed: true → forces 'complete' variant",
+                "Delivered stage renders as completed (blue checkmark) with its timestamp shown in muted grey",
+                "All 3 confirmations unlocked",
+              ]}
               sections={[
                 "OrderHeader",
                 "StatusHero — success badge, smaller icon",
                 "QuickActions",
                 "OrderConfirmations (stage='delivered' → all 3 ✓ tappable)",
                 "DeliveryCard — both rows ✓ done, collapsed by default",
-                "OrderDetails — services + instructions accordion",
+                "OrderDetails (locked) — only the selected service shown",
               ]}
             />
           </div>
