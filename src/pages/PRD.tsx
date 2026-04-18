@@ -135,7 +135,7 @@ const PRD = () => {
                 <Tr i={1} k="collected" l="Collected" m="Driver has the bag, en route to facility." />
                 <Tr i={2} k="processing" l="Processing" m="Items at facility being cleaned/ironed." />
                 <Tr i={3} k="delivery" l="Out for delivery" m="Bag is on its way back to customer." />
-                <Tr i={4} k="complete" l="Completed order" m="Delivered. Photos & receipt available." />
+                <Tr i={4} k="complete" l="Delivered" m="Delivered to customer. Photos & receipt available." />
               </tbody>
             </table>
           </div>
@@ -144,10 +144,13 @@ const PRD = () => {
           <Bullets
             items={[
               "Forward-only progression — stages cannot regress in the happy path.",
-              "Exactly one stage is 'active' (= currentIndex). All earlier stages render as 'completed'. Later stages render as 'upcoming'.",
-              "The active stage in the expandable timeline displays a green pulsing 'LIVE' badge.",
-              "Each completed stage has a timestamp (e.g. 'Wed 9:12 PM'); upcoming stages have none.",
+              "Exactly one stage is 'active' (= currentIndex). Earlier stages render as completed; later stages render as upcoming.",
+              "Visual completion exception: the active 'Collected' and 'Delivered' stages render as completed (blue checkmark) — they're milestones, not in-progress work.",
+              "Active timestamps render in bold green (text-success). Past stages render in muted grey. Upcoming stages have none.",
+              "If an active stage has no timestamp (e.g. Processing), a green pulsing 'Live' badge is shown in its place.",
+              "Timestamps are stacked two lines: 'Wed 24/03/26' on top, time on the bottom (right-aligned, tabular).",
               "Cancellation is only allowed at stage 0 (received). The cancel chip disappears at stage 1+.",
+              "Service selection is editable only at stage 0. From stage 1 onward, services are locked and only the selected service (Wash & Fold + add-on) is shown.",
             ]}
           />
         </Section>
