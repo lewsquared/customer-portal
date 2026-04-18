@@ -53,7 +53,7 @@ const PRD = () => {
           <div className="mt-6 grid gap-3 rounded-3xl border border-border bg-card p-5 shadow-card md:grid-cols-3">
             <Stat label="Order screens" value="6" />
             <Stat label="Pipeline statuses" value="5" />
-            <Stat label="Edge states" value="3" />
+            <Stat label="Edge states" value="4" />
           </div>
         </Section>
 
