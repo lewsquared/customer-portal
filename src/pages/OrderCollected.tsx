@@ -21,7 +21,7 @@ const OrderCollected = () => {
         <div className="flex-1 overflow-y-auto pb-4">
           <StatusHero
             status="Order collected"
-            subtitle="Your laundry is on its way to us"
+            subtitle="Your laundry is on its way to our facility"
             stages={stages}
             currentIndex={1}
             variant="delivery"
