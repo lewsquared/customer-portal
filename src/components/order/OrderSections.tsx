@@ -1,5 +1,5 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Check, ChevronRight, ListChecks, Sparkles, MessageSquare, Camera } from "lucide-react";
+import { Check, ChevronRight, ListChecks, Sparkles, MessageSquare, Camera, Plus, Pencil, WashingMachine, Shirt, BedDouble, Footprints, Crown, Wind } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Confirmation = {
