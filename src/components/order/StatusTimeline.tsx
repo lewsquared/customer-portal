@@ -120,7 +120,7 @@ export const StatusTimeline = ({ stages, currentIndex, rightSlot, onHold = false
                       >
                         {s.label}
                       </span>
-                      {active ? (
+                      {active && s.key !== "complete" ? (
                         onHold ? (
                           <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-destructive/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-destructive">
                             <span className="h-1 w-1 rounded-full bg-destructive animate-pulse" />
