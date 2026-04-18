@@ -7,10 +7,10 @@ import { OrderSections } from "@/components/order/OrderSections";
 import type { Stage } from "@/components/order/StatusTimeline";
 
 const stages: Stage[] = [
-  { key: "received", label: "Order received", timestamp: "Wed 9:12 PM" },
-  { key: "collected", label: "Collected", timestamp: "Thu 8:42 AM" },
-  { key: "processing", label: "Processing", timestamp: "Thu 1:05 PM" },
-  { key: "delivery", label: "Out for delivery", timestamp: "Today" },
+  { key: "received", label: "Order received", timestamp: "Wed 24/03/26\n9:12 PM" },
+  { key: "collected", label: "Collected", timestamp: "Thu 25/03/26\n8:42 AM" },
+  { key: "processing", label: "Processing", timestamp: "Thu 25/03/26\n1:05 PM" },
+  { key: "delivery", label: "Out for delivery", timestamp: "Sat 26/03/26" },
   { key: "complete", label: "Delivered" },
 ];
 
