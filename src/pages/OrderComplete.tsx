@@ -41,7 +41,7 @@ const OrderComplete = () => {
             defaultOpen={false}
           />
 
-          <OrderDetails />
+          <OrderDetails locked />
         </div>
       </div>
     </main>
