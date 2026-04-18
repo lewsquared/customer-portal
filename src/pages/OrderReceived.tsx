@@ -26,6 +26,7 @@ const OrderReceived = () => {
             stages={stages}
             currentIndex={0}
             cancellable
+            doorPickup
           />
 
           <UpsellBanner />
