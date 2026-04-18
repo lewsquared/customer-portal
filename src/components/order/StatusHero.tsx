@@ -55,6 +55,16 @@ export const StatusHero = ({
         <p className="mt-1.5 whitespace-nowrap text-sm text-muted-foreground tabular animate-fade-in" style={{ animationDelay: "80ms" }}>
           {subtitle}
         </p>
+
+        {doorPickup && (
+          <div
+            className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-warning/40 bg-warning/15 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wide text-warning-foreground animate-fade-in"
+            style={{ animationDelay: "120ms" }}
+          >
+            <DoorOpen className="h-3.5 w-3.5 text-warning" />
+            <span className="text-warning">Have your bags ready outside your door</span>
+          </div>
+        )}
       </div>
 
       <div className="relative mt-6">
