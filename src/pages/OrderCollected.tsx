@@ -27,8 +27,6 @@ const OrderCollected = () => {
             variant="delivery"
           />
 
-          <OrderDetails defaultOpen="services" locked />
-
           <DeliveryCard
             dropoffNote="Picked up at door"
             address="Apt 1402, Marina Heights, Dubai Marina"
@@ -38,6 +36,8 @@ const OrderCollected = () => {
           />
 
           <OrderConfirmations stage="collected" />
+
+          <OrderDetails locked />
         </div>
       </div>
     </main>
