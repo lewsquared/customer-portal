@@ -548,7 +548,7 @@ const PRD = () => {
               "Hero variants: float (received/complete), sway (processing), truck-roll (collected/delivery), shake (hold).",
               "Washing machine drum: spin-slow infinite while sway plays on the body.",
               "Progress bar: animate-progress-fill from 0 to target % on mount.",
-              "Pulsing 1×1 dot inside LIVE / On hold badges (animate-pulse).",
+              "Pulsing 1×1 dot inside Live / On hold badges (animate-pulse).",
               "Button press: active:scale-[0.95–0.99] across all tappables.",
             ]}
           />
