@@ -32,6 +32,7 @@ export const StatusHero = ({
   completed = false,
   onHold = false,
   variant = "received",
+  doorPickup = false,
 }: Props) => {
   const v: HeroVariant = onHold ? "hold" : completed ? "complete" : variant;
 
