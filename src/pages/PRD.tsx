@@ -359,13 +359,14 @@ const PRD = () => {
             props={[
               "stages, currentIndex — same as hero",
               "rightSlot — optional element (e.g. cancel button) rendered next to the toggle",
-              "onHold — flips the active badge from green LIVE to red 'On hold'",
+              "onHold — flips the active row's right side to a red 'On hold' badge",
             ]}
             notes={[
               "Progress bar fills `currentIndex / 4 * 100%` with the gradient-progress fill animation.",
               "Toggle button: 'View timeline' / 'Hide timeline' with a History icon and rotating chevron.",
-              "Expanded list shows: stage icon, label, timestamp OR live/hold badge, optional description.",
-              "Past stages: solid primary dot + check icon. Active: ringed accent dot. Future: hollow muted dot.",
+              "Stage state mapping (visual): past = filled blue dot + check. Active = ringed accent dot with stage icon. Future = hollow muted dot. Exception: active 'Collected' and 'Delivered' render as past (blue check) — they're milestones.",
+              "Right side of each row: completed = timestamp in muted grey; active = bold green timestamp OR green pulsing 'Live' badge if no timestamp; on-hold active = red 'On hold' badge; future = nothing.",
+              "Timestamps render stacked on two lines (whitespace-pre-line, right-aligned, tabular). Format: 'Wed 24/03/26' on top, time on the bottom.",
             ]}
           />
 
