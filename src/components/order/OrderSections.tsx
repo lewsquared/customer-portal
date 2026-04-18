@@ -176,7 +176,7 @@ export const OrderDetails = ({
                 { label: "Clean & Press", Icon: Crown, tint: "bg-[hsl(140_70%_92%)] text-[hsl(140_60%_35%)]" },
                 { label: "Bed & Bath", Icon: BedDouble, tint: "bg-[hsl(330_80%_94%)] text-[hsl(330_60%_45%)]" },
                 { label: "Press Only", Icon: Wind, tint: "bg-secondary text-primary" },
-                { label: "Shoe & Bag Care", Icon: Footprints, tint: "bg-[hsl(28_90%_92%)] text-[hsl(28_70%_45%)]" },
+                { label: "Try ShoeCare", Icon: Footprints, tint: "bg-[hsl(28_90%_92%)] text-[hsl(28_70%_45%)]" },
                 { label: "The Finery", Icon: Crown, tint: "bg-primary text-primary-foreground" },
               ].map(({ label, Icon, tint }) => (
                 <li
