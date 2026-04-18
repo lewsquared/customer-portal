@@ -401,11 +401,16 @@ const PRD = () => {
 
           <ComponentBlock
             name="OrderDetails"
-            purpose="Two-item accordion: Services Selection + Order Instructions."
-            props={["defaultOpen?: 'services' | 'instructions'"]}
+            purpose="Two-item accordion: Services Selection + Order Instructions. Mirrors the Pickup & Drop Off rhythm — divider-separated rows with small icon tiles, uppercase eyebrow labels, and a single trailing pill button per row."
+            props={[
+              "defaultOpen?: 'services' | 'instructions' — which accordion item starts open",
+              "locked?: boolean — when true, hides all unselected services, removes Add buttons, and disables editing of the selected add-on. Set automatically by the combined OrderSections wrapper for any stage > 0.",
+            ]}
             notes={[
-              "Services list uses a Sparkles icon and a soft secondary chip per service.",
-              "Instructions are free text in a single soft block.",
+              "Eyebrows: 'Selected' (Wash & Fold), 'Add-on' (Press & Hang, with yellow NEW badge), 'Available' (everything else).",
+              "Selected service shows a filled blue circular checkmark on the right (not a + button).",
+              "Press & Hang renders nested under Wash & Fold via a left border + indentation to communicate it's part of that service.",
+              "When locked: only Wash & Fold + the Press & Hang add-on row remain visible; all + buttons and the edit pencil are hidden.",
             ]}
           />
 
