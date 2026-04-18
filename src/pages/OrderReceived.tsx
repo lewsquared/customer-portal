@@ -10,7 +10,7 @@ const stages: Stage[] = [
   { key: "collected", label: "Collected" },
   { key: "processing", label: "Processing" },
   { key: "delivery", label: "Out for delivery" },
-  { key: "complete", label: "Completed order" },
+  { key: "complete", label: "Delivered" },
 ];
 
 const OrderReceived = () => {
