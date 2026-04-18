@@ -6,11 +6,11 @@ import { OrderConfirmations, OrderDetails } from "@/components/order/OrderSectio
 import type { Stage } from "@/components/order/StatusTimeline";
 
 const stages: Stage[] = [
-  { key: "received", label: "Order received", timestamp: "Wed 24 Mar '26\n9:12 PM" },
-  { key: "collected", label: "Collected", timestamp: "Thu 25 Mar '26\n8:42 AM" },
-  { key: "processing", label: "Processing", timestamp: "Thu 25 Mar '26\n1:05 PM" },
-  { key: "delivery", label: "Out for delivery", timestamp: "Sat 26 Mar '26\n11:20 AM" },
-  { key: "complete", label: "Delivered", timestamp: "Sat 26 Mar '26\n4:48 PM" },
+  { key: "received", label: "Order received", timestamp: "Wed 24 Mar 26'\n9:12 PM" },
+  { key: "collected", label: "Collected", timestamp: "Thu 25 Mar 26'\n8:42 AM" },
+  { key: "processing", label: "Processing", timestamp: "Thu 25 Mar 26'\n1:05 PM" },
+  { key: "delivery", label: "Out for delivery", timestamp: "Sat 26 Mar 26'\n11:20 AM" },
+  { key: "complete", label: "Delivered", timestamp: "Sat 26 Mar 26'\n4:48 PM" },
 ];
 
 const OrderComplete = () => {
@@ -22,7 +22,7 @@ const OrderComplete = () => {
         <div className="flex-1 overflow-y-auto pb-4">
           <StatusHero
             status="Completed order"
-            subtitle="Delivered Sat 26 Mar '26 at 4:49 PM"
+            subtitle="Delivered Sat 26 Mar 26' at 4:49 PM"
             stages={stages}
             currentIndex={4}
             completed
