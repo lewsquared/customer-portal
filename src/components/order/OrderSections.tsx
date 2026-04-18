@@ -115,96 +115,77 @@ export const OrderDetails = ({
             <span className="font-display text-base font-bold text-primary">Services Selection</span>
           </AccordionTrigger>
           <AccordionContent>
-            <ul className="mb-3 space-y-2.5">
-              {/* Wash & Fold (selected) with Press & Hang add-on */}
-              <li className="rounded-2xl border border-border bg-card overflow-hidden">
-                <div className="flex items-center gap-3 p-3">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[hsl(var(--accent)/0.18)] text-primary">
-                    <WashingMachine className="h-5 w-5" strokeWidth={2} />
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <p className="text-sm font-bold text-primary leading-tight">Wash & Fold</p>
-                    <button className="mt-0.5 text-[11px] font-semibold text-primary underline underline-offset-2">
-                      Learn More
-                    </button>
-                  </div>
-                  <span
-                    aria-label="Wash & Fold selected"
-                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground"
-                  >
-                    <Check className="h-3.5 w-3.5" strokeWidth={3} />
-                  </span>
+            <ul className="divide-y divide-border/60 pb-1">
+              {/* Selected: Wash & Fold */}
+              <li className="flex items-center gap-3 py-2.5">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
+                  <WashingMachine className="h-4 w-4" />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Selected</p>
+                  <p className="truncate text-sm font-semibold text-primary tabular">Wash & Fold</p>
                 </div>
+                <span
+                  aria-label="Wash & Fold selected"
+                  className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground"
+                >
+                  <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                </span>
+              </li>
 
-                {/* nested add-on */}
-                <div className="flex items-start gap-3 px-3 pb-3 pt-1 border-t border-border/60">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-secondary/70 text-muted-foreground">
-                    <Shirt className="h-5 w-5" strokeWidth={1.75} />
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-1.5">
-                      <p className="text-sm font-bold text-muted-foreground leading-tight">Press & Hang</p>
-                      <span className="rounded-md bg-warning px-1.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wide text-warning-foreground">
-                        New
-                      </span>
-                    </div>
-                    <p className="mt-0.5 text-xs text-muted-foreground">Press tops after washing</p>
-                    <div className="mt-2 flex items-center justify-between gap-2">
-                      <p className="text-xs text-muted-foreground">All T-Shirts / Polos</p>
-                      <span className="rounded-md bg-secondary px-2 py-0.5 text-[11px] font-semibold text-muted-foreground">
-                        + AED 9 /item
-                      </span>
-                    </div>
-                    <button className="mt-1.5 text-[11px] font-medium text-muted-foreground underline underline-offset-2">
-                      View Terms & Conditions
-                    </button>
+              {/* Add-on: Press & Hang */}
+              <li className="flex items-center gap-3 py-2.5">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
+                  <Shirt className="h-4 w-4" />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-1.5">
+                    <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Add-on</p>
+                    <span className="rounded-md bg-warning px-1.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wide text-warning-foreground">
+                      New
+                    </span>
                   </div>
+                  <p className="truncate text-sm font-semibold text-primary tabular">Press & Hang · +AED 9/item</p>
+                </div>
+                {!locked && (
                   <button
                     aria-label="Edit Press & Hang"
-                    disabled={locked}
-                    className={cn(
-                      "flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-transform active:scale-95",
-                      locked && "opacity-40 cursor-not-allowed",
-                    )}
+                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-secondary text-primary transition-transform active:scale-95"
                   >
                     <Pencil className="h-3.5 w-3.5" />
                   </button>
-                </div>
+                )}
               </li>
 
+              {/* Other services — single trailing + per row */}
               {[
-                { label: "Clean & Press", Icon: Crown, tint: "bg-[hsl(140_70%_92%)] text-[hsl(140_60%_35%)]" },
-                { label: "Bed & Bath", Icon: BedDouble, tint: "bg-[hsl(330_80%_94%)] text-[hsl(330_60%_45%)]" },
-                { label: "Press Only", Icon: Wind, tint: "bg-secondary text-primary" },
-                { label: "Try ShoeCare", Icon: Footprints, tint: "bg-[hsl(28_90%_92%)] text-[hsl(28_70%_45%)]" },
-                { label: "The Finery", Icon: Crown, tint: "bg-primary text-primary-foreground" },
-              ].map(({ label, Icon, tint }) => (
-                <li
-                  key={label}
-                  className={cn(
-                    "flex items-center gap-3 rounded-2xl border border-border bg-card p-3",
-                    locked && "opacity-60",
-                  )}
-                >
-                  <span className={cn("flex h-11 w-11 shrink-0 items-center justify-center rounded-full", tint)}>
-                    <Icon className="h-5 w-5" strokeWidth={2} />
+                { label: "Clean & Press", Icon: Crown },
+                { label: "Bed & Bath", Icon: BedDouble },
+                { label: "Press Only", Icon: Wind },
+                { label: "Try ShoeCare", Icon: Footprints },
+                { label: "The Finery", Icon: Crown },
+              ].map(({ label, Icon }) => (
+                <li key={label} className="flex items-center gap-3 py-2.5">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
+                    <Icon className="h-4 w-4" />
                   </span>
-                  <p className="min-w-0 flex-1 text-sm font-bold text-primary">{label}</p>
-                  <button
-                    aria-label={`Add ${label}`}
-                    disabled={locked}
-                    className={cn(
-                      "flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-primary/30 text-primary transition-transform active:scale-95",
-                      locked && "opacity-40 cursor-not-allowed",
-                    )}
-                  >
-                    <Plus className="h-3.5 w-3.5" strokeWidth={2.5} />
-                  </button>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Available</p>
+                    <p className="truncate text-sm font-semibold text-primary tabular">{label}</p>
+                  </div>
+                  {!locked && (
+                    <button
+                      aria-label={`Add ${label}`}
+                      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-secondary text-primary transition-transform active:scale-95"
+                    >
+                      <Plus className="h-3.5 w-3.5" strokeWidth={2.5} />
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>
             {locked && (
-              <p className="mb-3 text-center text-[11px] font-medium text-muted-foreground">
+              <p className="mt-2 mb-3 text-center text-[11px] font-medium text-muted-foreground">
                 Service selection is locked once your order is collected.
               </p>
             )}
