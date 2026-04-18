@@ -27,7 +27,7 @@ const OrderCollected = () => {
             variant="delivery"
           />
 
-          <OrderDetails defaultOpen="services" />
+          <OrderDetails defaultOpen="services" locked />
 
           <DeliveryCard
             dropoffNote="Picked up at door"
