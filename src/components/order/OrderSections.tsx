@@ -96,7 +96,14 @@ export const OrderConfirmations = ({ stage = "delivery" }: { stage?: OrderStage 
   );
 };
 
-export const OrderDetails = ({ defaultOpen }: { defaultOpen?: "services" | "instructions" }) => {
+export const OrderDetails = ({
+  defaultOpen,
+  locked = false,
+}: {
+  defaultOpen?: "services" | "instructions";
+  /** When true, services can no longer be added/edited (after order received). */
+  locked?: boolean;
+}) => {
   return (
     <section
       className="mx-5 mt-4 rounded-3xl border border-border bg-card shadow-card animate-fade-in"
@@ -109,24 +116,29 @@ export const OrderDetails = ({ defaultOpen }: { defaultOpen?: "services" | "inst
           </AccordionTrigger>
           <AccordionContent>
             <ul className="mb-3 space-y-2.5">
-              {/* Wash & Fold with Press & Hang add-on */}
-              <li className="rounded-2xl border border-border bg-card overflow-hidden">
+              {/* Wash & Fold (selected) with Press & Hang add-on */}
+              <li className="rounded-2xl border-2 border-primary bg-card overflow-hidden">
                 <div className="flex items-center gap-3 p-3">
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[hsl(var(--accent)/0.18)] text-primary">
                     <WashingMachine className="h-5 w-5" strokeWidth={2} />
                   </span>
                   <div className="min-w-0 flex-1">
-                    <p className="text-sm font-bold text-primary leading-tight">Wash & Fold</p>
+                    <div className="flex items-center gap-1.5">
+                      <p className="text-sm font-bold text-primary leading-tight">Wash & Fold</p>
+                      <span className="rounded-md bg-success/15 px-1.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wide text-success">
+                        Selected
+                      </span>
+                    </div>
                     <button className="mt-0.5 text-[11px] font-semibold text-primary underline underline-offset-2">
                       Learn More
                     </button>
                   </div>
-                  <button
-                    aria-label="Add Wash & Fold"
-                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-primary/30 text-primary transition-transform active:scale-95"
+                  <span
+                    aria-label="Wash & Fold selected"
+                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground"
                   >
-                    <Plus className="h-3.5 w-3.5" strokeWidth={2.5} />
-                  </button>
+                    <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                  </span>
                 </div>
 
                 {/* nested add-on */}
@@ -154,7 +166,11 @@ export const OrderDetails = ({ defaultOpen }: { defaultOpen?: "services" | "inst
                   </div>
                   <button
                     aria-label="Edit Press & Hang"
-                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-transform active:scale-95"
+                    disabled={locked}
+                    className={cn(
+                      "flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-transform active:scale-95",
+                      locked && "opacity-40 cursor-not-allowed",
+                    )}
                   >
                     <Pencil className="h-3.5 w-3.5" />
                   </button>
@@ -170,7 +186,10 @@ export const OrderDetails = ({ defaultOpen }: { defaultOpen?: "services" | "inst
               ].map(({ label, Icon, tint }) => (
                 <li
                   key={label}
-                  className="flex items-center gap-3 rounded-2xl border border-border bg-card p-3"
+                  className={cn(
+                    "flex items-center gap-3 rounded-2xl border border-border bg-card p-3",
+                    locked && "opacity-60",
+                  )}
                 >
                   <span className={cn("flex h-11 w-11 shrink-0 items-center justify-center rounded-full", tint)}>
                     <Icon className="h-5 w-5" strokeWidth={2} />
@@ -178,13 +197,22 @@ export const OrderDetails = ({ defaultOpen }: { defaultOpen?: "services" | "inst
                   <p className="min-w-0 flex-1 text-sm font-bold text-primary">{label}</p>
                   <button
                     aria-label={`Add ${label}`}
-                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-primary/30 text-primary transition-transform active:scale-95"
+                    disabled={locked}
+                    className={cn(
+                      "flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-primary/30 text-primary transition-transform active:scale-95",
+                      locked && "opacity-40 cursor-not-allowed",
+                    )}
                   >
                     <Plus className="h-3.5 w-3.5" strokeWidth={2.5} />
                   </button>
                 </li>
               ))}
             </ul>
+            {locked && (
+              <p className="mb-3 text-center text-[11px] font-medium text-muted-foreground">
+                Service selection is locked once your order is collected.
+              </p>
+            )}
           </AccordionContent>
         </AccordionItem>
 
