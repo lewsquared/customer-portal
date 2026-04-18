@@ -117,18 +117,13 @@ export const OrderDetails = ({
           <AccordionContent>
             <ul className="mb-3 space-y-2.5">
               {/* Wash & Fold (selected) with Press & Hang add-on */}
-              <li className="rounded-2xl border-2 border-primary bg-card overflow-hidden">
+              <li className="rounded-2xl border border-border bg-card overflow-hidden">
                 <div className="flex items-center gap-3 p-3">
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[hsl(var(--accent)/0.18)] text-primary">
                     <WashingMachine className="h-5 w-5" strokeWidth={2} />
                   </span>
                   <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-1.5">
-                      <p className="text-sm font-bold text-primary leading-tight">Wash & Fold</p>
-                      <span className="rounded-md bg-success/15 px-1.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wide text-success">
-                        Selected
-                      </span>
-                    </div>
+                    <p className="text-sm font-bold text-primary leading-tight">Wash & Fold</p>
                     <button className="mt-0.5 text-[11px] font-semibold text-primary underline underline-offset-2">
                       Learn More
                     </button>
