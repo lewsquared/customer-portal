@@ -159,38 +159,32 @@ export const OrderDetails = ({
                 </div>
               </li>
 
-              {/* Other services — single trailing + per row */}
-              {[
-                { label: "Clean & Press", Icon: Crown },
-                { label: "Bed & Bath", Icon: BedDouble },
-                { label: "Press Only", Icon: Wind },
-                { label: "Try ShoeCare", Icon: Footprints },
-                { label: "The Finery", Icon: Crown },
-              ].map(({ label, Icon }) => (
-                <li key={label} className="flex items-center gap-3 py-2.5">
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
-                    <Icon className="h-4 w-4" />
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Available</p>
-                    <p className="truncate text-sm font-semibold text-primary tabular">{label}</p>
-                  </div>
-                  {!locked && (
+              {/* Other services — only shown while still editable */}
+              {!locked &&
+                [
+                  { label: "Clean & Press", Icon: Crown },
+                  { label: "Bed & Bath", Icon: BedDouble },
+                  { label: "Press Only", Icon: Wind },
+                  { label: "Try ShoeCare", Icon: Footprints },
+                  { label: "The Finery", Icon: Crown },
+                ].map(({ label, Icon }) => (
+                  <li key={label} className="flex items-center gap-3 py-2.5">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
+                      <Icon className="h-4 w-4" />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Available</p>
+                      <p className="truncate text-sm font-semibold text-primary tabular">{label}</p>
+                    </div>
                     <button
                       aria-label={`Add ${label}`}
                       className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-secondary text-primary transition-transform active:scale-95"
                     >
                       <Plus className="h-3.5 w-3.5" strokeWidth={2.5} />
                     </button>
-                  )}
-                </li>
-              ))}
+                  </li>
+                ))}
             </ul>
-            {locked && (
-              <p className="mt-2 mb-3 text-center text-[11px] font-medium text-muted-foreground">
-                Service selection is locked once your order is collected.
-              </p>
-            )}
           </AccordionContent>
         </AccordionItem>
 
