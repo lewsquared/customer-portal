@@ -136,6 +136,11 @@ export const StatusTimeline = ({ stages, currentIndex, rightSlot, onHold = false
                         >
                           {s.timestamp}
                         </span>
+                      ) : active ? (
+                        <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-success/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-success">
+                          <span className="h-1 w-1 rounded-full bg-success animate-pulse" />
+                          Live
+                        </span>
                       ) : null}
                     </div>
                     {s.description && (
