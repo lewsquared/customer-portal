@@ -82,8 +82,10 @@ export const StatusTimeline = ({ stages, currentIndex, rightSlot, onHold = false
         <div className="overflow-hidden">
           <ol className="relative space-y-1 rounded-2xl bg-card/60 p-3 backdrop-blur">
             {stages.map((s, i) => {
-              const completed = i < currentIndex;
-              const active = i === currentIndex;
+              const isCompleteStage = s.key === "complete";
+              // Treat the active "complete" stage as fully completed visually (blue checkmark).
+              const completed = i < currentIndex || (i === currentIndex && isCompleteStage);
+              const active = i === currentIndex && !isCompleteStage;
               const Icon = iconForKey[s.key] ?? Clock;
               const isLast = i === stages.length - 1;
               return (
