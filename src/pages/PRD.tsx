@@ -334,15 +334,16 @@ const PRD = () => {
 
           <ComponentBlock
             name="StatusHero"
-            purpose="The primary status surface: title, subtitle, animated illustration, and timeline progress bar."
+            purpose="The primary status surface: title, subtitle, optional door-pickup pill, animated illustration, and timeline progress bar."
             props={[
-              "status: string — large display title (e.g. 'Order received')",
+              "status: string — large display title (e.g. 'Order received'). Always reserves 2 lines of height to keep layout stable.",
               "subtitle: string — secondary line, kept on a single line (whitespace-nowrap)",
               "stages: Stage[] — full list of 5 pipeline stages",
               "currentIndex: number — drives progress fill % and active marker",
               "cancellable?: boolean — shows red 'Cancel' chip on the right of the toggle row",
               "completed?: boolean — forces 'complete' variant (smaller success icon)",
-              "onHold?: boolean — forces 'hold' variant + red 'On hold' badge instead of LIVE",
+              "onHold?: boolean — forces 'hold' variant + red 'On hold' badge in the timeline",
+              "doorPickup?: boolean — shows a solid yellow pill 'Leave laundry bags at door' under the subtitle",
               "variant?: 'received'|'processing'|'delivery'|'complete'|'hold' — picks the illustration",
             ]}
             notes={[
