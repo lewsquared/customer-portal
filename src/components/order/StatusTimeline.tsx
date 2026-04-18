@@ -122,18 +122,11 @@ export const StatusTimeline = ({ stages, currentIndex, rightSlot, onHold = false
                       >
                         {s.label}
                       </span>
-                      {active && s.key !== "complete" ? (
-                        onHold ? (
-                          <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-destructive/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-destructive">
-                            <span className="h-1 w-1 rounded-full bg-destructive animate-pulse" />
-                            On hold
-                          </span>
-                        ) : (
-                          <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-success/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-success">
-                            <span className="h-1 w-1 rounded-full bg-success animate-pulse" />
-                            HERE
-                          </span>
-                        )
+                      {active && onHold ? (
+                        <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-destructive/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-destructive">
+                          <span className="h-1 w-1 rounded-full bg-destructive animate-pulse" />
+                          On hold
+                        </span>
                       ) : s.timestamp ? (
                         <span className="shrink-0 whitespace-pre-line text-right text-[11px] font-medium leading-tight text-muted-foreground tabular">
                           {s.timestamp}
