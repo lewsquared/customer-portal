@@ -53,7 +53,7 @@ const PRD = () => {
           <div className="mt-6 grid gap-3 rounded-3xl border border-border bg-card p-5 shadow-card md:grid-cols-3">
             <Stat label="Order screens" value="6" />
             <Stat label="Pipeline statuses" value="5" />
-            <Stat label="Edge states" value="3" />
+            <Stat label="Edge states" value="4" />
           </div>
         </Section>
 
@@ -135,7 +135,7 @@ const PRD = () => {
                 <Tr i={1} k="collected" l="Collected" m="Driver has the bag, en route to facility." />
                 <Tr i={2} k="processing" l="Processing" m="Items at facility being cleaned/ironed." />
                 <Tr i={3} k="delivery" l="Out for delivery" m="Bag is on its way back to customer." />
-                <Tr i={4} k="complete" l="Completed order" m="Delivered. Photos & receipt available." />
+                <Tr i={4} k="complete" l="Delivered" m="Delivered to customer. Photos & receipt available." />
               </tbody>
             </table>
           </div>
@@ -144,10 +144,13 @@ const PRD = () => {
           <Bullets
             items={[
               "Forward-only progression — stages cannot regress in the happy path.",
-              "Exactly one stage is 'active' (= currentIndex). All earlier stages render as 'completed'. Later stages render as 'upcoming'.",
-              "The active stage in the expandable timeline displays a green pulsing 'LIVE' badge.",
-              "Each completed stage has a timestamp (e.g. 'Wed 9:12 PM'); upcoming stages have none.",
+              "Exactly one stage is 'active' (= currentIndex). Earlier stages render as completed; later stages render as upcoming.",
+              "Visual completion exception: the active 'Collected' and 'Delivered' stages render as completed (blue checkmark) — they're milestones, not in-progress work.",
+              "Active timestamps render in bold green (text-success). Past stages render in muted grey. Upcoming stages have none.",
+              "If an active stage has no timestamp (e.g. Processing), a green pulsing 'Live' badge is shown in its place.",
+              "Timestamps are stacked two lines: 'Wed 24/03/26' on top, time on the bottom (right-aligned, tabular).",
               "Cancellation is only allowed at stage 0 (received). The cancel chip disappears at stage 1+.",
+              "Service selection is editable only at stage 0. From stage 1 onward, services are locked and only the selected service (Wash & Fold + add-on) is shown.",
             ]}
           />
         </Section>
@@ -171,15 +174,20 @@ const PRD = () => {
               heroAnimation="Float (gentle vertical bob)"
               copy={{
                 status: "Order received",
-                subtitle: "We'll pick up your laundry soon",
+                subtitle: "Pickup tomorrow · 8:00 – 10:00 AM",
               }}
-              flags={["cancellable: true", "Pickup pending", "Drop-off scheduled"]}
+              flags={[
+                "cancellable: true",
+                "doorPickup: true → solid yellow pill 'Leave laundry bags at door' under the subtitle",
+                "Pickup pending, drop-off scheduled",
+                "Service selection fully editable",
+              ]}
               sections={[
                 "OrderHeader (with support button)",
-                "StatusHero — phone illustration, cancel chip",
+                "StatusHero — phone illustration, cancel chip, door-pickup pill",
                 "UpsellBanner — sneaker care (only on this stage)",
-                "OrderDetails (services accordion open by default)",
-                "DeliveryCard — pickup pending, dropoff scheduled",
+                "OrderDetails (services accordion open by default, all services visible)",
+                "DeliveryCard — pickup pending, dropoff scheduled (collapsed by default)",
                 "OrderConfirmations (stage='received' → all pending)",
               ]}
             />
@@ -194,15 +202,15 @@ const PRD = () => {
               heroAnimation="Truck-roll (horizontal sway w/ wheel rotation)"
               copy={{
                 status: "Order collected",
-                subtitle: "Your laundry is on its way to us",
+                subtitle: "Your laundry is on its way to our facility",
               }}
-              flags={["cancellable: false", "pickupDone: true"]}
+              flags={["cancellable: false", "pickupDone: true", "Active stage renders as completed (blue checkmark)"]}
               sections={[
                 "OrderHeader",
                 "StatusHero — truck illustration",
-                "OrderDetails (services accordion)",
-                "DeliveryCard — pickup ✓ done, dropoff scheduled",
+                "DeliveryCard — pickup ✓ done, dropoff scheduled (collapsed)",
                 "OrderConfirmations (stage='collected' → pickup ✓, items pending, drop pending)",
+                "OrderDetails (locked, collapsed) — only the selected Wash & Fold + Press & Hang add-on visible",
               ]}
             />
 
@@ -280,7 +288,7 @@ const PRD = () => {
 
             <ScreenCard
               icon={<PackageCheck className="h-5 w-5" />}
-              title="Order complete"
+              title="Delivered"
               route="/order-complete"
               orderId="CUD135"
               currentIndex={4}
@@ -288,16 +296,20 @@ const PRD = () => {
               heroAnimation="Float + sparkles"
               copy={{
                 status: "Completed order",
-                subtitle: "Sat · 4:48 PM · Left at door",
+                subtitle: "Delivered Sat 26/03/26 at 4:49 PM",
               }}
-              flags={["completed: true → forces 'complete' variant", "All 3 confirmations unlocked"]}
+              flags={[
+                "completed: true → forces 'complete' variant",
+                "Delivered stage renders as completed (blue checkmark) with its timestamp shown in muted grey",
+                "All 3 confirmations unlocked",
+              ]}
               sections={[
                 "OrderHeader",
                 "StatusHero — success badge, smaller icon",
                 "QuickActions",
                 "OrderConfirmations (stage='delivered' → all 3 ✓ tappable)",
                 "DeliveryCard — both rows ✓ done, collapsed by default",
-                "OrderDetails — services + instructions accordion",
+                "OrderDetails (locked) — only the selected service shown",
               ]}
             />
           </div>
@@ -322,15 +334,16 @@ const PRD = () => {
 
           <ComponentBlock
             name="StatusHero"
-            purpose="The primary status surface: title, subtitle, animated illustration, and timeline progress bar."
+            purpose="The primary status surface: title, subtitle, optional door-pickup pill, animated illustration, and timeline progress bar."
             props={[
-              "status: string — large display title (e.g. 'Order received')",
+              "status: string — large display title (e.g. 'Order received'). Always reserves 2 lines of height to keep layout stable.",
               "subtitle: string — secondary line, kept on a single line (whitespace-nowrap)",
               "stages: Stage[] — full list of 5 pipeline stages",
               "currentIndex: number — drives progress fill % and active marker",
               "cancellable?: boolean — shows red 'Cancel' chip on the right of the toggle row",
               "completed?: boolean — forces 'complete' variant (smaller success icon)",
-              "onHold?: boolean — forces 'hold' variant + red 'On hold' badge instead of LIVE",
+              "onHold?: boolean — forces 'hold' variant + red 'On hold' badge in the timeline",
+              "doorPickup?: boolean — shows a solid yellow pill 'Leave laundry bags at door' under the subtitle",
               "variant?: 'received'|'processing'|'delivery'|'complete'|'hold' — picks the illustration",
             ]}
             notes={[
@@ -346,13 +359,14 @@ const PRD = () => {
             props={[
               "stages, currentIndex — same as hero",
               "rightSlot — optional element (e.g. cancel button) rendered next to the toggle",
-              "onHold — flips the active badge from green LIVE to red 'On hold'",
+              "onHold — flips the active row's right side to a red 'On hold' badge",
             ]}
             notes={[
               "Progress bar fills `currentIndex / 4 * 100%` with the gradient-progress fill animation.",
               "Toggle button: 'View timeline' / 'Hide timeline' with a History icon and rotating chevron.",
-              "Expanded list shows: stage icon, label, timestamp OR live/hold badge, optional description.",
-              "Past stages: solid primary dot + check icon. Active: ringed accent dot. Future: hollow muted dot.",
+              "Stage state mapping (visual): past = filled blue dot + check. Active = ringed accent dot with stage icon. Future = hollow muted dot. Exception: active 'Collected' and 'Delivered' render as past (blue check) — they're milestones.",
+              "Right side of each row: completed = timestamp in muted grey; active = bold green timestamp OR green pulsing 'Live' badge if no timestamp; on-hold active = red 'On hold' badge; future = nothing.",
+              "Timestamps render stacked on two lines (whitespace-pre-line, right-aligned, tabular). Format: 'Wed 24/03/26' on top, time on the bottom.",
             ]}
           />
 
@@ -363,7 +377,7 @@ const PRD = () => {
               "address, when, dropoffNote — pickup row content",
               "pickupDone?: boolean — replaces edit pencil with a green checkmark",
               "dropoff?: { label, when, done? } — second editable row",
-              "defaultOpen?: boolean — default true; set false on completed orders",
+              "defaultOpen?: boolean — default false; section is collapsed on every page (user opens to inspect).",
             ]}
             notes={[
               "Edit pencil only appears when row is editable AND not done. Address row is never editable.",
@@ -387,11 +401,16 @@ const PRD = () => {
 
           <ComponentBlock
             name="OrderDetails"
-            purpose="Two-item accordion: Services Selection + Order Instructions."
-            props={["defaultOpen?: 'services' | 'instructions'"]}
+            purpose="Two-item accordion: Services Selection + Order Instructions. Mirrors the Pickup & Drop Off rhythm — divider-separated rows with small icon tiles, uppercase eyebrow labels, and a single trailing pill button per row."
+            props={[
+              "defaultOpen?: 'services' | 'instructions' — which accordion item starts open",
+              "locked?: boolean — when true, hides all unselected services, removes Add buttons, and disables editing of the selected add-on. Set automatically by the combined OrderSections wrapper for any stage > 0.",
+            ]}
             notes={[
-              "Services list uses a Sparkles icon and a soft secondary chip per service.",
-              "Instructions are free text in a single soft block.",
+              "Eyebrows: 'Selected' (Wash & Fold), 'Add-on' (Press & Hang, with yellow NEW badge), 'Available' (everything else).",
+              "Selected service shows a filled blue circular checkmark on the right (not a + button).",
+              "Press & Hang renders nested under Wash & Fold via a left border + indentation to communicate it's part of that service.",
+              "When locked: only Wash & Fold + the Press & Hang add-on row remain visible; all + buttons and the edit pencil are hidden.",
             ]}
           />
 
@@ -476,9 +495,15 @@ const PRD = () => {
           />
 
           <EdgeCase
+            title="Door pickup"
+            trigger="Customer chose 'Pickup at door' as the pickup method."
+            behavior="A solid yellow pill 'Leave laundry bags at door' renders under the StatusHero subtitle on /order-received as a reminder. Pill disappears once the bag has been collected (stage 1+)."
+          />
+
+          <EdgeCase
             title="Completed-state rendering"
             trigger="currentIndex hits 4 OR completed=true."
-            behavior="Hero illustration shrinks (96 → 64px). 'LIVE' badge disappears. DeliveryCard collapses by default. All photo proofs unlock and become tappable."
+            behavior="Hero illustration shrinks (96 → 64px). Stage label is 'Delivered' and renders as a blue checkmark with its timestamp in muted grey (no Live badge). DeliveryCard stays collapsed. All photo proofs unlock and become tappable. Subtitle format: 'Delivered Sat 26/03/26 at 4:49 PM'."
           />
         </Section>
 
@@ -512,7 +537,7 @@ const PRD = () => {
               "Display font (font-display) for h1/h2/section titles — extra-bold, tight leading.",
               "Sans body for paragraphs and metadata.",
               "Tabular numerals (.tabular) for timestamps, IDs, currency.",
-              "Uppercase tracking-wide micro-labels (e.g. 'LIVE', 'NEW', section eyebrows).",
+              "Uppercase tracking-wide micro-labels (e.g. 'Live', 'NEW', 'Selected', 'Add-on', 'Available', section eyebrows).",
             ]}
           />
 
@@ -523,7 +548,7 @@ const PRD = () => {
               "Hero variants: float (received/complete), sway (processing), truck-roll (collected/delivery), shake (hold).",
               "Washing machine drum: spin-slow infinite while sway plays on the body.",
               "Progress bar: animate-progress-fill from 0 to target % on mount.",
-              "Pulsing 1×1 dot inside LIVE / On hold badges (animate-pulse).",
+              "Pulsing 1×1 dot inside Live / On hold badges (animate-pulse).",
               "Button press: active:scale-[0.95–0.99] across all tappables.",
             ]}
           />
@@ -534,9 +559,9 @@ const PRD = () => {
           <H2>7. Content & copy rules</H2>
           <Bullets
             items={[
-              "Stage labels are sentence case ('Order received', 'Completed order') — not title case.",
+              "Stage labels are sentence case ('Order received', 'Delivered') — not title case. Note: the Completed timeline label is the single word 'Delivered'.",
               "Subtitles never wrap — keep under ~36 chars or use abbreviations.",
-              "Timestamps are short, human ('Wed 9:12 PM', 'Just now', 'Today, anytime'). Never ISO.",
+              "Timeline timestamps follow 'Day DD/MM/YY' on line 1 + 'h:mm AM/PM' on line 2 (e.g. 'Wed 24/03/26' / '9:12 PM'). Hero subtitles can be long-form ('Delivered Sat 26/03/26 at 4:49 PM'). Never ISO.",
               "Action verbs are imperative ('Retry payment', 'View timeline', 'Contact support').",
               "Currency is prefix + space + amount with 2 decimals ('AED 142.00').",
               "Order IDs are uppercase alphanumeric, monospace, prefixed CUD (e.g. CUD138).",
