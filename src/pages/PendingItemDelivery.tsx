@@ -7,12 +7,12 @@ import { OrderConfirmations, OrderDetails } from "@/components/order/OrderSectio
 import type { Stage } from "@/components/order/StatusTimeline";
 
 const stages: Stage[] = [
-  { key: "received", label: "Order Received", timestamp: "Wed 24/03/26\n9:12 PM" },
-  { key: "collected", label: "Order Pick Up", timestamp: "Thu 25/03/26\n8:42 AM" },
-  { key: "items_in_process", label: "Items in Process", timestamp: "Thu 25/03/26\n1:05 PM" },
-  { key: "approval_done", label: "2 items needed approval", icon: "approval", timestamp: "Fri 26/03/26\n10:00 AM" },
-  { key: "delivery_today", label: "Drop Off Today", timestamp: "Sat 27/03/26\n6:00 PM" },
-  { key: "partially_delivered", label: "Order Partially Delivered", timestamp: "Sat 27/03/26\n6:42 PM" },
+  { key: "received", label: "Order Received", timestamp: "20 Aug, 9:12 pm" },
+  { key: "collected", label: "Order Pick Up", timestamp: "21 Aug, 8:42 am" },
+  { key: "items_in_process", label: "Items in Process", timestamp: "21 Aug, 1:05 pm" },
+  { key: "approval_done", label: "2 items needed approval", icon: "approval", timestamp: "22 Aug, 10:00 am" },
+  { key: "delivery_today", label: "Drop Off Today", timestamp: "23 Aug, 6:00 pm" },
+  { key: "partially_delivered", label: "Order Partially Delivered", timestamp: "23 Aug, 6:42 pm" },
   { key: "pending_item_delivery", label: "Pending Item Delivery", icon: "truck" },
   { key: "complete", label: "Delivered" },
 ];
