@@ -67,10 +67,10 @@ export const ActionCard = ({
     );
   };
 
-  // Render icon directly (no filled tile) at h-8 w-8, inheriting accent color.
+  // Render icon directly (no filled tile) at h-6 w-6, inheriting accent color.
   const sizedIcon = React.isValidElement(icon)
     ? React.cloneElement(icon as React.ReactElement<{ className?: string }>, {
-        className: cn("h-8 w-8", (icon.props as { className?: string }).className),
+        className: cn("h-6 w-6", (icon.props as { className?: string }).className),
       })
     : icon;
 
