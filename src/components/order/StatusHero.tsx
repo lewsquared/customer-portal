@@ -140,7 +140,8 @@ export const StatusHero = ({
             currentIndex={currentIndex}
             onHold={onHold}
             rightSlot={cancellable ? <CancelButton /> : undefined}
-        />
+          />
+        </div>
       </div>
     </section>
   );

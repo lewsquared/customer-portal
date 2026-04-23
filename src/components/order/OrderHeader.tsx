@@ -8,9 +8,10 @@ interface OrderHeaderProps {
   showSupport?: boolean;
   onBack?: () => void;
   variant?: "standalone" | "inline";
+  titleOpacity?: number;
 }
 
-export const OrderHeader = ({ orderId, orderType, showSupport = false, onBack, variant = "standalone" }: OrderHeaderProps) => {
+export const OrderHeader = ({ orderId, orderType, showSupport = false, onBack, variant = "standalone", titleOpacity }: OrderHeaderProps) => {
   const headerGradient = orderType === "finery" ? "bg-gradient-surface-finery" : "bg-gradient-surface-mint";
   const bgClass = variant === "inline" ? "bg-transparent" : `sticky top-0 z-30 ${headerGradient} backdrop-blur-md`;
   return (
@@ -35,7 +36,7 @@ export const OrderHeader = ({ orderId, orderType, showSupport = false, onBack, v
           </Link>
         )}
 
-        <div className="min-w-0 flex-1">
+        <div className="min-w-0 flex-1" style={titleOpacity !== undefined ? { opacity: titleOpacity } : undefined}>
           <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
             {ORDER_TYPE_LABEL[orderType]}
           </p>
