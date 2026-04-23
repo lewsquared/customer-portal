@@ -1,6 +1,7 @@
 import { DoorOpen } from "lucide-react";
 import { StatusTimeline, type Stage } from "./StatusTimeline";
 import { CancelButton } from "./CancelButton";
+import { OrderHeader } from "./OrderHeader";
 import type { OrderType } from "@/lib/order-types";
 
 export type HeroVariant = "received" | "processing" | "delivery" | "complete" | "hold";
@@ -16,6 +17,9 @@ interface Props {
   variant?: HeroVariant;
   doorPickup?: boolean;
   orderType?: OrderType;
+  orderId: string;
+  showSupport?: boolean;
+  onBack?: () => void;
 }
 
 const wrapperAnim: Record<HeroVariant, string> = {
@@ -37,16 +41,27 @@ export const StatusHero = ({
   variant = "received",
   doorPickup = false,
   orderType,
+  orderId,
+  showSupport = false,
+  onBack,
 }: Props) => {
   const v: HeroVariant = onHold ? "hold" : completed ? "complete" : variant;
   const gradientClass = orderType === "finery" ? "bg-gradient-hero-finery" : "bg-gradient-hero";
 
   return (
     <section
-      className={`relative mx-5 mt-2 overflow-hidden rounded-xl ${gradientClass} p-6 shadow-hero animate-fade-in`}
+      className={`relative overflow-hidden rounded-b-[32px] ${gradientClass} shadow-hero animate-fade-in`}
       aria-label="Order status"
     >
-      <div className="relative">
+      <OrderHeader
+        orderId={orderId}
+        orderType={orderType ?? "laundry"}
+        showSupport={showSupport}
+        onBack={onBack}
+        variant="inline"
+      />
+
+      <div className="relative px-6 pb-6 pt-2">
         <div className="flex items-center gap-4">
           <h1 className="min-w-0 flex-1 font-display text-2xl font-extrabold leading-tight text-primary animate-fade-in [text-wrap:balance]">
             {status}
