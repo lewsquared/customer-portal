@@ -1,4 +1,4 @@
-import { OrderHeader } from "@/components/order/OrderHeader";
+
 import { StatusHero } from "@/components/order/StatusHero";
 import { QuickActions } from "@/components/order/QuickActions";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
@@ -22,13 +22,12 @@ const Index = () => {
   return (
     <main className="min-h-screen bg-background font-sans antialiased">
       <div className="mx-auto flex min-h-screen max-w-md flex-col bg-background shadow-hero md:my-6 md:min-h-[calc(100vh-3rem)] md:overflow-hidden md:rounded-[2.25rem] md:border md:border-border">
-        <OrderHeader orderId={order.orderId} orderType={order.orderType} />
-
         <div className="flex-1 overflow-y-auto pb-4">
           <StatusHero
             status="Out for delivery"
             subtitle={`Today · ${order.dropoffWindow}`}
             orderType={order.orderType}
+            orderId={order.orderId}
             stages={stages}
             currentIndex={3}
             variant="delivery"
