@@ -101,7 +101,7 @@ const WashingMachineDetailed = () => (
     <circle cx="64" cy="72" r="30" fill="hsl(var(--card))" opacity="0.95" />
     <circle cx="64" cy="72" r="30" stroke="hsl(var(--indigo-deep))" strokeOpacity="0.25" strokeWidth="2" fill="none" />
     {/* drum inner with spinning suds */}
-    <g className="origin-center" style={{ transformOrigin: "64px 72px", animation: "spin 6s linear infinite" }}>
+    <g className="animate-spin-slow" style={{ transformOrigin: "64px 72px" }}>
       <circle cx="64" cy="72" r="20" fill="hsl(var(--surface-mint))" />
       <circle cx="58" cy="64" r="4" fill="hsl(var(--accent))" opacity="0.9" />
       <circle cx="72" cy="68" r="3" fill="hsl(var(--primary))" opacity="0.55" />
