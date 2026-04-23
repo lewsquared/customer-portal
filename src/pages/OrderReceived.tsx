@@ -2,6 +2,7 @@ import { OrderHeader } from "@/components/order/OrderHeader";
 import { StatusHero } from "@/components/order/StatusHero";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
 import { UpsellBanner } from "@/components/order/UpsellBanner";
+import { AddBagInstructionsCard } from "@/components/order/AddBagInstructionsCard";
 import { OrderDetails, OrderConfirmations } from "@/components/order/OrderSections";
 import { useOrderData } from "@/lib/useOrderData";
 import type { Stage } from "@/components/order/StatusTimeline";
@@ -32,6 +33,8 @@ const OrderReceived = () => {
             cancellable={order.cancellable}
             doorPickup={order.leaveBagsOutside}
           />
+
+          <AddBagInstructionsCard />
 
           <UpsellBanner />
 
