@@ -5,7 +5,7 @@ import { useOrderData } from "@/lib/useOrderData";
 
 const Cancelled = () => {
   const order = useOrderData();
-  const cancelledAt = order.stageTimestamps.received ?? "22 Aug, 12:02 pm";
+  const cancelledAt = order.cancelledAt ?? "—";
 
   return (
     <main className="min-h-screen bg-background font-sans antialiased">

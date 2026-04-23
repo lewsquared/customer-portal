@@ -24,7 +24,7 @@ const PendingItemDelivery = () => {
       timestamp: ts.approval_completed ?? "22 Aug, 10:00 am",
     },
     { key: "delivery_today", label: "Drop Off Today", timestamp: ts.delivery_today },
-    { key: "partially_delivered", label: "Order Partially Delivered", timestamp: "23 Aug, 6:42 pm" },
+    { key: "partially_delivered", label: "Order Partially Delivered", timestamp: ts.partially_delivered },
     { key: "pending_item_delivery", label: "Pending Item Delivery", icon: "truck" },
     { key: "complete", label: "Delivered" },
   ];

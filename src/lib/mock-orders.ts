@@ -14,6 +14,7 @@ export const MOCK_ORDERS: OrderData[] = [
     dropoffNote: "Drop off at door",
     stageTimestamps: {
       received: "23 Apr, 9:14 am",
+      partially_delivered: "23 Apr, 6:42 pm",
     },
     leaveBagsOutside: true,
     cancellable: true,
