@@ -85,7 +85,7 @@ export const StatusHero = ({
   return (
     <section
       ref={sectionRef}
-      className={`sticky top-0 z-40 relative overflow-hidden ${gradientClass} shadow-hero animate-fade-in`}
+      className={`sticky top-0 z-40 overflow-hidden ${gradientClass} shadow-hero animate-fade-in`}
       style={{ borderBottomLeftRadius: bottomRadius, borderBottomRightRadius: bottomRadius }}
       aria-label="Order status"
     >
