@@ -1,5 +1,6 @@
 import { DoorOpen } from "lucide-react";
 import { StatusTimeline, type Stage } from "./StatusTimeline";
+import { WashingMachineIcon } from "./WashingMachineIcon";
 
 export type HeroVariant = "received" | "processing" | "delivery" | "complete" | "hold";
 
@@ -90,7 +91,7 @@ export const StatusHero = ({
 };
 
 const HeroArt = ({ variant }: { variant: HeroVariant }) => {
-  if (variant === "processing") return <WashingMachine />;
+  if (variant === "processing") return <WashingMachineIcon size={96} className="h-full w-full" />;
   if (variant === "delivery") return <DeliveryTruck />;
   if (variant === "complete") return <ShirtHanger />;
   if (variant === "hold") return <CardAlert />;
@@ -127,27 +128,6 @@ const LaundryBag = () => (
     <circle cx="56" cy="74" r="4" fill="hsl(var(--card))" opacity="0.9" />
     <circle cx="72" cy="84" r="3" fill="hsl(var(--card))" opacity="0.7" />
     <circle cx="62" cy="92" r="2.5" fill="hsl(var(--card))" opacity="0.6" />
-  </svg>
-);
-
-const WashingMachine = () => (
-  <svg viewBox="0 0 128 128" fill="none" className="h-full w-full">
-    {bagDefs}
-    {/* body */}
-    <rect x="30" y="30" width="68" height="78" rx="12" fill="url(#bag)" opacity="0.95" />
-    {/* control panel */}
-    <rect x="36" y="36" width="56" height="9" rx="4" fill="hsl(var(--card))" opacity="0.4" />
-    <circle cx="46" cy="40" r="1.8" fill="hsl(var(--card))" />
-    <circle cx="54" cy="40" r="1.8" fill="hsl(var(--card))" />
-    {/* drum */}
-    <circle cx="64" cy="74" r="22" fill="hsl(var(--card))" opacity="0.95" />
-    <g className="animate-spin-slow" style={{ transformOrigin: "64px 74px" }}>
-      <circle cx="64" cy="74" r="17" fill="hsl(var(--secondary))" />
-      <circle cx="56" cy="66" r="3" fill="hsl(var(--accent))" opacity="0.85" />
-      <circle cx="72" cy="70" r="2.2" fill="hsl(var(--primary))" opacity="0.6" />
-      <circle cx="60" cy="82" r="2.6" fill="hsl(var(--accent))" opacity="0.7" />
-      <circle cx="73" cy="80" r="1.8" fill="hsl(var(--primary))" opacity="0.5" />
-    </g>
   </svg>
 );
 
