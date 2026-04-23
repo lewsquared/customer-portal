@@ -17,7 +17,7 @@ export const AddBagInstructionsCard = ({ onClick }: AddBagInstructionsCardProps)
       className="mx-5 mt-4 flex w-[calc(100%-2.5rem)] items-center justify-between rounded-xl border border-border bg-card px-4 py-3.5 text-left transition-colors hover:bg-secondary/40"
     >
       <span className="text-sm font-medium text-primary">Add Bag Instructions (optional)</span>
-      <Plus className="h-5 w-5 text-primary" strokeWidth={2.4} />
+      <Plus className="h-4 w-4 text-primary" strokeWidth={2.5} />
     </button>
   );
 };

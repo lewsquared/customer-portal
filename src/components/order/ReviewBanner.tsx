@@ -22,7 +22,7 @@ export const ReviewBanner = ({ count = 3 }: Props) => {
             Approve before we start processing
           </p>
         </div>
-        <ArrowRight className="h-4 w-4 shrink-0 text-primary transition-transform group-hover:translate-x-1" />
+        <ArrowRight className="h-4 w-4 shrink-0 text-primary transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
       </button>
     </section>
   );

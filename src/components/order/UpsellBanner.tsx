@@ -37,7 +37,7 @@ export const UpsellBanner = () => {
         </div>
 
         <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform group-hover:translate-x-0.5">
-          <ArrowRight className="h-4 w-4" />
+          <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
         </span>
       </button>
     </section>

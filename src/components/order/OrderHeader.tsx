@@ -25,7 +25,7 @@ export const OrderHeader = ({ orderId, orderType, showSupport = false, onBack, v
             aria-label="Back"
             className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card/80 text-primary shadow-press transition-transform active:scale-95"
           >
-            <ChevronLeft className="h-5 w-5" strokeWidth={2.4} />
+            <ChevronLeft className="h-5 w-5" strokeWidth={2.5} />
           </button>
         ) : (
           <Link
@@ -33,7 +33,7 @@ export const OrderHeader = ({ orderId, orderType, showSupport = false, onBack, v
             aria-label="Back to orders"
             className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card/80 text-primary shadow-press transition-transform active:scale-95"
           >
-            <ChevronLeft className="h-5 w-5" strokeWidth={2.4} />
+            <ChevronLeft className="h-5 w-5" strokeWidth={2.5} />
           </Link>
         )}
 
@@ -57,7 +57,7 @@ export const OrderHeader = ({ orderId, orderType, showSupport = false, onBack, v
             aria-label="Contact support"
             className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card/80 text-primary shadow-press transition-transform active:scale-95"
           >
-            <Headphones className="h-5 w-5" strokeWidth={2.2} />
+            <Headphones className="h-5 w-5" />
           </button>
         ) : (
           <span className="h-11 w-11 shrink-0" aria-hidden />

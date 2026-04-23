@@ -71,7 +71,8 @@ export const StatusTimeline = ({ stages, currentIndex, rightSlot, onHold = false
           <History className="h-3.5 w-3.5" />
           {open ? "Hide timeline" : "View timeline"}
           <ChevronDown
-            className={cn("h-3.5 w-3.5 transition-transform duration-300", open && "rotate-180")}
+            className={cn("h-4 w-4 transition-transform duration-300", open && "rotate-180")}
+            strokeWidth={2.5}
           />
         </button>
         {rightSlot}
