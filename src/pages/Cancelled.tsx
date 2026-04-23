@@ -1,12 +1,16 @@
 import { FileX } from "lucide-react";
 import { OrderHeader } from "@/components/order/OrderHeader";
 import { OrderConfirmations } from "@/components/order/OrderSections";
+import { useOrderData } from "@/lib/useOrderData";
 
 const Cancelled = () => {
+  const order = useOrderData();
+  const cancelledAt = order.stageTimestamps.received ?? "22 Aug, 12:02 pm";
+
   return (
     <main className="min-h-screen bg-background font-sans antialiased">
       <div className="mx-auto flex min-h-screen max-w-md flex-col bg-background shadow-hero md:my-6 md:min-h-[calc(100vh-3rem)] md:overflow-hidden md:rounded-[2.25rem] md:border md:border-border">
-        <OrderHeader orderId="CUD138" orderType="laundry" showSupport />
+        <OrderHeader orderId={order.orderId} orderType={order.orderType} showSupport />
 
         <div className="flex-1 overflow-y-auto pb-4">
           <section className="mx-5 mt-2 rounded-2xl border border-border bg-muted p-5 animate-fade-in">
@@ -16,7 +20,7 @@ const Cancelled = () => {
               </span>
               <div className="min-w-0 flex-1">
                 <h2 className="font-display text-lg font-extrabold text-primary leading-tight">Cancelled</h2>
-                <p className="mt-1 text-sm text-muted-foreground tabular">22 Aug, 12:02 pm</p>
+                <p className="mt-1 text-sm text-muted-foreground tabular">{cancelledAt}</p>
               </div>
             </div>
           </section>

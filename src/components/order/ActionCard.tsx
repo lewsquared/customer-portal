@@ -1,3 +1,4 @@
+import React from "react";
 import { Clock, CreditCard } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -9,7 +10,7 @@ interface ActionButton {
 
 interface ActionCardProps {
   variant: "urgent" | "attention";
-  icon: React.ReactNode;
+  icon: React.ReactElement;
   title: string;
   message: string;
   amountDue?: string;
@@ -66,21 +67,21 @@ export const ActionCard = ({
     );
   };
 
+  // Render icon directly (no filled tile) at h-8 w-8, inheriting accent color.
+  const sizedIcon = React.isValidElement(icon)
+    ? React.cloneElement(icon as React.ReactElement<{ className?: string }>, {
+        className: cn("h-8 w-8", (icon.props as { className?: string }).className),
+      })
+    : icon;
+
   return (
     <section
       className={cn("mx-5 mt-4 rounded-2xl p-5 animate-fade-in", surfaceClass)}
       style={{ animationDelay: "60ms" }}
     >
       <div className="flex items-start gap-3">
-        <span
-          className={cn(
-            "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white",
-            accentBg,
-          )}
-        >
-          {icon}
-        </span>
-        <div className="min-w-0 flex-1 pt-0.5">
+        <span className={cn("shrink-0 pt-0.5", accentText)}>{sizedIcon}</span>
+        <div className="min-w-0 flex-1">
           <h3 className={cn("font-sans text-base font-bold leading-tight", accentText)}>{title}</h3>
           <p className="mt-0.5 text-sm text-muted-foreground leading-snug">{message}</p>
 

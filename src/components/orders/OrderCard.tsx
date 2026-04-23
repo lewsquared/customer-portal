@@ -4,16 +4,13 @@ import {
   ORDER_TYPE_LABEL,
   STATUS_LABEL,
   STATUS_TO_CATEGORY,
+  type OrderData,
   type OrderStatus,
-  type OrderType,
 } from "@/lib/order-types";
 import { OrderTypeIcon } from "@/components/order/OrderTypeIcon";
 
 export interface OrderCardProps {
-  orderId: string;
-  orderType: OrderType;
-  status: OrderStatus;
-  timestamp: string;
+  order: OrderData;
 }
 
 const STATUS_TO_ROUTE: Record<OrderStatus, string> = {
@@ -28,6 +25,7 @@ const STATUS_TO_ROUTE: Record<OrderStatus, string> = {
   payment_failed: "/payment-failed",
   complete: "/order-complete",
   cancelled: "/cancelled",
+  // TODO: build dedicated /laundry-bag-requested page
   laundry_bag_requested: "/order-received",
 };
 
@@ -47,7 +45,8 @@ const cardBgForStatus = (status: OrderStatus): string => {
   }
 };
 
-export const OrderCard = ({ orderId, orderType, status, timestamp }: OrderCardProps) => {
+export const OrderCard = ({ order }: OrderCardProps) => {
+  const { orderId, orderType, status, listTimestamp } = order;
   const isCompleted = STATUS_TO_CATEGORY[status] === "completed";
   const route = STATUS_TO_ROUTE[status];
   const cardBg = cardBgForStatus(status);
@@ -56,16 +55,15 @@ export const OrderCard = ({ orderId, orderType, status, timestamp }: OrderCardPr
   return (
     <Link
       to={route}
+      state={{ order }}
       className={`flex items-center gap-3 rounded-xl ${
         isCompleted ? "border border-border" : ""
       } ${cardBg} p-4 shadow-card transition-transform active:scale-[0.99]`}
     >
-      {/* Icon tile — always white, regardless of status or type */}
       <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-card">
         <OrderTypeIcon orderType={orderType} size={36} />
       </div>
 
-      {/* Text */}
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm">
           <span className="font-bold text-primary">{ORDER_TYPE_LABEL[orderType]}</span>{" "}
@@ -76,7 +74,7 @@ export const OrderCard = ({ orderId, orderType, status, timestamp }: OrderCardPr
             isApproval ? "font-bold text-warning-dark" : "text-muted-foreground"
           }`}
         >
-          {isCompleted ? timestamp : STATUS_LABEL[status]}
+          {isCompleted ? listTimestamp : STATUS_LABEL[status]}
         </p>
       </div>
 

@@ -4,27 +4,31 @@ import { StatusHero } from "@/components/order/StatusHero";
 import { ActionCard } from "@/components/order/ActionCard";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
 import { OrderSections } from "@/components/order/OrderSections";
+import { useOrderData } from "@/lib/useOrderData";
 import type { Stage } from "@/components/order/StatusTimeline";
 
-const stages: Stage[] = [
-  { key: "received", label: "Order received", timestamp: "20 Aug, 9:12 pm" },
-  { key: "collected", label: "Collected", timestamp: "21 Aug, 8:42 am" },
-  { key: "items_in_process", label: "Items in Process", timestamp: "21 Aug, 1:05 pm" },
-  { key: "delivery_today", label: "Drop Off Today", timestamp: "22 Aug" },
-  {
-    key: "driver_on_the_way",
-    label: "Driver on the Way",
-    icon: "hold",
-    pill: { label: "ON HOLD", variant: "urgent" },
-  },
-  { key: "complete", label: "Delivered" },
-];
-
 const PaymentFailed = () => {
+  const order = useOrderData();
+  const ts = order.stageTimestamps;
+
+  const stages: Stage[] = [
+    { key: "received", label: "Order received", timestamp: ts.received },
+    { key: "collected", label: "Collected", timestamp: ts.collected },
+    { key: "items_in_process", label: "Items in Process", timestamp: ts.items_in_process },
+    { key: "delivery_today", label: "Drop Off Today", timestamp: ts.delivery_today },
+    {
+      key: "driver_on_the_way",
+      label: "Driver on the Way",
+      icon: "hold",
+      pill: { label: "ON HOLD", variant: "urgent" },
+    },
+    { key: "complete", label: "Delivered" },
+  ];
+
   return (
     <main className="min-h-screen bg-background font-sans antialiased">
       <div className="mx-auto flex min-h-screen max-w-md flex-col bg-background shadow-hero md:my-6 md:min-h-[calc(100vh-3rem)] md:overflow-hidden md:rounded-[2.25rem] md:border md:border-border">
-        <OrderHeader orderId="CUD137" orderType="laundry" showSupport />
+        <OrderHeader orderId={order.orderId} orderType={order.orderType} showSupport />
 
         <div className="flex-1 overflow-y-auto pb-4">
           <StatusHero
@@ -37,18 +41,18 @@ const PaymentFailed = () => {
 
           <ActionCard
             variant="urgent"
-            icon={<TriangleAlert className="h-5 w-5" strokeWidth={2.4} />}
+            icon={<TriangleAlert strokeWidth={2.4} />}
             title="Payment failed"
             message="Your card was declined. We can't deliver your order until payment is captured."
-            amountDue="AED 142.00 due"
+            amountDue={order.amountDue ?? "AED 142.00 due"}
             primaryAction={{ label: "Retry payment", variant: "primary" }}
             secondaryAction={{ label: "Update card", variant: "secondary" }}
           />
 
           <DeliveryCard
-            dropoffNote="Picked up at door"
-            address="Apt 1402, Marina Heights, Dubai Marina"
-            when="Thu · 8:42 AM"
+            dropoffNote={order.pickupNote ?? "Picked up at door"}
+            address={order.pickupLocation}
+            when={ts.collected ?? order.pickupWindow}
             pickupDone
             dropoff={{ label: "Delivery on hold", when: "Pending payment" }}
           />

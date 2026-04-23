@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, FileText } from "lucide-react";
 import { OrderCard } from "@/components/orders/OrderCard";
-import type { OrderStatus, OrderType } from "@/lib/order-types";
+import type { OrderData, OrderStatus, OrderType } from "@/lib/order-types";
 
 const PRODUCT_TYPES: OrderType[] = ["laundry", "shoe_bag", "finery"];
 
@@ -21,8 +21,33 @@ const ATTENTION: OrderStatus[] = [
 const COMPLETED: OrderStatus[] = ["complete", "cancelled"];
 
 const fakeId = (i: number) => `DMO${String(100 + i).padStart(3, "0")}`;
-const fakeTs = "22 Apr 2026, 12:41 PM";
-const fakeCompletedTs = "Completed on 22 Apr 2026, 12:41 PM";
+
+const synthOrder = (orderId: string, orderType: OrderType, status: OrderStatus): OrderData => {
+  const isComplete = status === "complete" || status === "cancelled";
+  return {
+    orderId,
+    orderType,
+    status,
+    listTimestamp: isComplete ? "Completed on 22 Apr 2026, 12:41 PM" : "22 Apr 2026, 12:41 PM",
+    pickupLocation: "Apt 1402, Marina Heights, Dubai Marina",
+    pickupWindow: "Tomorrow · 8:00 – 10:00 AM",
+    dropoffWindow: "Sun · 6:00 – 8:00 PM",
+    pickupNote: "Picked up at door",
+    dropoffNote: "Drop off at door",
+    stageTimestamps: {
+      received: "20 Apr, 9:12 pm",
+      collected: "21 Apr, 8:42 am",
+      items_in_process: "21 Apr, 1:05 pm",
+      delivery_today: "22 Apr, 11:20 am",
+      complete: "22 Apr, 12:41 pm",
+    },
+    itemsAwaitingApproval: status === "approval_required" ? 2 : undefined,
+    approvalDeadline: status === "approval_required" ? "2h 5m left to action" : undefined,
+    amountDue: status === "payment_failed" ? "AED 142.00 due" : undefined,
+    leaveBagsOutside: status === "received",
+    cancellable: status === "received",
+  };
+};
 
 const STATE_LINKS = [
   { to: "/order-received", label: "Order received" },
@@ -44,16 +69,8 @@ const Demo = () => {
     statuses.flatMap((s) =>
       types.map((t) => {
         counter += 1;
-        const isComplete = s === "complete" || s === "cancelled";
-        return (
-          <OrderCard
-            key={`${s}-${t}-${counter}`}
-            orderId={fakeId(counter)}
-            orderType={t}
-            status={s}
-            timestamp={isComplete ? fakeCompletedTs : fakeTs}
-          />
-        );
+        const order = synthOrder(fakeId(counter), t, s);
+        return <OrderCard key={`${s}-${t}-${counter}`} order={order} />;
       }),
     );
 

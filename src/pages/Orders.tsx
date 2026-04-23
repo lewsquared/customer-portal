@@ -31,7 +31,7 @@ const Orders = () => {
             <SectionHeader>Needs your attention</SectionHeader>
             <div className="flex flex-col gap-3">
               {approvalRequiredOrders.map((o) => (
-                <OrderCard key={o.orderId} {...o} />
+                <OrderCard key={o.orderId} order={o} />
               ))}
             </div>
           </>
@@ -46,7 +46,7 @@ const Orders = () => {
             ) : (
               <div className="flex flex-col gap-3">
                 {otherActiveOrders.map((o) => (
-                  <OrderCard key={o.orderId} {...o} />
+                  <OrderCard key={o.orderId} order={o} />
                 ))}
               </div>
             )}
@@ -59,7 +59,7 @@ const Orders = () => {
             <SectionHeader>Past Orders</SectionHeader>
             <div className="flex flex-col gap-3">
               {pastOrders.map((o) => (
-                <OrderCard key={o.orderId} {...o} />
+                <OrderCard key={o.orderId} order={o} />
               ))}
             </div>
           </>
