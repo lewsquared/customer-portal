@@ -73,6 +73,7 @@ export interface OrderStageTimestamps {
   approval_completed?: string;
   delivery_today?: string;
   driver_on_the_way?: string;
+  partially_delivered?: string;
   complete?: string;
 }
 
@@ -99,4 +100,6 @@ export interface OrderData {
   leaveBagsOutside?: boolean;
   /** Whether the order can still be cancelled */
   cancellable?: boolean;
+  /** Only present when status === "cancelled" */
+  cancelledAt?: string;
 }
