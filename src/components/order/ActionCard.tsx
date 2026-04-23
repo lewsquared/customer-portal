@@ -70,11 +70,8 @@ export const ActionCard = ({
     );
   };
 
-  return (
-    <section
-      className={cn("mx-5 mt-4 rounded-2xl p-5 animate-fade-in", surfaceClass)}
-      style={{ animationDelay: "60ms" }}
-    >
+  const innerContent = (
+    <>
       <div className="flex items-start gap-3">
         <span
           className={cn(
@@ -86,7 +83,7 @@ export const ActionCard = ({
         </span>
         <div className="min-w-0 flex-1 pt-0.5">
           <h3 className={cn("font-sans text-base font-bold leading-tight", accentText)}>{title}</h3>
-          <p className="mt-1 text-sm text-muted-foreground leading-snug">{message}</p>
+          <p className="mt-0.5 text-sm text-muted-foreground leading-snug">{message}</p>
 
           {amountDue && (
             <div className={cn("mt-2 inline-flex items-center gap-1.5 text-sm font-bold tabular", accentText)}>
@@ -102,12 +99,42 @@ export const ActionCard = ({
             </div>
           )}
         </div>
+        {fullCardClickable && (
+          <ChevronRight className={cn("h-5 w-5 shrink-0 self-center", accentText)} />
+        )}
       </div>
 
-      <div className="mt-4 flex flex-wrap items-center gap-2">
-        {renderButton(primaryAction, "primary")}
-        {secondaryAction && renderButton(secondaryAction, "secondary")}
-      </div>
+      {!fullCardClickable && primaryAction && (
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          {renderButton(primaryAction, "primary")}
+          {secondaryAction && renderButton(secondaryAction, "secondary")}
+        </div>
+      )}
+    </>
+  );
+
+  if (fullCardClickable) {
+    return (
+      <button
+        type="button"
+        onClick={onClick}
+        className={cn(
+          "mx-5 mt-4 block w-full rounded-2xl p-5 text-left animate-fade-in transition-all hover:brightness-[0.98] active:scale-[0.99]",
+          surfaceClass,
+        )}
+        style={{ animationDelay: "60ms" }}
+      >
+        {innerContent}
+      </button>
+    );
+  }
+
+  return (
+    <section
+      className={cn("mx-5 mt-4 rounded-2xl p-5 animate-fade-in", surfaceClass)}
+      style={{ animationDelay: "60ms" }}
+    >
+      {innerContent}
     </section>
   );
 };
