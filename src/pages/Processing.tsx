@@ -1,14 +1,14 @@
+import { ClipboardCheck } from "lucide-react";
 import { OrderHeader } from "@/components/order/OrderHeader";
 import { StatusHero } from "@/components/order/StatusHero";
-
+import { ActionCard } from "@/components/order/ActionCard";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
-import { ReviewBanner } from "@/components/order/ReviewBanner";
 import { OrderSections } from "@/components/order/OrderSections";
 import type { Stage } from "@/components/order/StatusTimeline";
 
 const stages: Stage[] = [
-  { key: "received", label: "Order received", timestamp: "Wed 24/03/26\n9:12 PM" },
-  { key: "collected", label: "Collected", timestamp: "Thu 25/03/26\n8:42 AM" },
+  { key: "received", label: "Order received", timestamp: "22 Aug, 9:12 pm" },
+  { key: "collected", label: "Collected", timestamp: "23 Aug, 8:42 am" },
   { key: "processing", label: "Processing" },
   { key: "delivery", label: "Out for delivery" },
   { key: "complete", label: "Delivered" },
@@ -29,9 +29,16 @@ const Processing = () => {
             variant="processing"
           />
 
-          <ReviewBanner count={3} />
-
-          
+          <ActionCard
+            variant="attention"
+            icon={<ClipboardCheck className="h-5 w-5" strokeWidth={2.4} />}
+            title="3 items need your review"
+            message="Approve before we start processing"
+            fullCardClickable
+            onClick={() => {
+              /* placeholder */
+            }}
+          />
 
           <DeliveryCard
             dropoffNote="Picked up at door"

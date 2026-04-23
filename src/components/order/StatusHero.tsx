@@ -1,6 +1,5 @@
 import { DoorOpen } from "lucide-react";
 import { StatusTimeline, type Stage } from "./StatusTimeline";
-import { WashingMachineIcon } from "./WashingMachineIcon";
 import { CancelButton } from "./CancelButton";
 
 export type HeroVariant = "received" | "processing" | "delivery" | "complete" | "hold";
@@ -82,13 +81,35 @@ export const StatusHero = ({
 };
 
 const HeroArt = ({ variant }: { variant: HeroVariant }) => {
-  if (variant === "processing") return <WashingMachineIcon size={96} className="h-full w-full" />;
+  if (variant === "processing") return <WashingMachineDetailed />;
   if (variant === "delivery") return <DeliveryTruck />;
   if (variant === "complete") return <ShirtHanger />;
   if (variant === "hold") return <CardAlert />;
   if (variant === "received") return <PhoneConfirm />;
   return <LaundryBag />;
 };
+
+const WashingMachineDetailed = () => (
+  <svg viewBox="0 0 128 128" fill="none" className="h-full w-full">
+    {/* body */}
+    <rect x="20" y="14" width="88" height="100" rx="14" fill="hsl(var(--primary))" opacity="0.95" />
+    {/* control panel strip */}
+    <rect x="20" y="14" width="88" height="18" rx="14" fill="hsl(var(--indigo-deep))" opacity="0.55" />
+    <circle cx="36" cy="23" r="2.4" fill="hsl(var(--accent))" />
+    <circle cx="46" cy="23" r="2.4" fill="hsl(var(--card))" opacity="0.85" />
+    {/* drum outer */}
+    <circle cx="64" cy="72" r="30" fill="hsl(var(--card))" opacity="0.95" />
+    <circle cx="64" cy="72" r="30" stroke="hsl(var(--indigo-deep))" strokeOpacity="0.25" strokeWidth="2" fill="none" />
+    {/* drum inner with spinning suds */}
+    <g className="animate-spin-slow" style={{ transformOrigin: "64px 72px" }}>
+      <circle cx="64" cy="72" r="20" fill="hsl(var(--surface-mint))" />
+      <circle cx="58" cy="64" r="4" fill="hsl(var(--accent))" opacity="0.9" />
+      <circle cx="72" cy="68" r="3" fill="hsl(var(--primary))" opacity="0.55" />
+      <circle cx="68" cy="80" r="3.5" fill="hsl(var(--card))" opacity="0.85" />
+      <circle cx="56" cy="78" r="2.5" fill="hsl(var(--accent))" opacity="0.7" />
+    </g>
+  </svg>
+);
 
 const bagDefs = (
   <defs>
