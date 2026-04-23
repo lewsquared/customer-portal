@@ -32,6 +32,8 @@ const OrderCollected = () => {
             variant="delivery"
           />
 
+          <AddBagInstructionsCard />
+
           <DeliveryCard
             dropoffNote={order.pickupNote ?? "Picked up at door"}
             address={order.pickupLocation}
