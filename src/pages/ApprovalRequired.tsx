@@ -4,32 +4,39 @@ import { StatusHero } from "@/components/order/StatusHero";
 import { ActionCard } from "@/components/order/ActionCard";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
 import { OrderConfirmations, OrderDetails } from "@/components/order/OrderSections";
+import { useOrderData } from "@/lib/useOrderData";
 import type { Stage } from "@/components/order/StatusTimeline";
 
-const stages: Stage[] = [
-  { key: "received", label: "Order Received", timestamp: "22 Aug, 9:12 pm" },
-  { key: "collected", label: "Order Pick Up", timestamp: "23 Aug, 8:42 am" },
-  {
-    key: "items_in_process",
-    label: "Items in Process",
-    icon: "approval",
-    pill: { label: "AWAITING APPROVAL", variant: "attention" },
-  },
-  { key: "delivery_today", label: "Drop Off Today" },
-  { key: "driver_on_the_way", label: "Driver on the Way" },
-  { key: "complete", label: "Delivered" },
-];
-
 const ApprovalRequired = () => {
+  const order = useOrderData();
+  const ts = order.stageTimestamps;
+  const count = order.itemsAwaitingApproval ?? 0;
+  const noun = count === 1 ? "item" : "items";
+
+  const stages: Stage[] = [
+    { key: "received", label: "Order Received", timestamp: ts.received },
+    { key: "collected", label: "Order Pick Up", timestamp: ts.collected },
+    {
+      key: "items_in_process",
+      label: "Items in Process",
+      icon: "approval",
+      pill: { label: "AWAITING APPROVAL", variant: "attention" },
+      timestamp: ts.items_in_process,
+    },
+    { key: "delivery_today", label: "Drop Off Today" },
+    { key: "driver_on_the_way", label: "Driver on the Way" },
+    { key: "complete", label: "Delivered" },
+  ];
+
   return (
     <main className="min-h-screen bg-background font-sans antialiased">
       <div className="mx-auto flex min-h-screen max-w-md flex-col bg-background shadow-hero md:my-6 md:min-h-[calc(100vh-3rem)] md:overflow-hidden md:rounded-[2.25rem] md:border md:border-border">
-        <OrderHeader orderId="CUD138" orderType="laundry" showSupport />
+        <OrderHeader orderId={order.orderId} orderType={order.orderType} showSupport />
 
         <div className="flex-1 overflow-y-auto pb-4">
           <StatusHero
             status="Approval required"
-            subtitle="2 items awaiting your review"
+            subtitle={`${count} ${noun} awaiting your review`}
             stages={stages}
             currentIndex={2}
             variant="received"
@@ -37,19 +44,19 @@ const ApprovalRequired = () => {
 
           <ActionCard
             variant="attention"
-            icon={<TriangleAlert className="h-5 w-5" strokeWidth={2.4} />}
-            title="2 items need approval"
-            message="You need to review and approve 2 items before they can be processed."
-            countdown="2h 5m left to action"
+            icon={<TriangleAlert strokeWidth={2.4} />}
+            title={`${count} ${noun} need approval`}
+            message={`You need to review and approve ${count} ${noun} before they can be processed.`}
+            countdown={order.approvalDeadline}
             primaryAction={{ label: "Review items", variant: "primary" }}
           />
 
           <DeliveryCard
-            dropoffNote="Picked up at door"
-            address="Apt 1402, Marina Heights, Dubai Marina"
-            when="Thu · 8:42 AM"
+            dropoffNote={order.pickupNote ?? "Picked up at door"}
+            address={order.pickupLocation}
+            when={ts.collected ?? order.pickupWindow}
             pickupDone
-            dropoff={{ label: "Drop off at door", when: "Sun · 6:00 – 8:00 PM" }}
+            dropoff={{ label: order.dropoffNote ?? "Drop off at door", when: order.dropoffWindow }}
           />
 
           <OrderConfirmations stage="items-in" />
