@@ -10,8 +10,9 @@ interface OrderHeaderProps {
 }
 
 export const OrderHeader = ({ orderId, orderType, showSupport = false, onBack }: OrderHeaderProps) => {
+  const headerGradient = orderType === "finery" ? "bg-gradient-surface-finery" : "bg-gradient-surface-mint";
   return (
-    <header className="sticky top-0 z-30 bg-gradient-surface-mint backdrop-blur-md">
+    <header className={`sticky top-0 z-30 ${headerGradient} backdrop-blur-md`}>
       <div className="flex items-center gap-3 px-5 pt-6 pb-5">
         {onBack ? (
           <button
