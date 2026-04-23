@@ -20,7 +20,7 @@ import {
 
 const PRD = () => {
   return (
-    <main className="min-h-screen bg-gradient-mint font-sans antialiased">
+    <main className="min-h-screen bg-gradient-surface-mint font-sans antialiased">
       {/* Header */}
       <header className="sticky top-0 z-30 border-b border-border/60 bg-card/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
@@ -692,7 +692,7 @@ const ScreenCard = ({
   sections,
 }: ScreenCardProps) => (
   <article className="overflow-hidden rounded-3xl border border-border bg-card shadow-card">
-    <div className="flex flex-wrap items-start justify-between gap-3 border-b border-border bg-gradient-mint/40 p-5">
+    <div className="flex flex-wrap items-start justify-between gap-3 border-b border-border bg-gradient-surface-mint/40 p-5">
       <div className="flex items-center gap-3">
         <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary text-primary-foreground">
           {icon}

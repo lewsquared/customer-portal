@@ -49,9 +49,9 @@
     --warning: 38 92% 55%;
 
     /* Gradients */
-    --gradient-mint: linear-gradient(180deg, hsl(162 65% 94%) 0%, hsl(40 33% 98%) 100%);
+    --gradient-mint: linear-gradient(180deg, hsl(var(--surface-mint)) 0%, hsl(var(--background)) 100%);
     --gradient-progress: linear-gradient(90deg, hsl(245 54% 20%) 0%, hsl(255 92% 70%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(162 65% 92%) 0%, hsl(255 100% 96%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(var(--surface-mint)) 0%, hsl(var(--surface-lavender-soft)) 100%);
 
     /* Shadows */
     --shadow-card: 0 1px 2px hsl(245 45% 14% / 0.04), 0 8px 24px -12px hsl(245 45% 14% / 0.08);
@@ -98,7 +98,7 @@
 }
 
 @layer utilities {
-  .bg-gradient-mint { background: var(--gradient-mint); }
+  .bg-gradient-surface-mint { background: var(--gradient-mint); }
   .bg-gradient-hero { background: var(--gradient-hero); }
   .bg-gradient-progress { background: var(--gradient-progress); }
   .shadow-card { box-shadow: var(--shadow-card); }

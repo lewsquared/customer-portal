@@ -8,7 +8,7 @@ interface Props {
 
 export const OrderHeader = ({ orderId, showSupport = false }: Props) => {
   return (
-    <header className="sticky top-0 z-30 bg-gradient-mint backdrop-blur-md">
+    <header className="sticky top-0 z-30 bg-gradient-surface-mint backdrop-blur-md">
       <div className="flex items-center justify-between px-5 pt-6 pb-5">
         <Link
           to="/"

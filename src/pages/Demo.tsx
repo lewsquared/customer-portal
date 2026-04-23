@@ -3,7 +3,7 @@ import { Package, PackageOpen, Truck, PackageCheck, ArrowRight, Sparkles, AlertT
 
 const Demo = () => {
   return (
-    <main className="min-h-screen bg-gradient-mint font-sans antialiased">
+    <main className="min-h-screen bg-gradient-surface-mint font-sans antialiased">
       <div className="mx-auto flex min-h-screen max-w-md flex-col items-center justify-center px-6 py-12">
         <div className="mb-10 text-center animate-fade-in">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-card/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary backdrop-blur">
