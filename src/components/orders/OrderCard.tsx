@@ -32,8 +32,6 @@ const STATUS_TO_ROUTE: Record<OrderStatus, string> = {
   laundry_bag_requested: "/order-received",
 };
 
-const TILE_BG: Record<ReturnType<() => string>, string> = {} as never;
-
 const tileBgForStatus = (status: OrderStatus, orderType: OrderType): string => {
   const cat = STATUS_TO_CATEGORY[status];
   if (orderType === "finery") return ""; // no tile for Finery — handled separately
@@ -57,11 +55,11 @@ const dotColorForStatus = (status: OrderStatus): string => {
     case "in_flight":
       return "bg-surface-in-flight";
     case "needs_attention_soft":
-      return "bg-warning";
+      return "bg-surface-attention-soft";
     case "needs_attention_urgent":
-      return "bg-destructive";
+      return "bg-surface-attention-urgent";
     case "special":
-      return "bg-surface-lavender";
+      return "bg-surface-special";
     case "completed":
       return "bg-muted";
   }
