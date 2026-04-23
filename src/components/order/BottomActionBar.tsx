@@ -36,7 +36,7 @@ export const BottomActionBar = ({
           aria-label="Back"
           className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border bg-card text-primary shadow-press transition-transform active:scale-95"
         >
-          <ChevronLeft className="h-5 w-5" strokeWidth={2.4} />
+          <ChevronLeft className="h-5 w-5" strokeWidth={2.5} />
         </button>
         <button
           type="button"

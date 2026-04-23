@@ -86,7 +86,7 @@ export const OrderConfirmations = ({ stage = "delivery" }: { stage?: OrderStage 
                   </p>
                   <p className="mt-0.5 text-xs font-medium text-muted-foreground">{c.subtitle}</p>
                 </div>
-                {done && <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />}
+                {done && <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" strokeWidth={2.5} />}
               </button>
             </li>
           );
