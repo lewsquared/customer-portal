@@ -38,6 +38,7 @@ const PendingItemDelivery = () => {
           <StatusHero
             status="Pending item delivery"
             subtitle="Today, before 08:00 pm"
+            orderType={order.orderType}
             stages={stages}
             currentIndex={6}
             variant="delivery"

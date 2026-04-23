@@ -27,6 +27,7 @@ const OrderCollected = () => {
           <StatusHero
             status="Order collected"
             subtitle="Your laundry is on its way to our facility"
+            orderType={order.orderType}
             stages={stages}
             currentIndex={1}
             variant="delivery"

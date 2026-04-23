@@ -26,6 +26,7 @@ const Processing = () => {
           <StatusHero
             status="Cleaning at our facility"
             subtitle="Your laundry is being cared for"
+            orderType={order.orderType}
             stages={stages}
             currentIndex={2}
             variant="processing"

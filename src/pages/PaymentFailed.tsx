@@ -34,6 +34,7 @@ const PaymentFailed = () => {
           <StatusHero
             status="Payment required"
             subtitle="Delivery on hold · capture payment to release"
+            orderType={order.orderType}
             stages={stages}
             currentIndex={4}
             onHold

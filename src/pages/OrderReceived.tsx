@@ -28,6 +28,7 @@ const OrderReceived = () => {
           <StatusHero
             status="Order received"
             subtitle={`Pickup ${order.pickupWindow}`}
+            orderType={order.orderType}
             stages={stages}
             currentIndex={0}
             cancellable={order.cancellable}
