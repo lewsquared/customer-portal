@@ -43,7 +43,7 @@ export const StatusHero = ({
 
   return (
     <section
-      className={`relative mx-5 mt-2 overflow-hidden rounded-3xl ${gradientClass} p-6 shadow-hero animate-fade-in`}
+      className={`relative mx-5 mt-2 overflow-hidden rounded-xl ${gradientClass} p-6 shadow-hero animate-fade-in`}
       aria-label="Order status"
     >
       <div className="relative">

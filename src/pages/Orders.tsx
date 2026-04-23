@@ -76,8 +76,8 @@ const SectionHeader = ({ children }: { children: React.ReactNode }) => (
 );
 
 const EmptyActive = () => (
-  <div className="flex h-60 flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-border bg-card/50 px-6 text-center">
-    <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-muted text-muted-foreground">
+  <div className="flex h-60 flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-border bg-card/50 px-6 text-center">
+    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-muted text-muted-foreground">
       <ClipboardList className="h-10 w-10" strokeWidth={1.6} />
     </div>
     <div>

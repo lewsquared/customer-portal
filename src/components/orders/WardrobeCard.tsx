@@ -2,7 +2,7 @@ import { ChevronRight, Search, Shirt } from "lucide-react";
 
 export const WardrobeCard = () => {
   return (
-    <div className="relative flex items-center gap-4 rounded-2xl border border-border bg-card p-4 shadow-card">
+    <div className="relative flex items-center gap-4 rounded-xl border border-border bg-card p-4 shadow-card">
       {/* Icon tile */}
       <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-surface-mint">
         <Shirt className="h-7 w-7 text-primary" strokeWidth={2.2} />

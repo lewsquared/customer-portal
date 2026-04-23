@@ -13,7 +13,7 @@ const Cancelled = () => {
         <OrderHeader orderId={order.orderId} orderType={order.orderType} showSupport />
 
         <div className="flex-1 overflow-y-auto pb-4">
-          <section className="mx-5 mt-2 rounded-2xl border border-border bg-muted p-5 animate-fade-in">
+          <section className="mx-5 mt-2 rounded-xl border border-border bg-muted p-5 animate-fade-in">
             <div className="flex items-start gap-3">
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-muted-foreground/15 text-muted-foreground">
                 <FileX className="h-5 w-5" strokeWidth={2.2} />
