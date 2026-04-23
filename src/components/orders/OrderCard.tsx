@@ -20,15 +20,14 @@ const STATUS_TO_ROUTE: Record<OrderStatus, string> = {
   received: "/order-received",
   collected: "/order-collected",
   items_in_process: "/processing",
-  delivery_today: "/out-for-delivery", // temporary — proper delivery page later
-  complete: "/order-complete",
+  delivery_today: "/out-for-delivery",
+  driver_on_the_way: "/driver-on-the-way",
+  approval_required: "/approval-required",
+  partially_delivered: "/partial-delivery",
+  pending_item_delivery: "/pending-item-delivery",
   payment_failed: "/payment-failed",
-  // TODO: route to proper state pages
-  approval_required: "/order-received",
-  driver_on_the_way: "/order-received",
-  partially_delivered: "/order-received",
-  pending_item_delivery: "/order-received",
-  cancelled: "/order-received",
+  complete: "/order-complete",
+  cancelled: "/cancelled",
   laundry_bag_requested: "/order-received",
 };
 

@@ -15,6 +15,11 @@ import OrderCollected from "./pages/OrderCollected.tsx";
 import Processing from "./pages/Processing.tsx";
 import PaymentFailed from "./pages/PaymentFailed.tsx";
 import OrderComplete from "./pages/OrderComplete.tsx";
+import DriverOnTheWay from "./pages/DriverOnTheWay.tsx";
+import ApprovalRequired from "./pages/ApprovalRequired.tsx";
+import PartialDelivery from "./pages/PartialDelivery.tsx";
+import PendingItemDelivery from "./pages/PendingItemDelivery.tsx";
+import Cancelled from "./pages/Cancelled.tsx";
 import PRD from "./pages/PRD.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
@@ -38,7 +43,12 @@ const App = () => (
           <Route path="/order-collected" element={<OrderCollected />} />
           <Route path="/processing" element={<Processing />} />
           <Route path="/out-for-delivery" element={<Index />} />
+          <Route path="/driver-on-the-way" element={<DriverOnTheWay />} />
+          <Route path="/approval-required" element={<ApprovalRequired />} />
+          <Route path="/partial-delivery" element={<PartialDelivery />} />
+          <Route path="/pending-item-delivery" element={<PendingItemDelivery />} />
           <Route path="/payment-failed" element={<PaymentFailed />} />
+          <Route path="/cancelled" element={<Cancelled />} />
           <Route path="/order-complete" element={<OrderComplete />} />
           <Route path="/prd" element={<PRD />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
