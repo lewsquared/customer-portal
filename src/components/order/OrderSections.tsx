@@ -43,7 +43,7 @@ export const OrderConfirmations = ({ stage = "delivery" }: { stage?: OrderStage 
   return (
     <section
       key="confirmations"
-      className="mx-5 mt-4 rounded-3xl border border-border bg-card shadow-card animate-fade-in p-5"
+      className="mx-5 mt-4 rounded-xl border border-border bg-card shadow-card animate-fade-in p-5"
       style={{ animationDelay: "260ms" }}
     >
       <div>
@@ -106,7 +106,7 @@ export const OrderDetails = ({
 }) => {
   return (
     <section
-      className="mx-5 mt-4 rounded-3xl border border-border bg-card shadow-card animate-fade-in"
+      className="mx-5 mt-4 rounded-xl border border-border bg-card shadow-card animate-fade-in"
       style={{ animationDelay: "300ms" }}
     >
       <Accordion type="single" collapsible defaultValue={defaultOpen} className="w-full">
@@ -193,7 +193,7 @@ export const OrderDetails = ({
             <span className="font-sans text-base font-bold text-primary">Order Instructions</span>
           </AccordionTrigger>
           <AccordionContent>
-            <p className="mb-4 rounded-2xl bg-secondary/60 p-3 text-sm text-muted-foreground">
+            <p className="mb-4 rounded-xl bg-secondary/60 p-3 text-sm text-muted-foreground">
               Please ring the doorbell twice. Leave the bag at the door if no one answers.
             </p>
           </AccordionContent>

@@ -11,7 +11,7 @@ export const DelayBanner = ({ count = 2 }: Props) => {
       style={{ animationDelay: "100ms" }}
       aria-label="Possible delivery delay"
     >
-      <div className="relative flex items-start gap-3 overflow-hidden rounded-3xl border border-warning/30 bg-warning/10 p-4 shadow-card">
+      <div className="relative flex items-start gap-3 overflow-hidden rounded-xl border border-warning/30 bg-warning/10 p-4 shadow-card">
         <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-warning/20 text-warning">
           <Clock className="h-4.5 w-4.5" strokeWidth={2.5} />
         </span>
