@@ -57,11 +57,11 @@ const dotColorForStatus = (status: OrderStatus): string => {
     case "in_flight":
       return "bg-surface-in-flight";
     case "needs_attention_soft":
-      return "bg-warning";
+      return "bg-surface-attention-soft";
     case "needs_attention_urgent":
-      return "bg-destructive";
+      return "bg-surface-attention-urgent";
     case "special":
-      return "bg-surface-lavender";
+      return "bg-surface-special";
     case "completed":
       return "bg-muted";
   }

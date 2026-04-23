@@ -98,9 +98,7 @@ const Demo = () => {
 };
 
 const SectionHeader = ({ children }: { children: React.ReactNode }) => (
-  <h2 className="mb-3 mt-8 font-sans text-[11px] font-bold uppercase tracking-[0.14em] text-muted-foreground">
-    {children}
-  </h2>
+  <h2 className="mb-3 mt-8 font-sans text-lg font-bold text-primary">{children}</h2>
 );
 
 export default Demo;
