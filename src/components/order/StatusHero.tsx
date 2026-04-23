@@ -60,8 +60,9 @@ export const StatusHero = ({
 
     const onScroll = () => {
       const raw = scrollParent.scrollTop;
-      const clamped = Math.min(Math.max(raw / 120, 0), 1);
-      setProgress(clamped);
+      const linear = Math.min(Math.max(raw / 120, 0), 1);
+      const eased = 1 - Math.pow(1 - linear, 3);
+      setProgress(eased);
     };
 
     scrollParent.addEventListener("scroll", onScroll, { passive: true });
@@ -69,45 +70,47 @@ export const StatusHero = ({
     return () => scrollParent.removeEventListener("scroll", onScroll);
   }, []);
 
-  const expandedWrapperStyle = {
-    maxHeight: `${(1 - progress) * 600}px`,
-    opacity: 1 - progress,
-    overflow: "hidden" as const,
-    pointerEvents: (progress > 0.5 ? "none" : "auto") as "none" | "auto",
-  };
-
-  const compressedTitle = {
-    opacity: progress,
-    transform: `translateY(${(1 - progress) * 6}px)`,
-  };
-
-  const bottomRadius = `${32 * (1 - progress)}px`;
-
   return (
-    <section
-      ref={sectionRef}
-      className={`sticky top-0 z-40 overflow-hidden ${gradientClass} shadow-hero animate-fade-in`}
-      style={{ borderBottomLeftRadius: bottomRadius, borderBottomRightRadius: bottomRadius }}
-      aria-label="Order status"
-    >
-      <OrderHeader
-        orderId={orderId}
-        orderType={orderType ?? "laundry"}
-        showSupport={showSupport}
-        onBack={onBack}
-        variant="inline"
-        titleOpacity={1 - progress}
-      />
-
+    <>
+      {/* Compact sticky overlay — fades in on scroll */}
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 flex flex-col items-center justify-center px-20 pt-6 pb-5"
-        style={{ ...compressedTitle, height: "80px" }}
+        className={`sticky top-0 z-50 ${gradientClass}`}
+        style={{
+          opacity: progress,
+          pointerEvents: progress > 0.5 ? "auto" : "none",
+          transform: `translateY(${(1 - progress) * -8}px)`,
+          willChange: "opacity, transform",
+        }}
         aria-hidden={progress < 0.5}
       >
-        <span className="truncate text-base font-bold text-primary">{status}</span>
+        <OrderHeader
+          orderId={orderId}
+          orderType={orderType ?? "laundry"}
+          showSupport={showSupport}
+          onBack={onBack}
+          variant="inline"
+          centeredTitle={status}
+        />
       </div>
 
-      <div style={expandedWrapperStyle}>
+      {/* Full expanded banner — scrolls naturally; sits below the compact overlay */}
+      <section
+        ref={sectionRef}
+        className={`relative -mt-[80px] overflow-hidden rounded-b-[32px] ${gradientClass} shadow-hero animate-fade-in`}
+        style={{
+          opacity: 1 - progress * 0.5,
+          willChange: "opacity",
+        }}
+        aria-label="Order status"
+      >
+        <OrderHeader
+          orderId={orderId}
+          orderType={orderType ?? "laundry"}
+          showSupport={showSupport}
+          onBack={onBack}
+          variant="inline"
+        />
+
         <div className="relative px-6 pt-2 pb-6">
           <div className="flex items-center gap-4">
             <h1 className="min-w-0 flex-1 font-display text-2xl font-extrabold leading-tight text-primary animate-fade-in [text-wrap:balance]">
@@ -142,8 +145,8 @@ export const StatusHero = ({
             rightSlot={cancellable ? <CancelButton /> : undefined}
           />
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
