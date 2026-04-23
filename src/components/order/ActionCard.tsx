@@ -1,4 +1,4 @@
-import { Clock, CreditCard } from "lucide-react";
+import { ChevronRight, Clock, CreditCard } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ActionButton {
@@ -13,9 +13,11 @@ interface ActionCardProps {
   title: string;
   message: string;
   amountDue?: string;
-  primaryAction: ActionButton;
+  primaryAction?: ActionButton;
   secondaryAction?: ActionButton;
   countdown?: string;
+  fullCardClickable?: boolean;
+  onClick?: () => void;
 }
 
 export const ActionCard = ({
@@ -27,6 +29,8 @@ export const ActionCard = ({
   primaryAction,
   secondaryAction,
   countdown,
+  fullCardClickable = false,
+  onClick,
 }: ActionCardProps) => {
   const isUrgent = variant === "urgent";
   const surfaceClass = isUrgent ? "bg-surface-attention-urgent" : "bg-surface-attention-soft";
