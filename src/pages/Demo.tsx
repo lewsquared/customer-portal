@@ -100,7 +100,7 @@ const Demo = () => {
             <Link
               key={l.to}
               to={l.to}
-              className="flex items-center justify-between rounded-xl border border-border bg-card px-4 py-3 text-sm font-semibold text-primary shadow-card"
+              className="flex items-center justify-between rounded-xl border border-border bg-card px-4 py-3 text-sm font-semibold text-primary"
             >
               {l.label}
               <ArrowRight className="h-4 w-4 text-muted-foreground" />

@@ -43,7 +43,7 @@ export const OrderConfirmations = ({ stage = "delivery" }: { stage?: OrderStage 
   return (
     <section
       key="confirmations"
-      className="mx-5 mt-4 rounded-xl border border-border bg-card shadow-card animate-fade-in p-5"
+      className="mx-5 mt-4 rounded-xl border border-border bg-card animate-fade-in p-5"
       style={{ animationDelay: "260ms" }}
     >
       <div>
@@ -106,7 +106,7 @@ export const OrderDetails = ({
 }) => {
   return (
     <section
-      className="mx-5 mt-4 rounded-xl border border-border bg-card shadow-card animate-fade-in"
+      className="mx-5 mt-4 rounded-xl border border-border bg-card animate-fade-in"
       style={{ animationDelay: "300ms" }}
     >
       <Accordion type="single" collapsible defaultValue={defaultOpen} className="w-full">

@@ -64,7 +64,7 @@ export const DeliveryCard = ({
 }: Props) => {
   return (
     <section
-      className="mx-5 mt-4 rounded-xl border border-border bg-card shadow-card animate-fade-in"
+      className="mx-5 mt-4 rounded-xl border border-border bg-card animate-fade-in"
       style={{ animationDelay: "160ms" }}
       aria-label="Pickup and drop off details"
     >
