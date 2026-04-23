@@ -1,10 +1,15 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Demo from "./pages/Demo.tsx";
 import Index from "./pages/Index.tsx";
+import Orders from "./pages/Orders.tsx";
+import Home from "./pages/Home.tsx";
+import Pricing from "./pages/Pricing.tsx";
+import Help from "./pages/Help.tsx";
+import More from "./pages/More.tsx";
 import OrderReceived from "./pages/OrderReceived.tsx";
 import OrderCollected from "./pages/OrderCollected.tsx";
 import Processing from "./pages/Processing.tsx";
@@ -22,7 +27,13 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Demo />} />
+          <Route path="/" element={<Navigate to="/orders" replace />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/help" element={<Help />} />
+          <Route path="/more" element={<More />} />
+          <Route path="/demo" element={<Demo />} />
           <Route path="/order-received" element={<OrderReceived />} />
           <Route path="/order-collected" element={<OrderCollected />} />
           <Route path="/processing" element={<Processing />} />
