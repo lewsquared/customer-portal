@@ -1,6 +1,7 @@
 import { DoorOpen } from "lucide-react";
 import { StatusTimeline, type Stage } from "./StatusTimeline";
 import { CancelButton } from "./CancelButton";
+import type { OrderType } from "@/lib/order-types";
 
 export type HeroVariant = "received" | "processing" | "delivery" | "complete" | "hold";
 
@@ -14,6 +15,7 @@ interface Props {
   onHold?: boolean;
   variant?: HeroVariant;
   doorPickup?: boolean;
+  orderType?: OrderType;
 }
 
 const wrapperAnim: Record<HeroVariant, string> = {
@@ -34,12 +36,14 @@ export const StatusHero = ({
   onHold = false,
   variant = "received",
   doorPickup = false,
+  orderType,
 }: Props) => {
   const v: HeroVariant = onHold ? "hold" : completed ? "complete" : variant;
+  const gradientClass = orderType === "finery" ? "bg-gradient-hero-finery" : "bg-gradient-hero";
 
   return (
     <section
-      className="relative mx-5 mt-2 overflow-hidden rounded-3xl bg-gradient-hero p-6 shadow-hero animate-fade-in"
+      className={`relative mx-5 mt-2 overflow-hidden rounded-3xl ${gradientClass} p-6 shadow-hero animate-fade-in`}
       aria-label="Order status"
     >
       <div className="relative">

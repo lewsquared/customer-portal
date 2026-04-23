@@ -3,18 +3,19 @@ import { BottomTabBar } from "@/components/nav/BottomTabBar";
 import { OrderCard } from "@/components/orders/OrderCard";
 import { WardrobeCard } from "@/components/orders/WardrobeCard";
 import { MOCK_ACTIVE_ORDERS, MOCK_PAST_ORDERS } from "@/lib/mock-orders";
+import { STATUS_TO_CATEGORY } from "@/lib/order-types";
 
 const Orders = () => {
-  const approvalRequiredOrders = MOCK_ACTIVE_ORDERS.filter(
-    (o) => o.status === "approval_required",
+  const needsAttentionOrders = MOCK_ACTIVE_ORDERS.filter(
+    (o) => STATUS_TO_CATEGORY[o.status] === "needs_attention_urgent",
   );
   const otherActiveOrders = MOCK_ACTIVE_ORDERS.filter(
-    (o) => o.status !== "approval_required",
+    (o) => STATUS_TO_CATEGORY[o.status] !== "needs_attention_urgent",
   );
   const pastOrders = MOCK_PAST_ORDERS;
 
   const showActiveSection =
-    otherActiveOrders.length > 0 || approvalRequiredOrders.length === 0;
+    otherActiveOrders.length > 0 || needsAttentionOrders.length === 0;
 
   return (
     <main className="min-h-screen bg-background font-sans antialiased">
@@ -26,11 +27,11 @@ const Orders = () => {
         </div>
 
         {/* Needs your attention — elevated above active orders */}
-        {approvalRequiredOrders.length > 0 && (
+        {needsAttentionOrders.length > 0 && (
           <>
             <SectionHeader>Needs your attention</SectionHeader>
             <div className="flex flex-col gap-3">
-              {approvalRequiredOrders.map((o) => (
+              {needsAttentionOrders.map((o) => (
                 <OrderCard key={o.orderId} order={o} />
               ))}
             </div>
