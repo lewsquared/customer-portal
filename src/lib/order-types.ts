@@ -65,3 +65,38 @@ export const STATUS_TO_BG_CLASS: Record<StatusCategory, string> = {
   completed: "bg-surface-completed",
   special: "bg-surface-special",
 };
+
+export interface OrderStageTimestamps {
+  received?: string;
+  collected?: string;
+  items_in_process?: string;
+  approval_completed?: string;
+  delivery_today?: string;
+  driver_on_the_way?: string;
+  complete?: string;
+}
+
+export interface OrderData {
+  orderId: string;
+  orderType: OrderType;
+  status: OrderStatus;
+  /** Timestamp shown on the Orders list card. */
+  listTimestamp: string;
+  /** Delivery / pickup info shown in DeliveryCard */
+  pickupLocation: string;
+  pickupWindow: string;
+  dropoffWindow: string;
+  pickupNote?: string;
+  dropoffNote?: string;
+  /** Per-stage timestamps; only filled in for stages that have occurred or are imminently scheduled */
+  stageTimestamps: OrderStageTimestamps;
+  /** State-specific data */
+  itemsAwaitingApproval?: number;
+  approvalDeadline?: string;
+  itemsPending?: number;
+  amountDue?: string;
+  /** Door-pickup reminder flag */
+  leaveBagsOutside?: boolean;
+  /** Whether the order can still be cancelled */
+  cancellable?: boolean;
+}

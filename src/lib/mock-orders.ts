@@ -1,74 +1,188 @@
-import type { OrderStatus, OrderType } from "./order-types";
+import { STATUS_TO_CATEGORY, type OrderData } from "./order-types";
 
-export interface OrderCardData {
-  orderId: string;
-  orderType: OrderType;
-  status: OrderStatus;
-  timestamp: string;
-}
-
-export const MOCK_ACTIVE_ORDERS: OrderCardData[] = [
+export const MOCK_ORDERS: OrderData[] = [
+  // --- Active orders ---
   {
     orderId: "CUI398",
     orderType: "laundry",
     status: "received",
-    timestamp: "23 Apr 2026, 09:14 AM",
+    listTimestamp: "23 Apr 2026, 09:14 AM",
+    pickupLocation: "Apt 1402, Marina Heights, Dubai Marina",
+    pickupWindow: "Tomorrow · 8:00 – 10:00 AM",
+    dropoffWindow: "Sun · 6:00 – 8:00 PM",
+    pickupNote: "Pickup at door",
+    dropoffNote: "Drop off at door",
+    stageTimestamps: {
+      received: "23 Apr, 9:14 am",
+    },
+    leaveBagsOutside: true,
+    cancellable: true,
   },
   {
     orderId: "SHB201",
     orderType: "shoe_bag",
     status: "items_in_process",
-    timestamp: "22 Apr 2026, 03:48 PM",
+    listTimestamp: "22 Apr 2026, 03:48 PM",
+    pickupLocation: "Tower B, Jumeirah Beach Residence",
+    pickupWindow: "Mon · 7:00 – 9:00 AM",
+    dropoffWindow: "Fri · 5:00 – 7:00 PM",
+    pickupNote: "Picked up at door",
+    dropoffNote: "Drop off at door",
+    stageTimestamps: {
+      received: "20 Apr, 6:02 pm",
+      collected: "21 Apr, 7:48 am",
+      items_in_process: "21 Apr, 1:12 pm",
+    },
   },
   {
     orderId: "TFY104",
     orderType: "finery",
     status: "collected",
-    timestamp: "22 Apr 2026, 11:02 AM",
+    listTimestamp: "22 Apr 2026, 11:02 AM",
+    pickupLocation: "Villa 27, Emirates Hills",
+    pickupWindow: "Today · 10:00 AM – 12:00 PM",
+    dropoffWindow: "Wed · 2:00 – 4:00 PM",
+    pickupNote: "Picked up at door",
+    dropoffNote: "Drop off at door",
+    stageTimestamps: {
+      received: "21 Apr, 8:30 pm",
+      collected: "22 Apr, 11:02 am",
+    },
   },
   {
     orderId: "CUI376",
     orderType: "laundry",
     status: "approval_required",
-    timestamp: "21 Apr 2026, 06:30 PM",
+    listTimestamp: "21 Apr 2026, 06:30 PM",
+    pickupLocation: "Apt 905, Boulevard Plaza, Downtown",
+    pickupWindow: "Mon · 6:00 – 8:00 PM",
+    dropoffWindow: "Thu · 6:00 – 8:00 PM",
+    pickupNote: "Picked up at door",
+    dropoffNote: "Drop off at door",
+    stageTimestamps: {
+      received: "19 Apr, 5:40 pm",
+      collected: "20 Apr, 7:55 am",
+      items_in_process: "20 Apr, 1:20 pm",
+    },
+    itemsAwaitingApproval: 2,
+    approvalDeadline: "2h 5m left to action",
+  },
+
+  // --- Past orders ---
+  {
+    orderId: "CUI392",
+    orderType: "laundry",
+    status: "complete",
+    listTimestamp: "Completed on 22 Apr 2026, 12:41 PM",
+    pickupLocation: "Apt 712, JLT Cluster G",
+    pickupWindow: "18 Apr · 8:00 – 10:00 AM",
+    dropoffWindow: "22 Apr · 12:00 – 2:00 PM",
+    pickupNote: "Picked up at door",
+    dropoffNote: "Delivered at door",
+    stageTimestamps: {
+      received: "17 Apr, 7:20 pm",
+      collected: "18 Apr, 8:32 am",
+      items_in_process: "18 Apr, 1:05 pm",
+      delivery_today: "22 Apr, 11:20 am",
+      complete: "22 Apr, 12:41 pm",
+    },
+  },
+  {
+    orderId: "CTN375",
+    orderType: "laundry",
+    status: "complete",
+    listTimestamp: "Completed on 5 Apr 2026, 2:39 PM",
+    pickupLocation: "Apt 304, Al Barsha Heights",
+    pickupWindow: "1 Apr · 7:00 – 9:00 AM",
+    dropoffWindow: "5 Apr · 1:00 – 3:00 PM",
+    pickupNote: "Picked up at door",
+    dropoffNote: "Delivered at door",
+    stageTimestamps: {
+      received: "31 Mar, 8:14 pm",
+      collected: "1 Apr, 7:38 am",
+      items_in_process: "1 Apr, 12:10 pm",
+      delivery_today: "5 Apr, 1:20 pm",
+      complete: "5 Apr, 2:39 pm",
+    },
+  },
+  {
+    orderId: "CRC070",
+    orderType: "finery",
+    status: "complete",
+    listTimestamp: "Completed on 17 Feb 2026, 7:32 PM",
+    pickupLocation: "Villa 12, Palm Jumeirah",
+    pickupWindow: "13 Feb · 9:00 – 11:00 AM",
+    dropoffWindow: "17 Feb · 6:00 – 8:00 PM",
+    pickupNote: "Picked up at door",
+    dropoffNote: "Delivered at door",
+    stageTimestamps: {
+      received: "12 Feb, 9:02 pm",
+      collected: "13 Feb, 9:24 am",
+      items_in_process: "13 Feb, 2:10 pm",
+      delivery_today: "17 Feb, 6:00 pm",
+      complete: "17 Feb, 7:32 pm",
+    },
+  },
+  {
+    orderId: "CRO128",
+    orderType: "laundry_bag",
+    status: "complete",
+    listTimestamp: "Completed on 21 Feb 2026, 4:41 PM",
+    pickupLocation: "Apt 1102, Business Bay",
+    pickupWindow: "21 Feb · 3:00 – 5:00 PM",
+    dropoffWindow: "21 Feb · 3:00 – 5:00 PM",
+    stageTimestamps: {
+      complete: "21 Feb, 4:41 pm",
+    },
+  },
+  {
+    orderId: "CSO663",
+    orderType: "laundry",
+    status: "complete",
+    listTimestamp: "Completed on 13 Mar 2026, 4:31 PM",
+    pickupLocation: "Apt 808, Dubai Hills Estate",
+    pickupWindow: "9 Mar · 8:00 – 10:00 AM",
+    dropoffWindow: "13 Mar · 3:00 – 5:00 PM",
+    pickupNote: "Picked up at door",
+    dropoffNote: "Delivered at door",
+    stageTimestamps: {
+      received: "8 Mar, 7:40 pm",
+      collected: "9 Mar, 8:18 am",
+      items_in_process: "9 Mar, 12:55 pm",
+      delivery_today: "13 Mar, 3:10 pm",
+      complete: "13 Mar, 4:31 pm",
+    },
+  },
+  {
+    orderId: "CTB988",
+    orderType: "laundry",
+    status: "complete",
+    listTimestamp: "Completed on 25 Mar 2026, 7:47 PM",
+    pickupLocation: "Apt 506, City Walk",
+    pickupWindow: "21 Mar · 6:00 – 8:00 PM",
+    dropoffWindow: "25 Mar · 6:00 – 8:00 PM",
+    pickupNote: "Picked up at door",
+    dropoffNote: "Delivered at door",
+    stageTimestamps: {
+      received: "20 Mar, 8:24 pm",
+      collected: "21 Mar, 6:32 pm",
+      items_in_process: "22 Mar, 10:18 am",
+      delivery_today: "25 Mar, 6:30 pm",
+      complete: "25 Mar, 7:47 pm",
+    },
   },
 ];
 
-export const MOCK_PAST_ORDERS: OrderCardData[] = [
-  {
-    orderId: "CUI355",
-    orderType: "laundry",
-    status: "complete",
-    timestamp: "Completed on 18 Apr 2026, 04:12 PM",
-  },
-  {
-    orderId: "CUI341",
-    orderType: "laundry",
-    status: "complete",
-    timestamp: "Completed on 14 Apr 2026, 02:55 PM",
-  },
-  {
-    orderId: "TFY092",
-    orderType: "finery",
-    status: "complete",
-    timestamp: "Completed on 11 Apr 2026, 06:20 PM",
-  },
-  {
-    orderId: "CUI318",
-    orderType: "laundry",
-    status: "complete",
-    timestamp: "Completed on 06 Apr 2026, 12:41 PM",
-  },
-  {
-    orderId: "LBG044",
-    orderType: "laundry_bag",
-    status: "complete",
-    timestamp: "Completed on 02 Apr 2026, 10:08 AM",
-  },
-  {
-    orderId: "CUI297",
-    orderType: "laundry",
-    status: "complete",
-    timestamp: "Completed on 28 Mar 2026, 05:33 PM",
-  },
-];
+export const MOCK_ACTIVE_ORDERS = MOCK_ORDERS.filter(
+  (o) => STATUS_TO_CATEGORY[o.status] !== "completed",
+);
+
+export const MOCK_PAST_ORDERS = MOCK_ORDERS.filter(
+  (o) => STATUS_TO_CATEGORY[o.status] === "completed",
+);
+
+export const findOrderById = (orderId: string): OrderData | undefined =>
+  MOCK_ORDERS.find((o) => o.orderId === orderId);
+
+/** Default fallback for detail pages hit without route state (direct URL / refresh / Demo gallery). */
+export const FALLBACK_ORDER: OrderData = MOCK_ORDERS[0];
