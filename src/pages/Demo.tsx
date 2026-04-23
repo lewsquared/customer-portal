@@ -28,8 +28,13 @@ const STATE_LINKS = [
   { to: "/order-received", label: "Order received" },
   { to: "/order-collected", label: "Order collected" },
   { to: "/processing", label: "Processing" },
+  { to: "/approval-required", label: "Approval required" },
   { to: "/out-for-delivery", label: "Out for delivery" },
+  { to: "/driver-on-the-way", label: "Driver on the way" },
+  { to: "/partial-delivery", label: "Partial delivery" },
+  { to: "/pending-item-delivery", label: "Pending item delivery" },
   { to: "/payment-failed", label: "Payment failed" },
+  { to: "/cancelled", label: "Cancelled" },
   { to: "/order-complete", label: "Order complete" },
 ];
 

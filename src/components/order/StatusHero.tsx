@@ -1,6 +1,7 @@
 import { DoorOpen } from "lucide-react";
 import { StatusTimeline, type Stage } from "./StatusTimeline";
 import { WashingMachineIcon } from "./WashingMachineIcon";
+import { CancelButton } from "./CancelButton";
 
 export type HeroVariant = "received" | "processing" | "delivery" | "complete" | "hold";
 
@@ -44,11 +45,11 @@ export const StatusHero = ({
     >
       <div className="relative">
         <div className="flex items-center gap-4">
-          <h1 className="min-w-0 flex-1 font-display text-3xl font-extrabold leading-tight text-primary animate-fade-in [text-wrap:balance] min-h-[2.4em] [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical] overflow-hidden">
+          <h1 className="min-w-0 flex-1 font-display text-2xl font-extrabold leading-tight text-primary animate-fade-in [text-wrap:balance]">
             {status}
           </h1>
 
-          <div className={`pointer-events-none shrink-0 opacity-95 ${v === "complete" ? "h-16 w-16" : "h-24 w-24"} ${wrapperAnim[v]}`}>
+          <div className={`pointer-events-none shrink-0 opacity-95 h-16 w-16 ${wrapperAnim[v]}`}>
             <HeroArt variant={v} />
           </div>
         </div>
@@ -73,17 +74,7 @@ export const StatusHero = ({
           stages={stages}
           currentIndex={currentIndex}
           onHold={onHold}
-          rightSlot={
-            cancellable ? (
-              <button
-                type="button"
-                aria-label="Cancel order"
-                className="inline-flex items-center rounded-full border border-destructive/30 bg-card/70 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-destructive shadow-press backdrop-blur transition-all hover:bg-destructive hover:text-destructive-foreground active:scale-95"
-              >
-                Cancel
-              </button>
-            ) : undefined
-          }
+          rightSlot={cancellable ? <CancelButton /> : undefined}
         />
       </div>
     </section>

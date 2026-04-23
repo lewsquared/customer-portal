@@ -1,0 +1,31 @@
+import { FileX } from "lucide-react";
+import { OrderHeader } from "@/components/order/OrderHeader";
+import { OrderConfirmations } from "@/components/order/OrderSections";
+
+const Cancelled = () => {
+  return (
+    <main className="min-h-screen bg-background font-sans antialiased">
+      <div className="mx-auto flex min-h-screen max-w-md flex-col bg-background shadow-hero md:my-6 md:min-h-[calc(100vh-3rem)] md:overflow-hidden md:rounded-[2.25rem] md:border md:border-border">
+        <OrderHeader orderId="CUD138" orderType="laundry" showSupport />
+
+        <div className="flex-1 overflow-y-auto pb-4">
+          <section className="mx-5 mt-2 rounded-2xl border border-border bg-muted p-5 animate-fade-in">
+            <div className="flex items-start gap-3">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-muted-foreground/15 text-muted-foreground">
+                <FileX className="h-5 w-5" strokeWidth={2.2} />
+              </span>
+              <div className="min-w-0 flex-1">
+                <h2 className="font-display text-lg font-extrabold text-primary leading-tight">Cancelled</h2>
+                <p className="mt-1 text-sm text-muted-foreground tabular">22 Aug, 12:02 pm</p>
+              </div>
+            </div>
+          </section>
+
+          <OrderConfirmations stage="received" />
+        </div>
+      </div>
+    </main>
+  );
+};
+
+export default Cancelled;
