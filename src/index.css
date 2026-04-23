@@ -49,7 +49,7 @@
     --warning: 38 92% 55%;
 
     /* Gradients */
-    --gradient-mint: linear-gradient(180deg, hsl(var(--surface-mint)) 0%, hsl(var(--background)) 100%);
+    --gradient-surface-mint: linear-gradient(180deg, hsl(var(--surface-mint)) 0%, hsl(var(--background)) 100%);
     --gradient-progress: linear-gradient(90deg, hsl(245 54% 20%) 0%, hsl(255 92% 70%) 100%);
     --gradient-hero: linear-gradient(135deg, hsl(var(--surface-mint)) 0%, hsl(var(--surface-lavender-soft)) 100%);
 
@@ -98,7 +98,7 @@
 }
 
 @layer utilities {
-  .bg-gradient-surface-mint { background: var(--gradient-mint); }
+  .bg-gradient-surface-mint { background: var(--gradient-surface-mint); }
   .bg-gradient-hero { background: var(--gradient-hero); }
   .bg-gradient-progress { background: var(--gradient-progress); }
   .shadow-card { box-shadow: var(--shadow-card); }
