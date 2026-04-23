@@ -1,37 +1,55 @@
 import { ChevronLeft, Headphones } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ORDER_TYPE_LABEL, type OrderType } from "@/lib/order-types";
 
-interface Props {
+interface OrderHeaderProps {
   orderId: string;
+  orderType: OrderType;
   showSupport?: boolean;
+  onBack?: () => void;
 }
 
-export const OrderHeader = ({ orderId, showSupport = false }: Props) => {
+export const OrderHeader = ({ orderId, orderType, showSupport = false, onBack }: OrderHeaderProps) => {
   return (
     <header className="sticky top-0 z-30 bg-gradient-surface-mint backdrop-blur-md">
-      <div className="flex items-center justify-between px-5 pt-6 pb-5">
-        <Link
-          to="/"
-          aria-label="Back to demo"
-          className="flex h-11 w-11 items-center justify-center rounded-full bg-card/80 text-primary shadow-press transition-transform active:scale-95"
-        >
-          <ChevronLeft className="h-5 w-5" strokeWidth={2.4} />
-        </Link>
+      <div className="flex items-center gap-3 px-5 pt-6 pb-5">
+        {onBack ? (
+          <button
+            type="button"
+            onClick={onBack}
+            aria-label="Back"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card/80 text-primary shadow-press transition-transform active:scale-95"
+          >
+            <ChevronLeft className="h-5 w-5" strokeWidth={2.4} />
+          </button>
+        ) : (
+          <Link
+            to="/orders"
+            aria-label="Back to orders"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card/80 text-primary shadow-press transition-transform active:scale-95"
+          >
+            <ChevronLeft className="h-5 w-5" strokeWidth={2.4} />
+          </Link>
+        )}
 
-        <div className="flex flex-col items-center">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Laundry Order</span>
-          <span className="mt-0.5 font-mono text-base font-bold text-primary tabular">{orderId}</span>
+        <div className="min-w-0 flex-1">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            {ORDER_TYPE_LABEL[orderType]}
+          </p>
+          <p className="font-display text-xl font-extrabold tracking-tight text-primary tabular leading-tight">
+            {orderId}
+          </p>
         </div>
 
         {showSupport ? (
           <button
             aria-label="Contact support"
-            className="flex h-11 w-11 items-center justify-center rounded-full bg-card/80 text-primary shadow-press transition-transform active:scale-95"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card/80 text-primary shadow-press transition-transform active:scale-95"
           >
             <Headphones className="h-5 w-5" strokeWidth={2.2} />
           </button>
         ) : (
-          <span className="h-11 w-11" aria-hidden />
+          <span className="h-11 w-11 shrink-0" aria-hidden />
         )}
       </div>
     </header>

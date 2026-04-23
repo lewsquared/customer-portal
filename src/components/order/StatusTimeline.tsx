@@ -1,12 +1,17 @@
 import { useState } from "react";
-import { Check, ChevronDown, Clock, Truck, Package, Sparkles, Home, PackageCheck, History, type LucideIcon } from "lucide-react";
+import { Check, ChevronDown, Clock, Truck, Home, Package, Pause, ClipboardCheck, History, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+export type StageIcon = "default" | "home" | "truck" | "hold" | "package" | "approval";
+export type StagePillVariant = "urgent" | "attention";
 
 export type Stage = {
   key: string;
   label: string;
   timestamp?: string;
   description?: string;
+  icon?: StageIcon;
+  pill?: { label: string; variant: StagePillVariant };
 };
 
 interface Props {
@@ -16,12 +21,12 @@ interface Props {
   onHold?: boolean;
 }
 
-const iconForKey: Record<string, LucideIcon> = {
-  received: Package,
-  collected: Truck,
-  processing: Sparkles,
-  delivery: Home,
-  complete: PackageCheck,
+const customIconMap: Record<Exclude<StageIcon, "default">, LucideIcon> = {
+  home: Home,
+  truck: Truck,
+  hold: Pause,
+  package: Package,
+  approval: ClipboardCheck,
 };
 
 export const StatusTimeline = ({ stages, currentIndex, rightSlot, onHold = false }: Props) => {
@@ -72,28 +77,28 @@ export const StatusTimeline = ({ stages, currentIndex, rightSlot, onHold = false
         {rightSlot}
       </div>
 
-      {/* Expandable timeline */}
+      {/* Expandable timeline — sits directly on the hero gradient (no wrapper card) */}
       <div
         className={cn(
           "grid transition-all duration-300 ease-out",
-          open ? "mt-3 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
+          open ? "mt-4 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
         )}
       >
         <div className="overflow-hidden">
-          <ol className="relative space-y-1 rounded-2xl bg-card/60 p-3 backdrop-blur">
+          <ol className="relative space-y-1 px-1">
             {stages.map((s, i) => {
-              // Stages whose "active" state is shown as fully completed (blue checkmark).
               const renderAsCompleteWhenActive = s.key === "complete" || s.key === "collected";
               const completed = i < currentIndex || (i === currentIndex && renderAsCompleteWhenActive);
               const active = i === currentIndex && !renderAsCompleteWhenActive;
-              const Icon = iconForKey[s.key] ?? Clock;
               const isLast = i === stages.length - 1;
+              const customIcon = s.icon && s.icon !== "default" ? customIconMap[s.icon] : null;
+
               return (
-                <li key={s.key} className="relative flex gap-3 pb-2">
+                <li key={s.key} className="relative flex gap-3 py-3">
                   {!isLast && (
                     <span
                       className={cn(
-                        "absolute left-[15px] top-8 h-[calc(100%-1rem)] w-0.5 rounded-full",
+                        "absolute left-[15px] top-9 h-[calc(100%-1rem)] w-0.5 rounded-full",
                         completed ? "bg-primary/60" : active ? "bg-gradient-to-b from-primary to-foreground/15" : "bg-foreground/10",
                       )}
                     />
@@ -102,32 +107,49 @@ export const StatusTimeline = ({ stages, currentIndex, rightSlot, onHold = false
                     className={cn(
                       "relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
                       completed && "border-primary bg-primary text-primary-foreground",
-                      active && "border-accent bg-card text-primary",
+                      active && !customIcon && "border-accent bg-card text-primary",
+                      active && customIcon && "border-primary bg-card text-primary",
                       !completed && !active && "border-foreground/15 bg-card text-muted-foreground",
                     )}
                   >
                     {completed ? (
                       <Check className="h-4 w-4" strokeWidth={3} />
+                    ) : customIcon ? (
+                      (() => {
+                        const Icon = customIcon;
+                        return <Icon className="h-4 w-4" strokeWidth={2.4} />;
+                      })()
+                    ) : active ? (
+                      <span className="h-2.5 w-2.5 rounded-full bg-primary" />
                     ) : (
-                      <Icon className="h-3.5 w-3.5" />
+                      <Clock className="h-3.5 w-3.5" />
                     )}
                   </span>
-                  <div className="min-w-0 flex-1 pt-0.5">
+                  <div className="min-w-0 flex-1 pt-1">
                     <div className="flex items-start justify-between gap-2">
-                      <span
-                        className={cn(
-                          "text-sm font-semibold",
-                          active ? "text-primary" : completed ? "text-primary/90" : "text-muted-foreground",
-                        )}
-                      >
-                        {s.label}
-                      </span>
-                      {active && onHold ? (
-                        <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-destructive/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-destructive">
-                          <span className="h-1 w-1 rounded-full bg-destructive animate-pulse" />
-                          On hold
+                      <div className="flex min-w-0 flex-wrap items-center gap-1.5">
+                        <span
+                          className={cn(
+                            "text-sm font-semibold",
+                            active ? "text-primary" : completed ? "text-primary/90" : "text-muted-foreground",
+                          )}
+                        >
+                          {s.label}
                         </span>
-                      ) : s.timestamp ? (
+                        {s.pill && (
+                          <span
+                            className={cn(
+                              "inline-flex shrink-0 items-center rounded-full px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide",
+                              s.pill.variant === "urgent"
+                                ? "bg-destructive/15 text-destructive"
+                                : "bg-warning-dark/15 text-warning-dark",
+                            )}
+                          >
+                            {s.pill.label}
+                          </span>
+                        )}
+                      </div>
+                      {s.timestamp ? (
                         <span
                           className={cn(
                             "shrink-0 whitespace-pre-line text-right text-[11px] font-medium leading-tight tabular",
@@ -135,11 +157,6 @@ export const StatusTimeline = ({ stages, currentIndex, rightSlot, onHold = false
                           )}
                         >
                           {s.timestamp}
-                        </span>
-                      ) : active ? (
-                        <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-success/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-success">
-                          <span className="h-1 w-1 rounded-full bg-success animate-pulse" />
-                          Live
                         </span>
                       ) : null}
                     </div>
