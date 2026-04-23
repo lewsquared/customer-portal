@@ -63,6 +63,16 @@ export default {
         },
         success: "hsl(var(--success))",
         warning: "hsl(var(--warning))",
+        "surface-in-flight": "hsl(var(--surface-in-flight))",
+        "surface-attention-soft": "hsl(var(--surface-attention-soft))",
+        "surface-attention-urgent": "hsl(var(--surface-attention-urgent))",
+        "surface-completed": "hsl(var(--surface-completed))",
+        "surface-special": "hsl(var(--surface-special))",
+        finery: {
+          DEFAULT: "hsl(var(--finery-primary))",
+          foreground: "hsl(var(--finery-primary-foreground))",
+          accent: "hsl(var(--finery-accent))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--background))",
           foreground: "hsl(var(--foreground))",
