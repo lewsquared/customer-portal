@@ -62,7 +62,7 @@ export const OrderCard = ({ orderId, orderType, status, timestamp }: OrderCardPr
       } ${cardBg} p-4 shadow-card transition-transform active:scale-[0.99]`}
     >
       {/* Icon tile — always white, regardless of status or type */}
-      <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-card shadow-press">
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-card">
         <OrderTypeIcon orderType={orderType} size={36} />
       </div>
 
@@ -74,7 +74,7 @@ export const OrderCard = ({ orderId, orderType, status, timestamp }: OrderCardPr
         </p>
         <p
           className={`mt-0.5 truncate text-xs ${
-            isApproval ? "font-semibold text-warning" : "text-muted-foreground"
+            isApproval ? "font-bold text-warning-dark" : "text-muted-foreground"
           }`}
         >
           {isCompleted ? timestamp : STATUS_LABEL[status]}

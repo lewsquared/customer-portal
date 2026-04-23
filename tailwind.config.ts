@@ -63,6 +63,7 @@ export default {
         },
         success: "hsl(var(--success))",
         warning: "hsl(var(--warning))",
+        "warning-dark": "hsl(var(--warning-dark))",
         "surface-in-flight": "hsl(var(--surface-in-flight))",
         "surface-attention-soft": "hsl(var(--surface-attention-soft))",
         "surface-attention-urgent": "hsl(var(--surface-attention-urgent))",

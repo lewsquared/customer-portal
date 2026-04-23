@@ -45,8 +45,9 @@ export const OrderTypeIcon = ({ orderType, size = 96, className = "" }: Props) =
 };
 
 /**
- * Shoe + bag icon — a tote bag with a small ankle boot in front.
- * Communicates the dual scope of the Shoe & Bag service.
+ * Shoe + bag icon — side-by-side composition.
+ * A tote on the left and an ankle boot on the right, both solid primary fill,
+ * sharing a common baseline. Reads clearly at 48×48.
  */
 const ShoeAndBagIcon = ({ size, className }: { size: number; className: string }) => (
   <svg
@@ -57,54 +58,29 @@ const ShoeAndBagIcon = ({ size, className }: { size: number; className: string }
     className={className}
     aria-hidden="true"
   >
-    <defs>
-      <linearGradient id="shoeBagFill" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stopColor="hsl(var(--primary))" />
-        <stop offset="100%" stopColor="hsl(var(--accent))" />
-      </linearGradient>
-    </defs>
-
-    {/* Tote bag (background) */}
+    {/* Tote bag (left) */}
+    {/* handles */}
     <path
-      d="M40 50 L92 50 C95 50 97 52 97 55 L101 102 C101 107 97 110 92 110 L40 110 C35 110 31 107 31 102 L35 55 C35 52 37 50 40 50 Z"
-      fill="url(#shoeBagFill)"
-      opacity="0.95"
-    />
-    {/* Bag handles */}
-    <path
-      d="M50 50 C50 38 54 32 60 32 C66 32 70 38 70 50"
+      d="M22 56 C22 42 28 36 36 36 C44 36 50 42 50 56"
       stroke="hsl(var(--primary))"
-      strokeWidth="3.5"
+      strokeWidth="4"
       strokeLinecap="round"
       fill="none"
     />
+    {/* body — bottom at y=100 */}
     <path
-      d="M70 50 C70 40 74 35 80 35 C86 35 90 40 90 50"
-      stroke="hsl(var(--primary))"
-      strokeWidth="3.5"
-      strokeLinecap="round"
-      fill="none"
-      opacity="0.55"
+      d="M16 56 L56 56 L60 100 L12 100 Z"
+      fill="hsl(var(--primary))"
     />
 
-    {/* Ankle boot (foreground, lower-right) */}
+    {/* Ankle boot (right) — sole at y=100 */}
+    {/* upper */}
+    <path
+      d="M76 100 L76 60 C76 56 79 54 82 54 L94 54 C97 54 100 56 100 60 L100 84 L116 92 C119 93.5 119 96 116 96 L100 96 L100 100 Z"
+      fill="hsl(var(--primary))"
+    />
     {/* sole */}
-    <rect x="60" y="100" width="56" height="8" rx="3" fill="hsl(var(--indigo-deep))" opacity="0.85" />
-    {/* boot upper */}
-    <path
-      d="M68 100 L68 80 C68 76 71 73 75 73 L88 73 C92 73 95 76 96 80 L100 92 C100 92 110 94 113 96 C116 98 116 100 113 100 Z"
-      fill="hsl(var(--card))"
-      stroke="hsl(var(--primary))"
-      strokeWidth="2.5"
-      strokeLinejoin="round"
-    />
-    {/* laces / accent */}
-    <path
-      d="M76 82 L86 82 M76 88 L86 88 M76 94 L86 94"
-      stroke="hsl(var(--primary))"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-      opacity="0.7"
-    />
+    <rect x="74" y="100" width="46" height="6" rx="2" fill="hsl(var(--primary))" />
   </svg>
 );
+

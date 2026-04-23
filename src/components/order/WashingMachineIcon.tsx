@@ -4,8 +4,8 @@ interface Props {
 }
 
 /**
- * Shared washing machine SVG icon.
- * Extracted from StatusHero for reuse across order surfaces.
+ * Shared washing machine SVG icon — simplified for card use.
+ * Static (no spin), no control panel. The animated hero version lives in StatusHero.
  */
 export const WashingMachineIcon = ({ size = 96, className = "" }: Props) => (
   <svg
@@ -23,19 +23,13 @@ export const WashingMachineIcon = ({ size = 96, className = "" }: Props) => (
       </linearGradient>
     </defs>
     {/* body */}
-    <rect x="30" y="30" width="68" height="78" rx="12" fill="url(#washingMachineFill)" opacity="0.95" />
-    {/* control panel */}
-    <rect x="36" y="36" width="56" height="9" rx="4" fill="hsl(var(--card))" opacity="0.4" />
-    <circle cx="46" cy="40" r="1.8" fill="hsl(var(--card))" />
-    <circle cx="54" cy="40" r="1.8" fill="hsl(var(--card))" />
+    <rect x="26" y="22" width="76" height="84" rx="12" fill="url(#washingMachineFill)" opacity="0.95" />
     {/* drum */}
-    <circle cx="64" cy="74" r="22" fill="hsl(var(--card))" opacity="0.95" />
-    <g className="animate-spin-slow" style={{ transformOrigin: "64px 74px" }}>
-      <circle cx="64" cy="74" r="17" fill="hsl(var(--secondary))" />
-      <circle cx="56" cy="66" r="3" fill="hsl(var(--accent))" opacity="0.85" />
-      <circle cx="72" cy="70" r="2.2" fill="hsl(var(--primary))" opacity="0.6" />
-      <circle cx="60" cy="82" r="2.6" fill="hsl(var(--accent))" opacity="0.7" />
-      <circle cx="73" cy="80" r="1.8" fill="hsl(var(--primary))" opacity="0.5" />
-    </g>
+    <circle cx="64" cy="68" r="26" fill="hsl(var(--card))" opacity="0.95" />
+    <circle cx="64" cy="68" r="20" fill="hsl(var(--secondary))" />
+    {/* suds */}
+    <circle cx="56" cy="60" r="3" fill="hsl(var(--accent))" opacity="0.85" />
+    <circle cx="72" cy="64" r="2.2" fill="hsl(var(--primary))" opacity="0.6" />
+    <circle cx="60" cy="76" r="2.6" fill="hsl(var(--accent))" opacity="0.7" />
   </svg>
 );
