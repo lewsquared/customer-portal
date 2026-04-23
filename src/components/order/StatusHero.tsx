@@ -69,15 +69,16 @@ export const StatusHero = ({
     return () => scrollParent.removeEventListener("scroll", onScroll);
   }, []);
 
-  const expandedContent = {
+  const expandedWrapperStyle = {
+    maxHeight: `${(1 - progress) * 600}px`,
     opacity: 1 - progress,
-    transform: `translateY(${-progress * 20}px)`,
+    overflow: "hidden" as const,
     pointerEvents: (progress > 0.5 ? "none" : "auto") as "none" | "auto",
   };
 
   const compressedTitle = {
     opacity: progress,
-    transform: `translateY(${(1 - progress) * 10}px)`,
+    transform: `translateY(${(1 - progress) * 6}px)`,
   };
 
   const bottomRadius = `${32 * (1 - progress)}px`;
@@ -95,55 +96,52 @@ export const StatusHero = ({
         showSupport={showSupport}
         onBack={onBack}
         variant="inline"
+        titleOpacity={1 - progress}
       />
 
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-center px-20 pt-6 pb-5"
-        style={compressedTitle}
+        className="pointer-events-none absolute inset-x-0 top-0 flex flex-col items-center justify-center px-20 pt-6 pb-5"
+        style={{ ...compressedTitle, height: "80px" }}
         aria-hidden={progress < 0.5}
       >
         <span className="truncate text-base font-bold text-primary">{status}</span>
       </div>
 
-      <div
-        className="relative px-6 pt-2"
-        style={{
-          paddingBottom: `${24 * (1 - progress) + 8 * progress}px`,
-          ...expandedContent,
-        }}
-      >
-        <div className="flex items-center gap-4">
-          <h1 className="min-w-0 flex-1 font-display text-2xl font-extrabold leading-tight text-primary animate-fade-in [text-wrap:balance]">
-            {status}
-          </h1>
+      <div style={expandedWrapperStyle}>
+        <div className="relative px-6 pt-2 pb-6">
+          <div className="flex items-center gap-4">
+            <h1 className="min-w-0 flex-1 font-display text-2xl font-extrabold leading-tight text-primary animate-fade-in [text-wrap:balance]">
+              {status}
+            </h1>
 
-          <div className={`pointer-events-none shrink-0 opacity-95 h-16 w-16 ${wrapperAnim[v]}`}>
-            <HeroArt variant={v} />
+            <div className={`pointer-events-none shrink-0 opacity-95 h-16 w-16 ${wrapperAnim[v]}`}>
+              <HeroArt variant={v} />
+            </div>
           </div>
+
+          <p className="mt-1.5 whitespace-nowrap text-sm text-muted-foreground tabular animate-fade-in" style={{ animationDelay: "80ms" }}>
+            {subtitle}
+          </p>
+
+          {doorPickup && (
+            <div
+              className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-warning px-3 py-1.5 text-[11px] font-bold uppercase tracking-wide text-warning-foreground animate-fade-in"
+              style={{ animationDelay: "120ms" }}
+            >
+              <DoorOpen className="h-3.5 w-3.5" />
+              <span>Leave laundry bags at door</span>
+            </div>
+          )}
         </div>
 
-        <p className="mt-1.5 whitespace-nowrap text-sm text-muted-foreground tabular animate-fade-in" style={{ animationDelay: "80ms" }}>
-          {subtitle}
-        </p>
-
-        {doorPickup && (
-          <div
-            className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-warning px-3 py-1.5 text-[11px] font-bold uppercase tracking-wide text-warning-foreground animate-fade-in"
-            style={{ animationDelay: "120ms" }}
-          >
-            <DoorOpen className="h-3.5 w-3.5" />
-            <span>Leave laundry bags at door</span>
-          </div>
-        )}
-      </div>
-
-      <div className="relative mt-6 px-6 pb-6" style={expandedContent}>
-        <StatusTimeline
-          stages={stages}
-          currentIndex={currentIndex}
-          onHold={onHold}
-          rightSlot={cancellable ? <CancelButton /> : undefined}
-        />
+        <div className="relative mt-6 px-6 pb-6">
+          <StatusTimeline
+            stages={stages}
+            currentIndex={currentIndex}
+            onHold={onHold}
+            rightSlot={cancellable ? <CancelButton /> : undefined}
+          />
+        </div>
       </div>
     </section>
   );
