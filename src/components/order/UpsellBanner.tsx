@@ -10,9 +10,9 @@ export const UpsellBanner = () => {
     >
       <button
         type="button"
-        className="group relative flex w-full items-center gap-4 overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-secondary to-lavender-soft p-4 text-left shadow-card transition-all active:scale-[0.99]"
+        className="group relative flex w-full items-center gap-4 overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-secondary to-surface-lavender-soft p-4 text-left shadow-card transition-all active:scale-[0.99]"
       >
-        <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-card">
+        <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl bg-card">
           <img
             src={shoeImage}
             alt="Sneaker cleaning service"
@@ -28,7 +28,7 @@ export const UpsellBanner = () => {
             <Sparkles className="h-2.5 w-2.5" />
             New
           </div>
-          <h3 className="mt-1 font-display text-base font-bold leading-tight text-primary">
+          <h3 className="mt-1 font-sans text-base font-bold leading-tight text-primary">
             Sneaker & leather care
           </h3>
           <p className="mt-0.5 text-xs text-muted-foreground leading-snug">

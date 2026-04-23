@@ -15,9 +15,9 @@
     --popover: 0 0% 100%;
     --popover-foreground: 245 45% 14%;
 
-    /* Deep indigo */
-    --primary: 245 54% 20%;
-    --primary-foreground: 160 60% 96%;
+    /* Washmen brand indigo (#251b7d) */
+    --primary: 246 64% 30%;
+    --primary-foreground: 0 0% 100%;
 
     /* Mint */
     --secondary: 162 65% 94%;
@@ -40,11 +40,11 @@
     --radius: 1rem;
 
     /* Brand surfaces */
-    --mint: 162 65% 94%;
-    --mint-strong: 162 60% 88%;
+    --surface-mint: 162 65% 94%;
+    --surface-mint-strong: 162 60% 88%;
     --indigo-deep: 245 54% 14%;
-    --lavender: 255 92% 76%;
-    --lavender-soft: 255 100% 96%;
+    --surface-lavender: 255 92% 76%;
+    --surface-lavender-soft: 255 100% 96%;
     --success: 152 60% 42%;
     --warning: 38 92% 55%;
 

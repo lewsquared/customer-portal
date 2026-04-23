@@ -9,7 +9,7 @@ const Demo = () => {
           <span className="inline-flex items-center gap-1.5 rounded-full bg-card/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary backdrop-blur">
             Washmen · Demo
           </span>
-          <h1 className="mt-4 font-display text-4xl font-extrabold leading-tight text-primary">
+          <h1 className="mt-4 font-sans text-4xl font-extrabold leading-tight text-primary">
             Pick a screen
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
@@ -97,7 +97,7 @@ const DemoCard = ({
       {icon}
     </span>
     <div className="min-w-0 flex-1">
-      <p className="font-display text-base font-bold text-primary">{title}</p>
+      <p className="font-sans text-base font-bold text-primary">{title}</p>
       <p className="mt-0.5 text-xs font-medium text-muted-foreground">{description}</p>
     </div>
     <ArrowRight className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />

@@ -50,16 +50,16 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        mint: {
-          DEFAULT: "hsl(var(--mint))",
-          strong: "hsl(var(--mint-strong))",
+        "surface-mint": {
+          DEFAULT: "hsl(var(--surface-mint))",
+          strong: "hsl(var(--surface-mint-strong))",
         },
         indigo: {
           deep: "hsl(var(--indigo-deep))",
         },
-        lavender: {
-          DEFAULT: "hsl(var(--lavender))",
-          soft: "hsl(var(--lavender-soft))",
+        "surface-lavender": {
+          DEFAULT: "hsl(var(--surface-lavender))",
+          soft: "hsl(var(--surface-lavender-soft))",
         },
         success: "hsl(var(--success))",
         warning: "hsl(var(--warning))",

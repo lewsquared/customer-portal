@@ -41,7 +41,7 @@ const PRD = () => {
         {/* Title */}
         <Section>
           <Eyebrow>For Product Managers · Figma rebuild reference</Eyebrow>
-          <h1 className="mt-3 font-display text-4xl font-extrabold leading-tight text-primary md:text-5xl">
+          <h1 className="mt-3 font-sans text-4xl font-extrabold leading-tight text-primary md:text-5xl">
             Order Tracking — Product Requirements
           </h1>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
@@ -517,7 +517,7 @@ const PRD = () => {
             tokens: <Code>primary</Code>, <Code>accent</Code>,{" "}
             <Code>secondary</Code>, <Code>card</Code>, <Code>muted-foreground</Code>,
             <Code>success</Code>, <Code>warning</Code>, <Code>destructive</Code>,
-            and the bespoke <Code>indigo-deep</Code>, <Code>lavender-soft</Code>.
+            and the bespoke <Code>indigo-deep</Code>, <Code>surface-lavender-soft</Code>.
           </p>
 
           <Subhead>Surfaces</Subhead>
@@ -527,14 +527,14 @@ const PRD = () => {
               "Header strip: gradient-mint with backdrop-blur.",
               "Status hero: gradient-hero, rounded-3xl, shadow-hero.",
               "Cards: bg-card, rounded-3xl, border-border, shadow-card.",
-              "Banners: tinted by intent — destructive/10, warning/15, secondary→lavender-soft for promo.",
+              "Banners: tinted by intent — destructive/10, warning/15, secondary→surface-lavender-soft for promo.",
             ]}
           />
 
           <Subhead>Typography</Subhead>
           <Bullets
             items={[
-              "Display font (font-display) for h1/h2/section titles — extra-bold, tight leading.",
+              "Display font (font-display, Plus Jakarta Sans) reserved for hero status headlines only.",
               "Sans body for paragraphs and metadata.",
               "Tabular numerals (.tabular) for timestamps, IDs, currency.",
               "Uppercase tracking-wide micro-labels (e.g. 'Live', 'NEW', 'Selected', 'Add-on', 'Available', section eyebrows).",
@@ -569,7 +569,7 @@ const PRD = () => {
           />
 
           <div className="mt-8 rounded-3xl border border-accent/40 bg-card p-6 shadow-card">
-            <p className="font-display text-lg font-bold text-primary">
+            <p className="font-sans text-lg font-bold text-primary">
               When in doubt, default to clarity over cleverness.
             </p>
             <p className="mt-2 text-sm text-muted-foreground">
@@ -601,13 +601,13 @@ const Eyebrow = ({ children }: { children: React.ReactNode }) => (
 );
 
 const H2 = ({ children }: { children: React.ReactNode }) => (
-  <h2 className="font-display text-2xl font-extrabold leading-tight text-primary md:text-3xl">
+  <h2 className="font-sans text-2xl font-extrabold leading-tight text-primary md:text-3xl">
     {children}
   </h2>
 );
 
 const Subhead = ({ children }: { children: React.ReactNode }) => (
-  <h3 className="mt-6 font-display text-base font-bold text-primary">{children}</h3>
+  <h3 className="mt-6 font-sans text-base font-bold text-primary">{children}</h3>
 );
 
 const Bullets = ({ items }: { items: string[] }) => (
@@ -632,7 +632,7 @@ const Code = ({ children }: { children: React.ReactNode }) => (
 
 const Stat = ({ label, value }: { label: string; value: string }) => (
   <div className="rounded-2xl bg-secondary/60 px-4 py-3">
-    <p className="font-display text-3xl font-extrabold text-primary">{value}</p>
+    <p className="font-sans text-3xl font-extrabold text-primary">{value}</p>
     <p className="mt-0.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
       {label}
     </p>
@@ -698,7 +698,7 @@ const ScreenCard = ({
           {icon}
         </span>
         <div>
-          <h3 className="font-display text-lg font-bold text-primary">{title}</h3>
+          <h3 className="font-sans text-lg font-bold text-primary">{title}</h3>
           <p className="mt-0.5 text-xs font-mono text-muted-foreground">
             {orderId} · stage {currentIndex} / 4
           </p>
@@ -716,7 +716,7 @@ const ScreenCard = ({
     <div className="grid gap-5 p-5 md:grid-cols-2">
       <div>
         <SmallLabel>Hero copy</SmallLabel>
-        <p className="mt-1 font-display text-base font-bold text-primary">
+        <p className="mt-1 font-sans text-base font-bold text-primary">
           {copy.status}
         </p>
         <p className="text-sm text-muted-foreground">{copy.subtitle}</p>
@@ -781,7 +781,7 @@ interface ComponentBlockProps {
 const ComponentBlock = ({ name, purpose, props, notes }: ComponentBlockProps) => (
   <div className="mt-5 rounded-3xl border border-border bg-card p-5 shadow-card">
     <div className="flex flex-wrap items-baseline justify-between gap-2">
-      <h3 className="font-display text-lg font-bold text-primary">{name}</h3>
+      <h3 className="font-sans text-lg font-bold text-primary">{name}</h3>
       <Code>component</Code>
     </div>
     <p className="mt-2 text-sm text-muted-foreground">{purpose}</p>
@@ -824,7 +824,7 @@ const EdgeCase = ({
   behavior: string;
 }) => (
   <div className="mt-4 rounded-3xl border border-border bg-card p-5 shadow-card">
-    <h3 className="font-display text-base font-bold text-primary">{title}</h3>
+    <h3 className="font-sans text-base font-bold text-primary">{title}</h3>
     <p className="mt-2 text-sm">
       <span className="font-bold text-primary">Trigger: </span>
       <span className="text-muted-foreground">{trigger}</span>

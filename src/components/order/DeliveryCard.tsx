@@ -71,7 +71,7 @@ export const DeliveryCard = ({
       <Accordion type="single" collapsible defaultValue={defaultOpen ? "pickup-dropoff" : undefined} className="w-full">
         <AccordionItem value="pickup-dropoff" className="border-b-0 px-5">
           <AccordionTrigger className="py-4 hover:no-underline">
-            <span className="font-display text-base font-bold text-primary">Pickup & Drop Off</span>
+            <span className="font-sans text-base font-bold text-primary">Pickup & Drop Off</span>
           </AccordionTrigger>
           <AccordionContent>
             <div className="divide-y divide-border/60 pb-1">
