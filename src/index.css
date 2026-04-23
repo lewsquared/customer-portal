@@ -98,7 +98,7 @@
 }
 
 @layer utilities {
-  .bg-gradient-mint { background: var(--gradient-mint); }
+  .bg-gradient-surface-mint { background: var(--gradient-mint); }
   .bg-gradient-hero { background: var(--gradient-hero); }
   .bg-gradient-progress { background: var(--gradient-progress); }
   .shadow-card { box-shadow: var(--shadow-card); }
