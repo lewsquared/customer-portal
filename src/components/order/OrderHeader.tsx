@@ -39,7 +39,7 @@ export const OrderHeader = ({ orderId, orderType, showSupport = false, onBack, v
           <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
             {ORDER_TYPE_LABEL[orderType]}
           </p>
-          <p className="font-display text-xl font-extrabold tracking-tight text-primary tabular leading-tight">
+          <p className="font-display text-base font-extrabold tracking-tight text-primary tabular leading-tight">
             {orderId}
           </p>
         </div>

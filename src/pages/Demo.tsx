@@ -77,7 +77,7 @@ const Demo = () => {
   return (
     <main className="min-h-screen bg-background font-sans antialiased">
       <div className="mx-auto max-w-md px-5 pb-16 pt-11">
-        <h1 className="font-display text-3xl font-extrabold text-primary">Order Card States</h1>
+        <h1 className="font-display text-2xl font-extrabold text-primary">Order Card States</h1>
         <p className="mt-1 text-xs text-muted-foreground">Design QA — every variant</p>
 
         <SectionHeader>In Flight</SectionHeader>
@@ -120,7 +120,7 @@ const Demo = () => {
 };
 
 const SectionHeader = ({ children }: { children: React.ReactNode }) => (
-  <h2 className="mb-3 mt-8 font-sans text-lg font-bold text-primary">{children}</h2>
+  <h2 className="mb-3 mt-8 font-sans text-base font-bold text-primary">{children}</h2>
 );
 
 export default Demo;
