@@ -534,7 +534,7 @@ const PRD = () => {
           <Subhead>Typography</Subhead>
           <Bullets
             items={[
-              "Display font (font-sans) for h1/h2/section titles — extra-bold, tight leading.",
+              "Display font (font-display, Plus Jakarta Sans) reserved for hero status headlines only.",
               "Sans body for paragraphs and metadata.",
               "Tabular numerals (.tabular) for timestamps, IDs, currency.",
               "Uppercase tracking-wide micro-labels (e.g. 'Live', 'NEW', 'Selected', 'Add-on', 'Available', section eyebrows).",
