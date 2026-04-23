@@ -91,22 +91,21 @@ const HeroArt = ({ variant }: { variant: HeroVariant }) => {
 
 const WashingMachineDetailed = () => (
   <svg viewBox="0 0 128 128" fill="none" className="h-full w-full">
+    {bagDefs}
     {/* body */}
-    <rect x="20" y="14" width="88" height="100" rx="14" fill="hsl(var(--primary))" opacity="0.95" />
-    {/* control panel strip */}
-    <rect x="20" y="14" width="88" height="18" rx="14" fill="hsl(var(--indigo-deep))" opacity="0.55" />
-    <circle cx="36" cy="23" r="2.4" fill="hsl(var(--accent))" />
-    <circle cx="46" cy="23" r="2.4" fill="hsl(var(--card))" opacity="0.85" />
-    {/* drum outer */}
-    <circle cx="64" cy="72" r="30" fill="hsl(var(--card))" opacity="0.95" />
-    <circle cx="64" cy="72" r="30" stroke="hsl(var(--indigo-deep))" strokeOpacity="0.25" strokeWidth="2" fill="none" />
-    {/* drum inner with spinning suds */}
-    <g className="animate-spin-slow" style={{ transformOrigin: "64px 72px" }}>
-      <circle cx="64" cy="72" r="20" fill="hsl(var(--surface-mint))" />
-      <circle cx="58" cy="64" r="4" fill="hsl(var(--accent))" opacity="0.9" />
-      <circle cx="72" cy="68" r="3" fill="hsl(var(--primary))" opacity="0.55" />
-      <circle cx="68" cy="80" r="3.5" fill="hsl(var(--card))" opacity="0.85" />
-      <circle cx="56" cy="78" r="2.5" fill="hsl(var(--accent))" opacity="0.7" />
+    <rect x="30" y="30" width="68" height="78" rx="12" fill="url(#bag)" opacity="0.95" />
+    {/* control panel */}
+    <rect x="36" y="36" width="56" height="9" rx="4" fill="hsl(var(--card))" opacity="0.4" />
+    <circle cx="46" cy="40" r="1.8" fill="hsl(var(--card))" />
+    <circle cx="54" cy="40" r="1.8" fill="hsl(var(--card))" />
+    {/* drum */}
+    <circle cx="64" cy="74" r="22" fill="hsl(var(--card))" opacity="0.95" />
+    <g className="animate-spin-slow" style={{ transformOrigin: "64px 74px" }}>
+      <circle cx="64" cy="74" r="17" fill="hsl(var(--surface-mint))" />
+      <circle cx="56" cy="66" r="3" fill="hsl(var(--accent))" opacity="0.85" />
+      <circle cx="72" cy="70" r="2.2" fill="hsl(var(--primary))" opacity="0.6" />
+      <circle cx="60" cy="82" r="2.6" fill="hsl(var(--accent))" opacity="0.7" />
+      <circle cx="73" cy="80" r="1.8" fill="hsl(var(--primary))" opacity="0.5" />
     </g>
   </svg>
 );
