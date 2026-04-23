@@ -1,4 +1,5 @@
 import { DoorOpen } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { StatusTimeline, type Stage } from "./StatusTimeline";
 import { CancelButton } from "./CancelButton";
 import { OrderHeader } from "./OrderHeader";
@@ -48,9 +49,44 @@ export const StatusHero = ({
   const v: HeroVariant = onHold ? "hold" : completed ? "complete" : variant;
   const gradientClass = orderType === "finery" ? "bg-gradient-hero-finery" : "bg-gradient-hero";
 
+  const sectionRef = useRef<HTMLElement>(null);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const scrollParent = el.parentElement;
+    if (!scrollParent) return;
+
+    const onScroll = () => {
+      const raw = scrollParent.scrollTop;
+      const clamped = Math.min(Math.max(raw / 120, 0), 1);
+      setProgress(clamped);
+    };
+
+    scrollParent.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => scrollParent.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const expandedContent = {
+    opacity: 1 - progress,
+    transform: `translateY(${-progress * 20}px)`,
+    pointerEvents: (progress > 0.5 ? "none" : "auto") as "none" | "auto",
+  };
+
+  const compressedTitle = {
+    opacity: progress,
+    transform: `translateY(${(1 - progress) * 10}px)`,
+  };
+
+  const bottomRadius = `${32 * (1 - progress)}px`;
+
   return (
     <section
-      className={`relative overflow-hidden rounded-b-[32px] ${gradientClass} shadow-hero animate-fade-in`}
+      ref={sectionRef}
+      className={`sticky top-0 z-40 relative overflow-hidden ${gradientClass} shadow-hero animate-fade-in`}
+      style={{ borderBottomLeftRadius: bottomRadius, borderBottomRightRadius: bottomRadius }}
       aria-label="Order status"
     >
       <OrderHeader
@@ -61,7 +97,21 @@ export const StatusHero = ({
         variant="inline"
       />
 
-      <div className="relative px-6 pb-6 pt-2">
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-center px-20 pt-6 pb-5"
+        style={compressedTitle}
+        aria-hidden={progress < 0.5}
+      >
+        <span className="truncate text-base font-bold text-primary">{status}</span>
+      </div>
+
+      <div
+        className="relative px-6 pt-2"
+        style={{
+          paddingBottom: `${24 * (1 - progress) + 8 * progress}px`,
+          ...expandedContent,
+        }}
+      >
         <div className="flex items-center gap-4">
           <h1 className="min-w-0 flex-1 font-display text-2xl font-extrabold leading-tight text-primary animate-fade-in [text-wrap:balance]">
             {status}
@@ -87,7 +137,7 @@ export const StatusHero = ({
         )}
       </div>
 
-      <div className="relative mt-6 px-6 pb-6">
+      <div className="relative mt-6 px-6 pb-6" style={expandedContent}>
         <StatusTimeline
           stages={stages}
           currentIndex={currentIndex}
