@@ -56,15 +56,15 @@ export const OrderCard = ({ order }: OrderCardProps) => {
     <Link
       to={route}
       state={{ order }}
-      className={`flex items-center gap-3 rounded-xl border border-black/[0.06] ${cardBg} p-4 transition-transform active:scale-[0.99]`}
+      className={`flex items-center gap-3 rounded-xl border border-black/[0.06] ${cardBg} px-3.5 py-3.5 transition-transform active:scale-[0.99]`}
     >
-      <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-card">
-        <OrderTypeIcon orderType={orderType} size={36} />
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-card">
+        <OrderTypeIcon orderType={orderType} size={18} />
       </div>
 
       <div className="min-w-0 flex-1">
-        <p className="truncate text-sm">
-          <span className="font-bold text-primary">{ORDER_TYPE_LABEL[orderType]}</span>{" "}
+        <p className="truncate text-sm tracking-tight">
+          <span className="font-semibold text-primary">{ORDER_TYPE_LABEL[orderType]}</span>{" "}
           <span className="font-medium text-primary/70">{orderId}</span>
         </p>
         <p
@@ -76,7 +76,7 @@ export const OrderCard = ({ order }: OrderCardProps) => {
         </p>
       </div>
 
-      <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground" />
+      <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" strokeWidth={2.5} />
     </Link>
   );
 };
