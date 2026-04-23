@@ -56,7 +56,7 @@ export const OrderCard = ({ order }: OrderCardProps) => {
     <Link
       to={route}
       state={{ order }}
-      className={`flex items-center gap-3 rounded-xl border border-black/[0.06] ${cardBg} p-4 shadow-card transition-transform active:scale-[0.99]`}
+      className={`flex items-center gap-3 rounded-xl border border-black/[0.06] ${cardBg} p-4 transition-transform active:scale-[0.99]`}
     >
       <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-card">
         <OrderTypeIcon orderType={orderType} size={36} />

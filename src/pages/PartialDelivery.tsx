@@ -1,5 +1,5 @@
 import { Package } from "lucide-react";
-import { OrderHeader } from "@/components/order/OrderHeader";
+
 import { StatusHero } from "@/components/order/StatusHero";
 import { ActionCard } from "@/components/order/ActionCard";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
@@ -32,13 +32,13 @@ const PartialDelivery = () => {
   return (
     <main className="min-h-screen bg-background font-sans antialiased">
       <div className="mx-auto flex min-h-screen max-w-md flex-col bg-background shadow-hero md:my-6 md:min-h-[calc(100vh-3rem)] md:overflow-hidden md:rounded-[2.25rem] md:border md:border-border">
-        <OrderHeader orderId={order.orderId} orderType={order.orderType} showSupport />
-
         <div className="flex-1 overflow-y-auto pb-4">
           <StatusHero
             status="Order partially delivered"
             subtitle={`${pending} ${noun} pending · coming tomorrow`}
             orderType={order.orderType}
+            orderId={order.orderId}
+            showSupport
             stages={stages}
             currentIndex={5}
             variant="complete"

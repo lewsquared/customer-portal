@@ -7,12 +7,14 @@ interface OrderHeaderProps {
   orderType: OrderType;
   showSupport?: boolean;
   onBack?: () => void;
+  variant?: "standalone" | "inline";
 }
 
-export const OrderHeader = ({ orderId, orderType, showSupport = false, onBack }: OrderHeaderProps) => {
+export const OrderHeader = ({ orderId, orderType, showSupport = false, onBack, variant = "standalone" }: OrderHeaderProps) => {
   const headerGradient = orderType === "finery" ? "bg-gradient-surface-finery" : "bg-gradient-surface-mint";
+  const bgClass = variant === "inline" ? "bg-transparent" : `sticky top-0 z-30 ${headerGradient} backdrop-blur-md`;
   return (
-    <header className={`sticky top-0 z-30 ${headerGradient} backdrop-blur-md`}>
+    <header className={bgClass}>
       <div className="flex items-center gap-3 px-5 pt-6 pb-5">
         {onBack ? (
           <button

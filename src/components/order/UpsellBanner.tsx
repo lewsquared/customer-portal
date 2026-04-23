@@ -10,7 +10,7 @@ export const UpsellBanner = () => {
     >
       <button
         type="button"
-        className="group relative flex w-full items-center gap-4 overflow-hidden rounded-xl border border-border bg-gradient-to-br from-secondary to-surface-lavender-soft p-4 text-left shadow-card transition-all active:scale-[0.99]"
+        className="group relative flex w-full items-center gap-4 overflow-hidden rounded-xl border border-border bg-gradient-to-br from-secondary to-surface-lavender-soft p-4 text-left transition-all active:scale-[0.99]"
       >
         <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-md bg-card">
           <img

@@ -1,4 +1,4 @@
-import { OrderHeader } from "@/components/order/OrderHeader";
+
 import { StatusHero } from "@/components/order/StatusHero";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
 import { OrderConfirmations, OrderDetails } from "@/components/order/OrderSections";
@@ -27,13 +27,13 @@ const DriverOnTheWay = () => {
   return (
     <main className="min-h-screen bg-background font-sans antialiased">
       <div className="mx-auto flex min-h-screen max-w-md flex-col bg-background shadow-hero md:my-6 md:min-h-[calc(100vh-3rem)] md:overflow-hidden md:rounded-[2.25rem] md:border md:border-border">
-        <OrderHeader orderId={order.orderId} orderType={order.orderType} showSupport />
-
         <div className="flex-1 overflow-y-auto pb-4">
           <StatusHero
             status="Driver on the way"
             subtitle={`Arriving ${arriving}`}
             orderType={order.orderType}
+            orderId={order.orderId}
+            showSupport
             stages={stages}
             currentIndex={4}
             variant="delivery"
