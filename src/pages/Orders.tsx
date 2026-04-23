@@ -20,7 +20,7 @@ const Orders = () => {
   return (
     <main className="min-h-screen bg-background font-sans antialiased">
       <div className="mx-auto max-w-md px-5 pb-24" style={{ paddingTop: "44px" }}>
-        <h1 className="font-display text-3xl font-extrabold text-primary">Orders</h1>
+        <h1 className="font-display text-2xl font-extrabold text-primary">Orders</h1>
 
         <div className="mt-5">
           <WardrobeCard />
@@ -72,7 +72,7 @@ const Orders = () => {
 };
 
 const SectionHeader = ({ children }: { children: React.ReactNode }) => (
-  <h2 className="mb-3 mt-6 font-sans text-lg font-bold text-primary">{children}</h2>
+  <h2 className="mb-3 mt-6 font-sans text-base font-bold text-primary">{children}</h2>
 );
 
 const EmptyActive = () => (
@@ -81,7 +81,7 @@ const EmptyActive = () => (
       <ClipboardList className="h-10 w-10" strokeWidth={1.6} />
     </div>
     <div>
-      <p className="font-sans text-base font-semibold text-primary">No active orders</p>
+      <p className="font-sans text-sm font-semibold text-primary">No active orders</p>
       <p className="mt-1 text-xs text-muted-foreground">
         Place an order to get your laundry picked up
       </p>
