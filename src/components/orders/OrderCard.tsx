@@ -32,8 +32,6 @@ const STATUS_TO_ROUTE: Record<OrderStatus, string> = {
   laundry_bag_requested: "/order-received",
 };
 
-const TILE_BG: Record<ReturnType<() => string>, string> = {} as never;
-
 const tileBgForStatus = (status: OrderStatus, orderType: OrderType): string => {
   const cat = STATUS_TO_CATEGORY[status];
   if (orderType === "finery") return ""; // no tile for Finery — handled separately
