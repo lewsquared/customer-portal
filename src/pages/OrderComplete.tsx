@@ -27,6 +27,7 @@ const OrderComplete = () => {
           <StatusHero
             status="Completed order"
             subtitle={ts.complete ? `Delivered ${ts.complete}` : "Delivered"}
+            orderType={order.orderType}
             stages={stages}
             currentIndex={4}
             completed

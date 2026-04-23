@@ -33,6 +33,7 @@ const DriverOnTheWay = () => {
           <StatusHero
             status="Driver on the way"
             subtitle={`Arriving ${arriving}`}
+            orderType={order.orderType}
             stages={stages}
             currentIndex={4}
             variant="delivery"

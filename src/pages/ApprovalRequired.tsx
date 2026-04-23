@@ -37,6 +37,7 @@ const ApprovalRequired = () => {
           <StatusHero
             status="Approval required"
             subtitle={`${count} ${noun} awaiting your review`}
+            orderType={order.orderType}
             stages={stages}
             currentIndex={2}
             variant="received"

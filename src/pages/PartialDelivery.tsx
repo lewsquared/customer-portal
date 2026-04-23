@@ -38,6 +38,7 @@ const PartialDelivery = () => {
           <StatusHero
             status="Order partially delivered"
             subtitle={`${pending} ${noun} pending · coming tomorrow`}
+            orderType={order.orderType}
             stages={stages}
             currentIndex={5}
             variant="complete"

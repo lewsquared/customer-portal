@@ -28,6 +28,7 @@ const Index = () => {
           <StatusHero
             status="Out for delivery"
             subtitle={`Today · ${order.dropoffWindow}`}
+            orderType={order.orderType}
             stages={stages}
             currentIndex={3}
             variant="delivery"
