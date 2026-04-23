@@ -1,6 +1,7 @@
 import { OrderHeader } from "@/components/order/OrderHeader";
 import { StatusHero } from "@/components/order/StatusHero";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
+import { AddBagInstructionsCard } from "@/components/order/AddBagInstructionsCard";
 import { OrderDetails, OrderConfirmations } from "@/components/order/OrderSections";
 import { useOrderData } from "@/lib/useOrderData";
 import type { Stage } from "@/components/order/StatusTimeline";
@@ -30,6 +31,8 @@ const OrderCollected = () => {
             currentIndex={1}
             variant="delivery"
           />
+
+          <AddBagInstructionsCard />
 
           <DeliveryCard
             dropoffNote={order.pickupNote ?? "Picked up at door"}
