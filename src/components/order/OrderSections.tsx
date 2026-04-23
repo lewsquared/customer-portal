@@ -47,7 +47,7 @@ export const OrderConfirmations = ({ stage = "delivery" }: { stage?: OrderStage 
       style={{ animationDelay: "260ms" }}
     >
       <div>
-        <h3 className="font-display text-base font-bold text-primary leading-tight">Order Confirmations</h3>
+        <h3 className="font-sans text-base font-bold text-primary leading-tight">Order Confirmations</h3>
         <p className="mt-1 text-xs font-medium text-muted-foreground leading-relaxed">
           We capture photos at every step — from your doorstep to our facility and back.
         </p>
@@ -112,7 +112,7 @@ export const OrderDetails = ({
       <Accordion type="single" collapsible defaultValue={defaultOpen} className="w-full">
         <AccordionItem value="services" className="border-b last:border-b-0 px-5">
           <AccordionTrigger className="py-4 hover:no-underline">
-            <span className="font-display text-base font-bold text-primary">Services Selection</span>
+            <span className="font-sans text-base font-bold text-primary">Services Selection</span>
           </AccordionTrigger>
           <AccordionContent>
             <ul className="divide-y divide-border/60 pb-1">
@@ -190,7 +190,7 @@ export const OrderDetails = ({
 
         <AccordionItem value="instructions" className="border-b-0 px-5">
           <AccordionTrigger className="py-4 hover:no-underline">
-            <span className="font-display text-base font-bold text-primary">Order Instructions</span>
+            <span className="font-sans text-base font-bold text-primary">Order Instructions</span>
           </AccordionTrigger>
           <AccordionContent>
             <p className="mb-4 rounded-2xl bg-secondary/60 p-3 text-sm text-muted-foreground">
