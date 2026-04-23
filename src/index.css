@@ -30,7 +30,7 @@
     --accent: 255 92% 76%;
     --accent-foreground: 245 54% 14%;
 
-    --destructive: 0 75% 55%;
+    --destructive: 359 53% 51%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 245 30% 92%;
@@ -74,7 +74,8 @@
     --shadow-hero: 0 12px 40px -16px hsl(245 54% 20% / 0.18);
     --shadow-press: 0 2px 6px hsl(245 45% 14% / 0.08);
 
-    --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .dark {

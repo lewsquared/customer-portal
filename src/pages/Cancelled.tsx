@@ -19,7 +19,7 @@ const Cancelled = () => {
                 <FileX className="h-5 w-5" strokeWidth={2.2} />
               </span>
               <div className="min-w-0 flex-1">
-                <h2 className="font-display text-2xl font-extrabold text-primary leading-tight">Cancelled</h2>
+                <h2 className="text-2xl font-extrabold text-primary leading-tight">Cancelled</h2>
                 <p className="mt-1 text-sm text-muted-foreground tabular">{cancelledAt}</p>
               </div>
             </div>

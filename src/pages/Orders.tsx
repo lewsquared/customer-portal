@@ -20,7 +20,7 @@ const Orders = () => {
   return (
     <main className="min-h-screen bg-background font-sans antialiased">
       <div className="mx-auto max-w-md px-5 pb-24" style={{ paddingTop: "44px" }}>
-        <h1 className="font-display text-2xl font-extrabold text-primary">Orders</h1>
+        <h1 className="text-2xl font-extrabold text-primary">Orders</h1>
 
         <div className="mt-5">
           <WardrobeCard />
