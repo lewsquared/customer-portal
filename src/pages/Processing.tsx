@@ -34,10 +34,7 @@ const Processing = () => {
             icon={<ClipboardCheck className="h-5 w-5" strokeWidth={2.4} />}
             title="3 items need your review"
             message="Approve before we start processing"
-            fullCardClickable
-            onClick={() => {
-              /* placeholder */
-            }}
+            primaryAction={{ label: "Review items", variant: "primary" }}
           />
 
           <DeliveryCard

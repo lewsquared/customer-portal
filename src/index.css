@@ -48,6 +48,7 @@
     --success: 152 60% 42%;
     --warning: 38 92% 55%;
     --warning-dark: 28 92% 42%;
+    --warning-amber: 28 95% 55%;
 
     /* Status category surfaces — tint list cards and detail hero */
     --surface-in-flight: 162 65% 94%;        /* mint */

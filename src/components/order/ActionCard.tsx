@@ -1,4 +1,4 @@
-import { ChevronRight, Clock, CreditCard } from "lucide-react";
+import { Clock, CreditCard } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ActionButton {
@@ -13,11 +13,9 @@ interface ActionCardProps {
   title: string;
   message: string;
   amountDue?: string;
-  primaryAction?: ActionButton;
+  primaryAction: ActionButton;
   secondaryAction?: ActionButton;
   countdown?: string;
-  fullCardClickable?: boolean;
-  onClick?: () => void;
 }
 
 export const ActionCard = ({
@@ -29,13 +27,11 @@ export const ActionCard = ({
   primaryAction,
   secondaryAction,
   countdown,
-  fullCardClickable = false,
-  onClick,
 }: ActionCardProps) => {
   const isUrgent = variant === "urgent";
   const surfaceClass = isUrgent ? "bg-surface-attention-urgent" : "bg-surface-attention-soft";
   const accentText = isUrgent ? "text-destructive" : "text-warning-dark";
-  const accentBg = isUrgent ? "bg-destructive" : "bg-warning-dark";
+  const accentBg = isUrgent ? "bg-destructive" : "bg-warning-amber";
   const accentBorder = isUrgent ? "border-destructive" : "border-warning-dark";
 
   const renderButton = (btn: ActionButton, key: string) => {
@@ -70,8 +66,11 @@ export const ActionCard = ({
     );
   };
 
-  const innerContent = (
-    <>
+  return (
+    <section
+      className={cn("mx-5 mt-4 rounded-2xl p-5 animate-fade-in", surfaceClass)}
+      style={{ animationDelay: "60ms" }}
+    >
       <div className="flex items-start gap-3">
         <span
           className={cn(
@@ -99,42 +98,12 @@ export const ActionCard = ({
             </div>
           )}
         </div>
-        {fullCardClickable && (
-          <ChevronRight className={cn("h-5 w-5 shrink-0 self-center", accentText)} />
-        )}
       </div>
 
-      {!fullCardClickable && primaryAction && (
-        <div className="mt-4 flex flex-wrap items-center gap-2">
-          {renderButton(primaryAction, "primary")}
-          {secondaryAction && renderButton(secondaryAction, "secondary")}
-        </div>
-      )}
-    </>
-  );
-
-  if (fullCardClickable) {
-    return (
-      <button
-        type="button"
-        onClick={onClick}
-        className={cn(
-          "mx-5 mt-4 block w-full rounded-2xl p-5 text-left animate-fade-in transition-all hover:brightness-[0.98] active:scale-[0.99]",
-          surfaceClass,
-        )}
-        style={{ animationDelay: "60ms" }}
-      >
-        {innerContent}
-      </button>
-    );
-  }
-
-  return (
-    <section
-      className={cn("mx-5 mt-4 rounded-2xl p-5 animate-fade-in", surfaceClass)}
-      style={{ animationDelay: "60ms" }}
-    >
-      {innerContent}
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        {renderButton(primaryAction, "primary")}
+        {secondaryAction && renderButton(secondaryAction, "secondary")}
+      </div>
     </section>
   );
 };
