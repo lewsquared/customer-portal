@@ -9,9 +9,10 @@ interface OrderHeaderProps {
   onBack?: () => void;
   variant?: "standalone" | "inline";
   titleOpacity?: number;
+  centeredTitle?: string;
 }
 
-export const OrderHeader = ({ orderId, orderType, showSupport = false, onBack, variant = "standalone", titleOpacity }: OrderHeaderProps) => {
+export const OrderHeader = ({ orderId, orderType, showSupport = false, onBack, variant = "standalone", titleOpacity, centeredTitle }: OrderHeaderProps) => {
   const headerGradient = orderType === "finery" ? "bg-gradient-surface-finery" : "bg-gradient-surface-mint";
   const bgClass = variant === "inline" ? "bg-transparent" : `sticky top-0 z-30 ${headerGradient} backdrop-blur-md`;
   return (
@@ -36,14 +37,20 @@ export const OrderHeader = ({ orderId, orderType, showSupport = false, onBack, v
           </Link>
         )}
 
-        <div className="min-w-0 flex-1" style={titleOpacity !== undefined ? { opacity: titleOpacity } : undefined}>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-            {ORDER_TYPE_LABEL[orderType]}
-          </p>
-          <p className="font-display text-base font-extrabold tracking-tight text-primary tabular leading-tight">
-            {orderId}
-          </p>
-        </div>
+        {centeredTitle ? (
+          <div className="min-w-0 flex-1 text-center">
+            <p className="truncate text-base font-bold text-primary">{centeredTitle}</p>
+          </div>
+        ) : (
+          <div className="min-w-0 flex-1" style={titleOpacity !== undefined ? { opacity: titleOpacity } : undefined}>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              {ORDER_TYPE_LABEL[orderType]}
+            </p>
+            <p className="font-display text-base font-extrabold tracking-tight text-primary tabular leading-tight">
+              {orderId}
+            </p>
+          </div>
+        )}
 
         {showSupport ? (
           <button
