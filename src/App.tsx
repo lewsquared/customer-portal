@@ -22,6 +22,7 @@ import PendingItemDelivery from "./pages/PendingItemDelivery.tsx";
 import Cancelled from "./pages/Cancelled.tsx";
 import PRD from "./pages/PRD.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import { ScrollToTop } from "./components/nav/ScrollToTop.tsx";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Navigate to="/orders" replace />} />
           <Route path="/orders" element={<Orders />} />
