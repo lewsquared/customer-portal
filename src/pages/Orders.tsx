@@ -5,8 +5,16 @@ import { WardrobeCard } from "@/components/orders/WardrobeCard";
 import { MOCK_ACTIVE_ORDERS, MOCK_PAST_ORDERS } from "@/lib/mock-orders";
 
 const Orders = () => {
-  const activeOrders = MOCK_ACTIVE_ORDERS;
+  const approvalRequiredOrders = MOCK_ACTIVE_ORDERS.filter(
+    (o) => o.status === "approval_required",
+  );
+  const otherActiveOrders = MOCK_ACTIVE_ORDERS.filter(
+    (o) => o.status !== "approval_required",
+  );
   const pastOrders = MOCK_PAST_ORDERS;
+
+  const showActiveSection =
+    otherActiveOrders.length > 0 || approvalRequiredOrders.length === 0;
 
   return (
     <main className="min-h-screen bg-background font-sans antialiased">
@@ -17,16 +25,32 @@ const Orders = () => {
           <WardrobeCard />
         </div>
 
+        {/* Needs your attention — elevated above active orders */}
+        {approvalRequiredOrders.length > 0 && (
+          <>
+            <SectionHeader>Needs your attention</SectionHeader>
+            <div className="flex flex-col gap-3">
+              {approvalRequiredOrders.map((o) => (
+                <OrderCard key={o.orderId} {...o} />
+              ))}
+            </div>
+          </>
+        )}
+
         {/* Active Orders */}
-        <SectionHeader>Active Orders</SectionHeader>
-        {activeOrders.length === 0 ? (
-          <EmptyActive />
-        ) : (
-          <div className="flex flex-col gap-3">
-            {activeOrders.map((o) => (
-              <OrderCard key={o.orderId} {...o} />
-            ))}
-          </div>
+        {showActiveSection && (
+          <>
+            <SectionHeader>Active Orders</SectionHeader>
+            {otherActiveOrders.length === 0 ? (
+              <EmptyActive />
+            ) : (
+              <div className="flex flex-col gap-3">
+                {otherActiveOrders.map((o) => (
+                  <OrderCard key={o.orderId} {...o} />
+                ))}
+              </div>
+            )}
+          </>
         )}
 
         {/* Past Orders */}
