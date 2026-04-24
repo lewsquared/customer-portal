@@ -21,7 +21,21 @@ import {
   type DoorbellDropoff,
 } from "./DoorbellInstructionsSheet";
 import { StarchSheet, starchLabel, type StarchLevel } from "./StarchSheet";
-import { AutoApprovalsSheet, type AutoApprovalsState } from "./AutoApprovalsSheet";
+import { AutoApprovalsSheet, type AutoApprovalsState, type WashFoldApproval } from "./AutoApprovalsSheet";
+
+const WF_SHORT_LABELS: Record<WashFoldApproval, string> = {
+  notify: "Notify me",
+  "transfer-clean-press": "Transfer to clean & press",
+  "wash-anyway": "Wash anyway",
+  "do-not-wash": "Do not wash",
+};
+
+const autoApprovalsSummary = (state: AutoApprovalsState): string => {
+  if (!state.stainDamageApprove && state.washFold === "notify") return "Off";
+  const stain = state.stainDamageApprove ? "Auto-approve" : "Off";
+  const wf = WF_SHORT_LABELS[state.washFold];
+  return `Stains: ${stain} · Wash & Fold: ${wf}`;
+};
 
 type Confirmation = {
   key: string;
