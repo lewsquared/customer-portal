@@ -1,5 +1,5 @@
 import { DoorOpen } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { StatusTimeline, type Stage } from "./StatusTimeline";
 import { CancelButton } from "./CancelButton";
 import { OrderHeader } from "./OrderHeader";
@@ -50,8 +50,25 @@ export const StatusHero = ({
   const gradientClass = orderType === "finery" ? "bg-gradient-hero-finery" : "bg-gradient-hero";
 
   const [morphProgress, setMorphProgress] = useState(0);
+  const [heroHeight, setHeroHeight] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const heroContentRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    if (heroContentRef.current) {
+      setHeroHeight(heroContentRef.current.scrollHeight);
+    }
+  }, [status, subtitle, stages]);
+
+  useLayoutEffect(() => {
+    const el = heroContentRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => {
+      if (morphProgress === 0) setHeroHeight(el.scrollHeight);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [morphProgress]);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -68,13 +85,14 @@ export const StatusHero = ({
     let latest = 0;
 
     const update = () => {
+      if (heroHeight == null) return;
       const raw = Math.min(Math.max(latest / SCROLL_RANGE, 0), 1);
       const p = easeOutCubic(raw);
 
       heroContent.style.opacity = `${1 - p}`;
-      heroContent.style.transform = `translateY(${-p * 20}px)`;
       heroContent.style.pointerEvents = p > 0.9 ? "none" : "auto";
-      heroContent.style.marginBottom = `${-p * 220}px`;
+      heroContent.style.maxHeight = `${heroHeight * (1 - p)}px`;
+      heroContent.style.overflow = "hidden";
 
       section.style.borderBottomLeftRadius = `${28 * (1 - p)}px`;
       section.style.borderBottomRightRadius = `${28 * (1 - p)}px`;
@@ -95,7 +113,7 @@ export const StatusHero = ({
     scrollParent.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => scrollParent.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [heroHeight]);
 
   return (
     <section
@@ -118,7 +136,7 @@ export const StatusHero = ({
       <div
         ref={heroContentRef}
         className="relative px-6 pt-2 pb-6"
-        style={{ willChange: "opacity, transform, margin-bottom" }}
+        style={{ willChange: "max-height, opacity", contain: "layout" }}
       >
         <div className="flex items-center gap-4">
           <h1 className="min-w-0 flex-1 text-2xl font-extrabold leading-tight text-primary [text-wrap:balance]">
