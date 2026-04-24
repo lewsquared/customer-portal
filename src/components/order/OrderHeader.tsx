@@ -55,13 +55,13 @@ export const OrderHeader = ({
           </p>
           <div className="relative h-5 leading-tight">
             <span
-              className="absolute inset-0 block text-base font-extrabold tracking-tight text-primary tabular whitespace-nowrap"
+              className="absolute inset-0 block text-center text-base font-extrabold tracking-tight text-primary tabular whitespace-nowrap"
               style={{ opacity: 1 - morph }}
             >
               {orderId}
             </span>
             <span
-              className="absolute inset-0 block text-base font-extrabold tracking-tight text-primary whitespace-nowrap"
+              className="absolute inset-0 block text-center text-base font-extrabold tracking-tight text-primary whitespace-nowrap"
               style={{ opacity: morph }}
               aria-hidden={morph < 0.5}
             >
