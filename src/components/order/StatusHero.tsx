@@ -1,5 +1,5 @@
 import { DoorOpen } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { StatusTimeline, type Stage } from "./StatusTimeline";
 import { CancelButton } from "./CancelButton";
 import { OrderHeader } from "./OrderHeader";
