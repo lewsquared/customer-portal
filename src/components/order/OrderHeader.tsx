@@ -8,8 +8,6 @@ interface OrderHeaderProps {
   showSupport?: boolean;
   onBack?: () => void;
   variant?: "standalone" | "inline";
-  status?: string;
-  headerMorphProgress?: number;
 }
 
 export const OrderHeader = ({
@@ -18,12 +16,9 @@ export const OrderHeader = ({
   showSupport = false,
   onBack,
   variant = "standalone",
-  status,
-  headerMorphProgress,
 }: OrderHeaderProps) => {
   const headerGradient = orderType === "finery" ? "bg-gradient-surface-finery" : "bg-gradient-surface-mint";
   const bgClass = variant === "inline" ? "bg-transparent" : `sticky top-0 z-30 ${headerGradient} backdrop-blur-md`;
-  const morph = headerMorphProgress ?? 0;
 
   const backButton = onBack ? (
     <button
@@ -53,19 +48,9 @@ export const OrderHeader = ({
           <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
             {ORDER_TYPE_LABEL[orderType]}
           </p>
-          <div className="grid leading-tight">
-            <span
-              className="row-start-1 col-start-1 block text-center text-base font-extrabold tracking-tight text-primary tabular whitespace-nowrap"
-              style={{ opacity: 1 - morph }}
-            >
+          <div className="leading-tight">
+            <span className="block text-center text-base font-extrabold tracking-tight text-primary tabular whitespace-nowrap">
               {orderId}
-            </span>
-            <span
-              className="row-start-1 col-start-1 block text-center text-base font-extrabold tracking-tight text-primary whitespace-nowrap"
-              style={{ opacity: morph }}
-              aria-hidden={morph < 0.5}
-            >
-              {status ?? orderId}
             </span>
           </div>
         </div>

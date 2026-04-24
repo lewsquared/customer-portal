@@ -1,5 +1,4 @@
 import { DoorOpen } from "lucide-react";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { StatusTimeline, type Stage } from "./StatusTimeline";
 import { CancelButton } from "./CancelButton";
 import { OrderHeader } from "./OrderHeader";
@@ -49,88 +48,8 @@ export const StatusHero = ({
   const v: HeroVariant = onHold ? "hold" : completed ? "complete" : variant;
   const gradientClass = orderType === "finery" ? "bg-gradient-hero-finery" : "bg-gradient-hero";
 
-  const [morphProgress, setMorphProgress] = useState(0);
-  const [heroHeight, setHeroHeight] = useState<number | null>(null);
-  const sectionRef = useRef<HTMLElement>(null);
-  const heroContentRef = useRef<HTMLDivElement>(null);
-  const morphProgressRef = useRef(0);
-  const heroHeightRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    morphProgressRef.current = morphProgress;
-  }, [morphProgress]);
-
-  useEffect(() => {
-    heroHeightRef.current = heroHeight;
-  }, [heroHeight]);
-
-  useLayoutEffect(() => {
-    if (heroContentRef.current) {
-      setHeroHeight(heroContentRef.current.scrollHeight);
-    }
-  }, [status, subtitle, stages]);
-
-  useLayoutEffect(() => {
-    const el = heroContentRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(() => {
-      if (morphProgressRef.current === 0) {
-        setHeroHeight(el.scrollHeight);
-      }
-    });
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    const heroContent = heroContentRef.current;
-    if (!section || !heroContent) return;
-
-    const scrollParent = section.parentElement;
-    if (!scrollParent) return;
-
-    const SCROLL_RANGE = 140;
-    const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
-
-    let ticking = false;
-    let latest = 0;
-
-    const update = () => {
-      const h = heroHeightRef.current;
-      if (h == null) return;
-      const raw = Math.min(Math.max(latest / SCROLL_RANGE, 0), 1);
-      const p = easeOutCubic(raw);
-
-      heroContent.style.opacity = `${1 - p}`;
-      heroContent.style.pointerEvents = p > 0.9 ? "none" : "auto";
-      heroContent.style.maxHeight = `${h * (1 - p)}px`;
-      heroContent.style.overflow = "hidden";
-
-      section.style.borderBottomLeftRadius = `${28 * (1 - p)}px`;
-      section.style.borderBottomRightRadius = `${28 * (1 - p)}px`;
-
-      setMorphProgress(p);
-
-      ticking = false;
-    };
-
-    const onScroll = () => {
-      latest = scrollParent.scrollTop;
-      if (!ticking) {
-        requestAnimationFrame(update);
-        ticking = true;
-      }
-    };
-
-    scrollParent.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => scrollParent.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
     <section
-      ref={sectionRef}
       className={`sticky top-0 z-40 overflow-hidden rounded-b-[28px] ${gradientClass} shadow-hero animate-fade-in`}
       aria-label="Order status"
     >
@@ -141,16 +60,10 @@ export const StatusHero = ({
           showSupport={showSupport}
           onBack={onBack}
           variant="inline"
-          status={status}
-          headerMorphProgress={morphProgress}
         />
       </div>
 
-      <div
-        ref={heroContentRef}
-        className="relative px-6 pt-2 pb-6"
-        style={{ willChange: "max-height, opacity", contain: "layout" }}
-      >
+      <div className="relative px-6 pt-2 pb-6">
         <div className="flex items-center gap-4">
           <h1 className="min-w-0 flex-1 text-2xl font-extrabold leading-tight text-primary [text-wrap:balance]">
             {status}
