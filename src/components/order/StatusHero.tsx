@@ -75,7 +75,9 @@ export const StatusHero = ({
       heroContent.style.transform = `translateY(${-p * 20}px)`;
       heroContent.style.pointerEvents = p > 0.5 ? "none" : "auto";
 
-      section.style.transform = `translateY(${-p * 180}px)`;
+      section.style.transform = `translateY(${-p * 280}px)`;
+      section.style.borderBottomLeftRadius = `${28 * (1 - p)}px`;
+      section.style.borderBottomRightRadius = `${28 * (1 - p)}px`;
 
       setMorphProgress(p);
 
