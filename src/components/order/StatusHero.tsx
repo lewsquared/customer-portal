@@ -51,20 +51,41 @@ export const StatusHero = ({
 
   const [tucked, setTucked] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
+  const isInitialMount = useRef(true);
+  const ioSettledRef = useRef(false);
 
+  // IntersectionObserver — with a mount-settle delay
   useEffect(() => {
     const el = sentinelRef.current;
     if (!el) return;
     const io = new IntersectionObserver(
-      ([entry]) => setTucked(!entry.isIntersecting),
+      ([entry]) => {
+        if (!ioSettledRef.current) return;
+        setTucked(!entry.isIntersecting);
+      },
       { threshold: 0, rootMargin: "0px" }
     );
     io.observe(el);
-    return () => io.disconnect();
+
+    const raf1 = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        ioSettledRef.current = true;
+      });
+    });
+
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(raf1);
+    };
   }, []);
 
-  // Lock scroll on the scroll container during tuck/untuck transitions
+  // Scroll lock — skip on initial mount, only lock on real tuck transitions
   useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
     const sentinel = sentinelRef.current;
     if (!sentinel) return;
 
