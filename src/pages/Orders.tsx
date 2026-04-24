@@ -33,7 +33,7 @@ const Orders = () => {
         {/* Needs your attention — elevated above active orders */}
         {needsAttentionOrders.length > 0 && (
           <>
-            <SectionHeader>Needs your attention</SectionHeader>
+            <SectionHeader>Action needed</SectionHeader>
             <div className="flex flex-col gap-3">
               {needsAttentionOrders.map((o) => (
                 <OrderCard key={o.orderId} order={o} />
