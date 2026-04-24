@@ -7,10 +7,14 @@ import { STATUS_TO_CATEGORY } from "@/lib/order-types";
 
 const Orders = () => {
   const needsAttentionOrders = MOCK_ACTIVE_ORDERS.filter(
-    (o) => STATUS_TO_CATEGORY[o.status] === "needs_attention_urgent",
+    (o) =>
+      STATUS_TO_CATEGORY[o.status] === "needs_attention_urgent" ||
+      STATUS_TO_CATEGORY[o.status] === "needs_attention_soft",
   );
   const otherActiveOrders = MOCK_ACTIVE_ORDERS.filter(
-    (o) => STATUS_TO_CATEGORY[o.status] !== "needs_attention_urgent",
+    (o) =>
+      STATUS_TO_CATEGORY[o.status] !== "needs_attention_urgent" &&
+      STATUS_TO_CATEGORY[o.status] !== "needs_attention_soft",
   );
   const pastOrders = MOCK_PAST_ORDERS;
 
