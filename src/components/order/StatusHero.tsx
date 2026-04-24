@@ -51,7 +51,6 @@ export const StatusHero = ({
 
   const [tucked, setTucked] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
-  const isInitialMount = useRef(true);
   const ioSettledRef = useRef(false);
 
   // IntersectionObserver — with a mount-settle delay
