@@ -3,7 +3,7 @@ import wardrobeUrl from "@/assets/icons/my_wardrobe.svg";
 
 export const WardrobeCard = () => {
   return (
-    <div className="relative flex items-start gap-4 overflow-hidden rounded-xl border border-border bg-card p-4">
+    <div className="relative flex items-start gap-2 overflow-hidden rounded-xl border border-border bg-card p-4">
       {/* Icon tile */}
       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-surface-mint">
         <img src={wardrobeUrl} alt="" width={24} height={24} aria-hidden="true" />

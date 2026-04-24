@@ -69,10 +69,6 @@ export default {
         "surface-attention-urgent": "hsl(var(--surface-attention-urgent))",
         "surface-completed": "hsl(var(--surface-completed))",
         "surface-special": "hsl(var(--surface-special))",
-        "tile-in-flight": "hsl(var(--tile-in-flight))",
-        "tile-attention-soft": "hsl(var(--tile-attention-soft))",
-        "tile-attention-urgent": "hsl(var(--tile-attention-urgent))",
-        "tile-special": "hsl(var(--tile-special))",
         finery: {
           DEFAULT: "hsl(var(--finery-primary))",
           foreground: "hsl(var(--finery-primary-foreground))",
