@@ -1,8 +1,9 @@
 import { DoorOpen } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StatusTimeline, type Stage } from "./StatusTimeline";
 import { CancelButton } from "./CancelButton";
 import { OrderHeader } from "./OrderHeader";
+import { OrderTypeIcon } from "./OrderTypeIcon";
 import type { OrderType } from "@/lib/order-types";
 
 export type HeroVariant = "received" | "processing" | "delivery" | "complete" | "hold";
@@ -50,59 +51,85 @@ export const StatusHero = ({
   const gradientClass = orderType === "finery" ? "bg-gradient-hero-finery" : "bg-gradient-hero";
 
   const sectionRef = useRef<HTMLElement>(null);
-  const [progress, setProgress] = useState(0);
+  const heroContentRef = useRef<HTMLDivElement>(null);
+  const compactRef = useRef<HTMLDivElement>(null);
+  const bannerInnerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const scrollParent = el.parentElement;
+    const section = sectionRef.current;
+    const heroContent = heroContentRef.current;
+    const compact = compactRef.current;
+    if (!section || !heroContent || !compact) return;
+
+    const scrollParent = section.parentElement;
     if (!scrollParent) return;
 
+    const SCROLL_RANGE = 140;
+    const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+
+    let ticking = false;
+    let latest = 0;
+
+    const update = () => {
+      const raw = Math.min(Math.max(latest / SCROLL_RANGE, 0), 1);
+      const p = easeOutCubic(raw);
+
+      // Hero content fades + translates up
+      heroContent.style.opacity = `${1 - p}`;
+      heroContent.style.transform = `translateY(${-p * 20}px)`;
+      heroContent.style.pointerEvents = p > 0.5 ? "none" : "auto";
+
+      // Banner translates up to give "shrinking" illusion
+      section.style.transform = `translateY(${-p * 180}px)`;
+
+      // Compact bar fades in
+      compact.style.opacity = `${p}`;
+      compact.style.pointerEvents = p > 0.5 ? "auto" : "none";
+
+      ticking = false;
+    };
+
     const onScroll = () => {
-      const raw = scrollParent.scrollTop;
-      const linear = Math.min(Math.max(raw / 120, 0), 1);
-      const eased = 1 - Math.pow(1 - linear, 3);
-      setProgress(eased);
+      latest = scrollParent.scrollTop;
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
     };
 
     scrollParent.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
+    onScroll(); // initial state
     return () => scrollParent.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <>
-      {/* Compact sticky overlay — fades in on scroll */}
+    <section
+      ref={sectionRef}
+      className={`sticky top-0 z-40 overflow-hidden rounded-b-[28px] ${gradientClass} shadow-hero animate-fade-in`}
+      aria-label="Order status"
+      style={{ willChange: "transform" }}
+    >
+      {/* Compact bar — absolutely positioned inside the sticky banner; fades in as hero leaves */}
       <div
-        className={`sticky top-0 z-50 ${gradientClass}`}
+        ref={compactRef}
+        className={`pointer-events-none absolute inset-x-0 top-0 z-[45] flex h-16 items-center justify-center ${gradientClass}`}
         style={{
-          opacity: progress,
-          pointerEvents: progress > 0.5 ? "auto" : "none",
-          transform: `translateY(${(1 - progress) * -8}px)`,
-          willChange: "opacity, transform",
+          opacity: 0,
+          borderBottom: "0.5px solid rgba(0,0,0,0.08)",
+          willChange: "opacity",
+          transform: `translateY(${0}px)`,
         }}
-        aria-hidden={progress < 0.5}
+        aria-hidden="true"
       >
-        <OrderHeader
-          orderId={orderId}
-          orderType={orderType ?? "laundry"}
-          showSupport={showSupport}
-          onBack={onBack}
-          variant="inline"
-          centeredTitle={status}
-        />
+        <div className="flex items-center gap-2">
+          <OrderTypeIcon orderType={orderType ?? "laundry"} size={24} />
+          <span className="text-sm font-extrabold text-primary tracking-tight tabular">
+            {orderId}
+          </span>
+        </div>
       </div>
 
-      {/* Full expanded banner — scrolls naturally; sits below the compact overlay */}
-      <section
-        ref={sectionRef}
-        className={`relative -mt-[80px] overflow-hidden rounded-b-[32px] ${gradientClass} shadow-hero animate-fade-in`}
-        style={{
-          opacity: 1 - progress * 0.5,
-          willChange: "opacity",
-        }}
-        aria-label="Order status"
-      >
+      <div ref={bannerInnerRef}>
         <OrderHeader
           orderId={orderId}
           orderType={orderType ?? "laundry"}
@@ -111,9 +138,14 @@ export const StatusHero = ({
           variant="inline"
         />
 
-        <div className="relative px-6 pt-2 pb-6">
+        {/* Hero content wrapper — fades/translates as a unit */}
+        <div
+          ref={heroContentRef}
+          className="relative px-6 pt-2 pb-6"
+          style={{ willChange: "opacity, transform" }}
+        >
           <div className="flex items-center gap-4">
-            <h1 className="min-w-0 flex-1 text-2xl font-extrabold leading-tight text-primary animate-fade-in [text-wrap:balance]">
+            <h1 className="min-w-0 flex-1 text-2xl font-extrabold leading-tight text-primary [text-wrap:balance]">
               {status}
             </h1>
 
@@ -122,31 +154,28 @@ export const StatusHero = ({
             </div>
           </div>
 
-          <p className="mt-1.5 whitespace-nowrap text-sm text-muted-foreground tabular animate-fade-in" style={{ animationDelay: "80ms" }}>
+          <p className="mt-1.5 whitespace-nowrap text-sm text-muted-foreground tabular">
             {subtitle}
           </p>
 
           {doorPickup && (
-            <div
-              className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-warning px-3 py-1.5 text-[11px] font-bold uppercase tracking-wide text-warning-foreground animate-fade-in"
-              style={{ animationDelay: "120ms" }}
-            >
+            <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-warning px-3 py-1.5 text-[11px] font-bold uppercase tracking-wide text-warning-foreground animate-fade-in">
               <DoorOpen className="h-3.5 w-3.5" />
               <span>Leave laundry bags at door</span>
             </div>
           )}
-        </div>
 
-        <div className="relative mt-6 px-6 pb-6">
-          <StatusTimeline
-            stages={stages}
-            currentIndex={currentIndex}
-            onHold={onHold}
-            rightSlot={cancellable ? <CancelButton /> : undefined}
-          />
+          <div className="relative mt-6">
+            <StatusTimeline
+              stages={stages}
+              currentIndex={currentIndex}
+              onHold={onHold}
+              rightSlot={cancellable ? <CancelButton /> : undefined}
+            />
+          </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 
