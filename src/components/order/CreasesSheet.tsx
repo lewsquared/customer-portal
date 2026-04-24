@@ -150,13 +150,11 @@ export function CreasesSheet({ open, onOpenChange, value, onApply }: Props) {
           <SheetTitle className="text-base font-bold text-primary">Creases</SheetTitle>
         </SheetHeader>
 
-        <div className="flex-shrink-0 px-5 py-5">
-          <div className="flex items-center gap-3">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-secondary text-base">
-              👖
-            </span>
-            <p className="text-sm font-semibold text-primary">How should we crease your items?</p>
-          </div>
+        <div className="flex flex-shrink-0 items-center gap-3 px-5 py-4">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-secondary text-base text-primary">
+            👖
+          </span>
+          <p className="text-sm font-semibold text-primary">How should we crease your items?</p>
         </div>
 
         <div className="flex-1 overflow-y-auto border-t border-border">

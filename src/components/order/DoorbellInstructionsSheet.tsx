@@ -34,29 +34,34 @@ function RadioRow<T extends string>({
   value,
   label,
   onSelect,
+  isFirst,
 }: {
   selected: T;
   value: T;
   label: string;
   onSelect: (v: T) => void;
+  isFirst: boolean;
 }) {
   const isSelected = selected === value;
   return (
     <button
       type="button"
       onClick={() => onSelect(value)}
-      className="flex w-full items-center gap-3 py-3.5 text-left transition-transform active:scale-[0.99]"
+      className={cn(
+        "flex w-full items-center justify-between px-5 py-3.5 text-left transition-colors hover:bg-secondary/40",
+        !isFirst && "border-t border-border/60",
+      )}
     >
+      <span className={cn("text-sm text-primary", isSelected ? "font-semibold" : "font-medium")}>
+        {label}
+      </span>
       <span
         className={cn(
           "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
-          isSelected ? "border-primary" : "border-muted-foreground/40",
+          isSelected ? "border-primary bg-primary/10" : "border-muted-foreground/40",
         )}
       >
-        {isSelected && <span className="h-2.5 w-2.5 rounded-full bg-primary" />}
-      </span>
-      <span className={cn("text-sm font-medium", isSelected ? "text-primary" : "text-foreground")}>
-        {label}
+        {isSelected && <span className="h-2 w-2 rounded-full bg-primary" />}
       </span>
     </button>
   );
@@ -77,73 +82,66 @@ export function DoorbellInstructionsSheet({ open, onOpenChange, pickup, dropoff,
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
         side="bottom"
-        className="flex flex-col gap-0 rounded-t-3xl border-t p-5 max-h-[85vh]"
+        className="flex max-h-[90vh] flex-col gap-0 rounded-t-3xl border-t p-0"
+        style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 1rem)" }}
       >
-        <SheetHeader className="flex-shrink-0 text-left">
-          <SheetTitle className="text-lg font-bold text-primary">Doorbell Instructions</SheetTitle>
+        <SheetHeader className="flex-shrink-0 border-b border-border p-4 text-center">
+          <SheetTitle className="text-base font-bold text-primary">Doorbell Instructions</SheetTitle>
         </SheetHeader>
 
-        <div className="flex-1 overflow-y-auto mt-2">
+        <div className="flex-1 overflow-y-auto">
+          <div className="flex items-center gap-3 px-5 py-4">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary">
+              <ShoppingBag className="h-5 w-5" />
+            </span>
+            <p className="text-sm font-semibold text-primary">Do you have any pickup instructions?</p>
+          </div>
           <div>
-            <div className="flex items-center gap-3 mb-1">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
-                <ShoppingBag className="h-4 w-4" />
-              </span>
-              <div>
-                <p className="text-sm font-bold text-primary">Pick Up</p>
-                <p className="text-xs font-medium text-muted-foreground">Do you have any pickup instructions?</p>
-              </div>
-            </div>
-            <ul className="divide-y divide-border">
-              {PICKUP_OPTIONS.map((opt) => (
-                <li key={opt.value}>
-                  <RadioRow<DoorbellPickup>
-                    selected={localPickup}
-                    value={opt.value}
-                    label={opt.label}
-                    onSelect={setLocalPickup}
-                  />
-                </li>
-              ))}
-            </ul>
+            {PICKUP_OPTIONS.map((opt, idx) => (
+              <RadioRow<DoorbellPickup>
+                key={opt.value}
+                selected={localPickup}
+                value={opt.value}
+                label={opt.label}
+                onSelect={setLocalPickup}
+                isFirst={idx === 0}
+              />
+            ))}
           </div>
 
-          <div className="my-4 h-px w-full bg-border" />
+          <div className="h-px w-full bg-border" />
 
+          <div className="flex items-center gap-3 px-5 py-4">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary">
+              <Shirt className="h-5 w-5" />
+            </span>
+            <p className="text-sm font-semibold text-primary">Do you have any delivery instructions?</p>
+          </div>
           <div>
-            <div className="flex items-center gap-3 mb-1">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
-                <Shirt className="h-4 w-4" />
-              </span>
-              <div>
-                <p className="text-sm font-bold text-primary">Delivery</p>
-                <p className="text-xs font-medium text-muted-foreground">Do you have any delivery instructions?</p>
-              </div>
-            </div>
-            <ul className="divide-y divide-border">
-              {DROPOFF_OPTIONS.map((opt) => (
-                <li key={opt.value}>
-                  <RadioRow<DoorbellDropoff>
-                    selected={localDropoff}
-                    value={opt.value}
-                    label={opt.label}
-                    onSelect={setLocalDropoff}
-                  />
-                </li>
-              ))}
-            </ul>
+            {DROPOFF_OPTIONS.map((opt, idx) => (
+              <RadioRow<DoorbellDropoff>
+                key={opt.value}
+                selected={localDropoff}
+                value={opt.value}
+                label={opt.label}
+                onSelect={setLocalDropoff}
+                isFirst={idx === 0}
+              />
+            ))}
           </div>
         </div>
 
-        <Button
-          onClick={() => {
-            onApply(localPickup, localDropoff);
-            onOpenChange(false);
-          }}
-          className="mt-4 h-12 flex-shrink-0 text-sm font-semibold"
-        >
-          Apply
-        </Button>
+        <div className="flex-shrink-0 border-t border-border/60 bg-background px-5 pt-4">
+          <Button
+            onClick={() => {
+              onApply(localPickup, localDropoff);
+              onOpenChange(false);
+            }}
+            className="h-12 w-full text-sm font-semibold"
+          >
+            Apply
+          </Button>
+        </div>
       </SheetContent>
     </Sheet>
   );

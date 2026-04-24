@@ -40,7 +40,8 @@ export function AutoApprovalsSheet({ open, onOpenChange, value, onApply }: Props
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
         side="bottom"
-        className="flex flex-col gap-0 rounded-t-3xl border-t p-0 max-h-[90vh]"
+        className="flex max-h-[90vh] flex-col gap-0 rounded-t-3xl border-t p-0"
+        style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 1rem)" }}
       >
         <SheetHeader className="flex-shrink-0 border-b border-border p-4 text-center">
           <SheetTitle className="text-base font-bold text-primary">Auto-Approvals</SheetTitle>
@@ -49,8 +50,8 @@ export function AutoApprovalsSheet({ open, onOpenChange, value, onApply }: Props
         <div className="flex-1 overflow-y-auto px-5 py-4">
           <div>
             <div className="flex items-center gap-3">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
-                <Shirt className="h-4 w-4" />
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary">
+                <Shirt className="h-5 w-5" />
               </span>
               <p className="text-sm font-bold text-primary">Stain and Damage Approval</p>
             </div>
@@ -87,8 +88,8 @@ export function AutoApprovalsSheet({ open, onOpenChange, value, onApply }: Props
 
           <div>
             <div className="flex items-center gap-3">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
-                <WashingMachine className="h-4 w-4" />
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary">
+                <WashingMachine className="h-5 w-5" />
               </span>
               <p className="text-sm font-bold text-primary">Wash and Fold Approval</p>
             </div>
