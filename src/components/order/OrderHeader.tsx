@@ -48,17 +48,12 @@ export const OrderHeader = ({
           <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
             {ORDER_TYPE_LABEL[orderType]}
           </p>
-          <div className="grid leading-tight">
-            <span
-              className="row-start-1 col-start-1 block text-center text-base font-extrabold tracking-tight text-primary tabular whitespace-nowrap"
-              style={{ opacity: 1 - morph }}
-            >
+          <div className="leading-tight">
+            <span className="block text-center text-base font-extrabold tracking-tight text-primary tabular whitespace-nowrap">
               {orderId}
             </span>
-            <span
-              className="row-start-1 col-start-1 block text-center text-base font-extrabold tracking-tight text-primary whitespace-nowrap"
-              style={{ opacity: morph }}
-              aria-hidden={morph < 0.5}
+          </div>
+        </div>
             >
               {status ?? orderId}
             </span>
