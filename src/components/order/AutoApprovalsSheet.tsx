@@ -104,18 +104,19 @@ export function AutoApprovalsSheet({ open, onOpenChange, value, onApply }: Props
                     <button
                       type="button"
                       onClick={() => setLocal((s) => ({ ...s, washFold: opt.value }))}
-                      className="flex w-full items-start gap-3 py-4 text-left"
+                      className="flex w-full items-start justify-between gap-4 py-4 text-left"
                     >
-                      <span className={cn("flex-1 text-sm leading-snug", isSelected ? "font-semibold text-primary" : "text-foreground")}>
+                      <span className={cn("flex-1 text-sm leading-relaxed", isSelected ? "font-semibold text-primary" : "font-medium text-primary")}>
                         {opt.label}
                       </span>
                       <span
                         className={cn(
                           "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2",
-                          isSelected ? "border-primary bg-primary text-primary-foreground" : "border-muted-foreground/40",
+                          isSelected ? "border-primary bg-primary/10" : "border-border",
                         )}
+                        aria-hidden
                       >
-                        {isSelected && <Check className="h-3 w-3" strokeWidth={3} />}
+                        {isSelected && <span className="h-2 w-2 rounded-full bg-primary" />}
                       </span>
                     </button>
                   </li>
