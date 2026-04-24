@@ -59,7 +59,7 @@ export const OrderCard = ({ order }: OrderCardProps) => {
       className={`flex items-center gap-3 rounded-xl border border-black/[0.06] ${cardBg} px-3.5 py-3.5 transition-transform active:scale-[0.99]`}
     >
       <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-card">
-        <OrderTypeIcon orderType={orderType} size={18} />
+        <OrderTypeIcon orderType={orderType} size={32} />
       </div>
 
       <div className="min-w-0 flex-1">
