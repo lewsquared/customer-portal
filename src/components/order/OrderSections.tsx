@@ -262,64 +262,67 @@ export const OrderInstructions = ({ locked = false }: { locked?: boolean }) => {
       className="mx-5 mt-4 animate-fade-in"
       style={{ animationDelay: "300ms" }}
     >
-      <div className="flex items-center justify-between mb-3">
-        <h3 className="font-sans text-base font-bold text-primary">Order Instructions</h3>
-        <button
-          type="button"
-          onClick={() => setOpen((o) => !o)}
-          aria-label={open ? "Collapse" : "Expand"}
-          className="flex h-7 w-7 items-center justify-center rounded-full text-primary transition-colors hover:bg-secondary/60"
-        >
-          {open ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
-        </button>
-      </div>
-
-      {open && (
-        <div className="flex flex-col gap-3">
-          <InstructionCard
-            title="Doorbell Instructions"
-            summary={
-              <>
-                <p>
-                  <span className="font-semibold">Pick Up:</span> {dbSummary.pickup}
-                </p>
-                <p>
-                  <span className="font-semibold">Drop Off:</span> {dbSummary.dropoff}
-                </p>
-              </>
-            }
-            onClick={() => setOpenSheet("doorbell")}
-            locked={locked}
-          />
-
-          <InstructionCard
-            title="Creases"
-            summary={<p>None</p>}
-            onClick={() => console.log("creases sheet — tbd")}
-            locked={locked}
-          />
-
-          <InstructionCard
-            title="Starch"
-            summary={<p>{starchLabel(starch)}</p>}
-            onClick={() => setOpenSheet("starch")}
-            locked={locked}
-          />
-
-          <InstructionCard
-            title="Laundry Auto-Approvals"
-            onClick={() => setOpenSheet("autoApprovals")}
-            locked={locked}
-          />
-
-          <InstructionCard
-            title="Delicate Items & Stains"
-            subtitle="Let us know which items need special attention"
-            onClick={() => console.log("delicate items sheet — tbd")}
-            locked={locked}
-          />
+      <div className="rounded-xl border border-border bg-card">
+        <div className="flex items-center justify-between px-5 py-4">
+          <h3 className="font-sans text-base font-bold text-primary">Order Instructions</h3>
+          <button
+            type="button"
+            onClick={() => setOpen((o) => !o)}
+            aria-label={open ? "Collapse" : "Expand"}
+            className="flex h-7 w-7 items-center justify-center rounded-full text-primary transition-colors hover:bg-secondary/60"
+          >
+            {open ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+          </button>
         </div>
-      )}
+
+        {open && (
+          <div className="flex flex-col gap-3 px-4 pb-4">
+            <InstructionCard
+              title="Doorbell Instructions"
+              summary={
+                <>
+                  <p>
+                    <span className="font-semibold">Pick Up:</span> {dbSummary.pickup}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Drop Off:</span> {dbSummary.dropoff}
+                  </p>
+                </>
+              }
+              onClick={() => setOpenSheet("doorbell")}
+              locked={locked}
+            />
+
+            <InstructionCard
+              title="Creases"
+              summary={<p>None</p>}
+              onClick={() => console.log("creases sheet — tbd")}
+              locked={locked}
+            />
+
+            <InstructionCard
+              title="Starch"
+              summary={<p>{starchLabel(starch)}</p>}
+              onClick={() => setOpenSheet("starch")}
+              locked={locked}
+            />
+
+            <InstructionCard
+              title="Laundry Auto-Approvals"
+              summary={<p>{autoApprovalsSummary(autoApprovals)}</p>}
+              onClick={() => setOpenSheet("autoApprovals")}
+              locked={locked}
+            />
+
+            <InstructionCard
+              title="Delicate Items & Stains"
+              subtitle="Let us know which items need special attention"
+              onClick={() => console.log("delicate items sheet — tbd")}
+              locked={locked}
+            />
+          </div>
+        )}
+      </div>
 
       <DoorbellInstructionsSheet
         open={openSheet === "doorbell"}
