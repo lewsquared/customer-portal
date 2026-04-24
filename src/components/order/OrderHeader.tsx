@@ -54,11 +54,6 @@ export const OrderHeader = ({
             </span>
           </div>
         </div>
-            >
-              {status ?? orderId}
-            </span>
-          </div>
-        </div>
 
         {showSupport && (
           <button
