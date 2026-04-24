@@ -45,11 +45,28 @@ const cardBgForStatus = (status: OrderStatus): string => {
   }
 };
 
+const tileBgForStatus = (status: OrderStatus): string => {
+  const category = STATUS_TO_CATEGORY[status];
+  switch (category) {
+    case "in_flight":
+      return "bg-tile-in-flight";
+    case "needs_attention_soft":
+      return "bg-tile-attention-soft";
+    case "needs_attention_urgent":
+      return "bg-tile-attention-urgent";
+    case "special":
+      return "bg-tile-special";
+    default:
+      return "bg-card"; // past orders stay white
+  }
+};
+
 export const OrderCard = ({ order }: OrderCardProps) => {
   const { orderId, orderType, status, listTimestamp } = order;
   const isCompleted = STATUS_TO_CATEGORY[status] === "completed";
   const route = STATUS_TO_ROUTE[status];
   const cardBg = cardBgForStatus(status);
+  const tileBg = tileBgForStatus(status);
   const isApproval = status === "approval_required";
 
   return (
@@ -58,7 +75,7 @@ export const OrderCard = ({ order }: OrderCardProps) => {
       state={{ order }}
       className={`flex items-center gap-3 rounded-xl border border-black/[0.06] ${cardBg} px-3.5 py-3.5 transition-transform active:scale-[0.99]`}
     >
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-card">
+      <div className={`flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full ${tileBg}`}>
         <OrderTypeIcon orderType={orderType} size={32} />
       </div>
 
