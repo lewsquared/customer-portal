@@ -51,7 +51,6 @@ export const StatusHero = ({
 
   const [tucked, setTucked] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
-  const isInitialMount = useRef(true);
   const ioSettledRef = useRef(false);
 
   // IntersectionObserver — with a mount-settle delay
@@ -79,42 +78,6 @@ export const StatusHero = ({
     };
   }, []);
 
-  // Scroll lock — skip on initial mount, only lock on real user-driven tuck transitions
-  useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-      return;
-    }
-
-    const sentinel = sentinelRef.current;
-    if (!sentinel) return;
-
-    const findScrollParent = (node: HTMLElement | null): HTMLElement | null => {
-      if (!node || node === document.body) return null;
-      const overflowY = window.getComputedStyle(node).overflowY;
-      if (overflowY === "auto" || overflowY === "scroll") return node;
-      return findScrollParent(node.parentElement);
-    };
-
-    const scrollParent = findScrollParent(sentinel.parentElement);
-    if (!scrollParent) return;
-
-    // Skip lock if this flip wasn't caused by user scrolling
-    // (e.g. layout shift from accordion opening, image loading, etc.)
-    if (scrollParent.scrollTop === 0 && !tucked) return;
-
-    const prevOverflow = scrollParent.style.overflowY;
-    scrollParent.style.overflowY = "hidden";
-
-    const timeout = window.setTimeout(() => {
-      scrollParent.style.overflowY = prevOverflow || "auto";
-    }, 300);
-
-    return () => {
-      window.clearTimeout(timeout);
-      scrollParent.style.overflowY = prevOverflow || "auto";
-    };
-  }, [tucked]);
 
   return (
     <>
