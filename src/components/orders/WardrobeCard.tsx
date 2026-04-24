@@ -1,5 +1,5 @@
 import { ChevronRight } from "lucide-react";
-import wardrobeUrl from "@/assets/icons/wardrobe.svg";
+import wardrobeUrl from "@/assets/icons/my_wardrobe.svg";
 
 export const WardrobeCard = () => {
   return (
