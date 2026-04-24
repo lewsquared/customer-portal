@@ -1,5 +1,5 @@
 import { ArrowRight, Sparkles } from "lucide-react";
-import shoeImage from "@/assets/shoe-cleaning.jpg";
+import shoeImage from "@/assets/images/shoe-cleaning.jpg";
 
 export const UpsellBanner = () => {
   return (
