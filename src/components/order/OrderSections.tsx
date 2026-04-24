@@ -22,6 +22,8 @@ import {
 } from "./DoorbellInstructionsSheet";
 import { StarchSheet, starchLabel, type StarchLevel } from "./StarchSheet";
 import { AutoApprovalsSheet, type AutoApprovalsState, type WashFoldApproval } from "./AutoApprovalsSheet";
+import { CreasesSheet, creasesSummary, EMPTY_CREASES, type CreasesState } from "./CreasesSheet";
+import { DelicateItemsSheet, delicateItemsSummary } from "./DelicateItemsSheet";
 
 const WF_SHORT_LABELS: Record<WashFoldApproval, string> = {
   notify: "Notify me",
