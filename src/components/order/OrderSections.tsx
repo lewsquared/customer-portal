@@ -349,6 +349,18 @@ export const OrderInstructions = ({ locked = false }: { locked?: boolean }) => {
         value={autoApprovals}
         onApply={setAutoApprovals}
       />
+      <CreasesSheet
+        open={openSheet === "creases"}
+        onOpenChange={(o) => setOpenSheet(o ? "creases" : null)}
+        value={creases}
+        onApply={setCreases}
+      />
+      <DelicateItemsSheet
+        open={openSheet === "delicate"}
+        onOpenChange={(o) => setOpenSheet(o ? "delicate" : null)}
+        photos={delicatePhotos}
+        onApply={setDelicatePhotos}
+      />
     </section>
   );
 };
