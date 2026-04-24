@@ -79,7 +79,7 @@ export const StatusHero = ({
     };
   }, []);
 
-  // Scroll lock — skip on initial mount, only lock on real tuck transitions
+  // Scroll lock — skip on initial mount, only lock on real user-driven tuck transitions
   useEffect(() => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
@@ -98,6 +98,10 @@ export const StatusHero = ({
 
     const scrollParent = findScrollParent(sentinel.parentElement);
     if (!scrollParent) return;
+
+    // Skip lock if this flip wasn't caused by user scrolling
+    // (e.g. layout shift from accordion opening, image loading, etc.)
+    if (scrollParent.scrollTop === 0 && !tucked) return;
 
     const prevOverflow = scrollParent.style.overflowY;
     scrollParent.style.overflowY = "hidden";
