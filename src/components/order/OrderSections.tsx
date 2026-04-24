@@ -301,8 +301,8 @@ export const OrderInstructions = ({ locked = false }: { locked?: boolean }) => {
 
             <InstructionCard
               title="Creases"
-              summary={<p>None</p>}
-              onClick={() => console.log("creases sheet — tbd")}
+              summary={<p>{creasesSummary(creases)}</p>}
+              onClick={() => setOpenSheet("creases")}
               locked={locked}
             />
 
@@ -322,8 +322,8 @@ export const OrderInstructions = ({ locked = false }: { locked?: boolean }) => {
 
             <InstructionCard
               title="Delicate Items & Stains"
-              subtitle="Let us know which items need special attention"
-              onClick={() => console.log("delicate items sheet — tbd")}
+              summary={<p>{delicateItemsSummary(delicatePhotos)}</p>}
+              onClick={() => setOpenSheet("delicate")}
               locked={locked}
             />
           </div>
