@@ -22,6 +22,8 @@ import {
 } from "./DoorbellInstructionsSheet";
 import { StarchSheet, starchLabel, type StarchLevel } from "./StarchSheet";
 import { AutoApprovalsSheet, type AutoApprovalsState, type WashFoldApproval } from "./AutoApprovalsSheet";
+import { CreasesSheet, creasesSummary, EMPTY_CREASES, type CreasesState } from "./CreasesSheet";
+import { DelicateItemsSheet, delicateItemsSummary } from "./DelicateItemsSheet";
 
 const WF_SHORT_LABELS: Record<WashFoldApproval, string> = {
   notify: "Notify me",
@@ -243,7 +245,9 @@ const InstructionCard = ({ title, summary, subtitle, onClick, locked }: Instruct
 
 export const OrderInstructions = ({ locked = false }: { locked?: boolean }) => {
   const [open, setOpen] = useState(true);
-  const [openSheet, setOpenSheet] = useState<"doorbell" | "starch" | "autoApprovals" | null>(null);
+  const [openSheet, setOpenSheet] = useState<
+    "doorbell" | "starch" | "autoApprovals" | "creases" | "delicate" | null
+  >(null);
 
   const [doorbell, setDoorbell] = useState<{ pickup: DoorbellPickup; dropoff: DoorbellDropoff }>({
     pickup: "none",
@@ -254,6 +258,8 @@ export const OrderInstructions = ({ locked = false }: { locked?: boolean }) => {
     stainDamageApprove: false,
     washFold: "notify",
   });
+  const [creases, setCreases] = useState<CreasesState>(EMPTY_CREASES);
+  const [delicatePhotos, setDelicatePhotos] = useState<string[]>([]);
 
   const dbSummary = doorbellSummary(doorbell.pickup, doorbell.dropoff);
 
@@ -295,8 +301,8 @@ export const OrderInstructions = ({ locked = false }: { locked?: boolean }) => {
 
             <InstructionCard
               title="Creases"
-              summary={<p>None</p>}
-              onClick={() => console.log("creases sheet — tbd")}
+              summary={<p>{creasesSummary(creases)}</p>}
+              onClick={() => setOpenSheet("creases")}
               locked={locked}
             />
 
@@ -316,8 +322,8 @@ export const OrderInstructions = ({ locked = false }: { locked?: boolean }) => {
 
             <InstructionCard
               title="Delicate Items & Stains"
-              subtitle="Let us know which items need special attention"
-              onClick={() => console.log("delicate items sheet — tbd")}
+              summary={<p>{delicateItemsSummary(delicatePhotos)}</p>}
+              onClick={() => setOpenSheet("delicate")}
               locked={locked}
             />
           </div>
@@ -342,6 +348,18 @@ export const OrderInstructions = ({ locked = false }: { locked?: boolean }) => {
         onOpenChange={(o) => setOpenSheet(o ? "autoApprovals" : null)}
         value={autoApprovals}
         onApply={setAutoApprovals}
+      />
+      <CreasesSheet
+        open={openSheet === "creases"}
+        onOpenChange={(o) => setOpenSheet(o ? "creases" : null)}
+        value={creases}
+        onApply={setCreases}
+      />
+      <DelicateItemsSheet
+        open={openSheet === "delicate"}
+        onOpenChange={(o) => setOpenSheet(o ? "delicate" : null)}
+        photos={delicatePhotos}
+        onApply={setDelicatePhotos}
       />
     </section>
   );
