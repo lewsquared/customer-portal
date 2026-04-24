@@ -1,7 +1,7 @@
 
 import { StatusHero } from "@/components/order/StatusHero";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
-import { OrderConfirmations, OrderDetails } from "@/components/order/OrderSections";
+import { OrderConfirmations, ServicesSelection, OrderInstructions } from "@/components/order/OrderSections";
 import { useOrderData } from "@/lib/useOrderData";
 import type { Stage } from "@/components/order/StatusTimeline";
 
@@ -49,7 +49,8 @@ const DriverOnTheWay = () => {
           />
 
           <OrderConfirmations stage="delivery" />
-          <OrderDetails locked />
+          <ServicesSelection locked />
+          <OrderInstructions locked />
           </div>
         </div>
       </div>

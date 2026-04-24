@@ -3,7 +3,7 @@ import { StatusHero } from "@/components/order/StatusHero";
 import { QuickActions } from "@/components/order/QuickActions";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
 import { DelayBanner } from "@/components/order/DelayBanner";
-import { OrderSections } from "@/components/order/OrderSections";
+import { OrderConfirmations, ServicesSelection, OrderInstructions } from "@/components/order/OrderSections";
 import { useOrderData } from "@/lib/useOrderData";
 import type { Stage } from "@/components/order/StatusTimeline";
 
@@ -45,7 +45,9 @@ const Index = () => {
             dropoff={{ label: order.dropoffNote ?? "Delivery at door", when: order.dropoffWindow }}
           />
 
-          <OrderSections />
+          <OrderConfirmations stage="delivery" />
+          <ServicesSelection locked />
+          <OrderInstructions locked />
         </div>
       </div>
     </main>

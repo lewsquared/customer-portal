@@ -1,7 +1,7 @@
 
 import { StatusHero } from "@/components/order/StatusHero";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
-import { OrderSections } from "@/components/order/OrderSections";
+import { OrderConfirmations, ServicesSelection, OrderInstructions } from "@/components/order/OrderSections";
 import { useOrderData } from "@/lib/useOrderData";
 import type { Stage } from "@/components/order/StatusTimeline";
 
@@ -41,7 +41,9 @@ const Processing = () => {
             dropoff={{ label: order.dropoffNote ?? "Drop off at door", when: order.dropoffWindow }}
           />
 
-          <OrderSections stage="items-in" />
+          <OrderConfirmations stage="items-in" />
+          <ServicesSelection locked />
+          <OrderInstructions locked />
           </div>
         </div>
       </div>

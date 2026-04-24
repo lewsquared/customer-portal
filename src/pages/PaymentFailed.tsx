@@ -3,7 +3,7 @@ import { TriangleAlert } from "lucide-react";
 import { StatusHero } from "@/components/order/StatusHero";
 import { ActionCard } from "@/components/order/ActionCard";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
-import { OrderSections } from "@/components/order/OrderSections";
+import { OrderConfirmations, ServicesSelection, OrderInstructions } from "@/components/order/OrderSections";
 import { useOrderData } from "@/lib/useOrderData";
 import type { Stage } from "@/components/order/StatusTimeline";
 
@@ -59,7 +59,9 @@ const PaymentFailed = () => {
             dropoff={{ label: "Delivery on hold", when: "Pending payment" }}
           />
 
-          <OrderSections stage="delivery" />
+          <OrderConfirmations stage="delivery" />
+          <ServicesSelection locked />
+          <OrderInstructions locked />
           </div>
         </div>
       </div>
