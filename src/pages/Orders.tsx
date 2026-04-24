@@ -8,13 +8,15 @@ import { STATUS_TO_CATEGORY } from "@/lib/order-types";
 const Orders = () => {
   const needsAttentionOrders = MOCK_ACTIVE_ORDERS.filter(
     (o) =>
-      STATUS_TO_CATEGORY[o.status] === "needs_attention_urgent" ||
-      STATUS_TO_CATEGORY[o.status] === "needs_attention_soft",
+      (STATUS_TO_CATEGORY[o.status] === "needs_attention_urgent" ||
+        STATUS_TO_CATEGORY[o.status] === "needs_attention_soft") &&
+      o.status !== "partially_delivered",
   );
   const otherActiveOrders = MOCK_ACTIVE_ORDERS.filter(
     (o) =>
-      STATUS_TO_CATEGORY[o.status] !== "needs_attention_urgent" &&
-      STATUS_TO_CATEGORY[o.status] !== "needs_attention_soft",
+      (STATUS_TO_CATEGORY[o.status] !== "needs_attention_urgent" &&
+        STATUS_TO_CATEGORY[o.status] !== "needs_attention_soft") ||
+      o.status === "partially_delivered",
   );
   const pastOrders = MOCK_PAST_ORDERS;
 
@@ -33,7 +35,7 @@ const Orders = () => {
         {/* Needs your attention — elevated above active orders */}
         {needsAttentionOrders.length > 0 && (
           <>
-            <SectionHeader>Action needed</SectionHeader>
+            <SectionHeader>Highlights</SectionHeader>
             <div className="flex flex-col gap-3">
               {needsAttentionOrders.map((o) => (
                 <OrderCard key={o.orderId} order={o} />

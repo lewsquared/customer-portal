@@ -68,6 +68,7 @@ export const OrderCard = ({ order }: OrderCardProps) => {
   const cardBg = cardBgForStatus(status);
   const tileBg = tileBgForStatus(status);
   const isApproval = status === "approval_required";
+  const isPaymentFailed = status === "payment_failed";
 
   return (
     <Link
@@ -86,7 +87,11 @@ export const OrderCard = ({ order }: OrderCardProps) => {
         </p>
         <p
           className={`mt-0.5 truncate text-xs ${
-            isApproval ? "font-bold text-warning-dark" : "text-muted-foreground"
+            isApproval
+              ? "font-bold text-warning-dark"
+              : isPaymentFailed
+                ? "font-bold text-destructive"
+                : "text-muted-foreground"
           }`}
         >
           {isCompleted ? listTimestamp : STATUS_LABEL[status]}
