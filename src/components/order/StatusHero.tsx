@@ -1,9 +1,8 @@
 import { DoorOpen } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { StatusTimeline, type Stage } from "./StatusTimeline";
 import { CancelButton } from "./CancelButton";
 import { OrderHeader } from "./OrderHeader";
-import { OrderTypeIcon } from "./OrderTypeIcon";
 import type { OrderType } from "@/lib/order-types";
 
 export type HeroVariant = "received" | "processing" | "delivery" | "complete" | "hold";
@@ -50,16 +49,14 @@ export const StatusHero = ({
   const v: HeroVariant = onHold ? "hold" : completed ? "complete" : variant;
   const gradientClass = orderType === "finery" ? "bg-gradient-hero-finery" : "bg-gradient-hero";
 
+  const [morphProgress, setMorphProgress] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const heroContentRef = useRef<HTMLDivElement>(null);
-  const compactRef = useRef<HTMLDivElement>(null);
-  const bannerInnerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
     const heroContent = heroContentRef.current;
-    const compact = compactRef.current;
-    if (!section || !heroContent || !compact) return;
+    if (!section || !heroContent) return;
 
     const scrollParent = section.parentElement;
     if (!scrollParent) return;
@@ -74,17 +71,13 @@ export const StatusHero = ({
       const raw = Math.min(Math.max(latest / SCROLL_RANGE, 0), 1);
       const p = easeOutCubic(raw);
 
-      // Hero content fades + translates up
       heroContent.style.opacity = `${1 - p}`;
       heroContent.style.transform = `translateY(${-p * 20}px)`;
       heroContent.style.pointerEvents = p > 0.5 ? "none" : "auto";
 
-      // Banner translates up to give "shrinking" illusion
       section.style.transform = `translateY(${-p * 180}px)`;
 
-      // Compact bar fades in
-      compact.style.opacity = `${p}`;
-      compact.style.pointerEvents = p > 0.5 ? "auto" : "none";
+      setMorphProgress(p);
 
       ticking = false;
     };
@@ -98,7 +91,7 @@ export const StatusHero = ({
     };
 
     scrollParent.addEventListener("scroll", onScroll, { passive: true });
-    onScroll(); // initial state
+    onScroll();
     return () => scrollParent.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -109,70 +102,49 @@ export const StatusHero = ({
       aria-label="Order status"
       style={{ willChange: "transform" }}
     >
-      {/* Compact bar — absolutely positioned inside the sticky banner; fades in as hero leaves */}
+      <OrderHeader
+        orderId={orderId}
+        orderType={orderType ?? "laundry"}
+        showSupport={showSupport}
+        onBack={onBack}
+        variant="inline"
+        status={status}
+        headerMorphProgress={morphProgress}
+      />
+
       <div
-        ref={compactRef}
-        className={`pointer-events-none absolute inset-x-0 top-0 z-[45] flex h-16 items-center justify-center ${gradientClass}`}
-        style={{
-          opacity: 0,
-          borderBottom: "0.5px solid rgba(0,0,0,0.08)",
-          willChange: "opacity",
-          transform: `translateY(${0}px)`,
-        }}
-        aria-hidden="true"
+        ref={heroContentRef}
+        className="relative px-6 pt-2 pb-6"
+        style={{ willChange: "opacity, transform" }}
       >
-        <div className="flex items-center gap-2">
-          <OrderTypeIcon orderType={orderType ?? "laundry"} size={24} />
-          <span className="text-sm font-extrabold text-primary tracking-tight tabular">
-            {orderId}
-          </span>
+        <div className="flex items-center gap-4">
+          <h1 className="min-w-0 flex-1 text-2xl font-extrabold leading-tight text-primary [text-wrap:balance]">
+            {status}
+          </h1>
+
+          <div className={`pointer-events-none shrink-0 opacity-95 h-16 w-16 ${wrapperAnim[v]}`}>
+            <HeroArt variant={v} />
+          </div>
         </div>
-      </div>
 
-      <div ref={bannerInnerRef}>
-        <OrderHeader
-          orderId={orderId}
-          orderType={orderType ?? "laundry"}
-          showSupport={showSupport}
-          onBack={onBack}
-          variant="inline"
-        />
+        <p className="mt-1.5 whitespace-nowrap text-sm text-muted-foreground tabular">
+          {subtitle}
+        </p>
 
-        {/* Hero content wrapper — fades/translates as a unit */}
-        <div
-          ref={heroContentRef}
-          className="relative px-6 pt-2 pb-6"
-          style={{ willChange: "opacity, transform" }}
-        >
-          <div className="flex items-center gap-4">
-            <h1 className="min-w-0 flex-1 text-2xl font-extrabold leading-tight text-primary [text-wrap:balance]">
-              {status}
-            </h1>
-
-            <div className={`pointer-events-none shrink-0 opacity-95 h-16 w-16 ${wrapperAnim[v]}`}>
-              <HeroArt variant={v} />
-            </div>
+        {doorPickup && (
+          <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-warning px-3 py-1.5 text-[11px] font-bold uppercase tracking-wide text-warning-foreground animate-fade-in">
+            <DoorOpen className="h-3.5 w-3.5" />
+            <span>Leave laundry bags at door</span>
           </div>
+        )}
 
-          <p className="mt-1.5 whitespace-nowrap text-sm text-muted-foreground tabular">
-            {subtitle}
-          </p>
-
-          {doorPickup && (
-            <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-warning px-3 py-1.5 text-[11px] font-bold uppercase tracking-wide text-warning-foreground animate-fade-in">
-              <DoorOpen className="h-3.5 w-3.5" />
-              <span>Leave laundry bags at door</span>
-            </div>
-          )}
-
-          <div className="relative mt-6">
-            <StatusTimeline
-              stages={stages}
-              currentIndex={currentIndex}
-              onHold={onHold}
-              rightSlot={cancellable ? <CancelButton /> : undefined}
-            />
-          </div>
+        <div className="relative mt-6">
+          <StatusTimeline
+            stages={stages}
+            currentIndex={currentIndex}
+            onHold={onHold}
+            rightSlot={cancellable ? <CancelButton /> : undefined}
+          />
         </div>
       </div>
     </section>

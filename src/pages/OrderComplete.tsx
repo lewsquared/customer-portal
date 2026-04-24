@@ -21,7 +21,7 @@ const OrderComplete = () => {
   return (
     <main className="h-screen bg-background font-sans antialiased">
       <div className="mx-auto flex h-screen max-w-md flex-col bg-background shadow-hero md:my-6 md:h-[calc(100vh-3rem)] md:overflow-hidden md:rounded-[2.25rem] md:border md:border-border">
-        <div className="flex-1 overflow-y-auto pb-4">
+        <div className="flex-1 overflow-y-auto pb-32">
           <StatusHero
             status="Completed order"
             subtitle={ts.complete ? `Delivered ${ts.complete}` : "Delivered"}
