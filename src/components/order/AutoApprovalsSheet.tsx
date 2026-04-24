@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { X, Check, Shirt, WashingMachine } from "lucide-react";
+import { Check, Shirt, WashingMachine } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export type WashFoldApproval =
@@ -42,16 +42,8 @@ export function AutoApprovalsSheet({ open, onOpenChange, value, onApply }: Props
         side="bottom"
         className="flex flex-col gap-0 rounded-t-3xl border-t p-0 max-h-[90vh]"
       >
-        <SheetHeader className="relative flex-shrink-0 border-b border-border p-4">
-          <SheetTitle className="text-center text-base font-bold text-primary">Auto-Approvals</SheetTitle>
-          <button
-            type="button"
-            onClick={() => onOpenChange(false)}
-            aria-label="Close"
-            className="absolute right-4 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center text-primary"
-          >
-            <X className="h-5 w-5" />
-          </button>
+        <SheetHeader className="flex-shrink-0 border-b border-border p-4 text-center">
+          <SheetTitle className="text-base font-bold text-primary">Auto-Approvals</SheetTitle>
         </SheetHeader>
 
         <div className="flex-1 overflow-y-auto px-5 py-4">

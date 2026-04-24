@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { ChevronLeft, Check, Sparkles } from "lucide-react";
+import { Check, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export type StarchLevel = "none" | "light" | "medium" | "hard";
@@ -38,16 +38,8 @@ export function StarchSheet({ open, onOpenChange, value, onApply }: Props) {
         side="bottom"
         className="flex flex-col gap-0 rounded-t-3xl border-t p-0 max-h-[85vh]"
       >
-        <SheetHeader className="relative flex-shrink-0 border-b border-border p-4">
-          <button
-            type="button"
-            onClick={() => onOpenChange(false)}
-            aria-label="Back"
-            className="absolute left-4 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center text-primary"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <SheetTitle className="text-center text-base font-bold text-primary">Starch</SheetTitle>
+        <SheetHeader className="flex-shrink-0 border-b border-border p-4 text-center">
+          <SheetTitle className="text-base font-bold text-primary">Starch</SheetTitle>
         </SheetHeader>
 
         <div className="px-5 py-5">
