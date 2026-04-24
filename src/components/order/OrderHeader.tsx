@@ -8,59 +8,75 @@ interface OrderHeaderProps {
   showSupport?: boolean;
   onBack?: () => void;
   variant?: "standalone" | "inline";
-  titleOpacity?: number;
-  centeredTitle?: string;
+  status?: string;
+  headerMorphProgress?: number;
 }
 
-export const OrderHeader = ({ orderId, orderType, showSupport = false, onBack, variant = "standalone", titleOpacity, centeredTitle }: OrderHeaderProps) => {
+export const OrderHeader = ({
+  orderId,
+  orderType,
+  showSupport = false,
+  onBack,
+  variant = "standalone",
+  status,
+  headerMorphProgress,
+}: OrderHeaderProps) => {
   const headerGradient = orderType === "finery" ? "bg-gradient-surface-finery" : "bg-gradient-surface-mint";
   const bgClass = variant === "inline" ? "bg-transparent" : `sticky top-0 z-30 ${headerGradient} backdrop-blur-md`;
+  const morph = headerMorphProgress ?? 0;
+
+  const backButton = onBack ? (
+    <button
+      type="button"
+      onClick={onBack}
+      aria-label="Back"
+      className="absolute left-5 top-1/2 -translate-y-1/2 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card/80 text-primary shadow-press transition-transform duration-100 ease-out active:duration-75 active:scale-90"
+    >
+      <ChevronLeft className="h-5 w-5" strokeWidth={2.5} />
+    </button>
+  ) : (
+    <Link
+      to="/orders"
+      aria-label="Back to orders"
+      className="absolute left-5 top-1/2 -translate-y-1/2 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card/80 text-primary shadow-press transition-transform duration-100 ease-out active:duration-75 active:scale-90"
+    >
+      <ChevronLeft className="h-5 w-5" strokeWidth={2.5} />
+    </Link>
+  );
+
   return (
     <header className={bgClass}>
-      <div className={`flex items-center gap-3 px-5 pb-5 ${variant === "inline" ? "pt-4" : "pt-6"}`}>
-        {onBack ? (
-          <button
-            type="button"
-            onClick={onBack}
-            aria-label="Back"
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card/80 text-primary shadow-press transition-transform duration-100 ease-out active:duration-75 active:scale-90"
-          >
-            <ChevronLeft className="h-5 w-5" strokeWidth={2.5} />
-          </button>
-        ) : (
-          <Link
-            to="/orders"
-            aria-label="Back to orders"
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card/80 text-primary shadow-press transition-transform duration-100 ease-out active:duration-75 active:scale-90"
-          >
-            <ChevronLeft className="h-5 w-5" strokeWidth={2.5} />
-          </Link>
-        )}
+      <div className={`relative flex items-center justify-center px-5 min-h-[60px] ${variant === "inline" ? "pt-4 pb-5" : "pt-6 pb-5"}`}>
+        {backButton}
 
-        {centeredTitle ? (
-          <div className="min-w-0 flex-1 text-center">
-            <p className="truncate text-base font-bold text-primary">{centeredTitle}</p>
-          </div>
-        ) : (
-          <div className="min-w-0 flex-1" style={titleOpacity !== undefined ? { opacity: titleOpacity } : undefined}>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-              {ORDER_TYPE_LABEL[orderType]}
-            </p>
-            <p className="text-base font-extrabold tracking-tight text-primary tabular leading-tight">
+        <div className="min-w-0 text-center relative">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            {ORDER_TYPE_LABEL[orderType]}
+          </p>
+          <div className="relative h-5 leading-tight">
+            <span
+              className="absolute inset-0 block text-base font-extrabold tracking-tight text-primary tabular whitespace-nowrap"
+              style={{ opacity: 1 - morph }}
+            >
               {orderId}
-            </p>
+            </span>
+            <span
+              className="absolute inset-0 block text-base font-extrabold tracking-tight text-primary whitespace-nowrap"
+              style={{ opacity: morph }}
+              aria-hidden={morph < 0.5}
+            >
+              {status ?? orderId}
+            </span>
           </div>
-        )}
+        </div>
 
-        {showSupport ? (
+        {showSupport && (
           <button
             aria-label="Contact support"
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card/80 text-primary shadow-press transition-transform duration-100 ease-out active:duration-75 active:scale-90"
+            className="absolute right-5 top-1/2 -translate-y-1/2 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card/80 text-primary shadow-press transition-transform duration-100 ease-out active:duration-75 active:scale-90"
           >
             <Headphones className="h-5 w-5" />
           </button>
-        ) : (
-          <span className="h-11 w-11 shrink-0" aria-hidden />
         )}
       </div>
     </header>
