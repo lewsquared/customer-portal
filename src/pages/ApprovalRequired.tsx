@@ -3,7 +3,7 @@ import { TriangleAlert } from "lucide-react";
 import { StatusHero } from "@/components/order/StatusHero";
 import { ActionCard } from "@/components/order/ActionCard";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
-import { OrderConfirmations, OrderDetails } from "@/components/order/OrderSections";
+import { OrderConfirmations, ServicesSelection, OrderInstructions } from "@/components/order/OrderSections";
 import { useOrderData } from "@/lib/useOrderData";
 import type { Stage } from "@/components/order/StatusTimeline";
 
@@ -62,7 +62,8 @@ const ApprovalRequired = () => {
           />
 
           <OrderConfirmations stage="items-in" />
-          <OrderDetails locked />
+          <ServicesSelection locked />
+          <OrderInstructions locked />
           </div>
         </div>
       </div>
