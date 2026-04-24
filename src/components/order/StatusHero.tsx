@@ -128,6 +128,7 @@ export const StatusHero = ({
         </div>
       </div>
     </section>
+    </>
   );
 };
 
