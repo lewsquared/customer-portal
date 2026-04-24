@@ -91,7 +91,7 @@ export function DriverInstructionsSheet({ open, onOpenChange, pickup, dropoff, o
             <ul className="divide-y divide-border">
               {PICKUP_OPTIONS.map((opt) => (
                 <li key={opt.value}>
-                  <RadioRow
+                  <RadioRow<PickupInstruction>
                     selected={localPickup}
                     value={opt.value}
                     label={opt.label}
@@ -112,7 +112,7 @@ export function DriverInstructionsSheet({ open, onOpenChange, pickup, dropoff, o
             <ul className="divide-y divide-border">
               {DROPOFF_OPTIONS.map((opt) => (
                 <li key={opt.value}>
-                  <RadioRow
+                  <RadioRow<DropoffInstruction>
                     selected={localDropoff}
                     value={opt.value}
                     label={opt.label}
