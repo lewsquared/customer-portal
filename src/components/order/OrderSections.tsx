@@ -1,6 +1,13 @@
+import { useState } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Check, ChevronRight, ListChecks, Sparkles, MessageSquare, Camera, Plus, Pencil, WashingMachine, Shirt, BedDouble, Footprints, Crown, Wind } from "lucide-react";
+import { Check, ChevronRight, ListChecks, Sparkles, MessageSquare, Camera, Plus, Pencil, WashingMachine, Shirt, BedDouble, Footprints, Crown, Wind, Edit2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  DriverInstructionsSheet,
+  instructionSummary,
+  type PickupInstruction,
+  type DropoffInstruction,
+} from "./DriverInstructionsSheet";
 
 type Confirmation = {
   key: string;
@@ -104,6 +111,10 @@ export const OrderDetails = ({
   /** When true, services can no longer be added/edited (after order received). */
   locked?: boolean;
 }) => {
+  const [driverSheetOpen, setDriverSheetOpen] = useState(false);
+  const [pickupInstr, setPickupInstr] = useState<PickupInstruction>("call");
+  const [dropoffInstr, setDropoffInstr] = useState<DropoffInstruction>("call");
+
   return (
     <section
       className="mx-5 mt-4 rounded-xl border border-border bg-card animate-fade-in"
@@ -193,12 +204,41 @@ export const OrderDetails = ({
             <span className="font-sans text-base font-bold text-primary">Order Instructions</span>
           </AccordionTrigger>
           <AccordionContent>
-            <p className="mb-4 rounded-xl bg-secondary/60 p-3 text-sm text-muted-foreground">
+            <p className="mb-3 rounded-xl bg-secondary/60 p-3 text-sm text-muted-foreground">
               Please ring the doorbell twice. Leave the bag at the door if no one answers.
             </p>
+
+            <button
+              type="button"
+              onClick={() => setDriverSheetOpen(true)}
+              disabled={locked}
+              className="group mb-1 flex w-full items-center gap-3 rounded-xl border border-border bg-card px-4 py-3 text-left transition-colors hover:bg-muted/30 active:bg-muted/50 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
+                <Edit2 className="h-4 w-4" />
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-bold text-primary">Driver Instructions</p>
+                <p className="mt-0.5 truncate text-xs font-medium text-muted-foreground">
+                  {instructionSummary(pickupInstr, dropoffInstr)}
+                </p>
+              </div>
+              <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" strokeWidth={2.5} />
+            </button>
           </AccordionContent>
         </AccordionItem>
       </Accordion>
+
+      <DriverInstructionsSheet
+        open={driverSheetOpen}
+        onOpenChange={setDriverSheetOpen}
+        pickup={pickupInstr}
+        dropoff={dropoffInstr}
+        onApply={(pickup, dropoff) => {
+          setPickupInstr(pickup);
+          setDropoffInstr(dropoff);
+        }}
+      />
     </section>
   );
 };
