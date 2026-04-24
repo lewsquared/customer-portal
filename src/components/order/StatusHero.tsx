@@ -53,6 +53,16 @@ export const StatusHero = ({
   const [heroHeight, setHeroHeight] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const heroContentRef = useRef<HTMLDivElement>(null);
+  const morphProgressRef = useRef(0);
+  const heroHeightRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    morphProgressRef.current = morphProgress;
+  }, [morphProgress]);
+
+  useEffect(() => {
+    heroHeightRef.current = heroHeight;
+  }, [heroHeight]);
 
   useLayoutEffect(() => {
     if (heroContentRef.current) {
@@ -64,11 +74,13 @@ export const StatusHero = ({
     const el = heroContentRef.current;
     if (!el) return;
     const ro = new ResizeObserver(() => {
-      if (morphProgress === 0) setHeroHeight(el.scrollHeight);
+      if (morphProgressRef.current === 0) {
+        setHeroHeight(el.scrollHeight);
+      }
     });
     ro.observe(el);
     return () => ro.disconnect();
-  }, [morphProgress]);
+  }, []);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -85,13 +97,14 @@ export const StatusHero = ({
     let latest = 0;
 
     const update = () => {
-      if (heroHeight == null) return;
+      const h = heroHeightRef.current;
+      if (h == null) return;
       const raw = Math.min(Math.max(latest / SCROLL_RANGE, 0), 1);
       const p = easeOutCubic(raw);
 
       heroContent.style.opacity = `${1 - p}`;
       heroContent.style.pointerEvents = p > 0.9 ? "none" : "auto";
-      heroContent.style.maxHeight = `${heroHeight * (1 - p)}px`;
+      heroContent.style.maxHeight = `${h * (1 - p)}px`;
       heroContent.style.overflow = "hidden";
 
       section.style.borderBottomLeftRadius = `${28 * (1 - p)}px`;
@@ -113,7 +126,7 @@ export const StatusHero = ({
     scrollParent.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => scrollParent.removeEventListener("scroll", onScroll);
-  }, [heroHeight]);
+  }, []);
 
   return (
     <section
