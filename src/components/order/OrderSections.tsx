@@ -151,7 +151,7 @@ export const OrderDetails = ({
                   {!locked && (
                     <button
                       aria-label="Add Press & Hang"
-                      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-secondary text-primary transition-transform active:scale-95"
+                      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-secondary text-primary transition-transform duration-100 ease-out active:duration-75 active:scale-90"
                     >
                       <Plus className="h-3.5 w-3.5" strokeWidth={2.5} />
                     </button>
@@ -178,7 +178,7 @@ export const OrderDetails = ({
                     </div>
                     <button
                       aria-label={`Add ${label}`}
-                      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-secondary text-primary transition-transform active:scale-95"
+                      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-secondary text-primary transition-transform duration-100 ease-out active:duration-75 active:scale-90"
                     >
                       <Plus className="h-3.5 w-3.5" strokeWidth={2.5} />
                     </button>

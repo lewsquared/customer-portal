@@ -66,7 +66,7 @@ export const StatusTimeline = ({ stages, currentIndex, rightSlot, onHold = false
           type="button"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
-          className="inline-flex items-center gap-1.5 rounded-full bg-card/70 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-primary shadow-press backdrop-blur transition-all active:scale-[0.97]"
+          className="inline-flex items-center gap-1.5 rounded-full bg-card/70 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-primary shadow-press backdrop-blur transition-transform duration-100 ease-out active:duration-75 active:scale-[0.96]"
         >
           <History className="h-3.5 w-3.5" />
           {open ? "Hide timeline" : "View timeline"}

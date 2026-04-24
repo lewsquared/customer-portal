@@ -43,7 +43,7 @@ export const ActionCard = ({
           type="button"
           onClick={btn.onClick}
           className={cn(
-            "inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-bold text-white shadow-press transition-all hover:brightness-110 active:scale-[0.98]",
+            "inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-bold text-white shadow-press transition-transform duration-100 ease-out hover:brightness-110 active:duration-75 active:scale-[0.97]",
             accentBg,
           )}
         >
@@ -57,7 +57,7 @@ export const ActionCard = ({
         type="button"
         onClick={btn.onClick}
         className={cn(
-          "inline-flex items-center justify-center rounded-xl border bg-transparent px-4 py-2.5 text-sm font-semibold transition-colors hover:bg-card/40 active:scale-[0.98]",
+          "inline-flex items-center justify-center rounded-xl border bg-transparent px-4 py-2.5 text-sm font-semibold transition-transform duration-100 ease-out hover:bg-card/40 active:duration-75 active:scale-[0.96]",
           accentBorder,
           accentText,
         )}
