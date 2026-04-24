@@ -59,21 +59,21 @@ export function StarchSheet({ open, onOpenChange, value, onApply }: Props) {
                 type="button"
                 onClick={() => choose(opt.value)}
                 className={cn(
-                  "flex w-full items-center gap-4 px-5 py-4 text-left transition-colors",
+                  "flex w-full items-center justify-between px-5 py-3.5 text-left transition-colors hover:bg-secondary/40",
                   idx > 0 && "border-t border-border/60",
-                  isSelected && "bg-secondary/40",
                 )}
               >
+                <span className={cn("text-sm", isSelected ? "font-semibold text-primary" : "font-medium text-primary")}>
+                  {opt.label}
+                </span>
                 <span
                   className={cn(
                     "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2",
-                    isSelected ? "border-primary bg-primary text-primary-foreground" : "border-muted-foreground/40",
+                    isSelected ? "border-primary bg-primary/10" : "border-border",
                   )}
+                  aria-hidden
                 >
-                  {isSelected && <Check className="h-3 w-3" strokeWidth={3} />}
-                </span>
-                <span className={cn("text-sm font-medium", isSelected ? "text-primary" : "text-foreground")}>
-                  {opt.label}
+                  {isSelected && <span className="h-2 w-2 rounded-full bg-primary" />}
                 </span>
               </button>
             );
