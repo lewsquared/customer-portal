@@ -245,7 +245,9 @@ const InstructionCard = ({ title, summary, subtitle, onClick, locked }: Instruct
 
 export const OrderInstructions = ({ locked = false }: { locked?: boolean }) => {
   const [open, setOpen] = useState(true);
-  const [openSheet, setOpenSheet] = useState<"doorbell" | "starch" | "autoApprovals" | null>(null);
+  const [openSheet, setOpenSheet] = useState<
+    "doorbell" | "starch" | "autoApprovals" | "creases" | "delicate" | null
+  >(null);
 
   const [doorbell, setDoorbell] = useState<{ pickup: DoorbellPickup; dropoff: DoorbellDropoff }>({
     pickup: "none",
@@ -256,6 +258,8 @@ export const OrderInstructions = ({ locked = false }: { locked?: boolean }) => {
     stainDamageApprove: false,
     washFold: "notify",
   });
+  const [creases, setCreases] = useState<CreasesState>(EMPTY_CREASES);
+  const [delicatePhotos, setDelicatePhotos] = useState<string[]>([]);
 
   const dbSummary = doorbellSummary(doorbell.pickup, doorbell.dropoff);
 
