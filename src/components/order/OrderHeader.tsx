@@ -49,19 +49,19 @@ export const OrderHeader = ({
       <div className={`relative flex items-center justify-center px-5 min-h-[60px] ${variant === "inline" ? "pt-4 pb-5" : "pt-6 pb-5"}`}>
         {backButton}
 
-        <div className="min-w-0 text-center relative">
+        <div className="inline-block w-max mx-auto text-center">
           <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
             {ORDER_TYPE_LABEL[orderType]}
           </p>
-          <div className="relative h-5 leading-tight">
+          <div className="grid leading-tight">
             <span
-              className="absolute inset-0 block text-center text-base font-extrabold tracking-tight text-primary tabular whitespace-nowrap"
+              className="row-start-1 col-start-1 block text-center text-base font-extrabold tracking-tight text-primary tabular whitespace-nowrap"
               style={{ opacity: 1 - morph }}
             >
               {orderId}
             </span>
             <span
-              className="absolute inset-0 block text-center text-base font-extrabold tracking-tight text-primary whitespace-nowrap"
+              className="row-start-1 col-start-1 block text-center text-base font-extrabold tracking-tight text-primary whitespace-nowrap"
               style={{ opacity: morph }}
               aria-hidden={morph < 0.5}
             >
