@@ -1,17 +1,12 @@
-import { ChevronRight, Shirt, Search } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+import wardrobeUrl from "@/assets/icons/wardrobe.svg";
 
 export const WardrobeCard = () => {
   return (
     <div className="relative flex items-start gap-4 overflow-hidden rounded-xl border border-border bg-card p-4">
       {/* Icon tile */}
       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-surface-mint">
-        <div className="relative">
-          <Shirt className="h-6 w-6 text-primary" strokeWidth={2} />
-          <Search
-            className="absolute -bottom-1 -left-1.5 h-4 w-4 text-primary"
-            strokeWidth={2.5}
-          />
-        </div>
+        <img src={wardrobeUrl} alt="" width={24} height={24} aria-hidden="true" />
       </div>
 
       {/* Content */}
