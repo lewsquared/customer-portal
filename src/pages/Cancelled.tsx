@@ -26,6 +26,7 @@ const Cancelled = () => {
           </section>
 
           <OrderConfirmations stage="received" />
+          </div>
         </div>
       </div>
     </main>

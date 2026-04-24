@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { DoorOpen } from "lucide-react";
 import { StatusTimeline, type Stage } from "./StatusTimeline";
 import { CancelButton } from "./CancelButton";
@@ -48,12 +49,30 @@ export const StatusHero = ({
   const v: HeroVariant = onHold ? "hold" : completed ? "complete" : variant;
   const gradientClass = orderType === "finery" ? "bg-gradient-hero-finery" : "bg-gradient-hero";
 
+  const [tucked, setTucked] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setTucked(!entry.isIntersecting),
+      { threshold: 0, rootMargin: "0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section
-      className={`sticky top-0 z-40 overflow-hidden rounded-b-[28px] ${gradientClass} shadow-hero animate-fade-in`}
+      className={`relative z-40 ${gradientClass} shadow-hero animate-fade-in transition-[border-radius] duration-300 ${tucked ? "rounded-b-none" : "rounded-b-[28px]"}`}
       aria-label="Order status"
     >
-      <div className="relative z-10">
+      {/* Sentinel — IntersectionObserver watches this. */}
+      <div ref={sentinelRef} aria-hidden className="h-px w-full" />
+
+      {/* Pinned header — stays visible when banner tucks away */}
+      <div className={`sticky top-0 z-50 ${gradientClass}`}>
         <OrderHeader
           orderId={orderId}
           orderType={orderType ?? "laundry"}
@@ -63,35 +82,48 @@ export const StatusHero = ({
         />
       </div>
 
-      <div className="relative px-6 pt-2 pb-6">
-        <div className="flex items-center gap-4">
-          <h1 className="min-w-0 flex-1 text-2xl font-extrabold leading-tight text-primary [text-wrap:balance]">
-            {status}
-          </h1>
+      {/* Tuckable hero body — grid row animates from 1fr to 0fr */}
+      <div
+        className="grid transition-[grid-template-rows,opacity] duration-300 ease-out"
+        style={{
+          gridTemplateRows: tucked ? "0fr" : "1fr",
+          opacity: tucked ? 0 : 1,
+          pointerEvents: tucked ? "none" : "auto",
+        }}
+        aria-hidden={tucked}
+      >
+        <div className="overflow-hidden">
+          <div className="relative px-6 pt-2 pb-6">
+            <div className="flex items-center gap-4">
+              <h1 className="min-w-0 flex-1 text-2xl font-extrabold leading-tight text-primary [text-wrap:balance]">
+                {status}
+              </h1>
 
-          <div className={`pointer-events-none shrink-0 opacity-95 h-16 w-16 ${wrapperAnim[v]}`}>
-            <HeroArt variant={v} />
+              <div className={`pointer-events-none shrink-0 opacity-95 h-16 w-16 ${wrapperAnim[v]}`}>
+                <HeroArt variant={v} />
+              </div>
+            </div>
+
+            <p className="mt-1.5 whitespace-nowrap text-sm text-muted-foreground tabular">
+              {subtitle}
+            </p>
+
+            {doorPickup && (
+              <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-warning px-3 py-1.5 text-[11px] font-bold uppercase tracking-wide text-warning-foreground animate-fade-in">
+                <DoorOpen className="h-3.5 w-3.5" />
+                <span>Leave laundry bags at door</span>
+              </div>
+            )}
+
+            <div className="relative mt-6">
+              <StatusTimeline
+                stages={stages}
+                currentIndex={currentIndex}
+                onHold={onHold}
+                rightSlot={cancellable ? <CancelButton /> : undefined}
+              />
+            </div>
           </div>
-        </div>
-
-        <p className="mt-1.5 whitespace-nowrap text-sm text-muted-foreground tabular">
-          {subtitle}
-        </p>
-
-        {doorPickup && (
-          <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-warning px-3 py-1.5 text-[11px] font-bold uppercase tracking-wide text-warning-foreground animate-fade-in">
-            <DoorOpen className="h-3.5 w-3.5" />
-            <span>Leave laundry bags at door</span>
-          </div>
-        )}
-
-        <div className="relative mt-6">
-          <StatusTimeline
-            stages={stages}
-            currentIndex={currentIndex}
-            onHold={onHold}
-            rightSlot={cancellable ? <CancelButton /> : undefined}
-          />
         </div>
       </div>
     </section>
