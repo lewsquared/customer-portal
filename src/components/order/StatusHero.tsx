@@ -53,14 +53,24 @@ export const StatusHero = ({
   const sentinelRef = useRef<HTMLDivElement>(null);
   const ioSettledRef = useRef(false);
 
-  // IntersectionObserver — with a mount-settle delay
+  // IntersectionObserver — with a mount-settle delay and post-change commit lock
   useEffect(() => {
     const el = sentinelRef.current;
     if (!el) return;
+    let commitLockUntil = 0;
     const io = new IntersectionObserver(
       ([entry]) => {
         if (!ioSettledRef.current) return;
-        setTucked(!entry.isIntersecting);
+        // During the post-transition commit window, ignore new IO fires —
+        // this prevents mid-collapse flicker when the sentinel briefly
+        // re-intersects due to scrollTop clamping as the section shrinks.
+        if (performance.now() < commitLockUntil) return;
+        const next = !entry.isIntersecting;
+        setTucked((prev) => {
+          if (prev === next) return prev;
+          commitLockUntil = performance.now() + 350;
+          return next;
+        });
       },
       { threshold: 0, rootMargin: "0px" }
     );
