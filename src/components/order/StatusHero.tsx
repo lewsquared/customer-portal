@@ -102,22 +102,23 @@ export const StatusHero = ({
       ref={sectionRef}
       className={`sticky top-0 z-40 overflow-hidden rounded-b-[28px] ${gradientClass} shadow-hero animate-fade-in`}
       aria-label="Order status"
-      style={{ willChange: "transform" }}
     >
-      <OrderHeader
-        orderId={orderId}
-        orderType={orderType ?? "laundry"}
-        showSupport={showSupport}
-        onBack={onBack}
-        variant="inline"
-        status={status}
-        headerMorphProgress={morphProgress}
-      />
+      <div className="relative z-10">
+        <OrderHeader
+          orderId={orderId}
+          orderType={orderType ?? "laundry"}
+          showSupport={showSupport}
+          onBack={onBack}
+          variant="inline"
+          status={status}
+          headerMorphProgress={morphProgress}
+        />
+      </div>
 
       <div
         ref={heroContentRef}
         className="relative px-6 pt-2 pb-6"
-        style={{ willChange: "opacity, transform" }}
+        style={{ willChange: "opacity, transform, margin-bottom" }}
       >
         <div className="flex items-center gap-4">
           <h1 className="min-w-0 flex-1 text-2xl font-extrabold leading-tight text-primary [text-wrap:balance]">
