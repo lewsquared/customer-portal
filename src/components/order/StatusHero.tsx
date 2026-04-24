@@ -64,9 +64,15 @@ export const StatusHero = ({
   }, []);
 
   return (
-    <>
-      {/* Pinned header — lives outside the collapsing section so it sticks to the scroll container */}
-      <div className={`sticky top-0 z-50 ${gradientClass}`}>
+    <section
+      className={`sticky top-0 z-50 ${gradientClass} shadow-hero animate-fade-in transition-[border-radius] duration-300 ${tucked ? "rounded-b-none" : "rounded-b-[28px]"}`}
+      aria-label="Order status"
+    >
+      {/* Sentinel — IntersectionObserver watches this. Sits at the very top of the section. */}
+      <div ref={sentinelRef} aria-hidden className="h-px w-full" />
+
+      {/* OrderHeader — always visible, never tucked */}
+      <div className="relative z-10">
         <OrderHeader
           orderId={orderId}
           orderType={orderType ?? "laundry"}
@@ -76,14 +82,7 @@ export const StatusHero = ({
         />
       </div>
 
-      <section
-        className={`relative z-40 ${gradientClass} shadow-hero animate-fade-in transition-[border-radius] duration-300 ${tucked ? "rounded-b-none" : "rounded-b-[28px]"}`}
-        aria-label="Order status"
-      >
-        {/* Sentinel — IntersectionObserver watches this. */}
-        <div ref={sentinelRef} aria-hidden className="h-px w-full" />
-
-        {/* Tuckable hero body — grid row animates from 1fr to 0fr */}
+      {/* Tuckable hero body — grid row animates from 1fr to 0fr */}
       <div
         className="grid transition-[grid-template-rows,opacity] duration-300 ease-out"
         style={{
