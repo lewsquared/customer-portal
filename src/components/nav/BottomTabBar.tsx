@@ -28,7 +28,7 @@ export const BottomTabBar = () => {
             <NavLink
               to={to}
               className={({ isActive }) =>
-                `flex h-full flex-col items-center justify-center gap-1 text-[11px] font-semibold transition-colors ${
+                `flex h-full flex-col items-center justify-center gap-1 text-[11px] font-semibold transition-transform duration-100 ease-out active:duration-75 active:scale-[0.96] ${
                   isActive ? "text-primary" : "text-muted-foreground"
                 }`
               }

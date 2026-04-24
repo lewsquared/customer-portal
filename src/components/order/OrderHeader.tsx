@@ -23,7 +23,7 @@ export const OrderHeader = ({ orderId, orderType, showSupport = false, onBack, v
             type="button"
             onClick={onBack}
             aria-label="Back"
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card/80 text-primary shadow-press transition-transform active:scale-95"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card/80 text-primary shadow-press transition-transform duration-100 ease-out active:duration-75 active:scale-90"
           >
             <ChevronLeft className="h-5 w-5" strokeWidth={2.5} />
           </button>
@@ -31,7 +31,7 @@ export const OrderHeader = ({ orderId, orderType, showSupport = false, onBack, v
           <Link
             to="/orders"
             aria-label="Back to orders"
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card/80 text-primary shadow-press transition-transform active:scale-95"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card/80 text-primary shadow-press transition-transform duration-100 ease-out active:duration-75 active:scale-90"
           >
             <ChevronLeft className="h-5 w-5" strokeWidth={2.5} />
           </Link>
@@ -55,7 +55,7 @@ export const OrderHeader = ({ orderId, orderType, showSupport = false, onBack, v
         {showSupport ? (
           <button
             aria-label="Contact support"
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card/80 text-primary shadow-press transition-transform active:scale-95"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card/80 text-primary shadow-press transition-transform duration-100 ease-out active:duration-75 active:scale-90"
           >
             <Headphones className="h-5 w-5" />
           </button>

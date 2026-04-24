@@ -34,14 +34,14 @@ export const BottomActionBar = ({
           type="button"
           onClick={handleBack}
           aria-label="Back"
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border bg-card text-primary shadow-press transition-transform active:scale-95"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border bg-card text-primary shadow-press transition-transform duration-100 ease-out active:duration-75 active:scale-90"
         >
           <ChevronLeft className="h-5 w-5" strokeWidth={2.5} />
         </button>
         <button
           type="button"
           onClick={handlePrimary}
-          className="flex-1 rounded-xl bg-primary py-3 text-sm font-bold text-primary-foreground transition-transform active:scale-[0.98]"
+          className="flex-1 rounded-xl bg-primary py-3 text-sm font-bold text-primary-foreground transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]"
         >
           {primaryLabel}
         </button>

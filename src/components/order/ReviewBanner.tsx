@@ -9,7 +9,7 @@ export const ReviewBanner = ({ count = 3 }: Props) => {
     <section className="mt-5 px-5 animate-fade-in" style={{ animationDelay: "60ms" }}>
       <button
         type="button"
-        className="group flex w-full items-center gap-3 rounded-xl border border-warning/40 bg-warning/15 p-4 text-left transition-all hover:bg-warning/20 active:scale-[0.99]"
+        className="group flex w-full items-center gap-3 rounded-xl border border-warning/40 bg-warning/15 p-4 text-left transition-transform duration-100 ease-out hover:bg-warning/20 active:duration-75 active:scale-[0.99]"
       >
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-warning text-primary">
           <ClipboardList className="h-5 w-5" strokeWidth={2.4} />
