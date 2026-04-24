@@ -65,8 +65,8 @@ export const StatusHero = ({
 
   return (
     <>
-      {/* Sentinel — lives in normal document flow ABOVE the sticky section so it can scroll away */}
-      <div ref={sentinelRef} aria-hidden className="h-px w-full" />
+      {/* Sentinel — tall so scrolling through it IS the tuck gesture; negative margin removes it from layout */}
+      <div ref={sentinelRef} aria-hidden className="h-56 w-full -mb-56" />
 
       <section
         className={`sticky top-0 z-50 ${gradientClass} shadow-hero animate-fade-in transition-[border-radius] duration-300 ${tucked ? "rounded-b-none" : "rounded-b-[28px]"}`}
@@ -127,6 +127,9 @@ export const StatusHero = ({
           </div>
         </div>
       </div>
+
+      {/* Breathing room below the pinned header — visible whether tucked or expanded */}
+      <div aria-hidden className="h-3" />
     </section>
     </>
   );
