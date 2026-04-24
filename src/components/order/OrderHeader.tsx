@@ -17,7 +17,7 @@ export const OrderHeader = ({ orderId, orderType, showSupport = false, onBack, v
   const bgClass = variant === "inline" ? "bg-transparent" : `sticky top-0 z-30 ${headerGradient} backdrop-blur-md`;
   return (
     <header className={bgClass}>
-      <div className="flex items-center gap-3 px-5 pt-6 pb-5">
+      <div className={`flex items-center gap-3 px-5 pb-5 ${variant === "inline" ? "pt-4" : "pt-6"}`}>
         {onBack ? (
           <button
             type="button"
