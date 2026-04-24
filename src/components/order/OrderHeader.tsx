@@ -8,8 +8,6 @@ interface OrderHeaderProps {
   showSupport?: boolean;
   onBack?: () => void;
   variant?: "standalone" | "inline";
-  status?: string;
-  headerMorphProgress?: number;
 }
 
 export const OrderHeader = ({
@@ -18,12 +16,9 @@ export const OrderHeader = ({
   showSupport = false,
   onBack,
   variant = "standalone",
-  status,
-  headerMorphProgress,
 }: OrderHeaderProps) => {
   const headerGradient = orderType === "finery" ? "bg-gradient-surface-finery" : "bg-gradient-surface-mint";
   const bgClass = variant === "inline" ? "bg-transparent" : `sticky top-0 z-30 ${headerGradient} backdrop-blur-md`;
-  const morph = headerMorphProgress ?? 0;
 
   const backButton = onBack ? (
     <button
