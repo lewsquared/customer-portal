@@ -58,10 +58,10 @@
     --surface-special: 255 92% 96%;          /* lavender — laundry bag flow */
 
     /* Tile tones — one step deeper than surface for icon tile inside cards */
-    --tile-in-flight: 162 55% 86%;
-    --tile-attention-soft: 28 90% 86%;
-    --tile-attention-urgent: 350 90% 88%;
-    --tile-special: 255 70% 88%;
+    --tile-in-flight: 162 50% 97%;
+    --tile-attention-soft: 28 80% 97%;
+    --tile-attention-urgent: 350 80% 98%;
+    --tile-special: 255 70% 98%;
 
     /* The Finery — distinct deep purple brand system */
     --finery-primary: 260 45% 25%;

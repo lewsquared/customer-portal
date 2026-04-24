@@ -1,14 +1,30 @@
-import { ChevronRight, Search, Shirt } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 export const WardrobeCard = () => {
   return (
-    <div className="relative flex items-start gap-4 rounded-xl border border-border bg-card p-4">
+    <div className="relative flex items-start gap-4 overflow-hidden rounded-xl border border-border bg-card p-4">
       {/* Icon tile */}
-      <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-surface-mint">
-        <Shirt className="h-7 w-7 text-primary" strokeWidth={2.2} />
-        <span className="absolute -bottom-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-card text-primary">
-          <Search className="h-3 w-3" strokeWidth={2.6} />
-        </span>
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-surface-mint">
+        <svg
+          width="28"
+          height="28"
+          viewBox="0 0 32 32"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-primary"
+          aria-hidden="true"
+        >
+          {/* Shirt silhouette — upper-left portion */}
+          <path d="M10 6 L6 8 L4 12 L7 14 L8 13 L8 21 Q8 22 9 22 L15 22 Q16 22 16 21 L16 13" />
+          <path d="M10 6 Q10 10 13 10 Q16 10 16 6" />
+          <path d="M10 6 L13 4 L16 6" />
+          {/* Magnifier — overlapping bottom-right */}
+          <circle cx="21" cy="21" r="5" />
+          <line x1="25" y1="25" x2="29" y2="29" />
+        </svg>
       </div>
 
       {/* Content */}
@@ -24,8 +40,8 @@ export const WardrobeCard = () => {
         </div>
       </div>
 
-      {/* BETA badge */}
-      <span className="absolute right-4 top-4 rounded-full bg-warning px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wider text-indigo-deep">
+      {/* BETA badge — corner tab */}
+      <span className="absolute right-0 top-0 rounded-bl-xl rounded-tr-xl bg-warning px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-indigo-deep">
         Beta
       </span>
 
