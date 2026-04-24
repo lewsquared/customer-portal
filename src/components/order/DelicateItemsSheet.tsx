@@ -43,7 +43,8 @@ export function DelicateItemsSheet({ open, onOpenChange, photos, onApply }: Prop
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
         side="bottom"
-        className="flex h-screen max-h-screen flex-col gap-0 border-0 p-0"
+        className="flex max-h-[90vh] flex-col gap-0 rounded-t-3xl border-t p-0"
+        style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 1rem)" }}
       >
         <SheetHeader className="flex-shrink-0 border-b border-border p-4 text-center">
           <SheetTitle className="text-base font-bold text-primary">Delicate Items & Stains</SheetTitle>
