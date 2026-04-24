@@ -127,7 +127,8 @@ export const StatusHero = ({
           </div>
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 };
 
