@@ -102,7 +102,7 @@ export default function ApprovalItem() {
                 <Shirt className="h-16 w-16" strokeWidth={1.5} />
               </div>
               <span className="absolute bottom-3 left-3 rounded-md bg-destructive px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-destructive-foreground">
-                {stain?.type === "damage" ? "Damage" : "Stain"}
+                {(stain?.type as string) === "damage" ? "Damage" : "Stain"}
               </span>
             </div>
           </div>
