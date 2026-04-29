@@ -9,7 +9,7 @@ export default function ApprovalEntry() {
   const items = MOCK_PORTAL_DATA.approvalItems;
 
   return (
-    <div className="min-h-screen bg-background pb-12">
+    <div className="flex h-screen flex-col bg-background font-sans">
       <OrderHeader
         orderId={order.orderId}
         orderType={order.orderType}
@@ -17,58 +17,44 @@ export default function ApprovalEntry() {
         variant="inline"
       />
 
-      {/* Hero placeholder image — full width, matches SC/BC layout */}
-      <div className="relative mx-5 mt-2 aspect-[4/3] overflow-hidden rounded-2xl bg-secondary">
+      {/* Hero image */}
+      <div className="relative mx-5 mt-3 overflow-hidden rounded-2xl" style={{ height: 240 }}>
         <img
-          src="/placeholder.svg"
+          src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=600&q=80"
           alt="Items needing approval"
           className="h-full w-full object-cover"
-          onError={(e) => {
-            (e.target as HTMLImageElement).style.display = "none";
-          }}
         />
-        {/* Item count badge */}
-        <div className="absolute right-3 top-3 flex h-9 min-w-9 items-center justify-center rounded-full bg-destructive px-2.5 text-sm font-extrabold text-destructive-foreground ring-4 ring-background">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+        <div className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-destructive text-sm font-extrabold text-white">
           {items.length}
         </div>
       </div>
 
-      {/* Content */}
-      <div className="px-6 pt-8">
-        <h1 className="text-2xl font-extrabold leading-tight tracking-tight text-primary">
-          Our team needs<br />your approval
+      {/* Text content */}
+      <div className="flex flex-1 flex-col items-center px-6 pt-7 text-center">
+        <h1 className="font-sans text-2xl font-extrabold text-primary">
+          Our team needs your approval
         </h1>
-
-        <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-          Our experts have assessed {items.length} item{items.length !== 1 ? "s" : ""} and
-          recommended the services needed.
+        <p className="mt-3 text-sm text-muted-foreground">
+          Our experts have assessed {items.length} item{items.length !== 1 ? "s" : ""} and recommended the services needed.
         </p>
+        <p className="mt-5 text-xs text-muted-foreground">Takes less than 1 minute!</p>
+      </div>
 
-        <div className="mt-8">
-          <button
-            onClick={() =>
-              navigate(`/portal/${order.orderId}/approval/0`, { state: { order } })
-            }
-            className="w-full rounded-xl bg-primary py-3.5 text-base font-extrabold text-primary-foreground transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]"
-          >
-            Start Review
-          </button>
-
-          <button
-            onClick={() =>
-              navigate(`/portal/${order.orderId}/approval/confirm`, {
-                state: { order, autoApproved: true },
-              })
-            }
-            className="mt-3 w-full text-center text-sm font-semibold text-muted-foreground active:opacity-70"
-          >
-            Approve all for processing
-          </button>
-
-          <p className="mt-4 text-center text-[11px] text-muted-foreground">
-            Takes less than 1 minute!
-          </p>
-        </div>
+      {/* Sticky bottom CTA */}
+      <div
+        className="border-t border-border bg-background px-5 pt-4"
+        style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)" }}
+      >
+        <button
+          type="button"
+          onClick={() =>
+            navigate(`/portal/${order.orderId}/approval/0`, { state: { order } })
+          }
+          className="w-full rounded-xl bg-primary py-3.5 font-sans text-base font-extrabold text-primary-foreground transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]"
+        >
+          Start Review
+        </button>
       </div>
     </div>
   );
