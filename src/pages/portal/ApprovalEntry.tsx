@@ -18,7 +18,7 @@ export default function ApprovalEntry() {
       />
 
       {/* Hero image */}
-      <div className="relative mx-5 mt-3 overflow-hidden rounded-2xl" style={{ height: 240 }}>
+      <div className="relative mt-3 aspect-square w-full overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=600&q=80"
           alt="Items needing approval"
