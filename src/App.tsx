@@ -21,6 +21,8 @@ import PartialDelivery from "./pages/PartialDelivery.tsx";
 import PendingItemDelivery from "./pages/PendingItemDelivery.tsx";
 import Cancelled from "./pages/Cancelled.tsx";
 import PRD from "./pages/PRD.tsx";
+import ProofOfPickup from "./pages/portal/ProofOfPickup.tsx";
+import ProofOfDelivery from "./pages/portal/ProofOfDelivery.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import { ScrollToTop } from "./components/nav/ScrollToTop.tsx";
 
@@ -53,6 +55,8 @@ const App = () => (
           <Route path="/cancelled" element={<Cancelled />} />
           <Route path="/order-complete" element={<OrderComplete />} />
           <Route path="/prd" element={<PRD />} />
+          <Route path="/portal/proof-of-pickup" element={<ProofOfPickup />} />
+          <Route path="/portal/proof-of-delivery" element={<ProofOfDelivery />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
