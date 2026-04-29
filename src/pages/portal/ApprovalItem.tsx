@@ -34,6 +34,8 @@ export default function ApprovalItem() {
   const [decision, setDecision] = useState<Decision>(null);
   const [returnOn, setReturnOn] = useState(false);
   const [photoIdx, setPhotoIdx] = useState(0);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
   const hasDecision = decision !== null || returnOn;
 
   const goNext = () =>
@@ -94,7 +96,17 @@ export default function ApprovalItem() {
       {/* Scrollable middle */}
       <div className="flex flex-1 flex-col overflow-y-auto">
         {/* Carousel */}
-        <div className="mt-4 overflow-hidden pl-5">
+        <div
+          className="mt-4 overflow-hidden pl-5"
+          onTouchStart={(e) => setTouchStartX(e.touches[0].clientX)}
+          onTouchEnd={(e) => {
+            if (touchStartX === null) return;
+            const delta = touchStartX - e.changedTouches[0].clientX;
+            if (delta > 50 && photoIdx < slides.length - 1) setPhotoIdx(photoIdx + 1);
+            if (delta < -50 && photoIdx > 0) setPhotoIdx(photoIdx - 1);
+            setTouchStartX(null);
+          }}
+        >
           <div
             className="flex gap-3 transition-transform duration-300 ease-out"
             style={{ transform: `translateX(calc(${photoIdx} * (-85vw - 12px)))` }}
@@ -102,8 +114,9 @@ export default function ApprovalItem() {
             {slides.map((slide, i) => (
               <div
                 key={i}
-                className="relative shrink-0 overflow-hidden rounded-2xl bg-secondary"
+                className="relative shrink-0 cursor-pointer overflow-hidden rounded-2xl bg-secondary"
                 style={{ width: "85vw", aspectRatio: "4/3" }}
+                onClick={() => setLightboxSrc(slide.src)}
               >
                 <img
                   src={slide.src}
@@ -249,16 +262,41 @@ export default function ApprovalItem() {
           {item.approvalType === "B" && (
             <>
               <p className="text-sm text-foreground">{item.facilityNote}</p>
-              <div className="mt-3 flex items-center justify-between rounded-xl border border-border bg-card px-4 py-3">
+              <h2 className="mt-5 text-base font-extrabold text-primary">
+                What would you like to do?
+              </h2>
+              <div className="mt-3">
+                {(() => {
+                  const sel = decision === "approved" && !returnOn;
+                  return (
+                    <button
+                      type="button"
+                      onClick={() => { setDecision("approved"); setReturnOn(false); }}
+                      className={cn(
+                        "flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all duration-150",
+                        sel ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card"
+                      )}
+                    >
+                      <div className={cn("flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2", sel ? "border-white bg-white" : "border-border")}>
+                        {sel && <Check className="h-3 w-3 text-primary" strokeWidth={3} />}
+                      </div>
+                      <div className="flex-1">
+                        <p className={cn("text-sm font-extrabold", sel ? "text-primary-foreground" : "text-primary")}>
+                          Approve for Clean & Press
+                        </p>
+                        <p className={cn("text-xs", sel ? "text-primary-foreground/80" : "text-muted-foreground")}>
+                          Consent to process despite damage risk
+                        </p>
+                      </div>
+                    </button>
+                  );
+                })()}
+              </div>
+              <div className="mt-2 flex items-center justify-between rounded-xl border border-border bg-card px-4 py-3">
                 <p className="text-sm font-extrabold text-destructive">Return Uncleaned</p>
                 <Switch
                   checked={returnOn}
-                  onCheckedChange={(v) => {
-                    if (v) {
-                      setDecision("return");
-                      goNext();
-                    }
-                  }}
+                  onCheckedChange={(v) => { setReturnOn(v); if (v) setDecision(null); }}
                   className="data-[state=checked]:bg-primary"
                 />
               </div>
@@ -267,41 +305,50 @@ export default function ApprovalItem() {
         </div>
       </div>
 
-      {/* Sticky bottom CTA */}
-      {item.approvalType === "A" && (
-        <div
-          className="border-t border-border bg-background px-5 pt-4"
-          style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)" }}
+      {/* Sticky bottom CTA — both Type A and B */}
+      <div
+        className="border-t border-border bg-background px-5 pt-4"
+        style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)" }}
+      >
+        <button
+          type="button"
+          disabled={!hasDecision}
+          onClick={goNext}
+          className={cn(
+            "w-full rounded-xl py-3.5 font-sans text-base font-extrabold transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]",
+            hasDecision
+              ? "bg-primary text-primary-foreground"
+              : "cursor-not-allowed bg-muted text-muted-foreground"
+          )}
         >
-          <button
-            type="button"
-            disabled={!hasDecision}
-            onClick={goNext}
-            className={cn(
-              "w-full rounded-xl py-3.5 font-sans text-base font-extrabold transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]",
-              hasDecision
-                ? "bg-primary text-primary-foreground"
-                : "cursor-not-allowed bg-muted text-muted-foreground"
-            )}
-          >
-            {isLast ? "Review decisions" : "Next item"}
-          </button>
-        </div>
-      )}
+          {isLast ? "Review decisions" : "Next item"}
+        </button>
+      </div>
 
-      {item.approvalType === "B" && (
+      {/* Full-screen lightbox */}
+      {lightboxSrc && (
         <div
-          className="border-t border-border bg-background px-5 pt-4"
-          style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)" }}
+          className="fixed inset-0 z-50 flex flex-col bg-black/95"
+          onClick={() => setLightboxSrc(null)}
         >
-          <button
-            type="button"
-            onClick={() => { setDecision("approved"); goNext(); }}
-            className="w-full rounded-xl py-3.5 font-sans text-sm font-extrabold text-[#1A1A1A] transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]"
-            style={{ background: "hsl(var(--cp-green))" }}
-          >
-            Approve for Clean & Press
-          </button>
+          <div className="flex items-center justify-end px-5 pt-12 pb-4">
+            <button
+              onClick={() => setLightboxSrc(null)}
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <div className="flex flex-1 items-center justify-center px-5" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={lightboxSrc}
+              className="max-h-full w-full rounded-2xl object-contain"
+              alt="Full size"
+            />
+          </div>
+          <div style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 2rem)" }} />
         </div>
       )}
     </div>
