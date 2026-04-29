@@ -25,9 +25,6 @@ export default function ApprovalEntry() {
           className="h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-        <div className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-destructive text-sm font-extrabold text-white">
-          {items.length}
-        </div>
       </div>
 
       {/* Text content */}
