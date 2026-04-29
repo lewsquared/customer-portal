@@ -231,7 +231,7 @@ export default function ApprovalItem() {
 
               {/* Return uncleaned */}
               <div className="mt-2 flex items-center justify-between rounded-xl border border-border bg-card px-4 py-3">
-                <p className="text-sm font-extrabold text-destructive">Return Uncleaned</p>
+                <p className="text-sm font-medium text-destructive">Return Uncleaned</p>
                 <Switch
                   checked={returnOn}
                   onCheckedChange={(v) => {
