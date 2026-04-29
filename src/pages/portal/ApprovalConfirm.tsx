@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { Shirt } from "lucide-react";
 import { OrderHeader } from "@/components/order/OrderHeader";
-import { BottomActionBar } from "@/components/order/BottomActionBar";
+
 import { MOCK_PORTAL_DATA } from "@/lib/portal-mock-data";
 import { useOrderData } from "@/lib/useOrderData";
 import { cn } from "@/lib/utils";
