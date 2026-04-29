@@ -1,14 +1,17 @@
 import { TriangleAlert } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 import { StatusHero } from "@/components/order/StatusHero";
 import { ActionCard } from "@/components/order/ActionCard";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
 import { OrderConfirmations, ServicesSelection, OrderInstructions } from "@/components/order/OrderSections";
+import { ReviewBanner } from "@/components/order/ReviewBanner";
 import { useOrderData } from "@/lib/useOrderData";
 import type { Stage } from "@/components/order/StatusTimeline";
 
 const ApprovalRequired = () => {
   const order = useOrderData();
+  const navigate = useNavigate();
   const ts = order.stageTimestamps;
   const count = order.itemsAwaitingApproval ?? 0;
   const noun = count === 1 ? "item" : "items";
@@ -44,13 +47,19 @@ const ApprovalRequired = () => {
             variant="received"
           />
 
+          <ReviewBanner count={count} orderId={order.orderId} />
+
           <ActionCard
             variant="attention"
             icon={<TriangleAlert strokeWidth={2.4} />}
             title={`${count} ${noun} need approval`}
             message={`You need to review and approve ${count} ${noun} before they can be processed.`}
             countdown={order.approvalDeadline}
-            primaryAction={{ label: "Review items", variant: "primary" }}
+            primaryAction={{
+              label: "Review items",
+              variant: "primary",
+              onClick: () => navigate(`/portal/${order.orderId}/approval`, { state: { order } }),
+            }}
           />
 
           <DeliveryCard
@@ -61,7 +70,7 @@ const ApprovalRequired = () => {
             dropoff={{ label: order.dropoffNote ?? "Drop off at door", when: order.dropoffWindow }}
           />
 
-          <OrderConfirmations stage="items-in" />
+          <OrderConfirmations stage="items-in" orderId={order.orderId} />
           <ServicesSelection locked />
           <OrderInstructions locked />
           </div>
