@@ -1,7 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Shirt } from "lucide-react";
 import { OrderHeader } from "@/components/order/OrderHeader";
-import { UrgencyStrip } from "@/components/portal/UrgencyStrip";
 import { MOCK_PORTAL_DATA } from "@/lib/portal-mock-data";
 import { useOrderData } from "@/lib/useOrderData";
 
@@ -19,46 +17,58 @@ export default function ApprovalEntry() {
         variant="inline"
       />
 
-      <div className="px-5 pt-2">
-        <UrgencyStrip count={items.length} timeLeft="2h 45m left" />
+      {/* Hero placeholder image — full width, matches SC/BC layout */}
+      <div className="relative mx-5 mt-2 aspect-[4/3] overflow-hidden rounded-2xl bg-secondary">
+        <img
+          src="/placeholder.svg"
+          alt="Items needing approval"
+          className="h-full w-full object-cover"
+          onError={(e) => {
+            (e.target as HTMLImageElement).style.display = "none";
+          }}
+        />
+        {/* Item count badge */}
+        <div className="absolute right-3 top-3 flex h-9 min-w-9 items-center justify-center rounded-full bg-destructive px-2.5 text-sm font-extrabold text-destructive-foreground ring-4 ring-background">
+          {items.length}
+        </div>
       </div>
 
-      <div className="flex flex-col items-center px-6 pt-10 text-center">
-        <div className="relative">
-          <div className="flex h-32 w-32 items-center justify-center rounded-full bg-secondary">
-            <Shirt className="h-14 w-14 text-primary" strokeWidth={1.75} />
-          </div>
-          <div className="absolute -right-1 -top-1 flex h-9 w-9 items-center justify-center rounded-full bg-destructive text-sm font-extrabold text-destructive-foreground ring-4 ring-background">
-            {items.length}
-          </div>
-        </div>
-
-        <p className="mt-6 text-base font-semibold text-muted-foreground">{items.length} Items</p>
-        <h1 className="mt-1 text-2xl font-extrabold tracking-tight text-primary">
-          Need Your Approval
+      {/* Content */}
+      <div className="px-6 pt-8">
+        <h1 className="text-2xl font-extrabold leading-tight tracking-tight text-primary">
+          Our team needs<br />your approval
         </h1>
 
-        <button
-          onClick={() =>
-            navigate(`/portal/${order.orderId}/approval/0`, { state: { order } })
-          }
-          className="mt-8 w-full rounded-xl bg-primary py-3.5 text-base font-extrabold text-primary-foreground transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]"
-        >
-          Let's Start
-        </button>
+        <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+          Our experts have assessed {items.length} item{items.length !== 1 ? "s" : ""} and
+          recommended the services needed.
+        </p>
 
-        <button
-          onClick={() =>
-            navigate(`/portal/${order.orderId}/approval/confirm`, {
-              state: { order, autoApproved: true },
-            })
-          }
-          className="mt-3 text-xs font-semibold text-muted-foreground active:opacity-70"
-        >
-          Approve all for processing
-        </button>
+        <div className="mt-8">
+          <button
+            onClick={() =>
+              navigate(`/portal/${order.orderId}/approval/0`, { state: { order } })
+            }
+            className="w-full rounded-xl bg-primary py-3.5 text-base font-extrabold text-primary-foreground transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]"
+          >
+            Start Review
+          </button>
 
-        <p className="mt-4 text-[11px] text-muted-foreground">Takes less than 1 minute!</p>
+          <button
+            onClick={() =>
+              navigate(`/portal/${order.orderId}/approval/confirm`, {
+                state: { order, autoApproved: true },
+              })
+            }
+            className="mt-3 w-full text-center text-sm font-semibold text-muted-foreground active:opacity-70"
+          >
+            Approve all for processing
+          </button>
+
+          <p className="mt-4 text-center text-[11px] text-muted-foreground">
+            Takes less than 1 minute!
+          </p>
+        </div>
       </div>
     </div>
   );
