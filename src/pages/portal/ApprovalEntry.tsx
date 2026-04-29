@@ -33,12 +33,12 @@ export default function ApprovalEntry() {
       {/* Text content */}
       <div className="flex flex-1 flex-col items-center px-6 pt-7 text-center">
         <h1 className="font-sans text-2xl font-extrabold text-primary">
-          Our team needs your approval
+          {items.length} item{items.length !== 1 ? "s" : ""} need your approval
         </h1>
         <p className="mt-3 text-sm text-muted-foreground">
-          Our experts have assessed {items.length} item{items.length !== 1 ? "s" : ""} and recommended the services needed.
+          We need a quick confirmation before we can continue processing your order.
         </p>
-        <p className="mt-5 text-xs text-muted-foreground">Takes less than 1 minute!</p>
+        <p className="mt-5 text-xs text-muted-foreground">Takes under a minute</p>
       </div>
 
       {/* Sticky bottom CTA */}
