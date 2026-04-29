@@ -63,23 +63,31 @@ export default function ApprovalItem() {
 
   return (
     <div className="flex h-screen flex-col bg-background font-sans">
-      {/* Stepper nav */}
-      <div className="flex items-start gap-2 px-5 pt-6">
-        <button
-          type="button"
-          onClick={goBack}
-          aria-label="Back"
-          className="-ml-1 flex h-8 w-8 shrink-0 items-center justify-center text-primary active:opacity-70"
-        >
-          <ChevronLeft className="h-6 w-6" strokeWidth={2.5} />
-        </button>
-        <div className="flex flex-col">
+      {/* Header — title + segmented progress bar */}
+      <div className="px-5 pt-6">
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={goBack}
+            aria-label="Back"
+            className="-ml-1 flex h-8 w-8 shrink-0 items-center justify-center text-primary active:opacity-70"
+          >
+            <ChevronLeft className="h-6 w-6" strokeWidth={2.5} />
+          </button>
           <h1 className="text-xl font-extrabold text-primary leading-tight">
-            Item {idx + 1} of {items.length}
+            Review Your Services
           </h1>
-          <p className="text-sm text-muted-foreground">
-            {item.brand} {item.itemType}
-          </p>
+        </div>
+        <div className="mt-3 flex gap-1.5">
+          {items.map((_, i) => (
+            <div
+              key={i}
+              className={cn(
+                "h-1.5 flex-1 rounded-full transition-colors duration-300",
+                i <= idx ? "bg-warning" : "bg-muted"
+              )}
+            />
+          ))}
         </div>
       </div>
 
@@ -224,11 +232,8 @@ export default function ApprovalItem() {
               </div>
 
               {/* Return uncleaned */}
-              <div className="mt-4 flex items-center justify-between rounded-xl border border-border bg-card px-4 py-3">
-                <div>
-                  <p className="text-sm font-extrabold text-primary">Return uncleaned</p>
-                  <p className="text-xs text-muted-foreground">Item returned as is</p>
-                </div>
+              <div className="mt-2 flex items-center justify-between rounded-xl border border-border bg-card px-4 py-3">
+                <p className="text-sm font-extrabold text-destructive">Return Uncleaned</p>
                 <Switch
                   checked={returnOn}
                   onCheckedChange={(v) => {
