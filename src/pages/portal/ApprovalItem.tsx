@@ -103,7 +103,7 @@ export default function ApprovalItem() {
               <div
                 key={i}
                 className="relative shrink-0 overflow-hidden rounded-2xl bg-secondary"
-                style={{ width: "85vw", height: 180 }}
+                style={{ width: "85vw", aspectRatio: "4/3" }}
               >
                 <img
                   src={slide.src}
@@ -249,33 +249,25 @@ export default function ApprovalItem() {
           {item.approvalType === "B" && (
             <>
               <p className="text-sm text-foreground">{item.facilityNote}</p>
-              <button
-                type="button"
-                onClick={() => {
-                  setDecision("approved");
-                  goNext();
-                }}
-                className="mt-5 w-full rounded-xl py-3.5 font-sans text-sm font-extrabold text-[#1A1A1A] transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]"
-                style={{ background: "hsl(var(--cp-green))" }}
-              >
-                Approve for Clean & Press
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setDecision("return");
-                  goNext();
-                }}
-                className="mt-3 w-full rounded-xl bg-surface-attention-soft py-3.5 font-sans text-sm font-extrabold text-destructive transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]"
-              >
-                Return Uncleaned
-              </button>
+              <div className="mt-3 flex items-center justify-between rounded-xl border border-border bg-card px-4 py-3">
+                <p className="text-sm font-extrabold text-destructive">Return Uncleaned</p>
+                <Switch
+                  checked={returnOn}
+                  onCheckedChange={(v) => {
+                    if (v) {
+                      setDecision("return");
+                      goNext();
+                    }
+                  }}
+                  className="data-[state=checked]:bg-primary"
+                />
+              </div>
             </>
           )}
         </div>
       </div>
 
-      {/* Sticky bottom CTA — Type A only */}
+      {/* Sticky bottom CTA */}
       {item.approvalType === "A" && (
         <div
           className="border-t border-border bg-background px-5 pt-4"
@@ -296,6 +288,23 @@ export default function ApprovalItem() {
           </button>
         </div>
       )}
+
+      {item.approvalType === "B" && (
+        <div
+          className="border-t border-border bg-background px-5 pt-4"
+          style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)" }}
+        >
+          <button
+            type="button"
+            onClick={() => { setDecision("approved"); goNext(); }}
+            className="w-full rounded-xl py-3.5 font-sans text-sm font-extrabold text-[#1A1A1A] transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]"
+            style={{ background: "hsl(var(--cp-green))" }}
+          >
+            Approve for Clean & Press
+          </button>
+        </div>
+      )}
     </div>
   );
 }
+
