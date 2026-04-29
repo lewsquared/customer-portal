@@ -38,7 +38,7 @@ export default function ApprovalItem() {
 
   const slides = [
     { label: "ORIGINAL", labelClass: "bg-primary/80 text-primary-foreground" },
-    { label: stain?.type === "damage" ? "DAMAGE" : "STAIN", labelClass: "bg-destructive text-destructive-foreground" },
+    { label: (stain?.type as string) === "damage" ? "DAMAGE" : "STAIN", labelClass: "bg-destructive text-destructive-foreground" },
   ];
 
   return (
