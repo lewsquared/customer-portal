@@ -48,7 +48,7 @@ export default function ApprovalEntry() {
           onClick={() =>
             navigate(`/portal/${order.orderId}/approval/0`, { state: { order } })
           }
-          className="w-full rounded-xl bg-primary py-3.5 font-sans text-base font-extrabold text-primary-foreground transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]"
+          className="w-full rounded-xl bg-primary py-3.5 font-sans text-base font-normal text-primary-foreground transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]"
         >
           Start Review
         </button>
