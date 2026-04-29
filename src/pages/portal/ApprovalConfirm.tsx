@@ -100,11 +100,18 @@ export default function ApprovalConfirm() {
         </div>
       </div>
 
-      <BottomActionBar
-        primaryLabel="Confirm decisions"
-        onPrimaryClick={() => navigate(-1)}
-        onBack={() => navigate(-1)}
-      />
+      <div
+        className="border-t border-border bg-background px-5 pt-4"
+        style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)" }}
+      >
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
+          className="w-full rounded-xl bg-primary py-3.5 font-sans text-base font-normal text-primary-foreground transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]"
+        >
+          Confirm decisions
+        </button>
+      </div>
     </div>
   );
 }
