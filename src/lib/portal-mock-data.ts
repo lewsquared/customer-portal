@@ -1,0 +1,97 @@
+export const SERVICE_COLORS: Record<string, string> = {
+  CP: "#A4FF00", WF: "#02FFF7", BB: "#FF8CF9", PO: "#B6BCD1", SC: "#FF7D19",
+};
+export const SERVICE_LABELS: Record<string, string> = {
+  CP: "Clean & Press", WF: "Wash & Fold", BB: "Bed & Bath", PO: "Press Only", SC: "Shoe & Bag Care",
+};
+export const MOCK_PORTAL_DATA = {
+  orderId: "W8KZ7A",
+  pickup: {
+    timestamp: "Thu, 26 Mar · 9:14 AM",
+    address: "Al Barsha Heights, Tower 2, Apt 204",
+    handoverMethod: "door" as const,
+    photos: [
+      { url: "", caption: "Everything at Door 1", emoji: "🚪" },
+      { url: "", caption: "Bags at door", emoji: "🛍" },
+      { url: "", caption: "Driver confirmation", emoji: "👤" },
+    ],
+    bags: [
+      { serviceType: "CP", count: 1 },
+      { serviceType: "WF", count: 2 },
+      { serviceType: "BB", count: 1 },
+    ],
+  },
+  facilityItems: [
+    {
+      id: "i0", brand: "Calvin Klein", itemType: "Dress shirt",
+      status: "may_be_delayed" as const, itemNumber: "230709252549",
+      issues: [{ type: "stain" as const, location: "collar front",
+        photoCoords: { x: 52, y: 26 },
+        facilityNote: "Oil stain ~2cm. Likely to respond to CP treatment." }],
+      timeline: [
+        { event: "Item received", timestamp: "Mon, 22 Oct · 1:15 pm", done: true, isHighlight: false },
+        { event: "Item sorted", timestamp: "Yesterday · 8:00 am", done: true, isHighlight: false },
+        { event: "Stain reported – collar front", timestamp: "Yesterday · 8:20 am", done: true, isHighlight: true },
+        { event: "Requested customer approval", timestamp: "Today · 6:00 pm", done: true, isHighlight: false },
+        { event: "Approved by facility", timestamp: "Today · 7:00 pm", done: false, isHighlight: false },
+      ],
+    },
+    { id: "i1", brand: "Zara", itemType: "White tee", status: "cleaned" as const, itemNumber: "230709252550", issues: [], timeline: [] },
+    { id: "i2", brand: "H&M", itemType: "Linen shirt", status: "cleaned" as const, itemNumber: "230709252551", issues: [], timeline: [] },
+    { id: "i3", brand: "Mango", itemType: "Summer dress", status: "cleaned" as const, itemNumber: "230709252552", issues: [], timeline: [] },
+    { id: "i4", brand: "Ralph Lauren", itemType: "Linen trousers", status: "delayed" as const,
+      itemNumber: "230709252553",
+      issues: [{ type: "stain" as const, location: "left knee", photoCoords: { x: 38, y: 58 }, facilityNote: "Grass stain. Taking extra care." }],
+      timeline: [] },
+    { id: "i5", brand: "Tom Ford", itemType: "Wool coat", status: "uncleaned" as const, rejectedBy: "facility" as const, itemNumber: "230709252554", issues: [], timeline: [] },
+    { id: "i6", brand: "Dior", itemType: "Cashmere pullover", status: "uncleaned" as const, rejectedBy: "customer" as const, itemNumber: "230709252555", issues: [], timeline: [] },
+  ],
+  approvalItems: [
+    { id: "a0", brand: "Calvin Klein", itemType: "Dress shirt", color: "Navy",
+      approvalType: "A" as const, issue: "Stain", issueLocation: "collar front",
+      facilityNote: "Oil stain ~2cm. Likely to respond to CP treatment.",
+      recommendation: "CP", price: 12,
+      issues: [{ type: "stain" as const, photoCoords: { x: 52, y: 26 } }],
+      itemNumber: "230709252549" },
+    { id: "a1", brand: "Ralph Lauren", itemType: "Linen trousers", color: "Beige",
+      approvalType: "A" as const, issue: "Stain", issueLocation: "left knee",
+      facilityNote: "Grass stain. Best treated with CP.",
+      recommendation: "CP", price: 14,
+      issues: [{ type: "stain" as const, photoCoords: { x: 38, y: 58 } }],
+      itemNumber: "230709252550" },
+    { id: "b0", brand: "Panagia", itemType: "Blazer", color: "Pink",
+      approvalType: "B" as const,
+      facilityNote: "This item has a stain/damage and requires your consent before processing. Cleaning may affect the fabric.",
+      issues: [{ type: "stain" as const, photoCoords: { x: 48, y: 35 } }],
+      itemNumber: "230709252551" },
+  ],
+  delivery: {
+    timestamp: "Fri, 16 Jan · 4:23 PM",
+    address: "Prive Residence, 1205",
+    handoverMethod: "door" as const,
+    photos: [
+      { url: "", caption: "Everything at Door 1", emoji: "📦" },
+      { url: "", caption: "Door Image 1", emoji: "🚪" },
+      { url: "", caption: "Hangers 1", emoji: "👗" },
+    ],
+    foldedPackages: [
+      { label: "Folded Package 1", count: 6, items: [
+        { brand: "Homecentre" }, { brand: "Homecentre" }, { brand: "Oc" },
+        { brand: "Unbranded" }, { brand: "Homecentre" }, { brand: "Unbranded" },
+      ]},
+      { label: "Folded Package 2", count: 2, items: [{ brand: "Crate Barrel" }, { brand: "H M" }] },
+      { label: "Folded Package 3", count: 74, items: null },
+      { label: "Folded Package 4", count: 74, items: null },
+      { label: "Folded Package 5", count: 1, items: [{ brand: "Unbranded" }] },
+      { label: "Folded Package 6", count: 5, items: [
+        { brand: "Zara" }, { brand: "H&M" }, { brand: "Mango" }, { brand: "Uniqlo" }, { brand: "Gap" },
+      ]},
+    ],
+    hungPackages: [
+      { label: "Hung Package 1", count: 2, items: [
+        { brand: "Uniqlo", stainStatus: "not-removed" as const },
+        { brand: "Zara", stainStatus: "removed" as const },
+      ]},
+    ],
+  },
+};
