@@ -112,8 +112,8 @@ export default function ProofOfDelivery() {
   return (
     <div className="min-h-screen bg-background pb-12">
       <OrderHeader
-        orderId={order.id}
-        orderType={order.type}
+        orderId={order.orderId}
+        orderType={order.orderType}
         onBack={() => navigate(-1)}
         variant="inline"
       />
