@@ -103,7 +103,7 @@ export default function ApprovalItem() {
               <div
                 key={i}
                 className="relative shrink-0 overflow-hidden rounded-2xl bg-secondary"
-                style={{ width: "85vw", height: 180 }}
+                style={{ width: "85vw", aspectRatio: "4/3" }}
               >
                 <img
                   src={slide.src}
