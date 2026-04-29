@@ -321,7 +321,7 @@ export default function ApprovalItem() {
               : "cursor-not-allowed bg-muted text-muted-foreground"
           )}
         >
-          {isLast ? "Review decisions" : "Next item"}
+          {isLast ? "Review Decisions" : "Next Item"}
         </button>
       </div>
 
