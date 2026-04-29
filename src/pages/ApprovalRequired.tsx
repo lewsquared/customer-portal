@@ -5,7 +5,7 @@ import { StatusHero } from "@/components/order/StatusHero";
 import { ActionCard } from "@/components/order/ActionCard";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
 import { OrderConfirmations, ServicesSelection, OrderInstructions } from "@/components/order/OrderSections";
-import { ReviewBanner } from "@/components/order/ReviewBanner";
+
 import { useOrderData } from "@/lib/useOrderData";
 import type { Stage } from "@/components/order/StatusTimeline";
 
@@ -46,8 +46,6 @@ const ApprovalRequired = () => {
             currentIndex={2}
             variant="received"
           />
-
-          <ReviewBanner count={count} orderId={order.orderId} />
 
           <ActionCard
             variant="attention"

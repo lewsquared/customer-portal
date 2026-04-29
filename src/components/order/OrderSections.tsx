@@ -25,6 +25,7 @@ import { StarchSheet, starchLabel, type StarchLevel } from "./StarchSheet";
 import { AutoApprovalsSheet, type AutoApprovalsState, type WashFoldApproval } from "./AutoApprovalsSheet";
 import { CreasesSheet, creasesSummary, EMPTY_CREASES, type CreasesState } from "./CreasesSheet";
 import { DelicateItemsSheet, delicateItemsSummary } from "./DelicateItemsSheet";
+import type { OrderData } from "@/lib/order-types";
 
 const WF_SHORT_LABELS: Record<WashFoldApproval, string> = {
   notify: "Notify me",
@@ -75,13 +76,14 @@ const buildConfirmations = (stage: OrderStage): Confirmation[] => {
   ];
 };
 
-export const OrderConfirmations = ({ stage = "delivery", orderId = "" }: { stage?: OrderStage; orderId?: string }) => {
+export const OrderConfirmations = ({ stage = "delivery", orderId = "", order }: { stage?: OrderStage; orderId?: string; order?: OrderData }) => {
   const confirmations = buildConfirmations(stage);
   const navigate = useNavigate();
   const handleTap = (key: string) => {
-    if (key === "pickup") navigate(`/portal/${orderId}/pickup`);
-    if (key === "items") navigate(`/portal/${orderId}/facility`);
-    if (key === "drop") navigate(`/portal/${orderId}/delivery`);
+    const navState = order ? { state: { order } } : undefined;
+    if (key === "pickup") navigate(`/portal/${orderId}/pickup`, navState);
+    if (key === "items") navigate(`/portal/${orderId}/facility`, navState);
+    if (key === "drop") navigate(`/portal/${orderId}/delivery`, navState);
   };
   return (
     <section
