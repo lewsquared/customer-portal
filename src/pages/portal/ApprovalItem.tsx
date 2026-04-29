@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Check, ChevronLeft, DollarSign, MessageCircle, Shirt } from "lucide-react";
+import { Check, ChevronLeft, Shirt } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { MOCK_PORTAL_DATA } from "@/lib/portal-mock-data";
 import { useOrderData } from "@/lib/useOrderData";
@@ -26,7 +26,7 @@ export default function ApprovalItem() {
       isLast
         ? `/portal/${order.orderId}/approval/confirm`
         : `/portal/${order.orderId}/approval/${idx + 1}`,
-      { state: { order } },
+      { state: { order } }
     );
   const goBack = () =>
     idx > 0
@@ -36,88 +36,67 @@ export default function ApprovalItem() {
   if (!item) return null;
   const stain = item.issues?.[0];
 
+  const slides = [
+    { label: "ORIGINAL", labelClass: "bg-primary/80 text-primary-foreground" },
+    { label: stain?.type === "damage" ? "DAMAGE" : "STAIN", labelClass: "bg-destructive text-destructive-foreground" },
+  ];
+
   return (
-    <main className="min-h-screen bg-background font-sans antialiased">
-      <div className="mx-auto flex min-h-screen max-w-md flex-col bg-background md:my-6 md:min-h-[calc(100vh-3rem)] md:rounded-[2.25rem] md:border md:border-border">
-        {/* Top nav */}
-        <div className="flex items-start justify-between px-5 pt-6">
-          <div className="flex items-start gap-2">
-            <button
-              type="button"
-              onClick={goBack}
-              aria-label="Back"
-              className="-ml-1 mt-1 text-primary"
-            >
-              <ChevronLeft className="h-6 w-6" strokeWidth={2.5} />
-            </button>
-            <div className="min-w-0">
-              <h1 className="font-sans text-2xl font-extrabold leading-tight text-primary">
-                Item {idx + 1} of {items.length}
-              </h1>
-              <p className="mt-0.5 text-xs font-medium text-muted-foreground">
-                {item.brand} {item.itemType}
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              aria-label="Pricing"
-              className="flex h-7 w-7 items-center justify-center rounded-full border border-border bg-card text-primary"
-            >
-              <DollarSign className="h-3.5 w-3.5" strokeWidth={2.5} />
-            </button>
-            <button
-              type="button"
-              aria-label="Chat"
-              className="flex h-7 w-7 items-center justify-center rounded-full border border-border bg-card text-primary"
-            >
-              <MessageCircle className="h-3.5 w-3.5" strokeWidth={2.5} />
-            </button>
+    <div className="min-h-screen bg-background pb-12">
+      <div className="px-5 pt-6">
+        {/* Stepper nav — NO $ or chat icons */}
+        <div className="flex items-start gap-2">
+          <button
+            onClick={goBack}
+            aria-label="Back"
+            className="-ml-1 flex h-8 w-8 shrink-0 items-center justify-center text-primary active:opacity-60"
+          >
+            <ChevronLeft className="h-6 w-6" strokeWidth={2.5} />
+          </button>
+          <div className="min-w-0 flex-1">
+            <h1 className="text-xl font-extrabold tracking-tight text-primary">
+              Item {idx + 1} of {items.length}
+            </h1>
+            <p className="mt-0.5 text-sm font-medium text-muted-foreground truncate">
+              {item.brand} {item.itemType}
+            </p>
           </div>
         </div>
 
-        {/* Photo carousel — centered card with peek */}
-        <div className="mt-5 pl-5">
-          <div className="flex items-stretch gap-3 overflow-hidden">
-            {/* Main photo */}
-            <div className="relative aspect-[3/4] w-[78%] shrink-0 overflow-hidden rounded-2xl bg-secondary">
-              <div className="flex h-full w-full items-center justify-center text-muted-foreground">
-                <Shirt className="h-16 w-16" strokeWidth={1.5} />
+        {/* Carousel — compact fixed height, proper slide logic, peek effect */}
+        <div className="mt-5 overflow-hidden">
+          <div
+            className="flex gap-3 transition-transform duration-300 ease-out"
+            style={{ transform: `translateX(calc(${photoIdx * -72}% - ${photoIdx * 12}px))` }}
+          >
+            {slides.map((slide, i) => (
+              <div key={i} className="relative w-[72%] shrink-0 aspect-[3/4] rounded-2xl overflow-hidden bg-secondary">
+                <div className="flex h-full w-full items-center justify-center">
+                  <Shirt className="h-20 w-20 text-muted-foreground/30" strokeWidth={1.25} />
+                </div>
+                {/* Stain dot — first slide only */}
+                {i === 0 && stain && (
+                  <div
+                    className="absolute h-3 w-3 rounded-full bg-destructive ring-2 ring-background"
+                    style={{ left: `${stain.photoCoords?.x ?? 50}%`, top: `${stain.photoCoords?.y ?? 50}%`, transform: "translate(-50%, -50%)" }}
+                  />
+                )}
+                <span className={cn("absolute left-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-extrabold tracking-wider", slide.labelClass)}>
+                  {slide.label}
+                </span>
               </div>
-              {stain && (
-                <span
-                  aria-hidden
-                  className="absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-background bg-destructive shadow-md"
-                  style={{ left: `${stain.photoCoords.x}%`, top: `${stain.photoCoords.y}%` }}
-                />
-              )}
-              <span className="absolute bottom-3 left-3 rounded-md bg-primary/80 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-primary-foreground">
-                Original
-              </span>
-            </div>
-            {/* Peek card */}
-            <div className="relative aspect-[3/4] w-[78%] shrink-0 overflow-hidden rounded-2xl bg-secondary">
-              <div className="flex h-full w-full items-center justify-center text-muted-foreground">
-                <Shirt className="h-16 w-16" strokeWidth={1.5} />
-              </div>
-              <span className="absolute bottom-3 left-3 rounded-md bg-destructive px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-destructive-foreground">
-                {(stain?.type as string) === "damage" ? "Damage" : "Stain"}
-              </span>
-            </div>
+            ))}
           </div>
 
           {/* Dot pagination */}
-          <div className="mt-4 flex items-center justify-center gap-1.5 pr-5">
-            {[0, 1, 2].map((i) => (
+          <div className="mt-4 flex items-center justify-center gap-1.5">
+            {slides.map((_, i) => (
               <button
                 key={i}
-                type="button"
-                aria-label={`Photo ${i + 1}`}
                 onClick={() => setPhotoIdx(i)}
                 className={cn(
                   "h-1.5 rounded-full bg-primary transition-all duration-200",
-                  i === photoIdx ? "w-5" : "w-1.5 opacity-30",
+                  i === photoIdx ? "w-5" : "w-1.5 opacity-30"
                 )}
               />
             ))}
@@ -125,20 +104,20 @@ export default function ApprovalItem() {
         </div>
 
         {/* Decision content */}
-        <div className="flex-1 px-5 pb-10 pt-6">
-          {/* TYPE A */}
+        <div className="mt-6">
+          {/* TYPE A — WF→CP */}
           {item.approvalType === "A" && (
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <p className="text-xs font-bold uppercase tracking-wider text-destructive">
                 {(item as any).issue} · {(item as any).issueLocation}
               </p>
-              <div className="mt-2 rounded-xl border border-border bg-card px-4 py-3">
-                <p className="text-sm font-medium italic text-primary">
+              <div className="mt-2 rounded-xl bg-secondary p-4">
+                <p className="text-sm italic text-foreground leading-relaxed">
                   "{item.facilityNote}"
                 </p>
               </div>
 
-              <h2 className="mt-6 text-base font-bold text-primary">
+              <h2 className="mt-6 text-base font-extrabold text-primary">
                 What would you like to do?
               </h2>
 
@@ -148,57 +127,33 @@ export default function ApprovalItem() {
                   return (
                     <button
                       key={id}
-                      type="button"
-                      onClick={() => {
-                        setDecision(id);
-                        setReturnOn(false);
-                      }}
+                      onClick={() => { setDecision(id); setReturnOn(false); }}
                       className={cn(
                         "flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all duration-150",
-                        sel ? "border-primary bg-primary" : "border-border bg-card",
+                        sel ? "border-primary bg-primary" : "border-border bg-card"
                       )}
                     >
-                      <span
-                        className={cn(
-                          "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2",
-                          sel
-                            ? "border-primary-foreground bg-primary-foreground"
-                            : "border-muted-foreground/40",
-                        )}
-                      >
+                      <span className={cn(
+                        "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2",
+                        sel ? "border-primary-foreground bg-primary-foreground" : "border-muted-foreground"
+                      )}>
                         {sel && <Check className="h-3 w-3 text-primary" strokeWidth={3} />}
                       </span>
                       <div className="min-w-0 flex-1">
-                        <p
-                          className={cn(
-                            "text-sm font-bold",
-                            sel ? "text-primary-foreground" : "text-primary",
-                          )}
-                        >
+                        <p className={cn("text-sm font-bold", sel ? "text-primary-foreground" : "text-primary")}>
                           {id === "CP" ? "Send to Clean & Press" : "Keep as Wash & Fold"}
                         </p>
-                        <p
-                          className={cn(
-                            "mt-0.5 text-xs font-medium",
-                            sel ? "text-primary-foreground/80" : "text-muted-foreground",
-                          )}
-                        >
+                        <p className={cn("text-xs", sel ? "text-primary-foreground/80" : "text-muted-foreground")}>
                           {id === "CP"
-                            ? (item as any).price
-                              ? `AED ${(item as any).price} added · best outcome`
-                              : "Best outcome"
+                            ? (item as any).price ? `AED ${(item as any).price} added · best outcome` : "Best outcome"
                             : "Risk acknowledged"}
                         </p>
                       </div>
                       {id === "CP" && (
-                        <span
-                          className={cn(
-                            "rounded-md px-1.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wide",
-                            sel
-                              ? "bg-primary-foreground text-primary"
-                              : "bg-warning text-warning-foreground",
-                          )}
-                        >
+                        <span className={cn(
+                          "rounded-full px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider",
+                          sel ? "bg-primary-foreground text-primary" : "bg-primary text-primary-foreground"
+                        )}>
                           Rec.
                         </span>
                       )}
@@ -208,64 +163,45 @@ export default function ApprovalItem() {
               </div>
 
               {/* Return uncleaned toggle */}
-              <div className="mt-4 flex items-center justify-between rounded-xl border border-border bg-card px-4 py-3">
-                <div className="min-w-0">
+              <div className="mt-3 flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3">
+                <div className="min-w-0 flex-1">
                   <p className="text-sm font-bold text-primary">Return uncleaned</p>
-                  <p className="mt-0.5 text-xs font-medium text-muted-foreground">
-                    Item returned as-is
-                  </p>
+                  <p className="text-xs text-muted-foreground">Item returned as-is</p>
                 </div>
                 <Switch
                   checked={returnOn}
-                  onCheckedChange={(v) => {
-                    setReturnOn(v);
-                    if (v) setDecision(null);
-                  }}
+                  onCheckedChange={(v) => { setReturnOn(v); if (v) setDecision(null); }}
                   className="data-[state=checked]:bg-primary"
                 />
               </div>
 
               <button
-                type="button"
-                disabled={!hasDecision}
                 onClick={goNext}
-                className={cn(
-                  "mt-6 w-full rounded-xl py-3.5 text-sm font-extrabold transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]",
-                  hasDecision
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-muted text-muted-foreground cursor-not-allowed",
-                )}
+                disabled={!hasDecision}
+                className="mt-6 w-full rounded-xl bg-primary py-3.5 text-base font-extrabold text-primary-foreground transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97] disabled:opacity-40 disabled:active:scale-100"
               >
                 {isLast ? "Review decisions" : "Next item"}
               </button>
             </div>
           )}
 
-          {/* TYPE B */}
+          {/* TYPE B — CP damage consent */}
           {item.approvalType === "B" && (
             <div>
-              <p className="text-sm font-medium leading-relaxed text-primary">
-                {item.facilityNote}
-              </p>
-
+              <div className="rounded-xl bg-secondary p-4">
+                <p className="text-sm italic text-foreground leading-relaxed">
+                  {item.facilityNote}
+                </p>
+              </div>
               <button
-                type="button"
-                onClick={() => {
-                  setDecision("approved");
-                  goNext();
-                }}
+                onClick={() => { setDecision("approved"); goNext(); }}
                 className="mt-6 w-full rounded-xl py-3.5 text-sm font-extrabold text-[#1A1A1A] transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]"
                 style={{ background: "hsl(var(--cp-green))" }}
               >
                 Approve for Clean & Press
               </button>
-
               <button
-                type="button"
-                onClick={() => {
-                  setDecision("return");
-                  goNext();
-                }}
+                onClick={() => { setDecision("return"); goNext(); }}
                 className="mt-3 w-full rounded-xl bg-surface-attention-soft py-3.5 text-sm font-extrabold text-destructive transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]"
               >
                 Return Uncleaned
@@ -274,6 +210,6 @@ export default function ApprovalItem() {
           )}
         </div>
       </div>
-    </main>
+    </div>
   );
 }
