@@ -75,7 +75,7 @@ export default function ApprovalItem() {
             <ChevronLeft className="h-6 w-6" strokeWidth={2.5} />
           </button>
           <h1 className="text-xl font-extrabold text-primary leading-tight">
-            Review Your Services
+            Review Your Items
           </h1>
         </div>
         <div className="mt-3 flex gap-1.5">
