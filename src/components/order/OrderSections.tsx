@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Check,
   ChevronRight,
@@ -74,8 +75,14 @@ const buildConfirmations = (stage: OrderStage): Confirmation[] => {
   ];
 };
 
-export const OrderConfirmations = ({ stage = "delivery" }: { stage?: OrderStage }) => {
+export const OrderConfirmations = ({ stage = "delivery", orderId = "" }: { stage?: OrderStage; orderId?: string }) => {
   const confirmations = buildConfirmations(stage);
+  const navigate = useNavigate();
+  const handleTap = (key: string) => {
+    if (key === "pickup") navigate(`/portal/${orderId}/pickup`);
+    if (key === "items") navigate(`/portal/${orderId}/facility`);
+    if (key === "drop") navigate(`/portal/${orderId}/delivery`);
+  };
   return (
     <section
       key="confirmations"
@@ -97,6 +104,7 @@ export const OrderConfirmations = ({ stage = "delivery" }: { stage?: OrderStage 
               <button
                 type="button"
                 disabled={!done}
+                onClick={done ? () => handleTap(c.key) : undefined}
                 className={cn(
                   "flex w-full items-center gap-3 py-3 text-left transition-colors",
                   done ? "hover:bg-secondary/40 -mx-2 px-2 rounded-xl" : "opacity-50 cursor-not-allowed",

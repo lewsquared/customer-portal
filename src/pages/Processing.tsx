@@ -41,7 +41,7 @@ const Processing = () => {
             dropoff={{ label: order.dropoffNote ?? "Drop off at door", when: order.dropoffWindow }}
           />
 
-          <OrderConfirmations stage="items-in" />
+          <OrderConfirmations stage="items-in" orderId={order.orderId} />
           <ServicesSelection locked />
           <OrderInstructions locked />
           </div>

@@ -45,7 +45,7 @@ const OrderCollected = () => {
               defaultOpen={false}
             />
 
-            <OrderConfirmations stage="collected" />
+            <OrderConfirmations stage="collected" orderId={order.orderId} />
 
             <ServicesSelection locked />
             <OrderInstructions locked />

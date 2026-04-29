@@ -1,14 +1,18 @@
 import { ClipboardList, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   count?: number;
+  orderId?: string;
 }
 
-export const ReviewBanner = ({ count = 3 }: Props) => {
+export const ReviewBanner = ({ count = 3, orderId }: Props) => {
+  const navigate = useNavigate();
   return (
     <section className="mt-5 px-5 animate-fade-in" style={{ animationDelay: "60ms" }}>
       <button
         type="button"
+        onClick={() => orderId && navigate(`/portal/${orderId}/approval`)}
         className="group flex w-full items-center gap-3 rounded-xl border border-warning/40 bg-warning/15 p-4 text-left transition-transform duration-100 ease-out hover:bg-warning/20 active:duration-75 active:scale-[0.99]"
       >
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-warning text-primary">

@@ -61,7 +61,7 @@ const PartialDelivery = () => {
             dropoff={{ label: "Partially delivered", when: order.dropoffWindow, done: true }}
           />
 
-          <OrderConfirmations stage="delivery" />
+          <OrderConfirmations stage="delivery" orderId={order.orderId} />
           <ServicesSelection locked />
           <OrderInstructions locked />
           </div>

@@ -61,7 +61,7 @@ const PendingItemDelivery = () => {
             dropoff={{ label: "Remaining items", when: "Today · before 08:00 PM" }}
           />
 
-          <OrderConfirmations stage="delivery" />
+          <OrderConfirmations stage="delivery" orderId={order.orderId} />
           <ServicesSelection locked />
           <OrderInstructions locked />
           </div>

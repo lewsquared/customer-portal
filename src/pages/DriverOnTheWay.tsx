@@ -48,7 +48,7 @@ const DriverOnTheWay = () => {
             dropoff={{ label: order.dropoffNote ?? "Delivery at door", when: arriving }}
           />
 
-          <OrderConfirmations stage="delivery" />
+          <OrderConfirmations stage="delivery" orderId={order.orderId} />
           <ServicesSelection locked />
           <OrderInstructions locked />
           </div>
