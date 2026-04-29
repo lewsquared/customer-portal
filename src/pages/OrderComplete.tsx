@@ -35,7 +35,7 @@ const OrderComplete = () => {
 
           <QuickActions />
 
-          <OrderConfirmations stage="delivered" orderId={order.orderId} />
+          <OrderConfirmations stage="delivered" orderId={order.orderId} order={order} />
 
           <DeliveryCard
             dropoffNote={order.pickupNote ?? "Picked up at door"}

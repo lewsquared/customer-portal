@@ -68,7 +68,7 @@ const ApprovalRequired = () => {
             dropoff={{ label: order.dropoffNote ?? "Drop off at door", when: order.dropoffWindow }}
           />
 
-          <OrderConfirmations stage="items-in" orderId={order.orderId} />
+          <OrderConfirmations stage="items-in" orderId={order.orderId} order={order} />
           <ServicesSelection locked />
           <OrderInstructions locked />
           </div>

@@ -45,7 +45,7 @@ const Index = () => {
             dropoff={{ label: order.dropoffNote ?? "Delivery at door", when: order.dropoffWindow }}
           />
 
-          <OrderConfirmations stage="delivery" orderId={order.orderId} />
+          <OrderConfirmations stage="delivery" orderId={order.orderId} order={order} />
           <ServicesSelection locked />
           <OrderInstructions locked />
         </div>
