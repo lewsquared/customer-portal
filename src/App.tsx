@@ -24,6 +24,9 @@ import PRD from "./pages/PRD.tsx";
 import ProofOfPickup from "./pages/portal/ProofOfPickup.tsx";
 import ProofOfDelivery from "./pages/portal/ProofOfDelivery.tsx";
 import ItemsSortedAtFacility from "./pages/portal/ItemsSortedAtFacility.tsx";
+import ApprovalEntry from "./pages/portal/ApprovalEntry.tsx";
+import ApprovalItem from "./pages/portal/ApprovalItem.tsx";
+import ApprovalConfirm from "./pages/portal/ApprovalConfirm.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import { ScrollToTop } from "./components/nav/ScrollToTop.tsx";
 
@@ -59,6 +62,9 @@ const App = () => (
           <Route path="/portal/proof-of-pickup" element={<ProofOfPickup />} />
           <Route path="/portal/proof-of-delivery" element={<ProofOfDelivery />} />
           <Route path="/portal/items-sorted-at-facility" element={<ItemsSortedAtFacility />} />
+          <Route path="/portal/:orderId/approval" element={<ApprovalEntry />} />
+          <Route path="/portal/:orderId/approval/confirm" element={<ApprovalConfirm />} />
+          <Route path="/portal/:orderId/approval/:itemIdx" element={<ApprovalItem />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
