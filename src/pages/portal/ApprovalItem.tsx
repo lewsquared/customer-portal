@@ -304,32 +304,7 @@ export default function ApprovalItem() {
           </button>
         </div>
       )}
-            </>
-          )}
-        </div>
-      </div>
-
-      {/* Sticky bottom CTA — Type A only */}
-      {item.approvalType === "A" && (
-        <div
-          className="border-t border-border bg-background px-5 pt-4"
-          style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)" }}
-        >
-          <button
-            type="button"
-            disabled={!hasDecision}
-            onClick={goNext}
-            className={cn(
-              "w-full rounded-xl py-3.5 font-sans text-base font-extrabold transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]",
-              hasDecision
-                ? "bg-primary text-primary-foreground"
-                : "cursor-not-allowed bg-muted text-muted-foreground"
-            )}
-          >
-            {isLast ? "Review decisions" : "Next item"}
-          </button>
-        </div>
-      )}
     </div>
   );
 }
+
