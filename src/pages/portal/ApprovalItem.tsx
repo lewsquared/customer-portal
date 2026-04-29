@@ -315,7 +315,7 @@ export default function ApprovalItem() {
           disabled={!hasDecision}
           onClick={goNext}
           className={cn(
-            "w-full rounded-xl py-3.5 font-sans text-base font-extrabold transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]",
+            "w-full rounded-xl py-3.5 font-sans text-base font-normal transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]",
             hasDecision
               ? "bg-primary text-primary-foreground"
               : "cursor-not-allowed bg-muted text-muted-foreground"
