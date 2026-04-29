@@ -193,35 +193,25 @@ export default function ApprovalItem() {
                         setReturnOn(false);
                       }}
                       className={cn(
-                        "flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all duration-150",
+                        "relative flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all duration-150",
                         sel
-                          ? "border-primary bg-primary text-primary-foreground"
+                          ? "border-primary bg-card"
                           : "border-border bg-card"
                       )}
                     >
                       <div
                         className={cn(
-                          "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2",
-                          sel ? "border-white bg-white" : "border-border"
+                          "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
+                          sel ? "border-primary bg-primary" : "border-border bg-background"
                         )}
                       >
-                        {sel && <Check className="h-3 w-3 text-primary" strokeWidth={3} />}
+                        {sel && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
                       </div>
                       <div className="flex-1">
-                        <p
-                          className={cn(
-                            "text-sm font-extrabold",
-                            sel ? "text-primary-foreground" : "text-primary"
-                          )}
-                        >
+                        <p className={cn("text-sm font-medium", "text-primary")}>
                           {id === "CP" ? "Send to Clean & Press" : "Keep as Wash & Fold"}
                         </p>
-                        <p
-                          className={cn(
-                            "text-xs",
-                            sel ? "text-primary-foreground/80" : "text-muted-foreground"
-                          )}
-                        >
+                        <p className="text-xs text-muted-foreground">
                           {id === "CP"
                             ? (item as any).price
                               ? `AED ${(item as any).price} added · best outcome`
@@ -230,13 +220,8 @@ export default function ApprovalItem() {
                         </p>
                       </div>
                       {id === "CP" && (
-                        <span
-                          className={cn(
-                            "rounded-md px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider",
-                            sel ? "bg-white text-primary" : "bg-warning text-warning-foreground"
-                          )}
-                        >
-                          Rec.
+                        <span className="absolute right-0 top-0 rounded-bl-lg rounded-tr-xl bg-warning px-2.5 py-1 text-[10px] font-semibold text-warning-foreground">
+                          Recommended
                         </span>
                       )}
                     </button>
@@ -246,7 +231,7 @@ export default function ApprovalItem() {
 
               {/* Return uncleaned */}
               <div className="mt-2 flex items-center justify-between rounded-xl border border-border bg-card px-4 py-3">
-                <p className="text-sm font-extrabold text-destructive">Return Uncleaned</p>
+                <p className="text-sm font-medium text-destructive">Return Uncleaned</p>
                 <Switch
                   checked={returnOn}
                   onCheckedChange={(v) => {
@@ -273,18 +258,18 @@ export default function ApprovalItem() {
                       type="button"
                       onClick={() => { setDecision("approved"); setReturnOn(false); }}
                       className={cn(
-                        "flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all duration-150",
-                        sel ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card"
+                        "relative flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all duration-150",
+                        sel ? "border-primary bg-card" : "border-border bg-card"
                       )}
                     >
-                      <div className={cn("flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2", sel ? "border-white bg-white" : "border-border")}>
-                        {sel && <Check className="h-3 w-3 text-primary" strokeWidth={3} />}
+                      <div className={cn("flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors", sel ? "border-primary bg-primary" : "border-border bg-background")}>
+                        {sel && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
                       </div>
                       <div className="flex-1">
-                        <p className={cn("text-sm font-extrabold", sel ? "text-primary-foreground" : "text-primary")}>
+                        <p className={cn("text-sm font-medium", "text-primary")}>
                           Approve for Clean & Press
                         </p>
-                        <p className={cn("text-xs", sel ? "text-primary-foreground/80" : "text-muted-foreground")}>
+                        <p className="text-xs text-muted-foreground">
                           Consent to process despite damage risk
                         </p>
                       </div>
@@ -293,7 +278,7 @@ export default function ApprovalItem() {
                 })()}
               </div>
               <div className="mt-2 flex items-center justify-between rounded-xl border border-border bg-card px-4 py-3">
-                <p className="text-sm font-extrabold text-destructive">Return Uncleaned</p>
+                <p className="text-sm font-medium text-destructive">Return Uncleaned</p>
                 <Switch
                   checked={returnOn}
                   onCheckedChange={(v) => { setReturnOn(v); if (v) setDecision(null); }}
