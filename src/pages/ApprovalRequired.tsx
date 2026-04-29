@@ -5,7 +5,7 @@ import { StatusHero } from "@/components/order/StatusHero";
 import { ActionCard } from "@/components/order/ActionCard";
 import { DeliveryCard } from "@/components/order/DeliveryCard";
 import { OrderConfirmations, ServicesSelection, OrderInstructions } from "@/components/order/OrderSections";
-import { ReviewBanner } from "@/components/order/ReviewBanner";
+
 import { useOrderData } from "@/lib/useOrderData";
 import type { Stage } from "@/components/order/StatusTimeline";
 
@@ -47,8 +47,6 @@ const ApprovalRequired = () => {
             variant="received"
           />
 
-          <ReviewBanner count={count} orderId={order.orderId} />
-
           <ActionCard
             variant="attention"
             icon={<TriangleAlert strokeWidth={2.4} />}
@@ -70,7 +68,7 @@ const ApprovalRequired = () => {
             dropoff={{ label: order.dropoffNote ?? "Drop off at door", when: order.dropoffWindow }}
           />
 
-          <OrderConfirmations stage="items-in" orderId={order.orderId} />
+          <OrderConfirmations stage="items-in" orderId={order.orderId} order={order} />
           <ServicesSelection locked />
           <OrderInstructions locked />
           </div>

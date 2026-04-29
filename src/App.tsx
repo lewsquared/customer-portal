@@ -59,9 +59,9 @@ const App = () => (
           <Route path="/cancelled" element={<Cancelled />} />
           <Route path="/order-complete" element={<OrderComplete />} />
           <Route path="/prd" element={<PRD />} />
-          <Route path="/portal/proof-of-pickup" element={<ProofOfPickup />} />
-          <Route path="/portal/proof-of-delivery" element={<ProofOfDelivery />} />
-          <Route path="/portal/items-sorted-at-facility" element={<ItemsSortedAtFacility />} />
+          <Route path="/portal/:orderId/pickup" element={<ProofOfPickup />} />
+          <Route path="/portal/:orderId/facility" element={<ItemsSortedAtFacility />} />
+          <Route path="/portal/:orderId/delivery" element={<ProofOfDelivery />} />
           <Route path="/portal/:orderId/approval" element={<ApprovalEntry />} />
           <Route path="/portal/:orderId/approval/confirm" element={<ApprovalConfirm />} />
           <Route path="/portal/:orderId/approval/:itemIdx" element={<ApprovalItem />} />
