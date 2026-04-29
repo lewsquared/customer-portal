@@ -33,7 +33,7 @@ export default function ApprovalEntry() {
       {/* Text content */}
       <div className="flex flex-1 flex-col items-center px-6 pt-7 text-center">
         <h1 className="font-sans text-2xl font-extrabold text-primary">
-          {items.length} item{items.length !== 1 ? "s" : ""} need your approval
+          {items.length} Item{items.length !== 1 ? "s" : ""} Need Your Approval
         </h1>
         <p className="mt-3 text-sm text-muted-foreground">
           We need a quick confirmation before we can continue processing your order.
