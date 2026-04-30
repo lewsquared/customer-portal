@@ -72,14 +72,14 @@ function ApprovalItemInner() {
   const slides =
     item.approvalType === "B"
       ? [
-          { label: "ORIGINAL", labelClass: "bg-primary/80 text-white", src: images.original },
+          { label: null as string | null, labelClass: "", src: images.original },
           ...item.issues.map((issue, i) => ({
-            label: (issue.type as string) === "damage" ? "DAMAGE" : "STAIN",
+            label: issue.location ?? null,
             labelClass: "bg-destructive text-white",
             src: i === 0 ? images.detail : images.original,
           })),
         ]
-      : [{ label: "ORIGINAL", labelClass: "bg-primary/80 text-white", src: images.original }];
+      : [{ label: null as string | null, labelClass: "", src: images.original }];
 
   const showStainUI = item.approvalType === "B";
   const activeIssue = showStainUI && item.issues.length > 0 ? item.issues[Math.max(0, photoIdx - 1)] : null;
@@ -147,26 +147,17 @@ function ApprovalItemInner() {
                     (e.target as HTMLImageElement).style.display = "none";
                   }}
                 />
-                {/* Stain dot — Type B only, original slide only */}
-                {showStainUI && i === 0 && item.issues[0]?.photoCoords && (
-                  <div
-                    className="absolute z-10 h-4 w-4 rounded-full bg-destructive shadow-md ring-2 ring-white"
-                    style={{
-                      left: `${item.issues[0].photoCoords.x}%`,
-                      top: `${item.issues[0].photoCoords.y}%`,
-                      transform: "translate(-50%, -50%)",
-                    }}
-                  />
-                )}
                 {/* Label tag */}
-                <div
-                  className={cn(
-                    "absolute bottom-3 left-3 z-10 rounded-lg px-2.5 py-1 text-[10px] font-extrabold tracking-widest shadow-sm",
-                    slide.labelClass,
-                  )}
-                >
-                  {slide.label}
-                </div>
+                {slide.label && (
+                  <div
+                    className={cn(
+                      "absolute bottom-3 left-3 z-10 rounded-lg px-2.5 py-1 text-[10px] font-extrabold tracking-widest shadow-sm",
+                      slide.labelClass,
+                    )}
+                  >
+                    {slide.label}
+                  </div>
+                )}
                 {/* Service bag icon — bottom-right overlay */}
                 <div className="absolute bottom-3 right-3 z-10">
                   <ServiceBagIcon service={(item as any).service ?? "WF"} size={32} />
@@ -386,26 +377,12 @@ function ApprovalItemInner() {
                 alt={slides[photoIdx]?.label}
                 className="h-full w-full object-cover"
               />
-              {/* Stain dot — Type B only, original slide only */}
-              {showStainUI && photoIdx === 0 && item.issues[0]?.photoCoords && (
-                <div
-                  className="absolute z-10 h-4 w-4 rounded-full bg-destructive shadow-md ring-2 ring-white"
-                  style={{
-                    left: `${item.issues[0].photoCoords.x}%`,
-                    top: `${item.issues[0].photoCoords.y}%`,
-                    transform: "translate(-50%, -50%)",
-                  }}
-                />
-              )}
               {/* Slide label, centered bottom */}
-              <div
-                className={cn(
-                  "absolute bottom-3 left-1/2 z-10 -translate-x-1/2 rounded-lg px-2.5 py-1 text-[10px] font-extrabold tracking-widest shadow-sm",
-                  slides[photoIdx]?.labelClass,
-                )}
-              >
-                {slides[photoIdx]?.label}
-              </div>
+              {slides[photoIdx]?.label && (
+                <div className="absolute bottom-3 left-1/2 z-10 -translate-x-1/2 rounded-lg bg-destructive px-3 py-1 text-xs font-bold text-white">
+                  {slides[photoIdx]?.label}
+                </div>
+              )}
               {/* Service bag icon, bottom-right */}
               <div className="absolute bottom-3 right-3 z-10">
                 <ServiceBagIcon service={(item as any).service ?? "WF"} size={36} />
