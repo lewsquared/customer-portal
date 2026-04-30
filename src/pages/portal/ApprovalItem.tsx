@@ -272,7 +272,7 @@ export default function ApprovalItem() {
             <>
               <p className="text-sm leading-relaxed text-muted-foreground">{item.facilityNote}</p>
 
-              <h2 className="mt-5 text-primary" style={{ fontWeight: 600, fontSize: "0.875rem" }}>What would you like to do?</h2>
+              <h2 className="mt-5 text-xs font-semibold uppercase tracking-wide text-primary">What would you like to do?</h2>
 
               <div className="mt-3">
                 {(() => {
