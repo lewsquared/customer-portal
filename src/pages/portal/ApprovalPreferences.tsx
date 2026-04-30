@@ -131,9 +131,9 @@ export default function ApprovalPreferences() {
               Stain And Damage Approvals
             </span>
             {stainOpen ? (
-              <ChevronUp className="h-4 w-4 text-muted-foreground" strokeWidth={2.5} />
+              <ChevronUp className="h-5 w-5 text-primary" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
             ) : (
-              <ChevronDown className="h-4 w-4 text-muted-foreground" strokeWidth={2.5} />
+              <ChevronDown className="h-5 w-5 text-primary" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
             )}
           </button>
 
@@ -166,9 +166,9 @@ export default function ApprovalPreferences() {
               Wash & Fold Approvals
             </span>
             {wfOpen ? (
-              <ChevronUp className="h-4 w-4 text-muted-foreground" strokeWidth={2.5} />
+              <ChevronUp className="h-5 w-5 text-primary" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
             ) : (
-              <ChevronDown className="h-4 w-4 text-muted-foreground" strokeWidth={2.5} />
+              <ChevronDown className="h-5 w-5 text-primary" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
             )}
           </button>
 
