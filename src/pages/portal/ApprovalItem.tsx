@@ -191,8 +191,8 @@ export default function ApprovalItem() {
                     Why we're asking
                   </p>
                   <div className="mt-2 rounded-xl border border-border bg-card px-4 py-3">
-                    <p className="text-muted-foreground whitespace-pre-line" style={{ fontSize: "14px", lineHeight: "20px", fontWeight: 100 }}>
-                      This item isn't suitable for Wash & Fold.{"\n\n"}We recommend switching it to Clean & Press so it's treated with the care it needs.
+                    <p className="text-muted-foreground" style={{ fontSize: "14px", lineHeight: "20px", fontWeight: 100 }}>
+                      This item isn't suitable for Wash & Fold. We recommend switching it to Clean & Press so it's treated with the care it needs.
                     </p>
                   </div>
                 </>
