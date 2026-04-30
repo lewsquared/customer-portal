@@ -101,11 +101,12 @@ export default function ApprovalPreferences() {
     <div className="flex h-screen flex-col bg-background font-sans">
       <div className="flex-1 overflow-y-auto px-6 pb-6 pt-14">
         {/* Confirmation */}
-        <div className="mb-10 flex items-center gap-3">
-          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-success">
-            <Check className="h-4 w-4 text-white" strokeWidth={3} />
-          </div>
-          <p className="text-sm font-semibold text-foreground">
+        <div
+          className="mb-10 flex items-center gap-2 rounded-lg px-3 py-2"
+          style={{ backgroundColor: "#D8FFF8" }}
+        >
+          <Check className="h-4 w-4 shrink-0" strokeWidth={3} style={{ color: "#2EA692" }} />
+          <p className="text-sm font-semibold" style={{ color: "#2EA692" }}>
             Decisions submitted
           </p>
         </div>
