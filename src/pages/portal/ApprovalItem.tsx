@@ -87,7 +87,7 @@ export default function ApprovalItem() {
           >
             <ChevronLeft className="h-6 w-6" strokeWidth={2.5} />
           </button>
-          <h1 className="text-xl leading-tight text-primary" style={{ fontWeight: 600 }}>Review Your Items</h1>
+          <h1 className="text-xl leading-tight text-primary" style={{ fontWeight: 700 }}>Review Your Items</h1>
         </div>
         {/* One segment per item, filled up to current */}
         <div className="mt-3 flex gap-1.5">
