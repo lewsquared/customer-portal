@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Check, ChevronDown, ChevronUp } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { useOrderData } from "@/lib/useOrderData";
+import { setOrderStatus } from "@/lib/order-status-override";
 import { cn } from "@/lib/utils";
 
 type WfPref = "notify" | "auto_cp" | "always_wash" | "return" | null;
@@ -40,7 +41,7 @@ const RadioRow = ({ selected, onSelect, label }: RadioRowProps) => (
 
 export default function ApprovalPreferences() {
   const navigate = useNavigate();
-  useOrderData();
+  const order = useOrderData();
 
   const [stainOpen, setStainOpen] = useState(true);
   const [wfOpen, setWfOpen] = useState(true);
@@ -82,7 +83,8 @@ export default function ApprovalPreferences() {
         // ignore
       }
     }
-    navigate(-4);
+    setOrderStatus(order.orderId, "items_in_process");
+    navigate("/orders");
   };
 
   let ctaLabel: string;
