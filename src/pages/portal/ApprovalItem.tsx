@@ -7,6 +7,9 @@ import { useOrderData } from "@/lib/useOrderData";
 import { cn } from "@/lib/utils";
 import { ServiceBagIcon } from "@/components/portal/ServiceBagIcon";
 
+const toTitleCase = (s: string) =>
+  s.replace(/\w\S*/g, (w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase());
+
 type Decision = "CP" | "WF" | "approved" | "return" | null;
 
 // Mock images per item id — replace with real facility photos when available
@@ -111,7 +114,7 @@ function ApprovalItemInner() {
       {/* Scrollable content */}
       <div className="flex flex-1 flex-col overflow-y-auto">
         <h2 className="px-5 pt-5 tracking-tight text-primary" style={{ fontSize: "16px", fontWeight: 600, lineHeight: "21px" }}>
-          {item.brand} {item.itemType}
+          {toTitleCase(`${item.brand} ${item.itemType}`)}
         </h2>
         {/* Carousel — swipe enabled, tap to expand */}
         <div
@@ -359,7 +362,7 @@ function ApprovalItemInner() {
 
             {/* Title */}
             <h3 className="pr-10 text-primary" style={{ fontSize: "16px", fontWeight: 600, lineHeight: "21px" }}>
-              {item.brand} - {item.itemType}
+              {toTitleCase(`${item.brand} - ${item.itemType}`)}
             </h3>
 
             {/* Color dots + item number */}
