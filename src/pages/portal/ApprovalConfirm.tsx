@@ -35,7 +35,7 @@ export default function ApprovalConfirm() {
   };
 
   const tagFor: Record<ApprovalDecision, string> = {
-    CP: "bg-washmen-light-green text-washmen-success",
+    CP: "bg-washmen-light-aqua text-washmen-primary",
     WF: "bg-washmen-light-aqua text-washmen-primary",
     approved: "bg-washmen-light-green text-washmen-success",
     return: "bg-washmen-light-red text-destructive",
@@ -89,20 +89,22 @@ export default function ApprovalConfirm() {
                     ) : null}
                   </span>
                   <div className="min-w-0 flex-1">
-                    <p className="text-sm font-bold text-foreground leading-tight">{item.brand}</p>
+                    <div className="flex items-baseline justify-between gap-2">
+                      <p className="text-sm font-bold text-foreground leading-tight">{item.brand}</p>
+                      {d === "CP" && (item as any).price > 0 && (
+                        <span className="shrink-0 text-sm font-extrabold text-primary leading-tight">
+                          +AED {(item as any).price}
+                        </span>
+                      )}
+                    </div>
                     <p className="mt-0.5 text-xs text-muted-foreground leading-tight">{(item as any).itemType}</p>
-                    <div className="mt-2.5 flex items-center justify-between gap-2">
+                    <div className="mt-2.5">
                       <span className={cn(
-                        "inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-bold leading-tight",
+                        "inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-normal leading-tight",
                         tagFor[d]
                       )}>
                         {labelFor[d]}
                       </span>
-                      {d === "CP" && (item as any).price > 0 && (
-                        <span className="shrink-0 text-sm font-extrabold text-primary">
-                          +AED {(item as any).price}
-                        </span>
-                      )}
                     </div>
                   </div>
                   <span
