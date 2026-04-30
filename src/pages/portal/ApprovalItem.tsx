@@ -336,7 +336,7 @@ export default function ApprovalItem() {
           onClick={goNext}
           className={cn(
             "w-full rounded-[6px] h-12 font-sans text-[15px] font-normal transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]",
-            hasDecision ? "bg-primary text-primary-foreground" : "cursor-not-allowed bg-muted text-muted-foreground",
+            hasDecision ? "bg-primary text-primary-foreground" : "cursor-not-allowed bg-[#F2F3F8] text-[#C3C8DB]",
           )}
         >
           {isLast ? "Review Decisions" : "Next Item"}
