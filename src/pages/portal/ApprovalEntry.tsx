@@ -25,10 +25,10 @@ export default function ApprovalEntry() {
         />
 
         <div className="mt-10 flex flex-col items-center text-center">
-          <h1 className="text-[1.75rem] font-extrabold tracking-tight text-primary" style={{ lineHeight: 1.15 }}>
+          <h1 className="text-[1.5rem] font-bold text-primary" style={{ lineHeight: 1.25, letterSpacing: "0.005em" }}>
             {count} {count === 1 ? "item needs" : "items need"} your approval
           </h1>
-          <p className="mt-4 text-[15px] leading-[1.5] text-muted-foreground">
+          <p className="mt-4 text-[0.875rem] leading-relaxed text-muted-foreground">
             A few of your items can't move forward without your decision.
             Anything left unapproved will be returned uncleaned.
           </p>
@@ -47,7 +47,8 @@ export default function ApprovalEntry() {
           onClick={() =>
             navigate(`/portal/${order.orderId}/approval/0`, { state: { order } })
           }
-          className="w-full rounded-[6px] bg-primary h-12 text-base font-semibold text-primary-foreground shadow-press transition-transform duration-100 ease-out active:duration-75 active:scale-[0.98]"
+          className="w-full rounded-[6px] bg-primary h-12 text-base font-normal text-primary-foreground shadow-press transition-transform duration-100 ease-out active:duration-75 active:scale-[0.98]"
+          style={{ letterSpacing: "0.01em" }}
         >
           Start Review
         </button>
