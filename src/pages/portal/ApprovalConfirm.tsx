@@ -35,9 +35,9 @@ export default function ApprovalConfirm() {
   };
 
   const tagFor: Record<ApprovalDecision, string> = {
-    CP: "bg-washmen-light-aqua text-washmen-primary",
+    CP: "bg-washmen-light-green text-washmen-primary",
     WF: "bg-washmen-light-aqua text-washmen-primary",
-    approved: "bg-washmen-light-green text-washmen-success",
+    approved: "bg-washmen-light-green text-washmen-primary",
     return: "bg-washmen-light-red text-destructive",
   };
 
