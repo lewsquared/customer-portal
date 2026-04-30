@@ -23,7 +23,7 @@ export default function ApprovalConfirm() {
   const labelFor: Record<ApprovalDecision, string> = {
     CP: "Moved to Clean & Press",
     WF: "Keeping in Wash & Fold",
-    approved: "Approved for processing",
+    approved: "Approved for Clean & Press",
     return: "Returning uncleaned",
   };
 
