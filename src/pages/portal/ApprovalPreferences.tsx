@@ -111,10 +111,11 @@ export default function ApprovalPreferences() {
         </div>
 
         {/* Heading */}
-        <h1 className="text-xl leading-tight text-primary" style={{ fontWeight: 700 }}>
-          Skip approvals next time?
+        <img src={bagsGroupIcon} alt="" className="mx-auto h-32 w-auto object-contain" />
+        <h1 className="mt-3 text-center text-xl leading-tight text-primary" style={{ fontWeight: 700 }}>
+          Skip Approvals Next Time?
         </h1>
-        <p className="mt-1 text-[0.875rem] leading-tight text-muted-foreground">
+        <p className="mt-1 text-center text-[0.875rem] leading-tight text-muted-foreground">
           Set your preferences once and we'll handle these decisions for you on future orders.
         </p>
 
