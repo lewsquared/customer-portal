@@ -208,7 +208,7 @@ export default function ApprovalItem() {
                       }}
                       className={cn(
                         "relative w-full rounded-xl border px-4 py-3 text-left transition-all duration-150",
-                        sel ? "border-primary bg-washmen-light-blue" : "border-border bg-card",
+                        sel ? "border-primary bg-card" : "border-border bg-card",
                       )}
                     >
                       {/* Recommended tag — top-right corner, CP only */}
@@ -274,7 +274,7 @@ export default function ApprovalItem() {
                       }}
                       className={cn(
                         "relative w-full rounded-xl border px-4 py-3 text-left transition-all duration-150",
-                        sel ? "border-primary bg-washmen-light-blue" : "border-border bg-card",
+                        sel ? "border-primary bg-card" : "border-border bg-card",
                       )}
                     >
                       <div className="pr-2">
