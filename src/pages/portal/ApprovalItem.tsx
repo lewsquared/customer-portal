@@ -275,7 +275,7 @@ export default function ApprovalItem() {
                           Approve for Clean & Press
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          Consent to process despite damage risk
+                          I understand processing may not remove the stain or could affect the item
                         </p>
                       </div>
                     </button>
