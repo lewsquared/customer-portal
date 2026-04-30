@@ -37,13 +37,38 @@ function ApprovalItemInner() {
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
 
+  const { state } = useLocation();
+  const editMode = (state as any)?.editMode ?? false;
+
+  useEffect(() => {
+    const stored = readDecision(idx);
+    if (stored === "return") {
+      setReturnOn(true);
+      setDecision(null);
+    } else if (stored) {
+      setDecision(stored);
+      setReturnOn(false);
+    }
+  }, [idx]);
+
   const hasDecision = decision !== null || returnOn;
 
   const goNext = () => {
     if (!hasDecision) return;
-    navigate(isLast ? `/portal/${order.orderId}/approval/confirm` : `/portal/${order.orderId}/approval/${idx + 1}`, {
-      state: { order },
-    });
+    const persisted = returnOn ? "return" : (decision as any);
+    if (persisted) persistDecision(idx, persisted);
+
+    if (editMode) {
+      navigate(`/portal/${order.orderId}/approval/confirm`, { state: { order } });
+      return;
+    }
+
+    navigate(
+      isLast
+        ? `/portal/${order.orderId}/approval/confirm`
+        : `/portal/${order.orderId}/approval/${idx + 1}`,
+      { state: { order } }
+    );
   };
 
   const goBack = () =>
@@ -53,7 +78,7 @@ function ApprovalItemInner() {
 
   if (!item) return null;
 
-  const images = ITEM_IMAGES[item.id] ?? ITEM_IMAGES.a0;
+  const images = APPROVAL_ITEM_IMAGES[item.id] ?? APPROVAL_ITEM_IMAGES.a0;
 
   // Type A: original photo only, no stain UI.
   // Type B: original + issue close-up slides, with stain dot on first slide.
