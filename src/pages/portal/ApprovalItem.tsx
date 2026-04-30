@@ -198,7 +198,7 @@ export default function ApprovalItem() {
                 </>
               )}
 
-              <h2 className="mt-4 text-base font-extrabold text-primary">What would you like to do?</h2>
+              <h2 className="mt-4 text-primary" style={{ fontWeight: 600, fontSize: "0.875rem" }}>What would you like to do?</h2>
 
               <div className="mt-3 flex flex-col gap-2">
                 {(["CP", "WF"] as const).map((id) => {
@@ -272,7 +272,7 @@ export default function ApprovalItem() {
             <>
               <p className="text-sm leading-relaxed text-muted-foreground">{item.facilityNote}</p>
 
-              <h2 className="mt-5 text-base font-extrabold text-primary">What would you like to do?</h2>
+              <h2 className="mt-5 text-primary" style={{ fontWeight: 600, fontSize: "0.875rem" }}>What would you like to do?</h2>
 
               <div className="mt-3">
                 {(() => {
