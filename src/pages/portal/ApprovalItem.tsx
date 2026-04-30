@@ -134,8 +134,8 @@ export default function ApprovalItem() {
                     (e.target as HTMLImageElement).style.display = "none";
                   }}
                 />
-                {/* Stain dot — original slide only, sits above image */}
-                {i === 0 && item.issues[0]?.photoCoords && (
+                {/* Stain dot — Type B only, original slide only */}
+                {showStainUI && i === 0 && item.issues[0]?.photoCoords && (
                   <div
                     className="absolute z-10 h-4 w-4 rounded-full bg-destructive shadow-md ring-2 ring-white"
                     style={{
