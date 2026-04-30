@@ -13,7 +13,7 @@ export default function ApprovalEntry() {
       <OrderHeader
         orderId={order.orderId}
         orderType={order.orderType}
-        onBack={() => navigate(-1)}
+        onBack={() => navigate("/orders")}
         variant="inline"
       />
 
