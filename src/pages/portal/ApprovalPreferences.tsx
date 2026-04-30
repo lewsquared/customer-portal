@@ -1,58 +1,102 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Check, ChevronDown, ChevronUp } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 import { useOrderData } from "@/lib/useOrderData";
 import { cn } from "@/lib/utils";
 
-type StainPref = "notify" | "auto_cp" | null;
-type WfPref = "notify" | "auto_cp" | "return" | null;
+type WfPref = "notify" | "auto_cp" | "always_wash" | "return" | null;
+
+interface SavedPrefs {
+  stainAutoApprove: boolean;
+  wfPref: WfPref;
+}
+
+const STORAGE_KEY = "washmen_approval_prefs";
 
 interface RadioRowProps {
   selected: boolean;
   onSelect: () => void;
   label: string;
-  sublabel?: string;
 }
 
-const RadioRow = ({ selected, onSelect, label, sublabel }: RadioRowProps) => (
-  <button type="button" onClick={onSelect} className="flex w-full items-start gap-3 py-3 text-left">
+const RadioRow = ({ selected, onSelect, label }: RadioRowProps) => (
+  <button
+    type="button"
+    onClick={onSelect}
+    className="flex w-full items-center gap-3 border-t border-border/60 py-3 text-left"
+  >
+    <span className="flex-1 text-sm text-primary">{label}</span>
     <div
       className={cn(
-        "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
+        "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
         selected ? "border-primary bg-primary" : "border-border bg-background",
       )}
     >
       {selected && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
-    </div>
-    <div className="min-w-0 flex-1">
-      <p className={cn("text-sm font-medium", selected ? "text-primary" : "text-foreground")}>{label}</p>
-      {sublabel && <p className="mt-0.5 text-xs text-muted-foreground">{sublabel}</p>}
     </div>
   </button>
 );
 
 export default function ApprovalPreferences() {
   const navigate = useNavigate();
-  const order = useOrderData();
+  useOrderData();
 
-  const [stainOpen, setStainOpen] = useState(false);
-  const [wfOpen, setWfOpen] = useState(false);
-  const [stainPref, setStainPref] = useState<StainPref>(null);
+  const [stainOpen, setStainOpen] = useState(true);
+  const [wfOpen, setWfOpen] = useState(true);
+  const [stainAutoApprove, setStainAutoApprove] = useState(false);
   const [wfPref, setWfPref] = useState<WfPref>(null);
 
-  const hasPref = stainPref !== null || wfPref !== null;
+  const [loaded, setLoaded] = useState<SavedPrefs | null>(null);
 
-  const handleContinue = () => {
-    if (hasPref) {
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw) as SavedPrefs;
+        setStainAutoApprove(!!parsed.stainAutoApprove);
+        setWfPref((parsed.wfPref ?? null) as WfPref);
+        setLoaded({
+          stainAutoApprove: !!parsed.stainAutoApprove,
+          wfPref: (parsed.wfPref ?? null) as WfPref,
+        });
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  const hasSaved = loaded !== null;
+  const hasChanges = loaded
+    ? loaded.stainAutoApprove !== stainAutoApprove || loaded.wfPref !== wfPref
+    : stainAutoApprove !== false || wfPref !== null;
+
+  const handleClick = () => {
+    if (hasChanges) {
       try {
-        localStorage.setItem("washmen_approval_prefs", JSON.stringify({ stainPref, wfPref }));
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify({ stainAutoApprove, wfPref }),
+        );
       } catch {
-        // localStorage unavailable — ignore
+        // ignore
       }
     }
-    // Go back to order tracking (past the 3 approval screens + confirm)
     navigate(-4);
   };
+
+  let ctaLabel: string;
+  let ctaPrimary: boolean;
+  if (hasChanges) {
+    ctaLabel = "Apply";
+    ctaPrimary = true;
+  } else if (hasSaved) {
+    ctaLabel = "Continue";
+    ctaPrimary = true;
+  } else {
+    ctaLabel = "Skip for Now";
+    ctaPrimary = false;
+  }
 
   return (
     <div className="flex h-screen flex-col bg-background font-sans">
@@ -65,23 +109,28 @@ export default function ApprovalPreferences() {
           <p className="text-sm font-semibold text-success">You are all done!</p>
         </div>
 
+        {/* Illustration */}
+        <div className="flex items-center justify-center py-4">
+          <span className="text-7xl leading-none">🛍️</span>
+        </div>
+
         {/* Heading */}
         <div className="mb-7 text-center">
           <h1 className="font-sans text-xl font-extrabold text-primary">Do you trust us?</h1>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            Enable auto-approvals and skip reviewing items in the future
+            Enable auto-approvals and skip approving each item in the future
           </p>
         </div>
 
-        {/* Stain and Damage Approvals */}
+        {/* Stain and Damage Approval */}
         <div className="mb-3 overflow-hidden rounded-xl border border-border bg-card">
           <button
             type="button"
             onClick={() => setStainOpen((v) => !v)}
             className="flex w-full items-center gap-3 px-4 py-3.5 text-left"
           >
-            <span className="text-xl">🧺</span>
-            <span className="flex-1 text-sm font-semibold text-primary">Stain and Damage Approvals</span>
+            <span className="text-xl">🛍️</span>
+            <span className="flex-1 text-sm font-semibold text-primary">Stain and Damage Approval</span>
             {stainOpen ? (
               <ChevronUp className="h-4 w-4 text-muted-foreground" strokeWidth={2.5} />
             ) : (
@@ -90,37 +139,32 @@ export default function ApprovalPreferences() {
           </button>
 
           {stainOpen && (
-            <div className="border-t border-border px-4 pb-2">
-              <p className="py-3 text-xs leading-relaxed text-muted-foreground">
-                When we find a stain or damage that requires consent before processing, we'll handle it based on your
-                preference.
+            <div className="px-4">
+              <p className="border-t border-border py-3 text-sm leading-relaxed text-muted-foreground">
+                By activating "Auto-approve" our laundry team will process all items with stains or damages
+                without seeking your consent
               </p>
-              <RadioRow
-                selected={stainPref === "notify"}
-                onSelect={() => setStainPref("notify")}
-                label="Always notify me so I can decide"
-                sublabel="Default — you'll review each item"
-              />
-              <div className="border-t border-border/60" />
-              <RadioRow
-                selected={stainPref === "auto_cp"}
-                onSelect={() => setStainPref("auto_cp")}
-                label="Automatically approve for Clean & Press"
-                sublabel="Items charged at Clean & Press pricing"
-              />
+              <div className="flex items-center gap-3 border-t border-border/60 py-3">
+                <span className="flex-1 text-sm font-medium text-primary">Auto-Approve</span>
+                <Switch
+                  checked={stainAutoApprove}
+                  onCheckedChange={setStainAutoApprove}
+                  className="data-[state=checked]:bg-primary"
+                />
+              </div>
             </div>
           )}
         </div>
 
-        {/* Wash and Fold Approvals */}
+        {/* Wash & Fold Approval */}
         <div className="overflow-hidden rounded-xl border border-border bg-card">
           <button
             type="button"
             onClick={() => setWfOpen((v) => !v)}
             className="flex w-full items-center gap-3 px-4 py-3.5 text-left"
           >
-            <span className="text-xl">👕</span>
-            <span className="flex-1 text-sm font-semibold text-primary">Wash and Fold Approvals</span>
+            <span className="text-xl">🛍️</span>
+            <span className="flex-1 text-sm font-semibold text-primary">Wash & Fold Approval</span>
             {wfOpen ? (
               <ChevronUp className="h-4 w-4 text-muted-foreground" strokeWidth={2.5} />
             ) : (
@@ -129,30 +173,30 @@ export default function ApprovalPreferences() {
           </button>
 
           {wfOpen && (
-            <div className="border-t border-border px-4 pb-2">
-              <p className="py-3 text-xs leading-relaxed text-muted-foreground">
-                When we identify items that may not be suitable for Wash & Fold, we'll handle them based on your
-                preference.
+            <div className="px-4 pb-1">
+              <p className="border-t border-border py-3 text-sm leading-relaxed text-muted-foreground">
+                In order to protect your delicate & expensive items, our team will flag items that we believe
+                might not be suitable to Wash & Fold and will require your approval on how to proceed
               </p>
               <RadioRow
                 selected={wfPref === "notify"}
                 onSelect={() => setWfPref("notify")}
-                label="Always notify me so I can decide"
-                sublabel="Default — you'll review each item"
+                label="Always notify me of the items in question so I can decide (default)"
               />
-              <div className="border-t border-border/60" />
               <RadioRow
                 selected={wfPref === "auto_cp"}
                 onSelect={() => setWfPref("auto_cp")}
-                label="Automatically transfer to Clean & Press"
-                sublabel="Items charged at Clean & Press pricing"
+                label="Automatically transfer items to the clean & press service and notify me"
               />
-              <div className="border-t border-border/60" />
+              <RadioRow
+                selected={wfPref === "always_wash"}
+                onSelect={() => setWfPref("always_wash")}
+                label="Always wash any items I send in the wash & fold bag, regardless of the risk involved and notify me"
+              />
               <RadioRow
                 selected={wfPref === "return"}
                 onSelect={() => setWfPref("return")}
-                label="Return unprocessed"
-                sublabel="Items will be returned as-is"
+                label="Do not wash and return unprocessed"
               />
             </div>
           )}
@@ -166,17 +210,15 @@ export default function ApprovalPreferences() {
       >
         <button
           type="button"
-          onClick={handleContinue}
-          className="w-full rounded-xl bg-primary py-3.5 font-sans text-base font-extrabold text-primary-foreground transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]"
+          onClick={handleClick}
+          className={cn(
+            "w-full rounded-xl py-3.5 font-sans text-base transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]",
+            ctaPrimary
+              ? "bg-primary font-extrabold text-primary-foreground"
+              : "border border-border bg-transparent font-semibold text-muted-foreground",
+          )}
         >
-          {hasPref ? "Save Preferences" : "Continue"}
-        </button>
-        <button
-          type="button"
-          onClick={() => navigate(-4)}
-          className="mt-3 w-full rounded-xl border border-border bg-transparent py-3 font-sans text-sm font-semibold text-muted-foreground transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]"
-        >
-          Skip for Now
+          {ctaLabel}
         </button>
       </div>
     </div>
