@@ -114,7 +114,7 @@
   }
 
   html, body, #root {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
     font-feature-settings: "ss01", "cv11";
   }
 
