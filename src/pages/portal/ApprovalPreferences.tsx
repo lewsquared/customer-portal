@@ -69,7 +69,7 @@ export default function ApprovalPreferences() {
   const hasSaved = loaded !== null;
   const hasChanges = loaded
     ? loaded.stainAutoApprove !== stainAutoApprove || loaded.wfPref !== wfPref
-    : stainAutoApprove !== false || wfPref !== null;
+    : stainAutoApprove !== false || wfPref !== "notify";
 
   const handleClick = () => {
     if (hasChanges) {
