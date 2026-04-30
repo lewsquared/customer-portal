@@ -119,14 +119,14 @@ export default function ApprovalItem() {
             {slides.map((slide, i) => (
               <div
                 key={i}
-                className="relative shrink-0 cursor-pointer overflow-hidden rounded-2xl bg-secondary"
-                style={{ width: "85vw", aspectRatio: "4/3" }}
+                className="relative shrink-0 cursor-pointer overflow-hidden rounded-3xl bg-[#EAF4F4]"
+                style={{ width: "85vw", height: "320px" }}
                 onClick={() => setLightboxSrc(slide.src)}
               >
                 <img
                   src={slide.src}
                   alt={slide.label}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-contain p-5"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = "none";
                   }}
