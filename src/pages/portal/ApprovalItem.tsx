@@ -207,7 +207,7 @@ export default function ApprovalItem() {
                         setReturnOn(false);
                       }}
                       className={cn(
-                        "relative w-full rounded-xl border-2 px-4 py-3 text-left transition-all duration-150",
+                        "relative w-full rounded-xl border px-4 py-3 text-left transition-all duration-150",
                         sel ? "border-primary bg-washmen-light-blue" : "border-border bg-card",
                       )}
                     >
@@ -273,7 +273,7 @@ export default function ApprovalItem() {
                         setReturnOn(false);
                       }}
                       className={cn(
-                        "relative w-full rounded-xl border-2 px-4 py-3 text-left transition-all duration-150",
+                        "relative w-full rounded-xl border px-4 py-3 text-left transition-all duration-150",
                         sel ? "border-primary bg-washmen-light-blue" : "border-border bg-card",
                       )}
                     >
