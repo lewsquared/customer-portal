@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Check, ChevronLeft } from "lucide-react";
+import { Check, ChevronLeft, X } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { MOCK_PORTAL_DATA } from "@/lib/portal-mock-data";
 import { useOrderData } from "@/lib/useOrderData";
@@ -8,18 +8,19 @@ import { cn } from "@/lib/utils";
 
 type Decision = "CP" | "WF" | "approved" | "return" | null;
 
+// Mock images per item id — replace with real facility photos when available
 const ITEM_IMAGES: Record<string, { original: string; detail: string }> = {
   a0: {
-    original: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&q=80",
-    detail: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=400&q=80",
+    original: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&q=80",
+    detail: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=80",
   },
   a1: {
-    original: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=400&q=80",
-    detail: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=400&q=80",
+    original: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=600&q=80",
+    detail: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=80",
   },
   b0: {
-    original: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&q=80",
-    detail: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=400&q=80",
+    original: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&q=80",
+    detail: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=80",
   },
 };
 
@@ -31,46 +32,50 @@ export default function ApprovalItem() {
   const items = MOCK_PORTAL_DATA.approvalItems;
   const item = items[idx];
   const isLast = idx === items.length - 1;
+
   const [decision, setDecision] = useState<Decision>(null);
   const [returnOn, setReturnOn] = useState(false);
   const [photoIdx, setPhotoIdx] = useState(0);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+
   const hasDecision = decision !== null || returnOn;
 
   const goNext = () =>
-    navigate(
-      isLast
-        ? `/portal/${order.orderId}/approval/confirm`
-        : `/portal/${order.orderId}/approval/${idx + 1}`,
-      { state: { order } }
-    );
+    navigate(isLast ? `/portal/${order.orderId}/approval/confirm` : `/portal/${order.orderId}/approval/${idx + 1}`, {
+      state: { order },
+    });
+
   const goBack = () =>
     idx > 0
       ? navigate(`/portal/${order.orderId}/approval/${idx - 1}`, { state: { order } })
       : navigate(`/portal/${order.orderId}/approval`, { state: { order } });
 
   if (!item) return null;
+
   const images = ITEM_IMAGES[item.id] ?? ITEM_IMAGES.a0;
 
-  // Slides: Original + one per issue
+  // Build slides: Original + one slide per issue
   const slides = [
-    { label: "ORIGINAL", labelClass: "bg-primary/80 text-white", src: images.original, issueIndex: null as number | null },
+    {
+      label: "ORIGINAL",
+      labelClass: "bg-primary/80 text-white",
+      src: images.original,
+    },
     ...item.issues.map((issue, i) => ({
-      label: (issue.type as string) === "damage" ? "DAMAGE" : "STAIN",
+      label: issue.type === "damage" ? "DAMAGE" : "STAIN",
       labelClass: "bg-destructive text-white",
       src: i === 0 ? images.detail : images.original,
-      issueIndex: i,
     })),
   ];
 
-  // Active issue updates as user swipes
-  const activeIssue =
-    item.issues.length > 0 ? item.issues[Math.max(0, photoIdx - 1)] : null;
+  // Active issue: when on Original slide show first issue as context,
+  // when on issue slide show that specific issue
+  const activeIssue = item.issues.length > 0 ? item.issues[Math.max(0, photoIdx - 1)] : null;
 
   return (
     <div className="flex h-screen flex-col bg-background font-sans">
-      {/* Header — title + segmented progress bar */}
+      {/* Header: "Review Your Items" + segmented progress bar */}
       <div className="px-5 pt-6">
         <div className="flex items-center gap-2">
           <button
@@ -81,26 +86,25 @@ export default function ApprovalItem() {
           >
             <ChevronLeft className="h-6 w-6" strokeWidth={2.5} />
           </button>
-          <h1 className="text-xl font-extrabold text-primary leading-tight">
-            Review Your Items
-          </h1>
+          <h1 className="text-xl font-extrabold leading-tight text-primary">Review Your Items</h1>
         </div>
+        {/* One segment per item, filled up to current */}
         <div className="mt-3 flex gap-1.5">
           {items.map((_, i) => (
             <div
               key={i}
               className={cn(
                 "h-1.5 flex-1 rounded-full transition-colors duration-300",
-                i <= idx ? "bg-warning" : "bg-muted"
+                i <= idx ? "bg-warning" : "bg-muted",
               )}
             />
           ))}
         </div>
       </div>
 
-      {/* Scrollable middle */}
+      {/* Scrollable content */}
       <div className="flex flex-1 flex-col overflow-y-auto">
-        {/* Carousel */}
+        {/* Carousel — swipe enabled, tap to expand */}
         <div
           className="mt-4 overflow-hidden pl-5"
           onTouchStart={(e) => setTouchStartX(e.touches[0].clientX)}
@@ -120,7 +124,7 @@ export default function ApprovalItem() {
               <div
                 key={i}
                 className="relative shrink-0 cursor-pointer overflow-hidden rounded-3xl bg-[#EAF4F4]"
-                style={{ width: "85vw", height: "320px" }}
+                style={{ width: "85vw", height: "260px" }}
                 onClick={() => setLightboxSrc(slide.src)}
               >
                 <img
@@ -131,9 +135,10 @@ export default function ApprovalItem() {
                     (e.target as HTMLImageElement).style.display = "none";
                   }}
                 />
+                {/* Stain dot — original slide only, sits above image */}
                 {i === 0 && item.issues[0]?.photoCoords && (
                   <div
-                    className="absolute z-10 h-4 w-4 rounded-full bg-destructive ring-2 ring-white shadow-md"
+                    className="absolute z-10 h-4 w-4 rounded-full bg-destructive shadow-md ring-2 ring-white"
                     style={{
                       left: `${item.issues[0].photoCoords.x}%`,
                       top: `${item.issues[0].photoCoords.y}%`,
@@ -141,10 +146,11 @@ export default function ApprovalItem() {
                     }}
                   />
                 )}
+                {/* Label tag */}
                 <div
                   className={cn(
                     "absolute bottom-3 left-3 z-10 rounded-lg px-2.5 py-1 text-[10px] font-extrabold tracking-widest shadow-sm",
-                    slide.labelClass
+                    slide.labelClass,
                   )}
                 >
                   {slide.label}
@@ -160,11 +166,10 @@ export default function ApprovalItem() {
             <button
               key={i}
               type="button"
-              aria-label={`Photo ${i + 1}`}
               onClick={() => setPhotoIdx(i)}
               className={cn(
                 "h-1.5 rounded-full bg-primary transition-all duration-200",
-                i === photoIdx ? "w-5" : "w-1.5 opacity-30"
+                i === photoIdx ? "w-5" : "w-1.5 opacity-30",
               )}
             />
           ))}
@@ -172,33 +177,25 @@ export default function ApprovalItem() {
 
         {/* Decision content */}
         <div className="px-5 pb-4 pt-4">
+          {/*
+            TYPE A — WF item not suitable for WF cycle
+            User must choose: Send to Clean & Press / Keep as Wash & Fold / Return Uncleaned
+          */}
           {item.approvalType === "A" && (
             <>
-              {activeIssue ? (
+              {/* Issue label + note — updates as user swipes through slides */}
+              {activeIssue && (
                 <>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    {(activeIssue as any).type} · {(activeIssue as any).location ?? (item as any).issueLocation}
+                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    {activeIssue.type} · {activeIssue.location}
                   </p>
-                  <div className="mt-2 rounded-xl border border-border bg-card p-3">
-                    <p className="text-sm italic text-muted-foreground">
-                      "{(activeIssue as any).facilityNote ?? item.facilityNote}"
-                    </p>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    {(item as any).issue} · {(item as any).issueLocation}
-                  </p>
-                  <div className="mt-2 rounded-xl border border-border bg-card p-3">
-                    <p className="text-sm italic text-muted-foreground">"{item.facilityNote}"</p>
+                  <div className="mt-2 rounded-xl border border-border bg-card px-4 py-3">
+                    <p className="text-sm italic text-muted-foreground">"{activeIssue.facilityNote}"</p>
                   </div>
                 </>
               )}
 
-              <h2 className="mt-6 text-base font-extrabold text-primary">
-                What would you like to do?
-              </h2>
+              <h2 className="mt-4 text-base font-extrabold text-primary">What would you like to do?</h2>
 
               <div className="mt-3 flex flex-col gap-2">
                 {(["CP", "WF"] as const).map((id) => {
@@ -213,24 +210,29 @@ export default function ApprovalItem() {
                       }}
                       className={cn(
                         "relative flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all duration-150",
-                        sel
-                          ? "border-primary bg-card"
-                          : "border-border bg-card"
+                        sel ? "border-primary bg-card" : "border-border bg-card",
                       )}
                     >
+                      {/* Recommended tag — top-right corner, CP only */}
+                      {id === "CP" && (
+                        <span className="absolute right-0 top-0 rounded-bl-lg rounded-tr-xl bg-warning px-2.5 py-1 text-[10px] font-semibold text-warning-foreground">
+                          Recommended
+                        </span>
+                      )}
+                      {/* Radio circle */}
                       <div
                         className={cn(
                           "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
-                          sel ? "border-primary bg-primary" : "border-border bg-background"
+                          sel ? "border-primary bg-primary" : "border-border bg-background",
                         )}
                       >
                         {sel && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
                       </div>
-                      <div className="flex-1">
-                        <p className={cn("text-sm font-medium", "text-primary")}>
+                      <div className="flex-1 pr-2">
+                        <p className="text-sm font-medium text-primary">
                           {id === "CP" ? "Send to Clean & Press" : "Keep as Wash & Fold"}
                         </p>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="mt-0.5 text-xs text-muted-foreground">
                           {id === "CP"
                             ? (item as any).price
                               ? `AED ${(item as any).price} added · best outcome`
@@ -238,17 +240,12 @@ export default function ApprovalItem() {
                             : "Risk acknowledged"}
                         </p>
                       </div>
-                      {id === "CP" && (
-                        <span className="absolute right-0 top-0 rounded-bl-lg rounded-tr-xl bg-warning px-2.5 py-1 text-[10px] font-semibold text-warning-foreground">
-                          Recommended
-                        </span>
-                      )}
                     </button>
                   );
                 })}
               </div>
 
-              {/* Return uncleaned */}
+              {/* Return Uncleaned — toggle row, red label */}
               <div className="mt-2 flex items-center justify-between rounded-xl border border-border bg-card px-4 py-3">
                 <p className="text-sm font-medium text-destructive">Return Uncleaned</p>
                 <Switch
@@ -263,32 +260,43 @@ export default function ApprovalItem() {
             </>
           )}
 
+          {/*
+            TYPE B — Item already in CP, processing might worsen stain or damage the item.
+            User must consent: Approve for CP / Return Uncleaned
+            No "Keep as WF" option — item is already in CP.
+          */}
           {item.approvalType === "B" && (
             <>
-              <p className="text-sm text-foreground">{item.facilityNote}</p>
-              <h2 className="mt-5 text-base font-extrabold text-primary">
-                What would you like to do?
-              </h2>
+              <p className="text-sm leading-relaxed text-muted-foreground">{item.facilityNote}</p>
+
+              <h2 className="mt-5 text-base font-extrabold text-primary">What would you like to do?</h2>
+
               <div className="mt-3">
                 {(() => {
                   const sel = decision === "approved" && !returnOn;
                   return (
                     <button
                       type="button"
-                      onClick={() => { setDecision("approved"); setReturnOn(false); }}
+                      onClick={() => {
+                        setDecision("approved");
+                        setReturnOn(false);
+                      }}
                       className={cn(
                         "relative flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all duration-150",
-                        sel ? "border-primary bg-card" : "border-border bg-card"
+                        sel ? "border-primary bg-card" : "border-border bg-card",
                       )}
                     >
-                      <div className={cn("flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors", sel ? "border-primary bg-primary" : "border-border bg-background")}>
+                      <div
+                        className={cn(
+                          "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
+                          sel ? "border-primary bg-primary" : "border-border bg-background",
+                        )}
+                      >
                         {sel && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
                       </div>
                       <div className="flex-1">
-                        <p className={cn("text-sm font-medium", "text-primary")}>
-                          Approve for Clean & Press
-                        </p>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-sm font-medium text-primary">Approve for Clean & Press</p>
+                        <p className="mt-0.5 text-xs text-muted-foreground">
                           I understand processing may not remove the stain or could affect the item
                         </p>
                       </div>
@@ -296,11 +304,16 @@ export default function ApprovalItem() {
                   );
                 })()}
               </div>
+
+              {/* Return Uncleaned — toggle row */}
               <div className="mt-2 flex items-center justify-between rounded-xl border border-border bg-card px-4 py-3">
                 <p className="text-sm font-medium text-destructive">Return Uncleaned</p>
                 <Switch
                   checked={returnOn}
-                  onCheckedChange={(v) => { setReturnOn(v); if (v) setDecision(null); }}
+                  onCheckedChange={(v) => {
+                    setReturnOn(v);
+                    if (v) setDecision(null);
+                  }}
                   className="data-[state=checked]:bg-primary"
                 />
               </div>
@@ -309,7 +322,7 @@ export default function ApprovalItem() {
         </div>
       </div>
 
-      {/* Sticky bottom CTA — both Type A and B */}
+      {/* Sticky bottom CTA — same for both Type A and B */}
       <div
         className="border-t border-border bg-background px-5 pt-4"
         style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)" }}
@@ -319,10 +332,8 @@ export default function ApprovalItem() {
           disabled={!hasDecision}
           onClick={goNext}
           className={cn(
-            "w-full rounded-xl py-3.5 font-sans text-base font-normal transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]",
-            hasDecision
-              ? "bg-primary text-primary-foreground"
-              : "cursor-not-allowed bg-muted text-muted-foreground"
+            "w-full rounded-xl py-3.5 font-sans text-base font-extrabold transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]",
+            hasDecision ? "bg-primary text-primary-foreground" : "cursor-not-allowed bg-muted text-muted-foreground",
           )}
         >
           {isLast ? "Review Decisions" : "Next Item"}
@@ -331,26 +342,17 @@ export default function ApprovalItem() {
 
       {/* Full-screen lightbox */}
       {lightboxSrc && (
-        <div
-          className="fixed inset-0 z-50 flex flex-col bg-black/95"
-          onClick={() => setLightboxSrc(null)}
-        >
+        <div className="fixed inset-0 z-50 flex flex-col bg-black/95" onClick={() => setLightboxSrc(null)}>
           <div className="flex items-center justify-end px-5 pt-12 pb-4">
             <button
               onClick={() => setLightboxSrc(null)}
               className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white"
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                <path d="M18 6L6 18M6 6l12 12" />
-              </svg>
+              <X className="h-4 w-4" strokeWidth={2.5} />
             </button>
           </div>
           <div className="flex flex-1 items-center justify-center px-5" onClick={(e) => e.stopPropagation()}>
-            <img
-              src={lightboxSrc}
-              className="max-h-full w-full rounded-2xl object-contain"
-              alt="Full size"
-            />
+            <img src={lightboxSrc} className="max-h-full w-full rounded-2xl object-contain" alt="Full size" />
           </div>
           <div style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 2rem)" }} />
         </div>
@@ -358,4 +360,3 @@ export default function ApprovalItem() {
     </div>
   );
 }
-
