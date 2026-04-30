@@ -86,23 +86,26 @@ export default function ApprovalConfirm() {
                   onClick={() => goEditItem(idx)}
                   className="flex w-full items-start gap-3 px-4 py-4 text-left transition-colors active:bg-muted/40"
                 >
-                  <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-md bg-muted">
+                  <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-muted">
                     {img ? (
                       <img src={img} alt={item.brand} className="h-full w-full object-cover" />
                     ) : null}
                   </span>
                   <div className="min-w-0 flex-1">
-                    <h3 className="text-primary" style={{ fontSize: "13px", fontWeight: 600, lineHeight: "18px", letterSpacing: "0em" }}>
-                      {toTitleCase(`${item.brand} - ${(item as any).itemType}`)}
-                    </h3>
-                    {d === "CP" && (item as any).price > 0 && (
-                      <p className="mt-1 text-primary leading-tight" style={{ fontSize: "12px", fontWeight: 100 }}>
-                        +AED {(item as any).price}
-                      </p>
-                    )}
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <p className="text-sm font-bold text-foreground leading-tight">{item.brand}</p>
+                        <p className="mt-0.5 text-xs text-muted-foreground leading-tight">{(item as any).itemType}</p>
+                      </div>
+                      {(d === "CP" || d === "approved") && (item as any).price > 0 && (
+                        <p className="shrink-0 text-base font-extrabold text-primary leading-none">
+                          +AED {(item as any).price}
+                        </p>
+                      )}
+                    </div>
                     <div className="mt-2.5">
                       <span className={cn(
-                        "inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-normal leading-tight",
+                        "inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-bold leading-tight",
                         tagFor[d]
                       )}>
                         {labelFor[d]}
