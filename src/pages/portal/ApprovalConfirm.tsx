@@ -92,11 +92,11 @@ export default function ApprovalConfirm() {
                     ) : null}
                   </span>
                   <div className="min-w-0 flex-1">
-                    <h3 className="text-primary" style={{ fontSize: "15px", fontWeight: 600, lineHeight: "21px", letterSpacing: "0em" }}>
+                    <h3 className="text-primary" style={{ fontSize: "13px", fontWeight: 600, lineHeight: "18px", letterSpacing: "0em" }}>
                       {toTitleCase(`${item.brand} - ${(item as any).itemType}`)}
                     </h3>
                     {d === "CP" && (item as any).price > 0 && (
-                      <p className="mt-1 text-primary leading-tight" style={{ fontSize: "14px", fontWeight: 100 }}>
+                      <p className="mt-1 text-primary leading-tight" style={{ fontSize: "12px", fontWeight: 100 }}>
                         +AED {(item as any).price}
                       </p>
                     )}
