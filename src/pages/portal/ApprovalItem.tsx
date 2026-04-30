@@ -198,7 +198,7 @@ export default function ApprovalItem() {
                 </>
               )}
 
-              <h2 className="mt-4 text-primary" style={{ fontWeight: 600, fontSize: "0.875rem" }}>What would you like to do?</h2>
+              <h2 className="mt-4 text-xs font-semibold uppercase tracking-wide text-primary">What would you like to do?</h2>
 
               <div className="mt-3 flex flex-col gap-2">
                 {(["CP", "WF"] as const).map((id) => {
