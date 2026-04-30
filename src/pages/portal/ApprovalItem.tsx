@@ -55,23 +55,22 @@ export default function ApprovalItem() {
 
   const images = ITEM_IMAGES[item.id] ?? ITEM_IMAGES.a0;
 
-  // Build slides: Original + one slide per issue
-  const slides = [
-    {
-      label: "ORIGINAL",
-      labelClass: "bg-primary/80 text-white",
-      src: images.original,
-    },
-    ...item.issues.map((issue, i) => ({
-      label: (issue.type as string) === "damage" ? "DAMAGE" : "STAIN",
-      labelClass: "bg-destructive text-white",
-      src: i === 0 ? images.detail : images.original,
-    })),
-  ];
+  // Type A: original photo only, no stain UI.
+  // Type B: original + issue close-up slides, with stain dot on first slide.
+  const slides =
+    item.approvalType === "B"
+      ? [
+          { label: "ORIGINAL", labelClass: "bg-primary/80 text-white", src: images.original },
+          ...item.issues.map((issue, i) => ({
+            label: (issue.type as string) === "damage" ? "DAMAGE" : "STAIN",
+            labelClass: "bg-destructive text-white",
+            src: i === 0 ? images.detail : images.original,
+          })),
+        ]
+      : [{ label: "ORIGINAL", labelClass: "bg-primary/80 text-white", src: images.original }];
 
-  // Active issue: when on Original slide show first issue as context,
-  // when on issue slide show that specific issue
-  const activeIssue = item.issues.length > 0 ? item.issues[Math.max(0, photoIdx - 1)] : null;
+  const showStainUI = item.approvalType === "B";
+  const activeIssue = showStainUI && item.issues.length > 0 ? item.issues[Math.max(0, photoIdx - 1)] : null;
 
   return (
     <div className="flex h-screen flex-col bg-background font-sans">
@@ -135,8 +134,8 @@ export default function ApprovalItem() {
                     (e.target as HTMLImageElement).style.display = "none";
                   }}
                 />
-                {/* Stain dot — original slide only, sits above image */}
-                {i === 0 && item.issues[0]?.photoCoords && (
+                {/* Stain dot — Type B only, original slide only */}
+                {showStainUI && i === 0 && item.issues[0]?.photoCoords && (
                   <div
                     className="absolute z-10 h-4 w-4 rounded-full bg-destructive shadow-md ring-2 ring-white"
                     style={{
@@ -160,20 +159,22 @@ export default function ApprovalItem() {
           </div>
         </div>
 
-        {/* Dot pagination */}
-        <div className="mt-3 flex justify-center gap-1.5 pr-5">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => setPhotoIdx(i)}
-              className={cn(
-                "h-1.5 rounded-full bg-primary transition-all duration-200",
-                i === photoIdx ? "w-5" : "w-1.5 opacity-30",
-              )}
-            />
-          ))}
-        </div>
+        {/* Dot pagination — only when multiple slides (Type B) */}
+        {slides.length > 1 && (
+          <div className="mt-3 flex justify-center gap-1.5 pr-5">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setPhotoIdx(i)}
+                className={cn(
+                  "h-1.5 rounded-full bg-primary transition-all duration-200",
+                  i === photoIdx ? "w-5" : "w-1.5 opacity-30",
+                )}
+              />
+            ))}
+          </div>
+        )}
 
         {/* Decision content */}
         <div className="px-5 pb-4 pt-4">
@@ -183,14 +184,14 @@ export default function ApprovalItem() {
           */}
           {item.approvalType === "A" && (
             <>
-              {/* Issue label + note — updates as user swipes through slides */}
-              {activeIssue && (
+              {/* Why we're asking — WF suitability reason (no stain UI) */}
+              {(item as any).wfReason && (
                 <>
                   <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                    {activeIssue.type} · {activeIssue.location}
+                    Why we're asking
                   </p>
                   <div className="mt-2 rounded-xl border border-border bg-card px-4 py-3">
-                    <p className="text-sm italic text-muted-foreground">"{activeIssue.facilityNote}"</p>
+                    <p className="text-sm leading-relaxed text-muted-foreground">{(item as any).wfReason}</p>
                   </div>
                 </>
               )}
