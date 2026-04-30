@@ -120,7 +120,7 @@ export default function ApprovalPreferences() {
         <h1 className="mt-2 text-[24px] font-extrabold leading-tight tracking-tight text-primary">
           Skip approvals next time?
         </h1>
-        <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
+        <p className="mt-3 text-[0.875rem] leading-relaxed text-muted-foreground">
           Set your preferences once and we'll handle these decisions for you on future orders.
         </p>
 
@@ -214,7 +214,7 @@ export default function ApprovalPreferences() {
           type="button"
           onClick={handleClick}
           className={cn(
-            "w-full rounded-[6px] py-4 text-base transition-transform duration-100 ease-out active:duration-75 active:scale-[0.98]",
+            "w-full rounded-[6px] h-12 text-base transition-transform duration-100 ease-out active:duration-75 active:scale-[0.98]",
             ctaPrimary
               ? "bg-primary font-semibold text-primary-foreground shadow-press"
               : "font-medium text-muted-foreground hover:text-foreground",
