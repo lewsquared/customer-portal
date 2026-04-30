@@ -335,7 +335,7 @@ export default function ApprovalItem() {
           disabled={!hasDecision}
           onClick={goNext}
           className={cn(
-            "w-full rounded-[6px] h-12 font-sans text-[15px] font-normal transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]",
+            "w-full rounded-[6px] h-[42px] font-sans text-[14px] leading-[20px] font-normal transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]",
             hasDecision ? "bg-primary text-primary-foreground" : "cursor-not-allowed bg-[#F2F3F8] text-[#C3C8DB]",
           )}
         >
