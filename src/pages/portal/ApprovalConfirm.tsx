@@ -86,23 +86,26 @@ export default function ApprovalConfirm() {
                   onClick={() => goEditItem(idx)}
                   className="flex w-full items-start gap-3 px-4 py-4 text-left transition-colors active:bg-muted/40"
                 >
-                  <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-md bg-muted">
+                  <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-muted">
                     {img ? (
                       <img src={img} alt={item.brand} className="h-full w-full object-cover" />
                     ) : null}
                   </span>
                   <div className="min-w-0 flex-1">
-                    <h3 className="text-primary" style={{ fontSize: "13px", fontWeight: 600, lineHeight: "18px", letterSpacing: "0em" }}>
-                      {toTitleCase(`${item.brand} - ${(item as any).itemType}`)}
-                    </h3>
-                    {d === "CP" && (item as any).price > 0 && (
-                      <p className="mt-1 text-primary leading-tight" style={{ fontSize: "12px", fontWeight: 100 }}>
-                        +AED {(item as any).price}
-                      </p>
-                    )}
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <p className="text-sm font-bold text-foreground leading-tight">{item.brand}</p>
+                        <p className="mt-0.5 text-xs text-muted-foreground leading-tight">{(item as any).itemType}</p>
+                      </div>
+                      {(d === "CP" || d === "approved") && (item as any).price > 0 && (
+                        <p className="shrink-0 text-base font-extrabold text-primary leading-none">
+                          +AED {(item as any).price}
+                        </p>
+                      )}
+                    </div>
                     <div className="mt-2.5">
                       <span className={cn(
-                        "inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-normal leading-tight",
+                        "inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-bold leading-tight",
                         tagFor[d]
                       )}>
                         {labelFor[d]}
@@ -122,25 +125,28 @@ export default function ApprovalConfirm() {
         </ul>
 
         {(cpAddedTotal > 0 || returnItems.length > 0) && (
-          <div className="mt-5 rounded-xl rounded-b-none border border-border bg-card px-4 py-3">
+          <div className="mt-5 rounded-xl px-4 py-4" style={{ backgroundColor: "#FEF2DF" }}>
             {cpAddedTotal > 0 && (
-              <p className="text-primary" style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 100 }}>
-                <span style={{ fontWeight: 600 }}>AED {cpAddedTotal}</span> will be added to your final bill for the {cpItems.length === 1 ? "item" : `${cpItems.length} items`} moving to Clean & Press
+              <div className="flex items-baseline justify-between gap-3">
+                <p className="text-sm font-bold text-primary">New total added</p>
+                <p className="text-xl font-extrabold text-primary leading-none">+AED {cpAddedTotal}</p>
+              </div>
+            )}
+            {cpAddedTotal > 0 && (
+              <p className="mt-1.5 text-xs text-muted-foreground leading-tight">
+                For the {cpItems.length === 1 ? "item" : `${cpItems.length} items`} moving to Clean & Press
               </p>
             )}
             {returnItems.length > 0 && (
-              <p className={cn("text-primary", cpAddedTotal > 0 && "mt-1.5")} style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 100 }}>
+              <p className={cn("text-xs text-muted-foreground leading-tight", cpAddedTotal > 0 && "mt-1.5")}>
                 {returnItems.length === 1 ? "1 item" : `${returnItems.length} items`} will be returned uncleaned at no charge
               </p>
             )}
+            <p className="mt-3 text-[11px] text-muted-foreground leading-tight">
+              Processing will begin immediately after confirmation. The new total above will be added to your final invoice.
+            </p>
           </div>
         )}
-
-        <div className="rounded-xl rounded-t-none px-4 py-3" style={{ backgroundColor: "#FEF2DF" }}>
-          <p className="text-primary" style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 100 }}>
-            Processing will begin immediately after confirmation. The new total above will be added to your final invoice.
-          </p>
-        </div>
       </div>
 
       <div
