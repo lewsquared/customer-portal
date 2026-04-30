@@ -33,7 +33,7 @@ export default function ApprovalConfirm() {
       : "Wash & Fold";
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="flex min-h-screen flex-col bg-background font-sans">
       <OrderHeader
         orderId={order.orderId}
         orderType={order.orderType}
@@ -41,30 +41,31 @@ export default function ApprovalConfirm() {
         variant="inline"
       />
 
-      <div className="flex-1 space-y-6 px-5 pb-6 pt-2">
-        <div>
-          <h1 className="text-lg font-extrabold tracking-tight text-primary">
-            Review your decisions
-          </h1>
-          <p className="mt-1 text-xs text-muted-foreground">
-            {autoApproved ? "All items auto-approved" : "Confirm before submitting"}
-          </p>
-        </div>
+      <div className="flex-1 px-6 pb-8 pt-4">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          Final step
+        </p>
+        <h1 className="mt-2 text-[22px] font-extrabold tracking-tight text-primary">
+          Review your decisions
+        </h1>
+        <p className="mt-2 text-sm text-muted-foreground">
+          {autoApproved ? "All items auto-approved." : "Confirm before we continue processing."}
+        </p>
 
-        <ul className="space-y-2">
+        <ul className="mt-6 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
           {items.map((item) => {
             const d = getDecision(item);
             return (
-              <li
-                key={item.id}
-                className="flex items-center gap-3 rounded-xl border border-border bg-card px-3 py-3"
-              >
+              <li key={item.id} className="flex items-center gap-3 px-4 py-3.5">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary">
-                  <Shirt className="h-5 w-5" />
+                  <Shirt className="h-5 w-5" strokeWidth={1.8} />
                 </span>
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-semibold text-foreground">
-                    {item.brand} · {item.itemType}
+                    {item.brand}
+                  </p>
+                  <p className="truncate text-xs text-muted-foreground">
+                    {item.itemType}
                   </p>
                 </div>
                 <div className="text-right">
@@ -80,36 +81,36 @@ export default function ApprovalConfirm() {
           })}
         </ul>
 
-        <div className="rounded-2xl border border-border bg-card p-4">
+        <div className="mt-5 rounded-2xl border border-border bg-card px-4 py-4">
           {[
             ["Original estimate", "AED 45"],
-            ["2 items → CP", "+AED 26"],
+            ["2 items → Clean & Press", "+AED 26"],
           ].map(([l, v]) => (
             <div
               key={l}
-              className="flex items-center justify-between py-1 text-sm text-muted-foreground"
+              className="flex items-center justify-between py-1.5 text-sm text-muted-foreground"
             >
               <span>{l}</span>
               <span className="font-medium text-foreground">{v}</span>
             </div>
           ))}
-          <div className="mt-2 flex items-center justify-between border-t border-border pt-3 text-sm">
-            <span className="font-semibold text-foreground">New total</span>
-            <span className="text-base font-extrabold text-primary">AED 71</span>
+          <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
+            <span className="text-sm font-semibold text-foreground">New total</span>
+            <span className="text-lg font-extrabold text-primary">AED 71</span>
           </div>
         </div>
       </div>
 
       <div
-        className="border-t border-border bg-background px-5 pt-4"
-        style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)" }}
+        className="px-6 pt-3"
+        style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1.25rem)" }}
       >
         <button
           type="button"
           onClick={() => navigate(`/portal/${order.orderId}/approval/preferences`, { state: { order } })}
-          className="w-full rounded-xl bg-primary py-3.5 font-sans text-base font-normal text-primary-foreground transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]"
+          className="w-full rounded-2xl bg-primary py-4 text-base font-semibold text-primary-foreground shadow-press transition-transform duration-100 ease-out active:duration-75 active:scale-[0.98]"
         >
-          Confirm Decisions
+          Confirm decisions
         </button>
       </div>
     </div>
