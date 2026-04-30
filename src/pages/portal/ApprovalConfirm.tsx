@@ -96,7 +96,7 @@ export default function ApprovalConfirm() {
                       {toTitleCase(`${item.brand} - ${(item as any).itemType}`)}
                     </h3>
                     {d === "CP" && (item as any).price > 0 && (
-                      <p className="mt-1 text-primary leading-tight" style={{ fontSize: "12px", fontWeight: 100 }}>
+                      <p className="mt-1 text-primary leading-tight" style={{ fontSize: "12px", fontWeight: 400 }}>
                         +AED {(item as any).price}
                       </p>
                     )}
@@ -124,16 +124,16 @@ export default function ApprovalConfirm() {
         {(cpAddedTotal > 0 || returnItems.length > 0) && (
           <div className="mt-5 rounded-xl px-3 py-2.5" style={{ backgroundColor: "#FEF2DF" }}>
             {cpAddedTotal > 0 && (
-              <p className="text-primary" style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 100 }}>
+              <p className="text-primary" style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 400 }}>
                 <span style={{ fontWeight: 600 }}>AED {cpAddedTotal}</span> will be added to your final bill for the {cpItems.length === 1 ? "item" : `${cpItems.length} items`} moving to Clean & Press
               </p>
             )}
             {returnItems.length > 0 && (
-              <p className={cn("text-primary", cpAddedTotal > 0 && "mt-1")} style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 100 }}>
+              <p className={cn("text-primary", cpAddedTotal > 0 && "mt-1")} style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 400 }}>
                 {returnItems.length === 1 ? "1 item" : `${returnItems.length} items`} will be returned uncleaned at no charge
               </p>
             )}
-            <p className="mt-1 text-primary" style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 100 }}>
+            <p className="mt-1 text-primary" style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 400 }}>
               Processing will begin immediately after confirmation. The new total above will be added to your final invoice.
             </p>
           </div>
