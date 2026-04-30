@@ -115,7 +115,7 @@ export default function ApprovalPreferences() {
         <h1 className="mt-3 text-center text-xl leading-tight text-primary" style={{ fontWeight: 700 }}>
           Skip Approvals Next Time?
         </h1>
-        <p className="mt-1 text-center text-[12px] leading-relaxed text-muted-foreground">
+        <p className="mt-1 text-center text-muted-foreground" style={{ fontSize: "14px", lineHeight: 1.5 }}>
           Set your preferences once and we'll handle these decisions for you on future orders.
         </p>
 
