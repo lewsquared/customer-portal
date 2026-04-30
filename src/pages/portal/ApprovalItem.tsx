@@ -126,14 +126,14 @@ export default function ApprovalItem() {
                 <img
                   src={slide.src}
                   alt={slide.label}
-                  className="h-full w-full object-contain p-5"
+                  className="h-full w-full object-cover"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = "none";
                   }}
                 />
                 {i === 0 && item.issues[0]?.photoCoords && (
                   <div
-                    className="absolute h-3 w-3 rounded-full bg-destructive ring-2 ring-background"
+                    className="absolute z-10 h-4 w-4 rounded-full bg-destructive ring-2 ring-white shadow-md"
                     style={{
                       left: `${item.issues[0].photoCoords.x}%`,
                       top: `${item.issues[0].photoCoords.y}%`,
@@ -143,7 +143,7 @@ export default function ApprovalItem() {
                 )}
                 <div
                   className={cn(
-                    "absolute bottom-2 left-2 rounded-md px-2 py-0.5 text-[10px] font-extrabold tracking-wider",
+                    "absolute bottom-3 left-3 z-10 rounded-lg px-2.5 py-1 text-[10px] font-extrabold tracking-widest shadow-sm",
                     slide.labelClass
                   )}
                 >
