@@ -232,7 +232,7 @@ export default function ApprovalItem() {
                         {sel && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
                       </div>
                       <div className="flex-1 pr-2">
-                        <p className="text-sm font-medium text-primary">
+                        <p className="text-primary" style={{ fontSize: "15px", fontWeight: 600 }}>
                           {id === "CP" ? "Send to Clean & Press" : "Keep as Wash & Fold"}
                         </p>
                         <p className="mt-0.5 text-xs text-muted-foreground">
@@ -298,7 +298,7 @@ export default function ApprovalItem() {
                         {sel && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
                       </div>
                       <div className="flex-1">
-                        <p className="text-sm font-medium text-primary">Approve for Clean & Press</p>
+                        <p className="text-primary" style={{ fontSize: "15px", fontWeight: 600 }}>Approve for Clean & Press</p>
                         <p className="mt-0.5 text-xs text-muted-foreground">
                           I understand processing may not remove the stain or could affect the item
                         </p>
