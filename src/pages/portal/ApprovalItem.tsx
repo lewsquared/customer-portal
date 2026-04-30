@@ -191,14 +191,14 @@ export default function ApprovalItem() {
                     Why we're asking
                   </p>
                   <div className="mt-2 rounded-xl border border-border bg-card px-4 py-3">
-                    <p className="text-muted-foreground" style={{ fontSize: "14px", lineHeight: "20px", fontWeight: 100 }}>
+                    <p className="text-muted-foreground" style={{ fontSize: "10px", lineHeight: "20px", fontWeight: 100 }}>
                       This item isn't suitable for Wash & Fold. We recommend switching it to Clean & Press so it's treated with the care it needs.
                     </p>
                   </div>
                 </>
               )}
 
-              <h2 className="mt-4 text-primary" style={{ fontWeight: 600, fontSize: "0.875rem" }}>What would you like to do?</h2>
+              <h2 className="mt-4 text-xs font-semibold uppercase tracking-wide text-primary">What would you like to do?</h2>
 
               <div className="mt-3 flex flex-col gap-2">
                 {(["CP", "WF"] as const).map((id) => {
@@ -272,7 +272,7 @@ export default function ApprovalItem() {
             <>
               <p className="text-sm leading-relaxed text-muted-foreground">{item.facilityNote}</p>
 
-              <h2 className="mt-5 text-primary" style={{ fontWeight: 600, fontSize: "0.875rem" }}>What would you like to do?</h2>
+              <h2 className="mt-5 text-xs font-semibold uppercase tracking-wide text-primary">What would you like to do?</h2>
 
               <div className="mt-3">
                 {(() => {
