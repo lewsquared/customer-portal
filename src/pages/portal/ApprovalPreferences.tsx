@@ -5,6 +5,8 @@ import { Switch } from "@/components/ui/switch";
 import { useOrderData } from "@/lib/useOrderData";
 import { setOrderStatus } from "@/lib/order-status-override";
 import { cn } from "@/lib/utils";
+import extraBagsIcon from "@/assets/icons/extra-bags.png";
+import washFoldIcon from "@/assets/icons/wash-fold.png";
 
 type WfPref = "notify" | "auto_cp" | "always_wash" | "return" | null;
 
@@ -27,7 +29,7 @@ const RadioRow = ({ selected, onSelect, label }: RadioRowProps) => (
     onClick={onSelect}
     className="flex w-full items-center gap-3 border-t border-border/60 py-3 text-left"
   >
-    <span className="flex-1 text-sm text-primary">{label}</span>
+    <span className="flex-1 text-[12px] leading-tight text-primary">{label}</span>
     <div
       className={cn(
         "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
@@ -43,8 +45,8 @@ export default function ApprovalPreferences() {
   const navigate = useNavigate();
   const order = useOrderData();
 
-  const [stainOpen, setStainOpen] = useState(true);
-  const [wfOpen, setWfOpen] = useState(true);
+  const [stainOpen, setStainOpen] = useState(false);
+  const [wfOpen, setWfOpen] = useState(false);
   const [stainAutoApprove, setStainAutoApprove] = useState(false);
   const [wfPref, setWfPref] = useState<WfPref>("notify");
 
@@ -88,16 +90,12 @@ export default function ApprovalPreferences() {
   };
 
   let ctaLabel: string;
-  let ctaPrimary: boolean;
   if (hasChanges) {
     ctaLabel = "Apply";
-    ctaPrimary = true;
   } else if (hasSaved) {
     ctaLabel = "Continue";
-    ctaPrimary = true;
   } else {
     ctaLabel = "Skip For Now";
-    ctaPrimary = false;
   }
 
   return (
@@ -114,13 +112,10 @@ export default function ApprovalPreferences() {
         </div>
 
         {/* Heading */}
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-          Optional
-        </p>
-        <h1 className="mt-2 text-[24px] font-bold leading-tight tracking-tight text-primary">
+        <h1 className="text-xl leading-tight text-primary" style={{ fontWeight: 700 }}>
           Skip approvals next time?
         </h1>
-        <p className="mt-3 text-[0.875rem] leading-relaxed text-muted-foreground">
+        <p className="mt-1 text-[0.875rem] leading-tight text-muted-foreground">
           Set your preferences once and we'll handle these decisions for you on future orders.
         </p>
 
@@ -131,7 +126,8 @@ export default function ApprovalPreferences() {
             onClick={() => setStainOpen((v) => !v)}
             className="flex w-full items-center gap-3 px-4 py-4 text-left"
           >
-            <span className="flex-1 text-sm font-semibold text-primary">
+            <img src={extraBagsIcon} alt="" className="h-7 w-7 shrink-0 object-contain" />
+            <span className="flex-1 text-[13px] font-semibold text-primary">
               Stain & damage approval
             </span>
             {stainOpen ? (
@@ -143,11 +139,11 @@ export default function ApprovalPreferences() {
 
           {stainOpen && (
             <div className="px-4 pb-1">
-              <p className="border-t border-border py-3 text-sm leading-relaxed text-muted-foreground">
+              <p className="border-t border-border py-3 text-[12px] leading-tight text-muted-foreground">
                 When enabled, our team will process items with stains or damage without asking for your approval each time.
               </p>
               <div className="flex items-center gap-3 border-t border-border py-3">
-                <span className="flex-1 text-sm font-medium text-primary">Auto-approve</span>
+                <span className="flex-1 text-[12px] font-medium text-primary">Auto-approve</span>
                 <Switch
                   checked={stainAutoApprove}
                   onCheckedChange={setStainAutoApprove}
@@ -165,7 +161,8 @@ export default function ApprovalPreferences() {
             onClick={() => setWfOpen((v) => !v)}
             className="flex w-full items-center gap-3 px-4 py-4 text-left"
           >
-            <span className="flex-1 text-sm font-semibold text-primary">
+            <img src={washFoldIcon} alt="" className="h-7 w-7 shrink-0 object-contain" />
+            <span className="flex-1 text-[13px] font-semibold text-primary">
               Wash & Fold approval
             </span>
             {wfOpen ? (
@@ -177,7 +174,7 @@ export default function ApprovalPreferences() {
 
           {wfOpen && (
             <div className="px-4 pb-1">
-              <p className="border-t border-border py-3 text-sm leading-relaxed text-muted-foreground">
+              <p className="border-t border-border py-3 text-[12px] leading-tight text-muted-foreground">
                 Choose how we should handle delicate or expensive items flagged as unsuitable for Wash & Fold.
               </p>
               <RadioRow
@@ -213,12 +210,7 @@ export default function ApprovalPreferences() {
         <button
           type="button"
           onClick={handleClick}
-          className={cn(
-            "w-full rounded-[6px] h-[42px] text-[14px] leading-[20px] transition-transform duration-100 ease-out active:duration-75 active:scale-[0.98]",
-            ctaPrimary
-              ? "bg-primary font-normal text-primary-foreground shadow-press"
-              : "font-normal text-muted-foreground hover:text-foreground",
-          )}
+          className="w-full rounded-[6px] h-[42px] text-[14px] leading-[20px] bg-primary font-normal text-primary-foreground shadow-press transition-transform duration-100 ease-out active:duration-75 active:scale-[0.98]"
         >
           {ctaLabel}
         </button>
