@@ -51,17 +51,22 @@ export default function ApprovalItem() {
       : navigate(`/portal/${order.orderId}/approval`, { state: { order } });
 
   if (!item) return null;
-  const stain = item.issues?.[0];
   const images = ITEM_IMAGES[item.id] ?? ITEM_IMAGES.a0;
 
+  // Slides: Original + one per issue
   const slides = [
-    { label: "ORIGINAL", labelClass: "bg-primary/80 text-white", src: images.original },
-    {
-      label: (stain?.type as string) === "damage" ? "DAMAGE" : "STAIN",
+    { label: "ORIGINAL", labelClass: "bg-primary/80 text-white", src: images.original, issueIndex: null as number | null },
+    ...item.issues.map((issue, i) => ({
+      label: (issue.type as string) === "damage" ? "DAMAGE" : "STAIN",
       labelClass: "bg-destructive text-white",
-      src: images.detail,
-    },
+      src: i === 0 ? images.detail : images.original,
+      issueIndex: i,
+    })),
   ];
+
+  // Active issue updates as user swipes
+  const activeIssue =
+    item.issues.length > 0 ? item.issues[Math.max(0, photoIdx - 1)] : null;
 
   return (
     <div className="flex h-screen flex-col bg-background font-sans">
@@ -126,12 +131,12 @@ export default function ApprovalItem() {
                     (e.target as HTMLImageElement).style.display = "none";
                   }}
                 />
-                {i === 0 && stain?.photoCoords && (
+                {i === 0 && item.issues[0]?.photoCoords && (
                   <div
                     className="absolute h-3 w-3 rounded-full bg-destructive ring-2 ring-background"
                     style={{
-                      left: `${stain.photoCoords.x}%`,
-                      top: `${stain.photoCoords.y}%`,
+                      left: `${item.issues[0].photoCoords.x}%`,
+                      top: `${item.issues[0].photoCoords.y}%`,
                       transform: "translate(-50%, -50%)",
                     }}
                   />
@@ -169,13 +174,27 @@ export default function ApprovalItem() {
         <div className="px-5 pb-4 pt-4">
           {item.approvalType === "A" && (
             <>
-              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                {(item as any).issue} · {(item as any).issueLocation}
-              </p>
-
-              <div className="mt-2 rounded-xl border border-border bg-card p-3">
-                <p className="text-sm italic text-muted-foreground">"{item.facilityNote}"</p>
-              </div>
+              {activeIssue ? (
+                <>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    {(activeIssue as any).type} · {(activeIssue as any).location ?? (item as any).issueLocation}
+                  </p>
+                  <div className="mt-2 rounded-xl border border-border bg-card p-3">
+                    <p className="text-sm italic text-muted-foreground">
+                      "{(activeIssue as any).facilityNote ?? item.facilityNote}"
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    {(item as any).issue} · {(item as any).issueLocation}
+                  </p>
+                  <div className="mt-2 rounded-xl border border-border bg-card p-3">
+                    <p className="text-sm italic text-muted-foreground">"{item.facilityNote}"</p>
+                  </div>
+                </>
+              )}
 
               <h2 className="mt-6 text-base font-extrabold text-primary">
                 What would you like to do?
@@ -270,7 +289,7 @@ export default function ApprovalItem() {
                           Approve for Clean & Press
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          Consent to process despite damage risk
+                          I understand processing may not remove the stain or could affect the item
                         </p>
                       </div>
                     </button>
