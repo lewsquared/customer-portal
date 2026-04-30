@@ -362,7 +362,7 @@ function ApprovalItemInner() {
 
             {/* Title */}
             <h3 className="pr-10 text-primary" style={{ fontSize: "16px", fontWeight: 600, lineHeight: "21px" }}>
-              {item.brand} - {item.itemType}
+              {toTitleCase(`${item.brand} - ${item.itemType}`)}
             </h3>
 
             {/* Color dots + item number */}
