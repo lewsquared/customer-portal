@@ -338,7 +338,7 @@ function ApprovalItemInner() {
           onClick={() => setLightboxSrc(null)}
         >
           <div
-            className="relative w-full max-w-md rounded-3xl bg-background p-5 shadow-xl"
+            className="relative w-full max-w-md rounded-lg bg-background p-5 shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close button */}
