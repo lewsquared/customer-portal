@@ -87,7 +87,7 @@ export default function ApprovalItem() {
           >
             <ChevronLeft className="h-6 w-6" strokeWidth={2.5} />
           </button>
-          <h1 className="text-xl font-extrabold leading-tight text-primary">Review Your Items</h1>
+          <h1 className="text-2xl font-extrabold leading-tight tracking-tight text-primary">Review Your Items</h1>
         </div>
         {/* One segment per item, filled up to current */}
         <div className="mt-3 flex gap-1.5">
@@ -232,7 +232,7 @@ export default function ApprovalItem() {
                         {sel && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
                       </div>
                       <div className="flex-1 pr-2">
-                        <p className="text-sm font-medium text-primary">
+                        <p className="text-base font-semibold text-primary">
                           {id === "CP" ? "Send to Clean & Press" : "Keep as Wash & Fold"}
                         </p>
                         <p className="mt-0.5 text-xs text-muted-foreground">
@@ -250,7 +250,7 @@ export default function ApprovalItem() {
 
               {/* Return Uncleaned — toggle row, red label */}
               <div className="mt-2 flex items-center justify-between rounded-xl border border-border bg-card px-4 py-3">
-                <p className="text-sm font-medium text-destructive">Return Uncleaned</p>
+                <p className="text-base font-semibold text-destructive">Return Uncleaned</p>
                 <Switch
                   checked={returnOn}
                   onCheckedChange={(v) => {
@@ -298,7 +298,7 @@ export default function ApprovalItem() {
                         {sel && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
                       </div>
                       <div className="flex-1">
-                        <p className="text-sm font-medium text-primary">Approve for Clean & Press</p>
+                        <p className="text-base font-semibold text-primary">Approve for Clean & Press</p>
                         <p className="mt-0.5 text-xs text-muted-foreground">
                           I understand processing may not remove the stain or could affect the item
                         </p>
@@ -310,7 +310,7 @@ export default function ApprovalItem() {
 
               {/* Return Uncleaned — toggle row */}
               <div className="mt-2 flex items-center justify-between rounded-xl border border-border bg-card px-4 py-3">
-                <p className="text-sm font-medium text-destructive">Return Uncleaned</p>
+                <p className="text-base font-semibold text-destructive">Return Uncleaned</p>
                 <Switch
                   checked={returnOn}
                   onCheckedChange={(v) => {
@@ -335,7 +335,7 @@ export default function ApprovalItem() {
           disabled={!hasDecision}
           onClick={goNext}
           className={cn(
-            "w-full rounded-[6px] h-12 font-sans text-base font-normal transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]",
+            "w-full rounded-[6px] h-12 font-sans text-base font-semibold transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]",
             hasDecision ? "bg-primary text-primary-foreground" : "cursor-not-allowed bg-muted text-muted-foreground",
           )}
         >
