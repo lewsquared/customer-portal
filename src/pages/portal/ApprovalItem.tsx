@@ -26,6 +26,12 @@ const ITEM_IMAGES: Record<string, { original: string; detail: string }> = {
 
 export default function ApprovalItem() {
   const { itemIdx } = useParams();
+  // Force a fresh component instance (and fresh state) for each item.
+  return <ApprovalItemInner key={itemIdx ?? "0"} />;
+}
+
+function ApprovalItemInner() {
+  const { itemIdx } = useParams();
   const navigate = useNavigate();
   const order = useOrderData();
   const idx = parseInt(itemIdx ?? "0", 10);
