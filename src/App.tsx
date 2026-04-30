@@ -27,6 +27,7 @@ import ItemsSortedAtFacility from "./pages/portal/ItemsSortedAtFacility.tsx";
 import ApprovalEntry from "./pages/portal/ApprovalEntry.tsx";
 import ApprovalItem from "./pages/portal/ApprovalItem.tsx";
 import ApprovalConfirm from "./pages/portal/ApprovalConfirm.tsx";
+import ApprovalPreferences from "./pages/portal/ApprovalPreferences.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import { ScrollToTop } from "./components/nav/ScrollToTop.tsx";
 
@@ -64,6 +65,7 @@ const App = () => (
           <Route path="/portal/:orderId/delivery" element={<ProofOfDelivery />} />
           <Route path="/portal/:orderId/approval" element={<ApprovalEntry />} />
           <Route path="/portal/:orderId/approval/confirm" element={<ApprovalConfirm />} />
+          <Route path="/portal/:orderId/approval/preferences" element={<ApprovalPreferences />} />
           <Route path="/portal/:orderId/approval/:itemIdx" element={<ApprovalItem />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
