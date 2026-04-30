@@ -7,6 +7,7 @@ import { setOrderStatus } from "@/lib/order-status-override";
 import { cn } from "@/lib/utils";
 import extraBagsIcon from "@/assets/icons/extra-bags.png";
 import washFoldIcon from "@/assets/icons/wash-fold.png";
+import bagsGroupIcon from "@/assets/icons/bags-group.png";
 
 type WfPref = "notify" | "auto_cp" | "always_wash" | "return" | null;
 
@@ -32,12 +33,10 @@ const RadioRow = ({ selected, onSelect, label }: RadioRowProps) => (
     <span className="flex-1 text-[12px] leading-tight text-primary">{label}</span>
     <div
       className={cn(
-        "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-[2.5px] transition-colors",
-        selected ? "border-primary" : "border-border",
+        "h-5 w-5 shrink-0 rounded-full transition-colors",
+        selected ? "border-[5px] border-primary bg-background" : "border-2 border-border bg-background",
       )}
-    >
-      {selected && <span className="h-2 w-2 rounded-full bg-primary" />}
-    </div>
+    />
   </button>
 );
 
