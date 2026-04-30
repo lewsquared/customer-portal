@@ -72,12 +72,12 @@ export default function ApprovalConfirm() {
             : "Tap any item to change your decision before confirming."}
         </p>
 
-        <ul className="mt-6 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
+        <ul className="mt-6 space-y-3">
           {items.map((item, idx) => {
             const d = decisionFor(item, idx);
             const img = APPROVAL_ITEM_IMAGES[item.id]?.original;
             return (
-              <li key={item.id}>
+              <li key={item.id} className="overflow-hidden rounded-2xl border border-border bg-card">
                 <button
                   type="button"
                   onClick={() => goEditItem(idx)}
@@ -89,15 +89,15 @@ export default function ApprovalConfirm() {
                     ) : null}
                   </span>
                   <div className="min-w-0 flex-1">
-                    <div className="flex items-baseline justify-between gap-2">
-                      <p className="text-sm font-bold text-foreground leading-tight">{item.brand}</p>
-                      {d === "CP" && (item as any).price > 0 && (
-                        <span className="shrink-0 text-sm font-extrabold text-primary leading-tight">
-                          +AED {(item as any).price}
-                        </span>
-                      )}
-                    </div>
-                    <p className="mt-0.5 text-xs text-muted-foreground leading-tight">{(item as any).itemType}</p>
+                    <p className="leading-tight">
+                      <span className="text-sm font-bold text-foreground">{item.brand}</span>
+                      <span className="ml-1 text-xs text-muted-foreground">{(item as any).itemType}</span>
+                    </p>
+                    {d === "CP" && (item as any).price > 0 && (
+                      <p className="mt-1 text-sm font-extrabold text-primary leading-tight">
+                        +AED {(item as any).price}
+                      </p>
+                    )}
                     <div className="mt-2.5">
                       <span className={cn(
                         "inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-normal leading-tight",
