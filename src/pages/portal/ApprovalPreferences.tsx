@@ -175,27 +175,27 @@ export default function ApprovalPreferences() {
           {wfOpen && (
             <div className="px-4 pb-1">
               <p className="border-t border-border py-3 text-[12px] leading-tight text-muted-foreground">
-                Choose how we should handle delicate or expensive items flagged as unsuitable for Wash & Fold.
+                In order to protect your delicate & expensive items, our team will flag items that we believe might not be suitable to Wash & Fold and will require your approval on how to proceed
               </p>
               <RadioRow
                 selected={wfPref === "notify"}
                 onSelect={() => setWfPref("notify")}
-                label="Notify me so I can decide (default)"
+                label="Always notify me of the items in question so I can decide (default)"
               />
               <RadioRow
                 selected={wfPref === "auto_cp"}
                 onSelect={() => setWfPref("auto_cp")}
-                label="Move flagged items to Clean & Press and notify me"
+                label="Automatically transfer items to the clean & press service and notify me"
               />
               <RadioRow
                 selected={wfPref === "always_wash"}
                 onSelect={() => setWfPref("always_wash")}
-                label="Wash everything regardless of risk and notify me"
+                label="Always wash any items I send in the wash & fold bag, regardless of the risk involved and notify me"
               />
               <RadioRow
                 selected={wfPref === "return"}
                 onSelect={() => setWfPref("return")}
-                label="Return flagged items unprocessed"
+                label="Do not wash and return unprocessed"
               />
             </div>
           )}
