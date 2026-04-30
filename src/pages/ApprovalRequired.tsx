@@ -56,7 +56,13 @@ const ApprovalRequired = () => {
             primaryAction={{
               label: "Review items",
               variant: "primary",
-              onClick: () => navigate(`/portal/${order.orderId}/approval`, { state: { order } }),
+              onClick: () => {
+                // Reset approval flow state so user always starts from the beginning
+                try {
+                  localStorage.removeItem("washmen_approval_prefs");
+                } catch {}
+                navigate(`/portal/${order.orderId}/approval`, { state: { order } });
+              },
             }}
           />
 
