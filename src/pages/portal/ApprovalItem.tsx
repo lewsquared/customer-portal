@@ -55,23 +55,22 @@ export default function ApprovalItem() {
 
   const images = ITEM_IMAGES[item.id] ?? ITEM_IMAGES.a0;
 
-  // Build slides: Original + one slide per issue
-  const slides = [
-    {
-      label: "ORIGINAL",
-      labelClass: "bg-primary/80 text-white",
-      src: images.original,
-    },
-    ...item.issues.map((issue, i) => ({
-      label: (issue.type as string) === "damage" ? "DAMAGE" : "STAIN",
-      labelClass: "bg-destructive text-white",
-      src: i === 0 ? images.detail : images.original,
-    })),
-  ];
+  // Type A: original photo only, no stain UI.
+  // Type B: original + issue close-up slides, with stain dot on first slide.
+  const slides =
+    item.approvalType === "B"
+      ? [
+          { label: "ORIGINAL", labelClass: "bg-primary/80 text-white", src: images.original },
+          ...item.issues.map((issue, i) => ({
+            label: (issue.type as string) === "damage" ? "DAMAGE" : "STAIN",
+            labelClass: "bg-destructive text-white",
+            src: i === 0 ? images.detail : images.original,
+          })),
+        ]
+      : [{ label: "ORIGINAL", labelClass: "bg-primary/80 text-white", src: images.original }];
 
-  // Active issue: when on Original slide show first issue as context,
-  // when on issue slide show that specific issue
-  const activeIssue = item.issues.length > 0 ? item.issues[Math.max(0, photoIdx - 1)] : null;
+  const showStainUI = item.approvalType === "B";
+  const activeIssue = showStainUI && item.issues.length > 0 ? item.issues[Math.max(0, photoIdx - 1)] : null;
 
   return (
     <div className="flex h-screen flex-col bg-background font-sans">
