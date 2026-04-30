@@ -108,7 +108,7 @@ export default function ApprovalConfirm() {
         <button
           type="button"
           onClick={() => navigate(`/portal/${order.orderId}/approval/preferences`, { state: { order } })}
-          className="w-full rounded-[6px] bg-primary h-12 text-base font-normal text-primary-foreground shadow-press transition-transform duration-100 ease-out active:duration-75 active:scale-[0.98]"
+          className="w-full rounded-[6px] bg-primary h-12 text-[15px] font-normal text-primary-foreground shadow-press transition-transform duration-100 ease-out active:duration-75 active:scale-[0.98]"
         >
           Confirm Decisions
         </button>
