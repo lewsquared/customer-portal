@@ -105,7 +105,7 @@ export default function ApprovalItem() {
       <div className="flex flex-1 flex-col overflow-y-auto">
         {/* Carousel — swipe enabled, tap to expand */}
         <div
-          className="mt-4 overflow-hidden pl-5"
+          className="mt-4 overflow-hidden px-5"
           onTouchStart={(e) => setTouchStartX(e.touches[0].clientX)}
           onTouchEnd={(e) => {
             if (touchStartX === null) return;
@@ -117,13 +117,13 @@ export default function ApprovalItem() {
         >
           <div
             className="flex gap-3 transition-transform duration-300 ease-out"
-            style={{ transform: `translateX(calc(${photoIdx} * (-85vw - 12px)))` }}
+            style={{ transform: `translateX(calc(${photoIdx} * (-100% - 12px)))` }}
           >
             {slides.map((slide, i) => (
               <div
                 key={i}
-                className="relative shrink-0 cursor-pointer overflow-hidden rounded-3xl bg-[#EAF4F4]"
-                style={{ width: "85vw", height: "260px" }}
+                className="relative w-full shrink-0 cursor-pointer overflow-hidden rounded-3xl bg-[#EAF4F4]"
+                style={{ height: "260px" }}
                 onClick={() => setLightboxSrc(slide.src)}
               >
                 <img
