@@ -187,7 +187,7 @@ export default function ApprovalItem() {
               {/* Why we're asking — WF suitability reason (no stain UI) */}
               {(item as any).wfReason && (
                 <div className="rounded-xl px-4 py-3" style={{ backgroundColor: "#FEF2DF" }}>
-                  <p className="text-primary" style={{ fontSize: "12px", lineHeight: "15px", fontWeight: 100 }}>
+                  <p className="text-primary" style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 100 }}>
                     This item isn't suitable for Wash & Fold. We recommend switching it to Clean & Press so it's treated with the care it needs.
                   </p>
                 </div>
@@ -213,7 +213,7 @@ export default function ApprovalItem() {
                     >
                       {/* Recommended tag — top-right corner, CP only */}
                       {id === "CP" && (
-                        <span className="absolute right-0 top-0 rounded-bl-lg rounded-tr-xl px-2.5 py-1 text-[10px] font-normal text-primary" style={{ backgroundColor: "#A4FF00" }}>
+                        <span className="absolute right-0 top-0 rounded-bl-lg rounded-tr-xl px-2.5 py-1 text-[10px] font-normal text-primary" style={{ backgroundColor: "#F5D534" }}>
                           Recommended
                         </span>
                       )}
@@ -266,7 +266,7 @@ export default function ApprovalItem() {
           {item.approvalType === "B" && (
             <>
               <div className="rounded-xl px-4 py-3" style={{ backgroundColor: "#FEF2DF" }}>
-                <p className="text-primary" style={{ fontSize: "12px", lineHeight: "15px", fontWeight: 100 }}>{item.facilityNote}</p>
+                <p className="text-primary" style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 100 }}>{item.facilityNote}</p>
               </div>
 
               <h2 className="mt-5 text-xs font-semibold uppercase tracking-wide text-primary">What would you like to do?</h2>
