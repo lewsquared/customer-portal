@@ -2,195 +2,149 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Washmen design system. All colors HSL. */
+/* Washmen Live Order — design system. All colors HSL. */
 
 @layer base {
   :root {
-    /*
-     * HANDOFF: All --washmen-* color tokens below MUST stay in sync with the
-     * Design Library / Customer App / Colours page in Figma:
-     *   https://www.figma.com/design/nnyLq2qzzraZszKvJ4zMlz/?node-id=30307-5016
-     * Updating a hex here without updating Figma (or vice versa) breaks the
-     * single source of truth. The "@/lib/colors.ts" file (if it exists) MUST
-     * also stay in sync.
-     *
-     * Format: HSL fractions (Tailwind-compatible). The trailing hex comment
-     * is informational â€” match the hex value to the design system.
-     */
-
-    /* Primary colors */
-    --washmen-primary: 245 65% 30%; /* #251B7D â€” was #291482 */
-    --washmen-primary-aqua: 177 100% 50%; /* #02FFF7 â€” NEW */
-    --washmen-primary-green: 75 100% 50%; /* #A4FF00 â€” was #2FBD00 */
-    --washmen-primary-orange: 22 100% 55%; /* #FF7D19 â€” was --washmen-orange / #FF6B35 */
-    --washmen-primary-pink: 302 100% 78%; /* #FF8CF9 */
-    --washmen-primary-red: 359 56% 51%; /* #C83C3E */
-    --washmen-primary-teal: 168 57% 42%; /* #2EA692 â€” NEW */
-    --washmen-notification-red: 0 100% 50%; /* #FF0000 â€” NEW */
-
-    /* Secondary colors (light variants) */
-    --washmen-light-blue: 245 86% 93%; /* #E1DEFB â€” was --washmen-secondary-blue */
-    --washmen-light-aqua: 180 100% 95%; /* #E5FFFF â€” was --washmen-secondary-aqua / #E5FFFE */
-    --washmen-light-green: 79 100% 93%; /* #F3FFDD */
-    --washmen-light-orange: 35 96% 94%; /* #FEF2DF â€” NEW */
-    --washmen-light-pink: 300 100% 95%; /* #FFE8FE */
-    --washmen-light-red: 345 71% 95%; /* #FBEEF2 â€” was --washmen-secondary-red */
-    --washmen-light-teal: 168 100% 92%; /* #D8FFF8 â€” NEW */
-
-    /* Greys */
-    --washmen-slate-grey: 240 13% 40%; /* #585871 â€” NEW */
-    --washmen-cloudy-blue: 224 21% 77%; /* #B6BCD1 â€” NEW */
-    --washmen-light-grey: 240 11% 95%; /* #EEEFF4 â€” was #EFEFF4 */
-    --washmen-pale-grey: 234 24% 96%; /* #F2F3F8 â€” NEW */
-    --washmen-bg: 220 25% 98%; /* #FAFBFC â€” NEW */
-
-    /* Function colors */
-    --washmen-discount: 339 89% 58%; /* #F13578 â€” NEW */
-    --washmen-info-toast: 192 99% 41%; /* #01A8CD â€” NEW */
-    --washmen-express-delivery: 250 89% 72%; /* #8D77F7 â€” was #9176FF */
-    --washmen-secondary-express: 248 88% 94%; /* #E8E3FD â€” was #E9E3FF */
-
-    /*
-     * HANDOFF: Deprecated aliases â€” kept so existing usages don't break
-     * during Phase 2 of the color migration. Remove once all usages are
-     * migrated to the canonical names above.
-     */
-    --washmen-primary-light: 245 86% 93%; /* deprecated alias â†’ light-blue */
-    --washmen-orange: var(--washmen-primary-orange);
-    --washmen-pink: var(--washmen-primary-pink);
-    --washmen-red: var(--washmen-primary-red);
-    --washmen-secondary-blue: var(--washmen-light-blue);
-    --washmen-secondary-aqua: var(--washmen-light-aqua);
-    --washmen-secondary-red: var(--washmen-light-red);
-
-    /* Misc legacy tokens â€” still referenced; audit and migrate in Phase 2. */
-    --washmen-success: 142 71% 45%; /* #22C55E */
-    --washmen-warning: 45 96% 64%; /* #FCD34D */
-    --washmen-error: 0 84% 60%; /* #EF4444 */
-    --washmen-aqua-stroke: 178 100% 35%; /* deep aqua/teal */
-
-    /*
-     * HANDOFF: This neutral ladder predates the design-system import. It
-     * does NOT correspond to design-system colors â€” they're a Lovable-era
-     * invention. Phase 2 of the color migration will replace each usage
-     * with the correct design-system grey (slate-grey, cloudy-blue,
-     * light-grey, pale-grey, bg). After that migration completes, delete
-     * these tokens.
-     */
-    --washmen-secondary-50: 240 20% 98%;
-    --washmen-secondary-100: 240 17% 95%;
-    --washmen-secondary-200: 240 14% 89%;
-    --washmen-secondary-300: 240 11% 78%;
-    --washmen-secondary-400: 240 8% 60%;
-    --washmen-secondary-500: 240 6% 46%;
-    --washmen-secondary-600: 240 8% 34%;
-    --washmen-secondary-700: 240 10% 24%;
-    --washmen-secondary-800: 240 12% 16%;
-    --washmen-secondary-900: 240 16% 10%;
-
-    --subtle-bg: 240 20% 97%; /* #F7F7FA */
-
-    /* shadcn aliases mapped to Washmen */
-    --background: 0 0% 100%;
-    --foreground: var(--washmen-secondary-900);
+    --background: 40 33% 98%;
+    --foreground: 245 45% 14%;
 
     --card: 0 0% 100%;
-    --card-foreground: var(--washmen-secondary-900);
+    --card-foreground: 245 45% 14%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: var(--washmen-secondary-900);
+    --popover-foreground: 245 45% 14%;
 
-    --primary: var(--washmen-primary);
+    /* Washmen brand indigo (#291482) */
+    --primary: 252 73% 30%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: var(--washmen-secondary-100);
-    --secondary-foreground: var(--washmen-secondary-900);
+    /* Mint */
+    --secondary: 162 65% 94%;
+    --secondary-foreground: 245 54% 20%;
 
-    --muted: var(--washmen-secondary-100);
-    --muted-foreground: var(--washmen-secondary-500);
+    --muted: 240 20% 96%;
+    --muted-foreground: 244 14% 40%;
 
-    --accent: var(--washmen-primary-light);
-    --accent-foreground: var(--washmen-primary);
+    /* Lavender accent */
+    --accent: 255 92% 76%;
+    --accent-foreground: 245 54% 14%;
 
-    --destructive: var(--washmen-error);
+    --destructive: 359 53% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: var(--washmen-secondary-200);
-    --input: var(--washmen-secondary-200);
-    --ring: var(--washmen-primary);
+    --border: 245 30% 92%;
+    --input: 245 30% 92%;
+    --ring: 255 92% 70%;
 
-    --radius: 1rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
+    --cp-green: 80 100% 50%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Brand surfaces */
+    --surface-mint: 162 65% 94%;
+    --surface-mint-strong: 162 60% 88%;
+    --indigo-deep: 245 54% 14%;
+    --surface-lavender: 255 92% 76%;
+    --surface-lavender-soft: 255 100% 96%;
+    --success: 152 60% 42%;
+    --warning: 38 92% 55%;
+    --warning-dark: 28 92% 42%;
+    --warning-amber: 28 95% 55%;
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Status category surfaces — tint list cards and detail hero */
+    --surface-in-flight: 162 65% 94%;        /* mint */
+    --surface-attention-soft: 28 100% 94%;   /* peach */
+    --surface-attention-urgent: 350 100% 96%;/* pink */
+    --surface-completed: 84 55% 92%;         /* pale green */
+    --surface-special: 255 92% 96%;          /* lavender — laundry bag flow */
 
-    --sidebar-primary-foreground: 0 0% 98%;
 
-    --sidebar-accent: 240 4.8% 95.9%;
+    /* The Finery — distinct deep purple brand system */
+    --finery-primary: 260 45% 25%;
+    --finery-primary-foreground: 0 0% 100%;
+    --finery-accent: 260 30% 92%;
 
-    --sidebar-accent-foreground: 240 5.9% 10%;
+    /* Gradients */
+    --gradient-surface-mint: linear-gradient(180deg, hsl(var(--surface-mint)) 0%, hsl(var(--background)) 100%);
+    --gradient-surface-finery: linear-gradient(180deg, hsl(258 50% 90%) 0%, hsl(270 40% 96%) 100%);
+    --gradient-progress: linear-gradient(90deg, hsl(245 54% 20%) 0%, hsl(255 92% 70%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(var(--surface-mint)) 0%, hsl(var(--surface-lavender-soft)) 100%);
+    --gradient-hero-finery: linear-gradient(135deg, hsl(258 55% 84%) 0%, hsl(270 45% 92%) 100%);
 
-    --sidebar-border: 220 13% 91%;
+    /* Shadows */
+    --shadow-card: 0 1px 2px hsl(245 45% 14% / 0.04), 0 8px 24px -12px hsl(245 45% 14% / 0.08);
+    --shadow-hero: 0 12px 40px -16px hsl(245 54% 20% / 0.18);
+    --shadow-press: 0 2px 6px hsl(245 45% 14% / 0.08);
 
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .dark {
+    --background: 245 45% 8%;
+    --foreground: 160 60% 96%;
+    --card: 245 40% 12%;
+    --card-foreground: 160 60% 96%;
+    --popover: 245 40% 12%;
+    --popover-foreground: 160 60% 96%;
+    --primary: 255 92% 76%;
+    --primary-foreground: 245 54% 14%;
+    --secondary: 245 35% 18%;
+    --secondary-foreground: 160 60% 96%;
+    --muted: 245 30% 16%;
+    --muted-foreground: 245 15% 65%;
+    --accent: 255 92% 70%;
+    --accent-foreground: 245 54% 14%;
+    --border: 245 30% 20%;
+    --input: 245 30% 20%;
+    --ring: 255 92% 70%;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
-  }
-
-  html,
-  body,
-  #root {
-    @apply h-full;
-  }
-
-  body {
-    @apply bg-background text-foreground font-sans antialiased;
-    font-family:
-      "Inter",
-      system-ui,
-      -apple-system,
-      sans-serif;
-    -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: transparent;
-    overscroll-behavior-y: none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  *::-webkit-scrollbar {
+    display: none;
   }
 
-  /* Tap targets: no text selection, unified press feedback */
-  button,
-  [role="button"],
-  a,
-  .tap-target {
+  html, body, #root {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  html, body {
     -webkit-user-select: none;
     user-select: none;
     -webkit-touch-callout: none;
-    touch-action: manipulation;
+    overscroll-behavior: none;
   }
 
-  .press-effect {
-    transition:
-      transform 100ms ease-out,
-      opacity 100ms ease-out;
+  input, textarea, [contenteditable] {
+    -webkit-user-select: text;
+    user-select: text;
   }
-  .press-effect:active {
-    transform: scale(0.98);
-    opacity: 0.9;
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
   }
 }
 
 @layer utilities {
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
+  .bg-gradient-surface-mint { background: var(--gradient-surface-mint); }
+  .bg-gradient-surface-finery { background: var(--gradient-surface-finery); }
+  .bg-gradient-hero { background: var(--gradient-hero); }
+  .bg-gradient-hero-finery { background: var(--gradient-hero-finery); }
+  .bg-gradient-progress { background: var(--gradient-progress); }
+  .shadow-card { box-shadow: var(--shadow-card); }
+  .shadow-hero { box-shadow: var(--shadow-hero); }
+  .shadow-press { box-shadow: var(--shadow-press); }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; }
 }

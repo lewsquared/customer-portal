@@ -7,14 +7,13 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
+      padding: "1.5rem",
+      screens: { "2xl": "1400px" },
     },
     extend: {
       fontFamily: {
-        sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
+        sans: ["'Inter'", "ui-sans-serif", "system-ui", "sans-serif"],
+        mono: ["'JetBrains Mono'", "ui-monospace", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -22,70 +21,6 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        "subtle-bg": "hsl(var(--subtle-bg))",
-        washmen: {
-          // Primary
-          primary: "hsl(var(--washmen-primary))",
-          "primary-aqua": "hsl(var(--washmen-primary-aqua))",
-          "primary-green": "hsl(var(--washmen-primary-green))",
-          "primary-orange": "hsl(var(--washmen-primary-orange))",
-          "primary-pink": "hsl(var(--washmen-primary-pink))",
-          "primary-red": "hsl(var(--washmen-primary-red))",
-          "primary-teal": "hsl(var(--washmen-primary-teal))",
-          "notification-red": "hsl(var(--washmen-notification-red))",
-
-          // Light / secondary variants
-          "light-blue": "hsl(var(--washmen-light-blue))",
-          "light-aqua": "hsl(var(--washmen-light-aqua))",
-          "light-green": "hsl(var(--washmen-light-green))",
-          "light-orange": "hsl(var(--washmen-light-orange))",
-          "light-pink": "hsl(var(--washmen-light-pink))",
-          "light-red": "hsl(var(--washmen-light-red))",
-          "light-teal": "hsl(var(--washmen-light-teal))",
-
-          // Greys
-          "slate-grey": "hsl(var(--washmen-slate-grey))",
-          "cloudy-blue": "hsl(var(--washmen-cloudy-blue))",
-          "light-grey": "hsl(var(--washmen-light-grey))",
-          "pale-grey": "hsl(var(--washmen-pale-grey))",
-          bg: "hsl(var(--washmen-bg))",
-
-          // Function colors
-          discount: "hsl(var(--washmen-discount))",
-          "info-toast": "hsl(var(--washmen-info-toast))",
-          "express-delivery": "hsl(var(--washmen-express-delivery))",
-          "secondary-express": "hsl(var(--washmen-secondary-express))",
-
-          // === Deprecated aliases ===
-          // HANDOFF: kept so existing usages don't break during Phase 2 of
-          // the color migration. Remove once all usages are migrated to the
-          // canonical names above.
-          "primary-light": "hsl(var(--washmen-primary-light))", // deprecated → light-blue
-          orange: "hsl(var(--washmen-primary-orange))", // deprecated → primary-orange
-          pink: "hsl(var(--washmen-primary-pink))", // deprecated → primary-pink
-          red: "hsl(var(--washmen-primary-red))", // deprecated → primary-red
-          "secondary-blue": "hsl(var(--washmen-light-blue))", // deprecated → light-blue
-          "secondary-aqua": "hsl(var(--washmen-light-aqua))", // deprecated → light-aqua
-          "secondary-red": "hsl(var(--washmen-light-red))", // deprecated → light-red
-
-          // === Pre-design-system neutral ladder (deprecated, kept for compat) ===
-          "secondary-50": "hsl(var(--washmen-secondary-50))",
-          "secondary-100": "hsl(var(--washmen-secondary-100))",
-          "secondary-200": "hsl(var(--washmen-secondary-200))",
-          "secondary-300": "hsl(var(--washmen-secondary-300))",
-          "secondary-400": "hsl(var(--washmen-secondary-400))",
-          "secondary-500": "hsl(var(--washmen-secondary-500))",
-          "secondary-600": "hsl(var(--washmen-secondary-600))",
-          "secondary-700": "hsl(var(--washmen-secondary-700))",
-          "secondary-800": "hsl(var(--washmen-secondary-800))",
-          "secondary-900": "hsl(var(--washmen-secondary-900))",
-
-          // Misc remaining (audit usage and migrate if possible)
-          success: "hsl(var(--washmen-success))",
-          warning: "hsl(var(--washmen-warning))",
-          error: "hsl(var(--washmen-error))",
-          "aqua-stroke": "hsl(var(--washmen-aqua-stroke))",
-        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -114,56 +49,141 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        "surface-mint": {
+          DEFAULT: "hsl(var(--surface-mint))",
+          strong: "hsl(var(--surface-mint-strong))",
+        },
+        indigo: {
+          deep: "hsl(var(--indigo-deep))",
+        },
+        "surface-lavender": {
+          DEFAULT: "hsl(var(--surface-lavender))",
+          soft: "hsl(var(--surface-lavender-soft))",
+        },
+        success: "hsl(var(--success))",
+        warning: "hsl(var(--warning))",
+        "warning-dark": "hsl(var(--warning-dark))",
+        "warning-amber": "hsl(var(--warning-amber))",
+        "surface-in-flight": "hsl(var(--surface-in-flight))",
+        "surface-attention-soft": "hsl(var(--surface-attention-soft))",
+        "surface-attention-urgent": "hsl(var(--surface-attention-urgent))",
+        "surface-completed": "hsl(var(--surface-completed))",
+        "surface-special": "hsl(var(--surface-special))",
+        finery: {
+          DEFAULT: "hsl(var(--finery-primary))",
+          foreground: "hsl(var(--finery-primary-foreground))",
+          accent: "hsl(var(--finery-accent))",
+        },
+        "washmen-aqua": "#02FFF7",
+        "washmen-green": "#A4FF00",
+        "washmen-orange": "#FF7D19",
+        "washmen-pink": "#FF8CF9",
+        "washmen-red": "#C83C3E",
+        "washmen-teal": "#2EA692",
+        "washmen-slate": "#585871",
+        "washmen-cloudy": "#C3C8DB",
+        "washmen-light-grey": "#EFEFF4",
+        "washmen-stroke": "#F2F3F8",
+        "washmen-bg": "#FAFBFC",
+        "washmen-discount": "#F13578",
+        "washmen-info": "#01A8CD",
+        "washmen-express": "#9176FF",
+        "washmen-express-light": "#E9E3FF",
+        "washmen-light-blue": "#E1DEFB",
+        "washmen-light-aqua": "#E5FFFE",
+        "washmen-light-green": "#F3FFDD",
+        "washmen-light-orange": "#FEF2DF",
+        "washmen-light-pink": "#FFE8FE",
+        "washmen-light-red": "#FBEEF2",
+        "washmen-light-teal": "#D8FFF8",
         sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
+          DEFAULT: "hsl(var(--background))",
+          foreground: "hsl(var(--foreground))",
+          primary: "hsl(var(--primary))",
+          "primary-foreground": "hsl(var(--primary-foreground))",
+          accent: "hsl(var(--accent))",
+          "accent-foreground": "hsl(var(--accent-foreground))",
+          border: "hsl(var(--border))",
+          ring: "hsl(var(--ring))",
         },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 4px)",
         sm: "calc(var(--radius) - 8px)",
-        sheet: "24px",
-        card: "8px",
-        btn: "12px",
+        "2xl": "calc(var(--radius) + 8px)",
+        "3xl": "calc(var(--radius) + 16px)",
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0", opacity: "0" },
+          to: { height: "var(--radix-accordion-content-height)", opacity: "1" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
-        },
-        "sheet-in": {
-          from: { transform: "translateY(100%)" },
-          to: { transform: "translateY(0)" },
+          from: { height: "var(--radix-accordion-content-height)", opacity: "1" },
+          to: { height: "0", opacity: "0" },
         },
         "fade-in": {
-          from: { opacity: "0" },
-          to: { opacity: "1" },
+          "0%": { opacity: "0", transform: "translateY(8px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "scale-in": {
+          "0%": { opacity: "0", transform: "scale(0.96)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        "progress-fill": {
+          "0%": { width: "0%" },
+          "100%": { width: "var(--progress-target, 50%)" },
+        },
+        "pulse-ring": {
+          "0%": { boxShadow: "0 0 0 0 hsl(var(--accent) / 0.55)" },
+          "70%": { boxShadow: "0 0 0 12px hsl(var(--accent) / 0)" },
+          "100%": { boxShadow: "0 0 0 0 hsl(var(--accent) / 0)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-6px)" },
+        },
+        sway: {
+          "0%, 100%": { transform: "rotate(-4deg)" },
+          "50%": { transform: "rotate(4deg)" },
+        },
+        "spin-slow": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        "truck-roll": {
+          "0%, 100%": { transform: "translateX(0)" },
+          "50%": { transform: "translateX(6px)" },
+        },
+        shake: {
+          "0%, 100%": { transform: "translateX(0)" },
+          "20%, 60%": { transform: "translateX(-4px)" },
+          "40%, 80%": { transform: "translateX(4px)" },
+        },
+        "bounce-soft": {
+          "0%, 100%": { transform: "translateY(0) scale(1)" },
+          "50%": { transform: "translateY(-4px) scale(1.04)" },
+        },
+        sparkle: {
+          "0%, 100%": { opacity: "0.4", transform: "scale(0.9)" },
+          "50%": { opacity: "1", transform: "scale(1.15)" },
         },
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-        "sheet-in": "sheet-in 240ms cubic-bezier(0.32, 0.72, 0, 1)",
-        "fade-in": "fade-in 200ms ease-out",
+        "accordion-down": "accordion-down 0.25s ease-out",
+        "accordion-up": "accordion-up 0.25s ease-out",
+        "fade-in": "fade-in 0.5s ease-out both",
+        "scale-in": "scale-in 0.3s ease-out both",
+        "progress-fill": "progress-fill 1.2s cubic-bezier(0.65, 0, 0.35, 1) 0.2s both",
+        "pulse-ring": "pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        float: "float 4s ease-in-out infinite",
+        sway: "sway 3s ease-in-out infinite",
+        "spin-slow": "spin-slow 6s linear infinite",
+        "truck-roll": "truck-roll 1.6s ease-in-out infinite",
+        shake: "shake 0.6s ease-in-out",
+        "bounce-soft": "bounce-soft 2s ease-in-out infinite",
+        sparkle: "sparkle 1.8s ease-in-out infinite",
       },
     },
   },
