@@ -45,7 +45,7 @@ export default function ApprovalConfirm() {
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
           Final step
         </p>
-        <h1 className="mt-2 text-[22px] font-extrabold tracking-tight text-primary">
+        <h1 className="mt-2 text-[22px] font-bold tracking-tight text-primary">
           Review your decisions
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
