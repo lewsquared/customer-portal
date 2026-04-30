@@ -39,7 +39,7 @@ export default function ApprovalConfirm() {
     CP: "Moved to Clean & Press",
     WF: "Keeping in Wash & Fold",
     approved: "Approved for Clean & Press",
-    return: "Returning uncleaned",
+    return: "Returning Uncleaned",
   };
 
   const colorFor: Record<ApprovalDecision, string> = {
