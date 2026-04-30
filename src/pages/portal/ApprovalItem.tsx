@@ -135,7 +135,7 @@ function ApprovalItemInner() {
             {slides.map((slide, i) => (
               <div
                 key={i}
-                className="relative w-full shrink-0 cursor-pointer overflow-hidden rounded-3xl bg-[#EAF4F4]"
+                className="relative w-full shrink-0 cursor-pointer overflow-hidden rounded-2xl bg-[#EAF4F4]"
                 style={{ height: "260px" }}
                 onClick={() => setLightboxSrc(slide.src)}
               >
