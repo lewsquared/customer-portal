@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Pencil } from "lucide-react";
 import { OrderHeader } from "@/components/order/OrderHeader";
@@ -5,6 +6,9 @@ import { APPROVAL_ITEM_IMAGES, MOCK_PORTAL_DATA } from "@/lib/portal-mock-data";
 import { useOrderData } from "@/lib/useOrderData";
 import { getAllDecisions, type ApprovalDecision } from "@/lib/approvalDecisions";
 import { cn } from "@/lib/utils";
+import extraBagsIcon from "@/assets/icons/extra-bags.png";
+import washFoldIcon from "@/assets/icons/wash-fold.png";
+import bagsGroupIcon from "@/assets/icons/bags-group.png";
 
 const toTitleCase = (s: string) =>
   s.replace(/\w\S*/g, (t) => t.charAt(0).toUpperCase() + t.slice(1).toLowerCase());
@@ -13,6 +17,14 @@ export default function ApprovalConfirm() {
   const navigate = useNavigate();
   const { state } = useLocation() as { state: { autoApproved?: boolean } | null };
   const order = useOrderData();
+
+  // Preload icons used on the next screen (Skip Approvals)
+  useEffect(() => {
+    [extraBagsIcon, washFoldIcon, bagsGroupIcon].forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
   const autoApproved = state?.autoApproved ?? false;
   const items = MOCK_PORTAL_DATA.approvalItems;
 
