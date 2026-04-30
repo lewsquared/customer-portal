@@ -41,7 +41,7 @@ export const BottomActionBar = ({
         <button
           type="button"
           onClick={handlePrimary}
-          className="flex-1 rounded-xl bg-primary py-3 text-sm font-bold text-primary-foreground transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]"
+          className="flex-1 rounded-[6px] bg-primary py-3 text-sm font-bold text-primary-foreground transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]"
         >
           {primaryLabel}
         </button>

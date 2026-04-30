@@ -214,7 +214,7 @@ export default function ApprovalPreferences() {
           type="button"
           onClick={handleClick}
           className={cn(
-            "w-full rounded-2xl py-4 text-base transition-transform duration-100 ease-out active:duration-75 active:scale-[0.98]",
+            "w-full rounded-[6px] py-4 text-base transition-transform duration-100 ease-out active:duration-75 active:scale-[0.98]",
             ctaPrimary
               ? "bg-primary font-semibold text-primary-foreground shadow-press"
               : "font-medium text-muted-foreground hover:text-foreground",
