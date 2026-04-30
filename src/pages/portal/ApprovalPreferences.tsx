@@ -144,7 +144,7 @@ export default function ApprovalPreferences() {
                 When enabled, our team will process items with stains or damage without asking for your approval each time
               </p>
               <div className="flex items-center gap-3 border-t border-border py-3">
-                <span className="flex-1 text-[12px] text-primary" style={{ fontWeight: 300 }}>Auto-Approve</span>
+                <span className="flex-1 text-[12px] text-primary" style={{ fontWeight: stainAutoApprove ? 500 : 300 }}>Auto-Approve</span>
                 <Switch
                   checked={stainAutoApprove}
                   onCheckedChange={setStainAutoApprove}
