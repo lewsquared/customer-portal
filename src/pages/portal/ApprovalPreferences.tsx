@@ -45,7 +45,7 @@ export default function ApprovalPreferences() {
   const [stainOpen, setStainOpen] = useState(true);
   const [wfOpen, setWfOpen] = useState(true);
   const [stainAutoApprove, setStainAutoApprove] = useState(false);
-  const [wfPref, setWfPref] = useState<WfPref>(null);
+  const [wfPref, setWfPref] = useState<WfPref>("notify");
 
   const [loaded, setLoaded] = useState<SavedPrefs | null>(null);
 
@@ -69,7 +69,7 @@ export default function ApprovalPreferences() {
   const hasSaved = loaded !== null;
   const hasChanges = loaded
     ? loaded.stainAutoApprove !== stainAutoApprove || loaded.wfPref !== wfPref
-    : stainAutoApprove !== false || wfPref !== null;
+    : stainAutoApprove !== false || wfPref !== "notify";
 
   const handleClick = () => {
     if (hasChanges) {
