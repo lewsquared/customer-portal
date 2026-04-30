@@ -186,8 +186,8 @@ export default function ApprovalItem() {
             <>
               {/* Why we're asking — WF suitability reason (no stain UI) */}
               {(item as any).wfReason && (
-                <div className="rounded-xl border border-border bg-card px-4 py-3">
-                  <p className="text-muted-foreground" style={{ fontSize: "12px", lineHeight: "20px", fontWeight: 100 }}>
+                <div className="rounded-xl px-4 py-3" style={{ backgroundColor: "#FEF2DF" }}>
+                  <p className="text-foreground" style={{ fontSize: "12px", lineHeight: "20px", fontWeight: 100 }}>
                     This item isn't suitable for Wash & Fold. We recommend switching it to Clean & Press so it's treated with the care it needs.
                   </p>
                 </div>
