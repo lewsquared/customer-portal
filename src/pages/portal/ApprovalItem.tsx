@@ -131,12 +131,12 @@ export default function ApprovalItem() {
                     (e.target as HTMLImageElement).style.display = "none";
                   }}
                 />
-                {i === 0 && stain?.photoCoords && (
+                {i === 0 && item.issues[0]?.photoCoords && (
                   <div
                     className="absolute h-3 w-3 rounded-full bg-destructive ring-2 ring-background"
                     style={{
-                      left: `${stain.photoCoords.x}%`,
-                      top: `${stain.photoCoords.y}%`,
+                      left: `${item.issues[0].photoCoords.x}%`,
+                      top: `${item.issues[0].photoCoords.y}%`,
                       transform: "translate(-50%, -50%)",
                     }}
                   />
