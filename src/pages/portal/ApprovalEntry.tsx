@@ -28,6 +28,12 @@ export default function ApprovalEntry() {
           <h1 className="text-2xl font-extrabold tracking-tight text-primary">
             {count} {count === 1 ? "Item" : "Items"} Need Your Approval
           </h1>
+          <p className="mt-3 max-w-xs text-sm text-muted-foreground">
+            Some of your items need your approval before we can continue processing them.
+          </p>
+          <p className="mt-3 max-w-xs text-sm text-muted-foreground">
+            If we don't receive approval, those items will be returned uncleaned.
+          </p>
           <p className="mt-3 text-xs text-muted-foreground">
             Takes less than 1 minute!
           </p>
