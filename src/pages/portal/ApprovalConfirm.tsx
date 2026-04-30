@@ -66,8 +66,8 @@ export default function ApprovalConfirm() {
       />
 
       <div className="flex-1 px-6 pb-8 pt-4">
-        <h1 className="text-[22px] font-bold tracking-tight text-primary">
-          Confirm your items
+        <h1 className="text-xl leading-tight text-primary" style={{ fontWeight: 700 }}>
+          Confirm Your Items
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
           {autoApproved
