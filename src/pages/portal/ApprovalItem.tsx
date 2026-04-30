@@ -5,6 +5,7 @@ import { Switch } from "@/components/ui/switch";
 import { MOCK_PORTAL_DATA } from "@/lib/portal-mock-data";
 import { useOrderData } from "@/lib/useOrderData";
 import { cn } from "@/lib/utils";
+import { ServiceBagIcon } from "@/components/portal/ServiceBagIcon";
 
 type Decision = "CP" | "WF" | "approved" | "return" | null;
 
@@ -162,6 +163,10 @@ function ApprovalItemInner() {
                   )}
                 >
                   {slide.label}
+                </div>
+                {/* Service bag icon — bottom-right overlay */}
+                <div className="absolute bottom-3 right-3 z-10">
+                  <ServiceBagIcon service={(item as any).service ?? "WF"} size={32} />
                 </div>
               </div>
             ))}
