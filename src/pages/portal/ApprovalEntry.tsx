@@ -26,11 +26,8 @@ export default function ApprovalEntry() {
 
         <div className="mt-8 flex flex-col items-center text-center">
           <h1 className="text-2xl font-extrabold tracking-tight text-primary">
-            Your items need a decision
+            {count} {count === 1 ? "Item" : "Items"} Need Your Approval
           </h1>
-          <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-            {count} {count === 1 ? "item" : "items"} can't move forward with processing until you've reviewed and approved them.
-          </p>
           <p className="mt-3 text-xs text-muted-foreground">
             Takes less than 1 minute!
           </p>
