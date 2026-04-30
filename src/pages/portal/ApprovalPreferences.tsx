@@ -7,6 +7,7 @@ import { setOrderStatus } from "@/lib/order-status-override";
 import { cn } from "@/lib/utils";
 import extraBagsIcon from "@/assets/icons/extra-bags.png";
 import washFoldIcon from "@/assets/icons/wash-fold.png";
+import bagsGroupIcon from "@/assets/icons/bags-group.png";
 
 type WfPref = "notify" | "auto_cp" | "always_wash" | "return" | null;
 
@@ -32,12 +33,10 @@ const RadioRow = ({ selected, onSelect, label }: RadioRowProps) => (
     <span className="flex-1 text-[12px] leading-tight text-primary">{label}</span>
     <div
       className={cn(
-        "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-[2.5px] transition-colors",
-        selected ? "border-primary" : "border-border",
+        "h-5 w-5 shrink-0 rounded-full transition-colors",
+        selected ? "border-[5px] border-primary bg-background" : "border-2 border-border bg-background",
       )}
-    >
-      {selected && <span className="h-2 w-2 rounded-full bg-primary" />}
-    </div>
+    />
   </button>
 );
 
@@ -112,10 +111,11 @@ export default function ApprovalPreferences() {
         </div>
 
         {/* Heading */}
-        <h1 className="text-xl leading-tight text-primary" style={{ fontWeight: 700 }}>
-          Skip approvals next time?
+        <img src={bagsGroupIcon} alt="" className="mx-auto h-32 w-auto object-contain" />
+        <h1 className="mt-3 text-center text-xl leading-tight text-primary" style={{ fontWeight: 700 }}>
+          Skip Approvals Next Time?
         </h1>
-        <p className="mt-1 text-[0.875rem] leading-tight text-muted-foreground">
+        <p className="mt-1 text-center text-[0.875rem] leading-tight text-muted-foreground">
           Set your preferences once and we'll handle these decisions for you on future orders.
         </p>
 
