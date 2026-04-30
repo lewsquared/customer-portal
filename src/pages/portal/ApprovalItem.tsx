@@ -51,17 +51,22 @@ export default function ApprovalItem() {
       : navigate(`/portal/${order.orderId}/approval`, { state: { order } });
 
   if (!item) return null;
-  const stain = item.issues?.[0];
   const images = ITEM_IMAGES[item.id] ?? ITEM_IMAGES.a0;
 
+  // Slides: Original + one per issue
   const slides = [
-    { label: "ORIGINAL", labelClass: "bg-primary/80 text-white", src: images.original },
-    {
-      label: (stain?.type as string) === "damage" ? "DAMAGE" : "STAIN",
+    { label: "ORIGINAL", labelClass: "bg-primary/80 text-white", src: images.original, issueIndex: null as number | null },
+    ...item.issues.map((issue, i) => ({
+      label: (issue.type as string) === "damage" ? "DAMAGE" : "STAIN",
       labelClass: "bg-destructive text-white",
-      src: images.detail,
-    },
+      src: i === 0 ? images.detail : images.original,
+      issueIndex: i,
+    })),
   ];
+
+  // Active issue updates as user swipes
+  const activeIssue =
+    item.issues.length > 0 ? item.issues[Math.max(0, photoIdx - 1)] : null;
 
   return (
     <div className="flex h-screen flex-col bg-background font-sans">
