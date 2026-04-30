@@ -63,7 +63,7 @@ export default function ApprovalItem() {
       src: images.original,
     },
     ...item.issues.map((issue, i) => ({
-      label: issue.type === "damage" ? "DAMAGE" : "STAIN",
+      label: (issue.type as string) === "damage" ? "DAMAGE" : "STAIN",
       labelClass: "bg-destructive text-white",
       src: i === 0 ? images.detail : images.original,
     })),
