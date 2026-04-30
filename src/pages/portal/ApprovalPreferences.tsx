@@ -32,11 +32,11 @@ const RadioRow = ({ selected, onSelect, label }: RadioRowProps) => (
     <span className="flex-1 text-[12px] leading-tight text-primary">{label}</span>
     <div
       className={cn(
-        "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
-        selected ? "border-primary bg-primary" : "border-border bg-background",
+        "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-[2.5px] transition-colors",
+        selected ? "border-primary" : "border-border",
       )}
     >
-      {selected && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
+      {selected && <span className="h-2 w-2 rounded-full bg-primary" />}
     </div>
   </button>
 );
