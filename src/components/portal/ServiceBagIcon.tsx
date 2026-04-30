@@ -12,6 +12,15 @@ const SERVICE_ICONS: Partial<Record<Service, string>> = {
   BB: bedBathIcon,
 };
 
+// Preload all service bag icons immediately so they appear instantly when rendered.
+if (typeof window !== "undefined") {
+  Object.values(SERVICE_ICONS).forEach((src) => {
+    if (!src) return;
+    const img = new Image();
+    img.src = src;
+  });
+}
+
 interface ServiceBagIconProps {
   service: Service;
   size?: number;
@@ -30,6 +39,10 @@ export function ServiceBagIcon({ service, size = 32, className }: ServiceBagIcon
       alt={label}
       width={size}
       height={size}
+      loading="eager"
+      decoding="sync"
+      // @ts-expect-error - fetchpriority is a valid HTML attribute
+      fetchpriority="high"
       className={cn("shrink-0 object-contain", className)}
       style={{ width: size, height: size }}
     />
