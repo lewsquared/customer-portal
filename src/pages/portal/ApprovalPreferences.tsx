@@ -117,7 +117,7 @@ export default function ApprovalPreferences() {
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
           Optional
         </p>
-        <h1 className="mt-2 text-[24px] font-extrabold leading-tight tracking-tight text-primary">
+        <h1 className="mt-2 text-[24px] font-bold leading-tight tracking-tight text-primary">
           Skip approvals next time?
         </h1>
         <p className="mt-3 text-[0.875rem] leading-relaxed text-muted-foreground">
