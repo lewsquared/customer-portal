@@ -109,7 +109,7 @@ function ApprovalItemInner() {
 
       {/* Scrollable content */}
       <div className="flex flex-1 flex-col overflow-y-auto">
-        <h2 className="px-5 pt-5 text-xl font-extrabold tracking-tight text-primary">
+        <h2 className="px-5 pt-5 tracking-tight text-primary" style={{ fontSize: "16px", fontWeight: 400 }}>
           {item.brand} {item.itemType}
         </h2>
         {/* Carousel — swipe enabled, tap to expand */}
