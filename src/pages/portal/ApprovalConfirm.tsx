@@ -6,6 +6,9 @@ import { useOrderData } from "@/lib/useOrderData";
 import { getAllDecisions, type ApprovalDecision } from "@/lib/approvalDecisions";
 import { cn } from "@/lib/utils";
 
+const toTitleCase = (s: string) =>
+  s.replace(/\w\S*/g, (t) => t.charAt(0).toUpperCase() + t.slice(1).toLowerCase());
+
 export default function ApprovalConfirm() {
   const navigate = useNavigate();
   const { state } = useLocation() as { state: { autoApproved?: boolean } | null };
@@ -89,12 +92,11 @@ export default function ApprovalConfirm() {
                     ) : null}
                   </span>
                   <div className="min-w-0 flex-1">
-                    <p className="leading-tight">
-                      <span className="text-sm font-bold text-foreground">{item.brand}</span>
-                      <span className="ml-1 text-xs text-muted-foreground">{(item as any).itemType}</span>
-                    </p>
+                    <h3 className="text-primary" style={{ fontSize: "15px", fontWeight: 600, lineHeight: "21px", letterSpacing: "0em" }}>
+                      {toTitleCase(`${item.brand} - ${(item as any).itemType}`)}
+                    </h3>
                     {d === "CP" && (item as any).price > 0 && (
-                      <p className="mt-1 text-sm font-extrabold text-primary leading-tight">
+                      <p className="mt-1 text-primary leading-tight" style={{ fontSize: "14px", fontWeight: 100 }}>
                         +AED {(item as any).price}
                       </p>
                     )}
