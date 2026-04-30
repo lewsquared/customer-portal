@@ -69,7 +69,7 @@ export default function ApprovalConfirm() {
         <h1 className="text-xl leading-tight text-primary" style={{ fontWeight: 700 }}>
           Confirm Your Items
         </h1>
-        <p className="mt-1 text-[0.875rem] leading-relaxed text-muted-foreground">
+        <p className="mt-1 text-[0.875rem] leading-tight text-muted-foreground">
           {autoApproved
             ? "All items have been auto-approved based on your preferences."
             : "Tap any item to change your decision before confirming."}
