@@ -113,7 +113,7 @@ function ApprovalItemInner() {
 
       {/* Scrollable content */}
       <div className="flex flex-1 flex-col overflow-y-auto">
-        <h2 className="px-5 pt-5 tracking-tight text-primary" style={{ fontSize: "16px", fontWeight: 600, lineHeight: "21px" }}>
+        <h2 className="px-5 pt-5 text-primary" style={{ fontSize: "16px", fontWeight: 600, lineHeight: "21px", letterSpacing: "0.01em" }}>
           {toTitleCase(`${item.brand} ${item.itemType}`)}
         </h2>
         {/* Carousel — swipe enabled, tap to expand */}
@@ -135,7 +135,7 @@ function ApprovalItemInner() {
             {slides.map((slide, i) => (
               <div
                 key={i}
-                className="relative w-full shrink-0 cursor-pointer overflow-hidden rounded-3xl bg-[#EAF4F4]"
+                className="relative w-full shrink-0 cursor-pointer overflow-hidden rounded-2xl bg-[#EAF4F4]"
                 style={{ height: "260px" }}
                 onClick={() => setLightboxSrc(slide.src)}
               >
