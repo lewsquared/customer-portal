@@ -18,7 +18,7 @@ export default function ApprovalEntry() {
       />
 
       <main className="flex flex-1 flex-col overflow-y-auto px-6 pb-8 pt-4">
-        <div className="overflow-hidden rounded-3xl">
+        <div className="overflow-hidden rounded-[10px]">
           <img
             src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=1200&q=80"
             alt="Facility"
@@ -27,10 +27,7 @@ export default function ApprovalEntry() {
         </div>
 
         <div className="mt-10 flex flex-col">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-            Action needed
-          </p>
-          <h1 className="mt-2 text-[26px] font-extrabold leading-[1.15] tracking-tight text-primary">
+          <h1 className="text-[1.5rem] font-extrabold leading-[1.15] tracking-tight text-primary">
             {count} {count === 1 ? "item needs" : "items need"} your approval
           </h1>
           <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
