@@ -27,8 +27,10 @@ export default function ApprovalEntry() {
         </div>
 
         <div className="mt-10 flex flex-col items-center text-center">
-          <h1 className="text-[1.5rem] font-bold leading-[1.15] tracking-tight text-primary">
-            {count} {count === 1 ? "item needs" : "items need"} your approval
+          <h1 className="text-[1.5rem] font-bold tracking-tight text-primary" style={{ lineHeight: 1.25 }}>
+            {count} {count === 1 ? "item needs" : "items need"}
+            <br />
+            your approval
           </h1>
           <p className="mt-4 text-[0.875rem] leading-relaxed text-muted-foreground">
             A few of your items can't move forward without your decision.
