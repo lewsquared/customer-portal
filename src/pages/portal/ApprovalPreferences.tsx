@@ -30,7 +30,7 @@ const RadioRow = ({ selected, onSelect, label }: RadioRowProps) => (
     onClick={onSelect}
     className="flex w-full items-center gap-3 border-t border-border/60 py-3 text-left"
   >
-    <span className="flex-1 text-[12px] leading-tight text-primary">{label}</span>
+    <span className={cn("flex-1 text-[12px] leading-tight text-primary", selected ? "font-normal" : "font-light")}>{label}</span>
     <div
       className={cn(
         "h-5 w-5 shrink-0 rounded-full transition-colors",
@@ -139,11 +139,11 @@ export default function ApprovalPreferences() {
 
           {stainOpen && (
             <div className="px-4 pb-1">
-              <p className="border-t border-border py-3 text-[12px] leading-tight text-muted-foreground">
-                When enabled, our team will process items with stains or damage without asking for your approval each time.
+              <p className="border-t border-border py-3 text-[12px] font-light text-primary" style={{ lineHeight: 1.5 }}>
+                When enabled, our team will process items with stains or damage without asking for your approval each time
               </p>
               <div className="flex items-center gap-3 border-t border-border py-3">
-                <span className="flex-1 text-[12px] font-medium text-primary">Auto-approve</span>
+                <span className="flex-1 text-[12px] font-light text-primary">Auto-Approve</span>
                 <Switch
                   checked={stainAutoApprove}
                   onCheckedChange={setStainAutoApprove}
@@ -174,7 +174,7 @@ export default function ApprovalPreferences() {
 
           {wfOpen && (
             <div className="px-4 pb-1">
-              <p className="border-t border-border py-3 text-[12px] leading-tight text-muted-foreground">
+              <p className="border-t border-border py-3 text-[12px] font-light text-primary" style={{ lineHeight: 1.5 }}>
                 In order to protect your delicate & expensive items, our team will flag items that we believe might not be suitable to Wash & Fold and will require your approval on how to proceed
               </p>
               <RadioRow
