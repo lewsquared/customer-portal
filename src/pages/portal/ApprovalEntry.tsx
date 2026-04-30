@@ -18,16 +18,11 @@ export default function ApprovalEntry() {
       />
 
       <main className="flex-1 overflow-y-auto px-5 pb-6 pt-2">
-        <div className="relative">
-          <img
-            src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=1200&q=80"
-            alt="Facility"
-            className="h-[240px] w-full rounded-2xl object-cover"
-          />
-          <div className="absolute right-3 top-3 flex h-8 min-w-8 items-center justify-center rounded-full bg-destructive px-2 text-sm font-bold text-destructive-foreground shadow-md">
-            {count}
-          </div>
-        </div>
+        <img
+          src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=1200&q=80"
+          alt="Facility"
+          className="h-[240px] w-full rounded-2xl object-cover"
+        />
 
         <div className="mt-8 flex flex-col items-center text-center">
           <h1 className="text-2xl font-extrabold tracking-tight text-primary">
