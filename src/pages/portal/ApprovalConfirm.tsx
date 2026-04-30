@@ -136,9 +136,9 @@ export default function ApprovalConfirm() {
           </div>
         )}
 
-        <div className="mt-3 rounded-xl px-4 py-3.5" style={{ backgroundColor: "#FEF2DF" }}>
-          <p className="text-[13px] leading-[18px] text-primary">
-            Processing will begin immediately after confirmation. The new total above will be added to your final invoice
+        <div className="mt-0 rounded-xl px-4 py-3" style={{ backgroundColor: "#FEF2DF" }}>
+          <p className="text-primary" style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 100 }}>
+            Processing will begin immediately after confirmation. The new total above will be added to your final invoice.
           </p>
         </div>
       </div>
