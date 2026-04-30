@@ -340,7 +340,7 @@ function ApprovalItemInner() {
             hasDecision ? "bg-primary text-primary-foreground" : "cursor-not-allowed bg-[#F2F3F8] text-[#C3C8DB]",
           )}
         >
-          {isLast ? "Review Decisions" : "Next Item"}
+          {editMode ? "Save changes" : isLast ? "Review Decisions" : "Next Item"}
         </button>
       </div>
 
