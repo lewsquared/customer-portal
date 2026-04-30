@@ -1,32 +1,20 @@
-import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Check, ChevronLeft, X } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
-import { MOCK_PORTAL_DATA } from "@/lib/portal-mock-data";
-import { useOrderData } from "@/lib/useOrderData";
-import { cn } from "@/lib/utils";
 import { ServiceBagIcon } from "@/components/portal/ServiceBagIcon";
+import { APPROVAL_ITEM_IMAGES, MOCK_PORTAL_DATA } from "@/lib/portal-mock-data";
+import { useOrderData } from "@/lib/useOrderData";
+import {
+  setDecision as persistDecision,
+  getDecision as readDecision,
+} from "@/lib/approvalDecisions";
+import { cn } from "@/lib/utils";
 
 const toTitleCase = (s: string) =>
   s.replace(/\w\S*/g, (w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase());
 
 type Decision = "CP" | "WF" | "approved" | "return" | null;
-
-// Mock images per item id — replace with real facility photos when available
-const ITEM_IMAGES: Record<string, { original: string; detail: string }> = {
-  a0: {
-    original: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&q=80",
-    detail: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=80",
-  },
-  a1: {
-    original: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=600&q=80",
-    detail: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=80",
-  },
-  b0: {
-    original: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&q=80",
-    detail: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=80",
-  },
-};
 
 export default function ApprovalItem() {
   const { itemIdx } = useParams();
