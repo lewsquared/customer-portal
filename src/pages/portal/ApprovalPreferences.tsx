@@ -30,7 +30,7 @@ const RadioRow = ({ selected, onSelect, label }: RadioRowProps) => (
     onClick={onSelect}
     className="flex w-full items-center gap-3 border-t border-border/60 py-3 text-left"
   >
-    <span className="flex-1 text-[12px] leading-tight text-primary">{label}</span>
+    <span className={cn("flex-1 text-[12px] leading-tight text-primary", selected ? "font-normal" : "font-light")}>{label}</span>
     <div
       className={cn(
         "h-5 w-5 shrink-0 rounded-full transition-colors",
