@@ -102,37 +102,38 @@ export default function ApprovalPreferences() {
 
   return (
     <div className="flex h-screen flex-col bg-background font-sans">
-      <div className="flex-1 overflow-y-auto px-5 pb-4 pt-12">
-        {/* Success banner */}
-        <div className="mb-8 flex items-center gap-2.5 rounded-xl bg-success/15 px-4 py-3">
-          <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-success">
-            <Check className="h-3 w-3 text-white" strokeWidth={3} />
+      <div className="flex-1 overflow-y-auto px-6 pb-6 pt-14">
+        {/* Confirmation */}
+        <div className="mb-10 flex items-center gap-3">
+          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-success">
+            <Check className="h-4 w-4 text-white" strokeWidth={3} />
           </div>
-          <p className="text-sm font-semibold text-success">You are all done!</p>
-        </div>
-
-        {/* Illustration */}
-        <div className="flex items-center justify-center py-4">
-          <span className="text-7xl leading-none">🛍️</span>
-        </div>
-
-        {/* Heading */}
-        <div className="mb-7 text-center">
-          <h1 className="font-sans text-xl font-extrabold text-primary">Do you trust us?</h1>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            Enable auto-approvals and skip approving each item in the future
+          <p className="text-sm font-semibold text-foreground">
+            Decisions submitted
           </p>
         </div>
 
+        {/* Heading */}
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          Optional
+        </p>
+        <h1 className="mt-2 text-[24px] font-extrabold leading-tight tracking-tight text-primary">
+          Skip approvals next time?
+        </h1>
+        <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
+          Set your preferences once and we'll handle these decisions for you on future orders.
+        </p>
+
         {/* Stain and Damage Approval */}
-        <div className="mb-3 overflow-hidden rounded-xl border border-border bg-card">
+        <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-card">
           <button
             type="button"
             onClick={() => setStainOpen((v) => !v)}
-            className="flex w-full items-center gap-3 px-4 py-3.5 text-left"
+            className="flex w-full items-center gap-3 px-4 py-4 text-left"
           >
-            <span className="text-xl">🛍️</span>
-            <span className="flex-1 text-sm font-semibold text-primary">Stain and Damage Approval</span>
+            <span className="flex-1 text-sm font-semibold text-primary">
+              Stain & damage approval
+            </span>
             {stainOpen ? (
               <ChevronUp className="h-4 w-4 text-muted-foreground" strokeWidth={2.5} />
             ) : (
@@ -141,13 +142,12 @@ export default function ApprovalPreferences() {
           </button>
 
           {stainOpen && (
-            <div className="px-4">
+            <div className="px-4 pb-1">
               <p className="border-t border-border py-3 text-sm leading-relaxed text-muted-foreground">
-                By activating "Auto-approve" our laundry team will process all items with stains or damages
-                without seeking your consent
+                When enabled, our team will process items with stains or damage without asking for your approval each time.
               </p>
-              <div className="flex items-center gap-3 border-t border-border/60 py-3">
-                <span className="flex-1 text-sm font-medium text-primary">Auto-Approve</span>
+              <div className="flex items-center gap-3 border-t border-border py-3">
+                <span className="flex-1 text-sm font-medium text-primary">Auto-approve</span>
                 <Switch
                   checked={stainAutoApprove}
                   onCheckedChange={setStainAutoApprove}
@@ -159,14 +159,15 @@ export default function ApprovalPreferences() {
         </div>
 
         {/* Wash & Fold Approval */}
-        <div className="overflow-hidden rounded-xl border border-border bg-card">
+        <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card">
           <button
             type="button"
             onClick={() => setWfOpen((v) => !v)}
-            className="flex w-full items-center gap-3 px-4 py-3.5 text-left"
+            className="flex w-full items-center gap-3 px-4 py-4 text-left"
           >
-            <span className="text-xl">🛍️</span>
-            <span className="flex-1 text-sm font-semibold text-primary">Wash & Fold Approval</span>
+            <span className="flex-1 text-sm font-semibold text-primary">
+              Wash & Fold approval
+            </span>
             {wfOpen ? (
               <ChevronUp className="h-4 w-4 text-muted-foreground" strokeWidth={2.5} />
             ) : (
@@ -177,28 +178,27 @@ export default function ApprovalPreferences() {
           {wfOpen && (
             <div className="px-4 pb-1">
               <p className="border-t border-border py-3 text-sm leading-relaxed text-muted-foreground">
-                In order to protect your delicate & expensive items, our team will flag items that we believe
-                might not be suitable to Wash & Fold and will require your approval on how to proceed
+                Choose how we should handle delicate or expensive items flagged as unsuitable for Wash & Fold.
               </p>
               <RadioRow
                 selected={wfPref === "notify"}
                 onSelect={() => setWfPref("notify")}
-                label="Always notify me of the items in question so I can decide (default)"
+                label="Notify me so I can decide (default)"
               />
               <RadioRow
                 selected={wfPref === "auto_cp"}
                 onSelect={() => setWfPref("auto_cp")}
-                label="Automatically transfer items to the clean & press service and notify me"
+                label="Move flagged items to Clean & Press and notify me"
               />
               <RadioRow
                 selected={wfPref === "always_wash"}
                 onSelect={() => setWfPref("always_wash")}
-                label="Always wash any items I send in the wash & fold bag, regardless of the risk involved and notify me"
+                label="Wash everything regardless of risk and notify me"
               />
               <RadioRow
                 selected={wfPref === "return"}
                 onSelect={() => setWfPref("return")}
-                label="Do not wash and return unprocessed"
+                label="Return flagged items unprocessed"
               />
             </div>
           )}
@@ -207,17 +207,17 @@ export default function ApprovalPreferences() {
 
       {/* Sticky bottom */}
       <div
-        className="border-t border-border bg-background px-5 pt-4"
-        style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)" }}
+        className="px-6 pt-3"
+        style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1.25rem)" }}
       >
         <button
           type="button"
           onClick={handleClick}
           className={cn(
-            "w-full rounded-xl py-3.5 font-sans text-base transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]",
+            "w-full rounded-2xl py-4 text-base transition-transform duration-100 ease-out active:duration-75 active:scale-[0.98]",
             ctaPrimary
-              ? "bg-primary font-extrabold text-primary-foreground"
-              : "border border-border bg-transparent font-semibold text-muted-foreground",
+              ? "bg-primary font-semibold text-primary-foreground shadow-press"
+              : "font-medium text-muted-foreground hover:text-foreground",
           )}
         >
           {ctaLabel}
