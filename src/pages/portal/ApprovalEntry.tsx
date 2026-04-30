@@ -18,13 +18,11 @@ export default function ApprovalEntry() {
       />
 
       <main className="flex flex-1 flex-col items-center justify-center overflow-y-auto px-6 pb-8 pt-4">
-        <div className="overflow-hidden rounded-[10px]">
-          <img
-            src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=1200&q=80"
-            alt="Facility"
-            className="h-[260px] w-full object-cover"
-          />
-        </div>
+        <img
+          src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=1200&q=80"
+          alt="Facility"
+          className="h-[260px] w-full object-cover"
+        />
 
         <div className="mt-10 flex flex-col items-center text-center">
           <h1 className="text-[1.5rem] font-bold tracking-tight text-primary" style={{ lineHeight: 1.25 }}>
