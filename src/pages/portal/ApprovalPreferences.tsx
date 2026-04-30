@@ -112,7 +112,7 @@ export default function ApprovalPreferences() {
         </div>
 
         {/* Heading */}
-        <img src={bagsGroupIcon} alt="" className="mx-auto h-16 w-auto object-contain" />
+        <img src={bagsGroupIcon} alt="" className="mx-auto h-16 w-auto rounded-[6px] object-contain" />
         <h1 className="mt-3 text-center text-xl leading-tight text-primary" style={{ fontWeight: 700 }}>
           Skip Approvals Next Time?
         </h1>
