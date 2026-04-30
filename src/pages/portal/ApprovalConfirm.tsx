@@ -80,13 +80,13 @@ export default function ApprovalConfirm() {
             const d = decisionFor(item, idx);
             const img = APPROVAL_ITEM_IMAGES[item.id]?.original;
             return (
-              <li key={item.id} className="overflow-hidden rounded-2xl border border-border bg-card">
+              <li key={item.id} className="overflow-hidden rounded-xl border border-border bg-card">
                 <button
                   type="button"
                   onClick={() => goEditItem(idx)}
                   className="flex w-full items-start gap-3 px-4 py-4 text-left transition-colors active:bg-muted/40"
                 >
-                  <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-muted">
+                  <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-muted">
                     {img ? (
                       <img src={img} alt={item.brand} className="h-full w-full object-cover" />
                     ) : null}
@@ -121,7 +121,7 @@ export default function ApprovalConfirm() {
           })}
         </ul>
 
-        <div className="mt-5 rounded-2xl border border-border bg-card px-4 py-4">
+        <div className="mt-5 rounded-xl border border-border bg-card px-4 py-4">
           <div className="flex items-center justify-between py-1.5 text-sm text-muted-foreground">
             <span>Original estimate</span>
             <span className="font-medium text-foreground">AED {originalEstimate}</span>
