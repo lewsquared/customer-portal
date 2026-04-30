@@ -5,6 +5,7 @@ import { Switch } from "@/components/ui/switch";
 import { MOCK_PORTAL_DATA } from "@/lib/portal-mock-data";
 import { useOrderData } from "@/lib/useOrderData";
 import { cn } from "@/lib/utils";
+import { ServiceBagIcon } from "@/components/portal/ServiceBagIcon";
 
 type Decision = "CP" | "WF" | "approved" | "return" | null;
 
@@ -162,6 +163,10 @@ function ApprovalItemInner() {
                   )}
                 >
                   {slide.label}
+                </div>
+                {/* Service bag icon — bottom-right overlay */}
+                <div className="absolute bottom-3 right-3 z-10">
+                  <ServiceBagIcon service={(item as any).service ?? "WF"} size={32} />
                 </div>
               </div>
             ))}
@@ -332,21 +337,108 @@ function ApprovalItemInner() {
         </button>
       </div>
 
-      {/* Full-screen lightbox */}
+      {/* Item detail modal — opens on slide tap */}
       {lightboxSrc && (
-        <div className="fixed inset-0 z-50 flex flex-col bg-black/95" onClick={() => setLightboxSrc(null)}>
-          <div className="flex items-center justify-end px-5 pt-12 pb-4">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-5"
+          onClick={() => setLightboxSrc(null)}
+        >
+          <div
+            className="relative w-full max-w-md rounded-3xl bg-background p-5 shadow-xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
             <button
+              type="button"
               onClick={() => setLightboxSrc(null)}
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white"
+              aria-label="Close"
+              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center text-primary active:opacity-70"
             >
-              <X className="h-4 w-4" strokeWidth={2.5} />
+              <X className="h-5 w-5" strokeWidth={2.5} />
             </button>
+
+            {/* Title */}
+            <h3 className="pr-10 text-primary" style={{ fontSize: "16px", fontWeight: 600, lineHeight: "21px" }}>
+              {item.brand} - {item.itemType}
+            </h3>
+
+            {/* Color dots + item number */}
+            <div className="mt-2 flex items-center gap-2">
+              <div className="flex items-center gap-1">
+                {((item as any).colors ?? []).slice(0, 3).map((hex: string, i: number) => (
+                  <div
+                    key={i}
+                    className="h-3 w-3 rounded-full ring-1 ring-border"
+                    style={{ backgroundColor: hex }}
+                  />
+                ))}
+              </div>
+              <span className="text-xs text-muted-foreground">({item.itemNumber})</span>
+            </div>
+
+            {/* Image with overlays */}
+            <div className="relative mt-4 overflow-hidden rounded-2xl bg-[#EAF4F4]" style={{ height: "320px" }}>
+              <img
+                src={slides[photoIdx]?.src}
+                alt={slides[photoIdx]?.label}
+                className="h-full w-full object-cover"
+              />
+              {/* Stain dot — Type B only, original slide only */}
+              {showStainUI && photoIdx === 0 && item.issues[0]?.photoCoords && (
+                <div
+                  className="absolute z-10 h-4 w-4 rounded-full bg-destructive shadow-md ring-2 ring-white"
+                  style={{
+                    left: `${item.issues[0].photoCoords.x}%`,
+                    top: `${item.issues[0].photoCoords.y}%`,
+                    transform: "translate(-50%, -50%)",
+                  }}
+                />
+              )}
+              {/* Slide label, centered bottom */}
+              <div
+                className={cn(
+                  "absolute bottom-3 left-1/2 z-10 -translate-x-1/2 rounded-lg px-2.5 py-1 text-[10px] font-extrabold tracking-widest shadow-sm",
+                  slides[photoIdx]?.labelClass,
+                )}
+              >
+                {slides[photoIdx]?.label}
+              </div>
+              {/* Service bag icon, bottom-right */}
+              <div className="absolute bottom-3 right-3 z-10">
+                <ServiceBagIcon service={(item as any).service ?? "WF"} size={36} />
+              </div>
+            </div>
+
+            {/* Pagination dots — only when multiple slides */}
+            {slides.length > 1 && (
+              <div className="mt-3 flex justify-center gap-1.5">
+                {slides.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setPhotoIdx(i)}
+                    className={cn(
+                      "h-1.5 rounded-full bg-primary transition-all duration-200",
+                      i === photoIdx ? "w-5" : "w-1.5 opacity-30",
+                    )}
+                    aria-label={`Slide ${i + 1}`}
+                  />
+                ))}
+              </div>
+            )}
+
+            {/* Issue summary */}
+            {(item as any).issueSummary && (
+              <div className="mt-4 flex items-center gap-2 rounded-xl px-3 py-2" style={{ backgroundColor: "#FEF2DF" }}>
+                <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-destructive text-[11px] font-bold text-white">
+                  !
+                </div>
+                <p className="text-primary" style={{ fontSize: "13px", fontWeight: 500 }}>
+                  {(item as any).issueSummary}
+                </p>
+              </div>
+            )}
           </div>
-          <div className="flex flex-1 items-center justify-center px-5" onClick={(e) => e.stopPropagation()}>
-            <img src={lightboxSrc} className="max-h-full w-full rounded-2xl object-contain" alt="Full size" />
-          </div>
-          <div style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 2rem)" }} />
         </div>
       )}
     </div>
