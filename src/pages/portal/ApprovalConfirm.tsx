@@ -84,7 +84,7 @@ export default function ApprovalConfirm() {
                 <button
                   type="button"
                   onClick={() => goEditItem(idx)}
-                  className="flex w-full items-start gap-3 px-4 py-4 text-left transition-colors active:bg-muted/40"
+                  className="flex w-full items-start gap-3 px-3 py-3 text-left transition-colors active:bg-muted/40"
                 >
                   <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-md bg-muted">
                     {img ? (
@@ -122,25 +122,22 @@ export default function ApprovalConfirm() {
         </ul>
 
         {(cpAddedTotal > 0 || returnItems.length > 0) && (
-          <div className="mt-5 rounded-xl rounded-b-none px-4 py-3" style={{ backgroundColor: "#FEF2DF" }}>
+          <div className="mt-5 rounded-xl px-3 py-2.5" style={{ backgroundColor: "#FEF2DF" }}>
             {cpAddedTotal > 0 && (
               <p className="text-primary" style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 100 }}>
                 <span style={{ fontWeight: 600 }}>AED {cpAddedTotal}</span> will be added to your final bill for the {cpItems.length === 1 ? "item" : `${cpItems.length} items`} moving to Clean & Press
               </p>
             )}
             {returnItems.length > 0 && (
-              <p className={cn("text-primary", cpAddedTotal > 0 && "mt-1.5")} style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 100 }}>
+              <p className={cn("text-primary", cpAddedTotal > 0 && "mt-1")} style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 100 }}>
                 {returnItems.length === 1 ? "1 item" : `${returnItems.length} items`} will be returned uncleaned at no charge
               </p>
             )}
+            <p className="mt-1 text-primary" style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 100 }}>
+              Processing will begin immediately after confirmation. The new total above will be added to your final invoice.
+            </p>
           </div>
         )}
-
-        <div className="rounded-xl rounded-t-none px-4 py-3" style={{ backgroundColor: "#FEF2DF" }}>
-          <p className="text-primary" style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 100 }}>
-            Processing will begin immediately after confirmation. The new total above will be added to your final invoice.
-          </p>
-        </div>
       </div>
 
       <div
