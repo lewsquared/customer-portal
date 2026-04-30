@@ -159,20 +159,22 @@ export default function ApprovalItem() {
           </div>
         </div>
 
-        {/* Dot pagination */}
-        <div className="mt-3 flex justify-center gap-1.5 pr-5">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => setPhotoIdx(i)}
-              className={cn(
-                "h-1.5 rounded-full bg-primary transition-all duration-200",
-                i === photoIdx ? "w-5" : "w-1.5 opacity-30",
-              )}
-            />
-          ))}
-        </div>
+        {/* Dot pagination — only when multiple slides (Type B) */}
+        {slides.length > 1 && (
+          <div className="mt-3 flex justify-center gap-1.5 pr-5">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setPhotoIdx(i)}
+                className={cn(
+                  "h-1.5 rounded-full bg-primary transition-all duration-200",
+                  i === photoIdx ? "w-5" : "w-1.5 opacity-30",
+                )}
+              />
+            ))}
+          </div>
+        )}
 
         {/* Decision content */}
         <div className="px-5 pb-4 pt-4">
