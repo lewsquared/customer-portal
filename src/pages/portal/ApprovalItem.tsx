@@ -174,13 +174,27 @@ export default function ApprovalItem() {
         <div className="px-5 pb-4 pt-4">
           {item.approvalType === "A" && (
             <>
-              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                {(item as any).issue} · {(item as any).issueLocation}
-              </p>
-
-              <div className="mt-2 rounded-xl border border-border bg-card p-3">
-                <p className="text-sm italic text-muted-foreground">"{item.facilityNote}"</p>
-              </div>
+              {activeIssue ? (
+                <>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    {(activeIssue as any).type} · {(activeIssue as any).location ?? (item as any).issueLocation}
+                  </p>
+                  <div className="mt-2 rounded-xl border border-border bg-card p-3">
+                    <p className="text-sm italic text-muted-foreground">
+                      "{(activeIssue as any).facilityNote ?? item.facilityNote}"
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    {(item as any).issue} · {(item as any).issueLocation}
+                  </p>
+                  <div className="mt-2 rounded-xl border border-border bg-card p-3">
+                    <p className="text-sm italic text-muted-foreground">"{item.facilityNote}"</p>
+                  </div>
+                </>
+              )}
 
               <h2 className="mt-6 text-base font-extrabold text-primary">
                 What would you like to do?
