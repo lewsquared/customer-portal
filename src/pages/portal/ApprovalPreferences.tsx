@@ -96,7 +96,7 @@ export default function ApprovalPreferences() {
     ctaLabel = "Continue";
     ctaPrimary = true;
   } else {
-    ctaLabel = "Skip for Now";
+    ctaLabel = "Skip For Now";
     ctaPrimary = false;
   }
 
@@ -216,8 +216,8 @@ export default function ApprovalPreferences() {
           className={cn(
             "w-full rounded-[6px] h-12 text-base transition-transform duration-100 ease-out active:duration-75 active:scale-[0.98]",
             ctaPrimary
-              ? "bg-primary font-semibold text-primary-foreground shadow-press"
-              : "font-medium text-muted-foreground hover:text-foreground",
+              ? "bg-primary font-normal text-primary-foreground shadow-press"
+              : "font-normal text-muted-foreground hover:text-foreground",
           )}
         >
           {ctaLabel}

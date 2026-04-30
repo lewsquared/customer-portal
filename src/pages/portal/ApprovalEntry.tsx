@@ -26,7 +26,7 @@ export default function ApprovalEntry() {
           />
         </div>
 
-        <div className="mt-10 flex flex-col">
+        <div className="mt-10 flex flex-col items-center text-center">
           <h1 className="text-[1.5rem] font-extrabold leading-[1.15] tracking-tight text-primary">
             {count} {count === 1 ? "item needs" : "items need"} your approval
           </h1>
@@ -49,9 +49,9 @@ export default function ApprovalEntry() {
           onClick={() =>
             navigate(`/portal/${order.orderId}/approval/0`, { state: { order } })
           }
-          className="w-full rounded-[6px] bg-primary h-12 text-base font-semibold text-primary-foreground shadow-press transition-transform duration-100 ease-out active:duration-75 active:scale-[0.98]"
+          className="w-full rounded-[6px] bg-primary h-12 text-base font-normal text-primary-foreground shadow-press transition-transform duration-100 ease-out active:duration-75 active:scale-[0.98]"
         >
-          Start review
+          Start Review
         </button>
       </div>
     </div>
