@@ -41,10 +41,12 @@ export default function ApprovalItem() {
 
   const hasDecision = decision !== null || returnOn;
 
-  const goNext = () =>
+  const goNext = () => {
+    if (!hasDecision) return;
     navigate(isLast ? `/portal/${order.orderId}/approval/confirm` : `/portal/${order.orderId}/approval/${idx + 1}`, {
       state: { order },
     });
+  };
 
   const goBack = () =>
     idx > 0

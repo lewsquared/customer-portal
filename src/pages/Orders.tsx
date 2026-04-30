@@ -2,23 +2,33 @@ import { ClipboardList } from "lucide-react";
 import { BottomTabBar } from "@/components/nav/BottomTabBar";
 import { OrderCard } from "@/components/orders/OrderCard";
 import { WardrobeCard } from "@/components/orders/WardrobeCard";
-import { MOCK_ACTIVE_ORDERS, MOCK_PAST_ORDERS } from "@/lib/mock-orders";
-import { STATUS_TO_CATEGORY } from "@/lib/order-types";
+import { MOCK_ORDERS } from "@/lib/mock-orders";
+import { STATUS_TO_CATEGORY, type OrderStatus } from "@/lib/order-types";
+import { getOrderStatus } from "@/lib/order-status-override";
 
 const Orders = () => {
-  const needsAttentionOrders = MOCK_ACTIVE_ORDERS.filter(
+  const allOrders = MOCK_ORDERS.map((o) => {
+    const override = getOrderStatus(o.orderId);
+    return override ? { ...o, status: override as OrderStatus } : o;
+  });
+  const activeOrders = allOrders.filter(
+    (o) => STATUS_TO_CATEGORY[o.status] !== "completed",
+  );
+  const needsAttentionOrders = activeOrders.filter(
     (o) =>
       (STATUS_TO_CATEGORY[o.status] === "needs_attention_urgent" ||
         STATUS_TO_CATEGORY[o.status] === "needs_attention_soft") &&
       o.status !== "partially_delivered",
   );
-  const otherActiveOrders = MOCK_ACTIVE_ORDERS.filter(
+  const otherActiveOrders = activeOrders.filter(
     (o) =>
       (STATUS_TO_CATEGORY[o.status] !== "needs_attention_urgent" &&
         STATUS_TO_CATEGORY[o.status] !== "needs_attention_soft") ||
       o.status === "partially_delivered",
   );
-  const pastOrders = MOCK_PAST_ORDERS;
+  const pastOrders = allOrders.filter(
+    (o) => STATUS_TO_CATEGORY[o.status] === "completed",
+  );
 
   const showActiveSection =
     otherActiveOrders.length > 0 || needsAttentionOrders.length === 0;
