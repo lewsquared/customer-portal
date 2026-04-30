@@ -4,6 +4,20 @@ export const SERVICE_COLORS: Record<string, string> = {
 export const SERVICE_LABELS: Record<string, string> = {
   CP: "Clean & Press", WF: "Wash & Fold", BB: "Bed & Bath", PO: "Press Only", SC: "Shoe & Bag Care",
 };
+export const APPROVAL_ITEM_IMAGES: Record<string, { original: string; detail: string }> = {
+  a0: {
+    original: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&q=80",
+    detail: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=80",
+  },
+  a1: {
+    original: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=600&q=80",
+    detail: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=80",
+  },
+  b0: {
+    original: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&q=80",
+    detail: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=80",
+  },
+};
 export const MOCK_PORTAL_DATA = {
   orderId: "W8KZ7A",
   pickup: {

@@ -1,9 +1,9 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { Shirt } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { OrderHeader } from "@/components/order/OrderHeader";
-
-import { MOCK_PORTAL_DATA } from "@/lib/portal-mock-data";
+import { APPROVAL_ITEM_IMAGES, MOCK_PORTAL_DATA } from "@/lib/portal-mock-data";
 import { useOrderData } from "@/lib/useOrderData";
+import { getAllDecisions, type ApprovalDecision } from "@/lib/approvalDecisions";
 import { cn } from "@/lib/utils";
 
 export default function ApprovalConfirm() {
@@ -13,24 +13,38 @@ export default function ApprovalConfirm() {
   const autoApproved = state?.autoApproved ?? false;
   const items = MOCK_PORTAL_DATA.approvalItems;
 
-  const getDecision = (item: any) =>
-    autoApproved ? (item.approvalType === "B" ? "approved" : "CP") : "CP";
+  const stored = getAllDecisions();
 
-  const color = (d: string) =>
-    d === "CP" || d === "approved"
-      ? "text-primary"
-      : d === "return"
-      ? "text-destructive"
-      : "text-success";
+  const decisionFor = (item: any, idx: number): ApprovalDecision => {
+    if (autoApproved) return item.approvalType === "B" ? "approved" : "CP";
+    return stored.get(idx) ?? "CP";
+  };
 
-  const label = (d: string) =>
-    d === "CP"
-      ? "Clean & Press"
-      : d === "return"
-      ? "Return uncleaned"
-      : d === "approved"
-      ? "Approved for CP"
-      : "Wash & Fold";
+  const labelFor: Record<ApprovalDecision, string> = {
+    CP: "Moved to Clean & Press",
+    WF: "Keeping in Wash & Fold",
+    approved: "Approved for processing",
+    return: "Returning uncleaned",
+  };
+
+  const colorFor: Record<ApprovalDecision, string> = {
+    CP: "text-primary",
+    WF: "text-muted-foreground",
+    approved: "text-primary",
+    return: "text-destructive",
+  };
+
+  const cpItems = items.filter((it, i) => decisionFor(it, i) === "CP");
+  const cpAddedTotal = cpItems.reduce((sum, it: any) => sum + (it.price ?? 0), 0);
+  const returnItems = items.filter((it, i) => decisionFor(it, i) === "return");
+  const originalEstimate = 45;
+  const newTotal = originalEstimate + cpAddedTotal;
+
+  const goEditItem = (idx: number) => {
+    navigate(`/portal/${order.orderId}/approval/${idx}`, {
+      state: { order, editMode: true },
+    });
+  };
 
   return (
     <div className="flex min-h-screen flex-col bg-background font-sans">
@@ -42,62 +56,83 @@ export default function ApprovalConfirm() {
       />
 
       <div className="flex-1 px-6 pb-8 pt-4">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-          Final step
-        </p>
-        <h1 className="mt-2 text-[22px] font-bold tracking-tight text-primary">
-          Review your decisions
+        <h1 className="text-[22px] font-bold tracking-tight text-primary">
+          Confirm your items
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          {autoApproved ? "All items auto-approved." : "Confirm before we continue processing."}
+          {autoApproved
+            ? "All items auto-approved."
+            : "Tap any item to change your decision before confirming."}
         </p>
 
         <ul className="mt-6 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
-          {items.map((item) => {
-            const d = getDecision(item);
+          {items.map((item, idx) => {
+            const d = decisionFor(item, idx);
+            const img = APPROVAL_ITEM_IMAGES[item.id]?.original;
             return (
-              <li key={item.id} className="flex items-center gap-3 px-4 py-3.5">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary">
-                  <Shirt className="h-5 w-5" strokeWidth={1.8} />
-                </span>
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-semibold text-foreground">
-                    {item.brand}
-                  </p>
-                  <p className="truncate text-xs text-muted-foreground">
-                    {item.itemType}
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className={cn("text-xs font-semibold", color(d))}>{label(d)}</p>
-                  {d === "CP" && (item as any).price > 0 && (
-                    <p className="text-[11px] text-muted-foreground">
-                      +AED {(item as any).price}
+              <li key={item.id}>
+                <button
+                  type="button"
+                  onClick={() => goEditItem(idx)}
+                  className="flex w-full items-center gap-3 px-4 py-3.5 text-left transition-colors active:bg-muted/40"
+                >
+                  <div className="h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-secondary">
+                    {img ? (
+                      <img src={img} alt={item.brand} className="h-full w-full object-cover" />
+                    ) : null}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-semibold text-foreground">
+                      {item.brand}
                     </p>
-                  )}
-                </div>
+                    <p className="truncate text-xs text-muted-foreground">
+                      {(item as any).itemType}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="text-right">
+                      <p className={cn("text-xs font-semibold", colorFor[d])}>{labelFor[d]}</p>
+                      {d === "CP" && (item as any).price > 0 && (
+                        <p className="text-[11px] text-muted-foreground">
+                          +AED {(item as any).price}
+                        </p>
+                      )}
+                    </div>
+                    <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                  </div>
+                </button>
               </li>
             );
           })}
         </ul>
 
         <div className="mt-5 rounded-2xl border border-border bg-card px-4 py-4">
-          {[
-            ["Original estimate", "AED 45"],
-            ["2 items → Clean & Press", "+AED 26"],
-          ].map(([l, v]) => (
-            <div
-              key={l}
-              className="flex items-center justify-between py-1.5 text-sm text-muted-foreground"
-            >
-              <span>{l}</span>
-              <span className="font-medium text-foreground">{v}</span>
+          <div className="flex items-center justify-between py-1.5 text-sm text-muted-foreground">
+            <span>Original estimate</span>
+            <span className="font-medium text-foreground">AED {originalEstimate}</span>
+          </div>
+          {cpItems.length > 0 && (
+            <div className="flex items-center justify-between py-1.5 text-sm text-muted-foreground">
+              <span>{cpItems.length} {cpItems.length === 1 ? "item" : "items"} → Clean & Press</span>
+              <span className="font-medium text-foreground">+AED {cpAddedTotal}</span>
             </div>
-          ))}
+          )}
+          {returnItems.length > 0 && (
+            <div className="flex items-center justify-between py-1.5 text-sm text-muted-foreground">
+              <span>{returnItems.length} {returnItems.length === 1 ? "item" : "items"} → Returning uncleaned</span>
+              <span className="font-medium text-foreground">No charge</span>
+            </div>
+          )}
           <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
             <span className="text-sm font-semibold text-foreground">New total</span>
-            <span className="text-lg font-extrabold text-primary">AED 71</span>
+            <span className="text-lg font-extrabold text-primary">AED {newTotal}</span>
           </div>
+        </div>
+
+        <div className="mt-4 rounded-xl px-4 py-3" style={{ backgroundColor: "#FEF2DF" }}>
+          <p className="text-primary" style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 100 }}>
+            Processing begins immediately after confirmation. The new total above will be added to your final invoice.
+          </p>
         </div>
       </div>
 
@@ -108,9 +143,9 @@ export default function ApprovalConfirm() {
         <button
           type="button"
           onClick={() => navigate(`/portal/${order.orderId}/approval/preferences`, { state: { order } })}
-          className="w-full rounded-[6px] bg-primary h-[42px] text-[14px] leading-[20px] font-normal text-primary-foreground shadow-press transition-transform duration-100 ease-out active:duration-75 active:scale-[0.98]"
+          className="w-full rounded-[6px] bg-primary h-12 text-base font-semibold text-primary-foreground shadow-press transition-transform duration-100 ease-out active:duration-75 active:scale-[0.98]"
         >
-          Confirm Decisions
+          Confirm
         </button>
       </div>
     </div>
