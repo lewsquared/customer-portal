@@ -126,7 +126,8 @@ export default function ApprovalPreferences() {
             onClick={() => setStainOpen((v) => !v)}
             className="flex w-full items-center gap-3 px-4 py-4 text-left"
           >
-            <span className="flex-1 text-sm font-semibold text-primary">
+            <img src={extraBagsIcon} alt="" className="h-7 w-7 shrink-0 object-contain" />
+            <span className="flex-1 text-[13px] font-semibold text-primary">
               Stain & damage approval
             </span>
             {stainOpen ? (
@@ -138,11 +139,11 @@ export default function ApprovalPreferences() {
 
           {stainOpen && (
             <div className="px-4 pb-1">
-              <p className="border-t border-border py-3 text-sm leading-relaxed text-muted-foreground">
+              <p className="border-t border-border py-3 text-[12px] leading-tight text-muted-foreground">
                 When enabled, our team will process items with stains or damage without asking for your approval each time.
               </p>
               <div className="flex items-center gap-3 border-t border-border py-3">
-                <span className="flex-1 text-sm font-medium text-primary">Auto-approve</span>
+                <span className="flex-1 text-[12px] font-medium text-primary">Auto-approve</span>
                 <Switch
                   checked={stainAutoApprove}
                   onCheckedChange={setStainAutoApprove}
@@ -160,7 +161,8 @@ export default function ApprovalPreferences() {
             onClick={() => setWfOpen((v) => !v)}
             className="flex w-full items-center gap-3 px-4 py-4 text-left"
           >
-            <span className="flex-1 text-sm font-semibold text-primary">
+            <img src={washFoldIcon} alt="" className="h-7 w-7 shrink-0 object-contain" />
+            <span className="flex-1 text-[13px] font-semibold text-primary">
               Wash & Fold approval
             </span>
             {wfOpen ? (
@@ -172,7 +174,7 @@ export default function ApprovalPreferences() {
 
           {wfOpen && (
             <div className="px-4 pb-1">
-              <p className="border-t border-border py-3 text-sm leading-relaxed text-muted-foreground">
+              <p className="border-t border-border py-3 text-[12px] leading-tight text-muted-foreground">
                 Choose how we should handle delicate or expensive items flagged as unsuitable for Wash & Fold.
               </p>
               <RadioRow
@@ -208,12 +210,7 @@ export default function ApprovalPreferences() {
         <button
           type="button"
           onClick={handleClick}
-          className={cn(
-            "w-full rounded-[6px] h-[42px] text-[14px] leading-[20px] transition-transform duration-100 ease-out active:duration-75 active:scale-[0.98]",
-            ctaPrimary
-              ? "bg-primary font-normal text-primary-foreground shadow-press"
-              : "font-normal text-muted-foreground hover:text-foreground",
-          )}
+          className="w-full rounded-[6px] h-[42px] text-[14px] leading-[20px] bg-primary font-normal text-primary-foreground shadow-press transition-transform duration-100 ease-out active:duration-75 active:scale-[0.98]"
         >
           {ctaLabel}
         </button>
