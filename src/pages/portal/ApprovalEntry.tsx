@@ -25,7 +25,7 @@ export default function ApprovalEntry() {
         />
 
         <div className="mt-10 flex flex-col items-center text-center">
-          <h1 className="text-[1.5rem] text-primary" style={{ lineHeight: 1.25, letterSpacing: "0.002em", fontWeight: 650 }}>
+          <h1 className="text-[1.5rem] text-primary" style={{ lineHeight: 1.25, letterSpacing: "0.002em", fontWeight: 600 }}>
             {count} {count === 1 ? "item needs" : "items need"} your approval
           </h1>
           <p className="mt-4 text-[0.875rem] leading-relaxed text-muted-foreground">
