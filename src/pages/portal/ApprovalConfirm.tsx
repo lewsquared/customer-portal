@@ -34,6 +34,13 @@ export default function ApprovalConfirm() {
     return: "text-destructive",
   };
 
+  const tagFor: Record<ApprovalDecision, string> = {
+    CP: "bg-washmen-light-green text-washmen-success",
+    WF: "bg-washmen-light-aqua text-washmen-primary",
+    approved: "bg-washmen-light-green text-washmen-success",
+    return: "bg-washmen-light-red text-destructive",
+  };
+
   const cpItems = items.filter((it, i) => decisionFor(it, i) === "CP");
   const cpAddedTotal = cpItems.reduce((sum, it: any) => sum + (it.price ?? 0), 0);
   const returnItems = items.filter((it, i) => decisionFor(it, i) === "return");
@@ -74,7 +81,7 @@ export default function ApprovalConfirm() {
                 <button
                   type="button"
                   onClick={() => goEditItem(idx)}
-                  className="flex w-full items-start gap-3 px-4 py-3.5 text-left transition-colors active:bg-muted/40"
+                  className="flex w-full items-start gap-3 px-4 py-4 text-left transition-colors active:bg-muted/40"
                 >
                   <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-muted">
                     {img ? (
@@ -84,16 +91,23 @@ export default function ApprovalConfirm() {
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-bold text-foreground leading-tight">{item.brand}</p>
                     <p className="mt-0.5 text-xs text-muted-foreground leading-tight">{(item as any).itemType}</p>
-                    <div className="mt-2 flex items-baseline gap-2">
-                      <p className={cn("text-[13px] font-bold leading-tight", colorFor[d])}>{labelFor[d]}</p>
+                    <div className="mt-2.5 flex items-center justify-between gap-2">
+                      <span className={cn(
+                        "inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-bold leading-tight",
+                        tagFor[d]
+                      )}>
+                        {labelFor[d]}
+                      </span>
                       {d === "CP" && (item as any).price > 0 && (
-                        <p className="text-[11px] font-medium text-muted-foreground">+AED {(item as any).price}</p>
+                        <span className="shrink-0 text-sm font-extrabold text-primary">
+                          +AED {(item as any).price}
+                        </span>
                       )}
                     </div>
                   </div>
                   <span
                     aria-label="Edit decision"
-                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-muted-foreground"
+                    className="flex h-8 w-8 shrink-0 items-center justify-center text-muted-foreground"
                   >
                     <Pencil className="h-4 w-4" strokeWidth={2.2} />
                   </span>
