@@ -7,6 +7,9 @@ import { useOrderData } from "@/lib/useOrderData";
 import { cn } from "@/lib/utils";
 import { ServiceBagIcon } from "@/components/portal/ServiceBagIcon";
 
+const toTitleCase = (s: string) =>
+  s.replace(/\w\S*/g, (w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase());
+
 type Decision = "CP" | "WF" | "approved" | "return" | null;
 
 // Mock images per item id — replace with real facility photos when available
