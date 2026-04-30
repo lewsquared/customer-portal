@@ -17,7 +17,7 @@ export default function ApprovalEntry() {
         variant="inline"
       />
 
-      <main className="flex flex-1 flex-col overflow-y-auto px-6 pb-8 pt-4">
+      <main className="flex flex-1 flex-col items-center justify-center overflow-y-auto px-6 pb-8 pt-4">
         <div className="overflow-hidden rounded-[10px]">
           <img
             src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=1200&q=80"
