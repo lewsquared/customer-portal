@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
+import { Pencil } from "lucide-react";
 import { OrderHeader } from "@/components/order/OrderHeader";
 import { APPROVAL_ITEM_IMAGES, MOCK_PORTAL_DATA } from "@/lib/portal-mock-data";
 import { useOrderData } from "@/lib/useOrderData";
@@ -74,32 +74,29 @@ export default function ApprovalConfirm() {
                 <button
                   type="button"
                   onClick={() => goEditItem(idx)}
-                  className="flex w-full items-center gap-3 px-4 py-3.5 text-left transition-colors active:bg-muted/40"
+                  className="flex w-full items-start gap-3 px-4 py-3.5 text-left transition-colors active:bg-muted/40"
                 >
-                  <div className="h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-secondary">
+                  <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-muted">
                     {img ? (
                       <img src={img} alt={item.brand} className="h-full w-full object-cover" />
                     ) : null}
-                  </div>
+                  </span>
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-semibold text-foreground">
-                      {item.brand}
-                    </p>
-                    <p className="truncate text-xs text-muted-foreground">
-                      {(item as any).itemType}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="text-right">
-                      <p className={cn("text-xs font-semibold", colorFor[d])}>{labelFor[d]}</p>
+                    <p className="text-sm font-bold text-foreground leading-tight">{item.brand}</p>
+                    <p className="mt-0.5 text-xs text-muted-foreground leading-tight">{(item as any).itemType}</p>
+                    <div className="mt-2 flex items-baseline gap-2">
+                      <p className={cn("text-[13px] font-bold leading-tight", colorFor[d])}>{labelFor[d]}</p>
                       {d === "CP" && (item as any).price > 0 && (
-                        <p className="text-[11px] text-muted-foreground">
-                          +AED {(item as any).price}
-                        </p>
+                        <p className="text-[11px] font-medium text-muted-foreground">+AED {(item as any).price}</p>
                       )}
                     </div>
-                    <ChevronRight className="h-4 w-4 text-muted-foreground" />
                   </div>
+                  <span
+                    aria-label="Edit decision"
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-muted-foreground"
+                  >
+                    <Pencil className="h-4 w-4" strokeWidth={2.2} />
+                  </span>
                 </button>
               </li>
             );
