@@ -69,9 +69,9 @@ export default function ApprovalConfirm() {
         <h1 className="text-xl leading-tight text-primary" style={{ fontWeight: 700 }}>
           Confirm Your Items
         </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
+        <p className="mt-4 text-[0.875rem] leading-relaxed text-muted-foreground">
           {autoApproved
-            ? "All items auto-approved."
+            ? "All items have been auto-approved based on your preferences."
             : "Tap any item to change your decision before confirming."}
         </p>
 
@@ -86,7 +86,7 @@ export default function ApprovalConfirm() {
                   onClick={() => goEditItem(idx)}
                   className="flex w-full items-start gap-3 px-4 py-4 text-left transition-colors active:bg-muted/40"
                 >
-                  <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-muted">
+                  <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-md bg-muted">
                     {img ? (
                       <img src={img} alt={item.brand} className="h-full w-full object-cover" />
                     ) : null}
@@ -121,28 +121,20 @@ export default function ApprovalConfirm() {
           })}
         </ul>
 
-        <div className="mt-5 rounded-xl border border-border bg-card px-4 py-4">
-          <div className="flex items-center justify-between py-1.5 text-sm text-muted-foreground">
-            <span>Original estimate</span>
-            <span className="font-medium text-foreground">AED {originalEstimate}</span>
+        {(cpAddedTotal > 0 || returnItems.length > 0) && (
+          <div className="mt-5 rounded-xl border border-border bg-card px-4 py-4">
+            {cpAddedTotal > 0 && (
+              <p className="text-sm text-foreground">
+                <span className="font-semibold text-primary">AED {cpAddedTotal}</span> will be added to your final bill for the {cpItems.length === 1 ? "item" : `${cpItems.length} items`} moving to Clean & Press.
+              </p>
+            )}
+            {returnItems.length > 0 && (
+              <p className={cn("text-sm text-muted-foreground", cpAddedTotal > 0 && "mt-2")}>
+                {returnItems.length === 1 ? "1 item" : `${returnItems.length} items`} will be returned uncleaned at no charge.
+              </p>
+            )}
           </div>
-          {cpItems.length > 0 && (
-            <div className="flex items-center justify-between py-1.5 text-sm text-muted-foreground">
-              <span>{cpItems.length} {cpItems.length === 1 ? "item" : "items"} → Clean & Press</span>
-              <span className="font-medium text-foreground">+AED {cpAddedTotal}</span>
-            </div>
-          )}
-          {returnItems.length > 0 && (
-            <div className="flex items-center justify-between py-1.5 text-sm text-muted-foreground">
-              <span>{returnItems.length} {returnItems.length === 1 ? "item" : "items"} → Returning uncleaned</span>
-              <span className="font-medium text-foreground">No charge</span>
-            </div>
-          )}
-          <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
-            <span className="text-sm font-semibold text-foreground">New total</span>
-            <span className="text-lg font-extrabold text-primary">AED {newTotal}</span>
-          </div>
-        </div>
+        )}
 
         <div className="mt-4 rounded-xl px-4 py-3" style={{ backgroundColor: "#FEF2DF" }}>
           <p className="text-primary" style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 100 }}>
