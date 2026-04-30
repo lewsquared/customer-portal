@@ -37,6 +37,10 @@ export default function ApprovalEntry() {
         </div>
       </main>
 
+      <p className="bg-background px-5 pb-3 text-center text-xs text-muted-foreground">
+        Takes less than 1 minute!
+      </p>
+
       <div
         className="border-t border-border px-5 pt-4"
         style={{
@@ -44,9 +48,6 @@ export default function ApprovalEntry() {
           paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)",
         }}
       >
-        <p className="mb-3 text-center text-xs text-muted-foreground">
-          Takes less than 1 minute!
-        </p>
         <button
           type="button"
           onClick={() =>
