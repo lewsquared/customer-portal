@@ -120,15 +120,15 @@ export default function ApprovalPreferences() {
         </p>
 
         {/* Stain and Damage Approval */}
-        <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-card">
+        <div className="mt-8 overflow-hidden rounded-xl border border-border bg-card">
           <button
             type="button"
             onClick={() => setStainOpen((v) => !v)}
-            className="flex w-full items-center gap-3 px-4 py-4 text-left"
+            className="flex h-[52px] w-full items-center gap-3 px-4 text-left"
           >
             <img src={extraBagsIcon} alt="" className="h-7 w-7 shrink-0 object-contain" />
-            <span className="flex-1 text-[13px] font-semibold text-primary">
-              Stain & damage approval
+            <span className="flex-1 text-[13px] font-medium text-primary">
+              Stain And Damage Approvals
             </span>
             {stainOpen ? (
               <ChevronUp className="h-4 w-4 text-muted-foreground" strokeWidth={2.5} />
@@ -155,15 +155,15 @@ export default function ApprovalPreferences() {
         </div>
 
         {/* Wash & Fold Approval */}
-        <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card">
+        <div className="mt-3 overflow-hidden rounded-xl border border-border bg-card">
           <button
             type="button"
             onClick={() => setWfOpen((v) => !v)}
-            className="flex w-full items-center gap-3 px-4 py-4 text-left"
+            className="flex h-[52px] w-full items-center gap-3 px-4 text-left"
           >
             <img src={washFoldIcon} alt="" className="h-7 w-7 shrink-0 object-contain" />
-            <span className="flex-1 text-[13px] font-semibold text-primary">
-              Wash & Fold approval
+            <span className="flex-1 text-[13px] font-medium text-primary">
+              Wash & Fold Approvals
             </span>
             {wfOpen ? (
               <ChevronUp className="h-4 w-4 text-muted-foreground" strokeWidth={2.5} />
