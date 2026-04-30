@@ -84,7 +84,7 @@ export default function ApprovalConfirm() {
                 <button
                   type="button"
                   onClick={() => goEditItem(idx)}
-                  className="flex w-full items-start gap-3 px-3 py-3 text-left transition-colors active:bg-muted/40"
+                  className="flex w-full items-start gap-3 pl-3 pr-2 py-3 text-left transition-colors active:bg-muted/40"
                 >
                   <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-md bg-muted">
                     {img ? (
