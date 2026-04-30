@@ -33,8 +33,15 @@ export default function ApprovalItem() {
   const item = items[idx];
   const isLast = idx === items.length - 1;
 
-  const [decision, setDecision] = useState<Decision>(null);
-  const [returnOn, setReturnOn] = useState(false);
+  const lastDecision = (typeof window !== "undefined"
+    ? (sessionStorage.getItem("approval:lastDecision") as Decision)
+    : null);
+  const lastReturnOn = typeof window !== "undefined"
+    ? sessionStorage.getItem("approval:lastReturnOn") === "1"
+    : false;
+
+  const [decision, setDecision] = useState<Decision>(lastDecision);
+  const [returnOn, setReturnOn] = useState<boolean>(lastReturnOn);
   const [photoIdx, setPhotoIdx] = useState(0);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
@@ -43,6 +50,10 @@ export default function ApprovalItem() {
 
   const goNext = () => {
     if (!hasDecision) return;
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("approval:lastDecision", decision ?? "");
+      sessionStorage.setItem("approval:lastReturnOn", returnOn ? "1" : "0");
+    }
     navigate(isLast ? `/portal/${order.orderId}/approval/confirm` : `/portal/${order.orderId}/approval/${idx + 1}`, {
       state: { order },
     });
