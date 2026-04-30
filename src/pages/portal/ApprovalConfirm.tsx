@@ -124,21 +124,21 @@ export default function ApprovalConfirm() {
         {(cpAddedTotal > 0 || returnItems.length > 0) && (
           <div className="mt-5 rounded-xl border border-border bg-card px-4 py-4">
             {cpAddedTotal > 0 && (
-              <p className="text-sm text-foreground">
-                <span className="font-semibold text-primary">AED {cpAddedTotal}</span> will be added to your final bill for the {cpItems.length === 1 ? "item" : `${cpItems.length} items`} moving to Clean & Press.
+              <p className="text-[15px] leading-relaxed text-primary">
+                <span className="font-bold">AED {cpAddedTotal}</span> will be added to your final bill for the {cpItems.length === 1 ? "item" : `${cpItems.length} items`} moving to Clean & Press
               </p>
             )}
             {returnItems.length > 0 && (
-              <p className={cn("text-sm text-muted-foreground", cpAddedTotal > 0 && "mt-2")}>
-                {returnItems.length === 1 ? "1 item" : `${returnItems.length} items`} will be returned uncleaned at no charge.
+              <p className={cn("text-[15px] leading-relaxed text-primary", cpAddedTotal > 0 && "mt-2")}>
+                {returnItems.length === 1 ? "1 item" : `${returnItems.length} items`} will be returned uncleaned at no charge
               </p>
             )}
           </div>
         )}
 
-        <div className="mt-4 rounded-xl px-4 py-3" style={{ backgroundColor: "#FEF2DF" }}>
-          <p className="text-primary" style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 100 }}>
-            Processing begins immediately after confirmation. The new total above will be added to your final invoice.
+        <div className="mt-4 rounded-xl px-4 py-4" style={{ backgroundColor: "#FEF2DF" }}>
+          <p className="text-[15px] leading-relaxed text-primary">
+            Processing will begin immediately after confirmation. The new total above will be added to your final invoice
           </p>
         </div>
       </div>
