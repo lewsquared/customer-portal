@@ -139,7 +139,7 @@ export default function ApprovalPreferences() {
 
           {stainOpen && (
             <div className="px-4 pb-1">
-              <p className="border-t border-border py-3 text-[11px] text-primary" style={{ lineHeight: 1.4, fontWeight: 200 }}>
+              <p className="border-t border-border py-3 text-[11px] text-primary" style={{ lineHeight: 1.7, fontWeight: 200 }}>
                 When enabled, our team will process items with stains or damage without asking for your approval each time
               </p>
               <div className="flex items-center gap-3 border-t border-border py-3">
@@ -174,7 +174,7 @@ export default function ApprovalPreferences() {
 
           {wfOpen && (
             <div className="px-4 pb-1">
-              <p className="border-t border-border py-3 text-[11px] text-primary" style={{ lineHeight: 1.4, fontWeight: 200 }}>
+              <p className="border-t border-border py-3 text-[11px] text-primary" style={{ lineHeight: 1.7, fontWeight: 200 }}>
                 In order to protect your delicate & expensive items, our team will flag items that we believe might not be suitable to Wash & Fold and will require your approval on how to proceed
               </p>
               <RadioRow
