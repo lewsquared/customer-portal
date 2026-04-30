@@ -66,7 +66,7 @@ const App = () => (
           <Route path="/portal/:orderId/approval" element={<ApprovalEntry />} />
           <Route path="/portal/:orderId/approval/confirm" element={<ApprovalConfirm />} />
           <Route path="/portal/:orderId/approval/preferences" element={<ApprovalPreferences />} />
-          <Route path="/portal/:orderId/approval/:itemIdx" element={<ApprovalItem />} />
+          <Route path="/portal/:orderId/approval/:itemIdx" element={<ApprovalItemRouted />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
