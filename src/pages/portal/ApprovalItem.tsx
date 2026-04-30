@@ -184,14 +184,14 @@ export default function ApprovalItem() {
           */}
           {item.approvalType === "A" && (
             <>
-              {/* Issue label + note — updates as user swipes through slides */}
-              {activeIssue && (
+              {/* Why we're asking — WF suitability reason (no stain UI) */}
+              {(item as any).wfReason && (
                 <>
                   <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                    {activeIssue.type} · {activeIssue.location}
+                    Why we're asking
                   </p>
                   <div className="mt-2 rounded-xl border border-border bg-card px-4 py-3">
-                    <p className="text-sm italic text-muted-foreground">"{activeIssue.facilityNote}"</p>
+                    <p className="text-sm leading-relaxed text-muted-foreground">{(item as any).wfReason}</p>
                   </div>
                 </>
               )}
