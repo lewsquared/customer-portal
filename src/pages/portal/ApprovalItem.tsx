@@ -352,7 +352,7 @@ function ApprovalItemInner() {
             </button>
 
             {/* Title */}
-            <h3 className="pr-10 text-primary" style={{ fontSize: "16px", fontWeight: 600, lineHeight: "21px" }}>
+            <h3 className="pr-10 text-primary" style={{ fontSize: "15px", fontWeight: 600, lineHeight: "21px", letterSpacing: "0em" }}>
               {toTitleCase(`${item.brand} - ${item.itemType}`)}
             </h3>
 
