@@ -207,8 +207,8 @@ export default function ApprovalItem() {
                         setReturnOn(false);
                       }}
                       className={cn(
-                        "relative flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all duration-150",
-                        sel ? "border-primary bg-card" : "border-border bg-card",
+                        "relative w-full rounded-xl border-2 px-4 py-3 text-left transition-all duration-150",
+                        sel ? "border-primary bg-washmen-light-blue" : "border-border bg-card",
                       )}
                     >
                       {/* Recommended tag — top-right corner, CP only */}
@@ -217,16 +217,7 @@ export default function ApprovalItem() {
                           RECOMMENDED
                         </span>
                       )}
-                      {/* Radio circle */}
-                      <div
-                        className={cn(
-                          "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
-                          sel ? "border-primary bg-primary" : "border-border bg-background",
-                        )}
-                      >
-                        {sel && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
-                      </div>
-                      <div className="flex-1 pr-2">
+                      <div className="pr-2">
                         <p className="text-primary" style={{ fontSize: "14px", fontWeight: 600 }}>
                           {id === "CP" ? "Send to Clean & Press" : "Keep as Wash & Fold"}
                         </p>
@@ -282,19 +273,11 @@ export default function ApprovalItem() {
                         setReturnOn(false);
                       }}
                       className={cn(
-                        "relative flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all duration-150",
-                        sel ? "border-primary bg-card" : "border-border bg-card",
+                        "relative w-full rounded-xl border-2 px-4 py-3 text-left transition-all duration-150",
+                        sel ? "border-primary bg-washmen-light-blue" : "border-border bg-card",
                       )}
                     >
-                      <div
-                        className={cn(
-                          "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
-                          sel ? "border-primary bg-primary" : "border-border bg-background",
-                        )}
-                      >
-                        {sel && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
-                      </div>
-                      <div className="flex-1">
+                      <div className="pr-2">
                         <p className="text-primary" style={{ fontSize: "14px", fontWeight: 600 }}>Approve for Clean & Press</p>
                         <p className="mt-0.5 text-xs text-muted-foreground">
                           I understand processing may not remove the stain or could affect the item
