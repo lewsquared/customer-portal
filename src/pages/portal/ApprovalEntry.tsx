@@ -1,58 +1,99 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Shirt } from "lucide-react";
 import { OrderHeader } from "@/components/order/OrderHeader";
+import { BottomActionBar } from "@/components/order/BottomActionBar";
 import { MOCK_PORTAL_DATA } from "@/lib/portal-mock-data";
 import { useOrderData } from "@/lib/useOrderData";
+import { cn } from "@/lib/utils";
 
-export default function ApprovalEntry() {
+export default function ApprovalConfirm() {
   const navigate = useNavigate();
+  const { state } = useLocation();
   const order = useOrderData();
+  const autoApproved = state?.autoApproved ?? false;
   const items = MOCK_PORTAL_DATA.approvalItems;
 
+  const getDecision = (item: any) => {
+    if (autoApproved) return item.approvalType === "B" ? "approved" : "CP";
+    return "CP"; // demo fallback — real app reads from state/context
+  };
+
+  const decisionColor = (d: string) =>
+    d === "CP" || d === "approved" ? "text-primary" : d === "return" ? "text-destructive" : "text-success";
+
+  const decisionLabel = (d: string) =>
+    d === "CP"
+      ? "Clean & Press"
+      : d === "return"
+        ? "Return uncleaned"
+        : d === "approved"
+          ? "Approved for CP"
+          : "Wash & Fold";
+
   return (
-    <div className="flex h-screen flex-col bg-background font-sans">
-      <OrderHeader
-        orderId={order.orderId}
-        orderType={order.orderType}
-        onBack={() => navigate(-1)}
-        variant="inline"
-      />
+    <div className="flex min-h-screen flex-col bg-background font-sans">
+      <OrderHeader orderId={order.orderId} orderType={order.orderType} onBack={() => navigate(-1)} variant="inline" />
 
-      {/* Hero image */}
-      <div className="relative mt-3 aspect-square w-full overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=600&q=80"
-          alt="Items needing approval"
-          className="h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-      </div>
-
-      {/* Text content */}
-      <div className="flex flex-1 flex-col items-center px-6 pt-7 text-center">
-        <h1 className="font-sans text-2xl font-extrabold text-primary">
-          {items.length} Item{items.length !== 1 ? "s" : ""} Need Your Approval
-        </h1>
-        <p className="mt-3 text-sm text-muted-foreground">
-          We need a quick confirmation before we can continue processing your order.
-        </p>
-        <p className="mt-5 text-xs text-muted-foreground">Takes under a minute</p>
-      </div>
-
-      {/* Sticky bottom CTA */}
-      <div
-        className="border-t border-border bg-background px-5 pt-4"
-        style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)" }}
-      >
-        <button
-          type="button"
-          onClick={() =>
-            navigate(`/portal/${order.orderId}/approval/0`, { state: { order } })
-          }
-          className="w-full rounded-xl bg-primary py-3.5 font-sans text-base font-normal text-primary-foreground transition-transform duration-100 ease-out active:duration-75 active:scale-[0.97]"
+      <main className="flex-1 overflow-y-auto pb-24">
+        {/* Decision summary card */}
+        <section
+          className="mx-5 mt-4 overflow-hidden rounded-xl border border-border bg-card animate-fade-in"
+          style={{ animationDelay: "30ms" }}
         >
-          Start Review
-        </button>
-      </div>
+          {items.map((item) => {
+            const d = getDecision(item);
+            return (
+              <div key={item.id} className="flex items-center gap-3 border-b border-border/60 px-4 py-3 last:border-0">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
+                  <Shirt className="h-4 w-4" />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-semibold text-primary">
+                    {item.brand} · {item.itemType}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className={cn("text-xs font-bold", decisionColor(d))}>{decisionLabel(d)}</p>
+                  {d === "CP" && (item as any).price > 0 && (
+                    <p className="text-[10px] text-muted-foreground">+AED {(item as any).price}</p>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </section>
+
+        {/* Billing block */}
+        <section
+          className="mx-5 mt-3 rounded-xl border border-border bg-card p-4 animate-fade-in"
+          style={{ animationDelay: "80ms" }}
+        >
+          <p className="mb-2 text-xs font-semibold text-muted-foreground">Order update</p>
+          {[
+            ["Original estimate", "AED 45"],
+            ["2 items → Clean & Press", "+AED 26"],
+          ].map(([label, value]) => (
+            <div key={label} className="flex justify-between py-1">
+              <span className="text-xs text-muted-foreground">{label}</span>
+              <span className="text-xs font-semibold tabular-nums">{value}</span>
+            </div>
+          ))}
+          <div className="flex justify-between border-t border-border pt-2 mt-1">
+            <span className="text-sm font-bold text-primary">New total</span>
+            <span className="text-sm font-bold text-primary tabular-nums">AED 71</span>
+          </div>
+        </section>
+      </main>
+
+      <BottomActionBar
+        primaryLabel="Confirm Decisions"
+        onPrimaryClick={() =>
+          navigate(`/portal/${order.orderId}/approval/preferences`, {
+            state: { order },
+          })
+        }
+        onBack={() => navigate(-1)}
+      />
     </div>
   );
 }
