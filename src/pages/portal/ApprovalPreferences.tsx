@@ -214,7 +214,7 @@ export default function ApprovalPreferences() {
           type="button"
           onClick={handleClick}
           className={cn(
-            "w-full rounded-[6px] h-12 text-base transition-transform duration-100 ease-out active:duration-75 active:scale-[0.98]",
+            "w-full rounded-[6px] h-12 text-[15px] transition-transform duration-100 ease-out active:duration-75 active:scale-[0.98]",
             ctaPrimary
               ? "bg-primary font-normal text-primary-foreground shadow-press"
               : "font-normal text-muted-foreground hover:text-foreground",
