@@ -216,7 +216,7 @@ export default function ApprovalItem() {
                     >
                       {/* Recommended tag — top-right corner, CP only */}
                       {id === "CP" && (
-                        <span className="absolute right-0 top-0 rounded-bl-lg rounded-tr-xl bg-warning px-2.5 py-1 text-[10px] font-semibold text-warning-foreground">
+                        <span className="absolute right-0 top-0 rounded-bl-lg rounded-tr-xl px-2.5 py-1 text-[10px] font-semibold text-warning-foreground" style={{ backgroundColor: "#FF7D19" }}>
                           Recommended
                         </span>
                       )}
