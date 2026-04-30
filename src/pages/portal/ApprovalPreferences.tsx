@@ -102,7 +102,7 @@ export default function ApprovalPreferences() {
       <div className="flex-1 overflow-y-auto px-6 pb-6 pt-14">
         {/* Confirmation */}
         <div
-          className="mb-10 flex items-center gap-2 rounded-lg px-3 py-2"
+          className="mb-10 flex items-center gap-2 rounded-[6px] px-3 py-2"
           style={{ backgroundColor: "#D8FFF8" }}
         >
           <Check className="h-4 w-4 shrink-0" strokeWidth={3} style={{ color: "#2EA692" }} />
