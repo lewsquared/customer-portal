@@ -34,16 +34,19 @@ export default function ApprovalEntry() {
           <p className="mt-3 max-w-xs text-sm text-muted-foreground">
             If we don't receive approval, those items will be returned uncleaned.
           </p>
-          <p className="mt-3 text-xs text-muted-foreground">
-            Takes less than 1 minute!
-          </p>
         </div>
       </main>
 
       <div
-        className="border-t border-border bg-background px-5 pt-4"
-        style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)" }}
+        className="border-t border-border px-5 pt-4"
+        style={{
+          backgroundColor: "#E9E3FF",
+          paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)",
+        }}
       >
+        <p className="mb-3 text-center text-xs text-muted-foreground">
+          Takes less than 1 minute!
+        </p>
         <button
           type="button"
           onClick={() =>
