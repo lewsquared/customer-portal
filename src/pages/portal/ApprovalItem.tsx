@@ -94,10 +94,8 @@ export default function ApprovalItem() {
           {items.map((_, i) => (
             <div
               key={i}
-              className={cn(
-                "h-1.5 flex-1 rounded-full transition-colors duration-300",
-                i <= idx ? "bg-warning" : "bg-muted",
-              )}
+              className="h-[2px] flex-1 rounded-full transition-colors duration-300"
+              style={{ backgroundColor: i <= idx ? "#FF7D19" : "#DFDBDB" }}
             />
           ))}
         </div>
