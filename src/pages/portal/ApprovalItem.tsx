@@ -208,7 +208,7 @@ function ApprovalItemInner() {
               {/* Why we're asking — WF suitability reason (no stain UI) */}
               {(item as any).wfReason && (
                 <div className="rounded-xl px-4 py-3" style={{ backgroundColor: "#FEF2DF" }}>
-                  <p className="text-primary" style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 100 }}>
+                  <p className="text-primary" style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 400 }}>
                     This item isn't suitable for Wash & Fold. We recommend switching it to Clean & Press so it's treated with the care it needs.
                   </p>
                 </div>
@@ -278,7 +278,7 @@ function ApprovalItemInner() {
           {item.approvalType === "B" && (
             <>
               <div className="rounded-xl px-4 py-3" style={{ backgroundColor: "#FEF2DF" }}>
-                <p className="text-primary" style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 100 }}>{item.facilityNote}</p>
+                <p className="text-primary" style={{ fontSize: "11px", lineHeight: "15px", fontWeight: 400 }}>{item.facilityNote}</p>
               </div>
 
               <h2 className="mt-5 text-xs font-semibold uppercase tracking-wide text-primary">What would you like to do?</h2>
